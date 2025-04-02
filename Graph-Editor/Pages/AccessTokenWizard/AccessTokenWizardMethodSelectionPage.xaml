@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Graph_Editor.Pages.AccessTokenWizard.AccessTokenWizardMethodSelectionPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Graph_Editor.Pages.AccessTokenWizard"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Margin="8">
+        <RadioButtons x:Name="RadioButtons_Method" x:Uid="/Pages.AccessTokenWizard.AccessTokenWizardMethodSelectionPage/RadioButtons_Method">
+            <RadioButton x:Name="RadioButton_BuiltIn" x:Uid="/Pages.AccessTokenWizard.AccessTokenWizardMethodSelectionPage/RadioButton_BuiltIn" Tag="AccessTokenWizardBuiltInPage" DoubleTapped="RadioButton_BuiltIn_DoubleTapped"/>
+            <RadioButton x:Name="RadioButton_AppOnlySecret" x:Uid="/Pages.AccessTokenWizard.AccessTokenWizardMethodSelectionPage/RadioButton_AppOnlySecret" Tag="AccessTokenWizardClientSecretPage" DoubleTapped="RadioButton_AppOnlySecret_DoubleTapped"/>
+        </RadioButtons>
+    </Grid>
+</Page>

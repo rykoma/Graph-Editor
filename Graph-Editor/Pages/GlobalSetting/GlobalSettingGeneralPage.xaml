@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Graph_Editor.Pages.GlobalSetting.GlobalSettingGeneralPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Graph_Editor.Pages.GlobalSetting"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Padding="0,0,16,16">
+        <Grid Margin="8,8,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <!-- Logging -->
+            <Expander Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" IsExpanded="True">
+                <Expander.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Uid="/Pages.GlobalSetting.GlobalSettingGeneralPage/TextBlock_EnableRequestAndResponseLogging" Grid.Column="0" VerticalAlignment="Center"></TextBlock>
+                        <ToggleSwitch x:Name="ToggleSwitch_EnableRequestAndResponseLogging" Grid.Column="1" VerticalAlignment="Center" />
+                    </Grid>
+                </Expander.Header>
+                <Expander.Content>
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Name="TextBlock_LogFolderPathHeader" x:Uid="/Pages.GlobalSetting.GlobalSettingGeneralPage/TextBlock_LogFolderPathHeader" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,8,0" />
+                        <Button x:Name="Button_PickLogFolderPath" x:Uid="/Pages.GlobalSetting.GlobalSettingGeneralPage/Button_PickLogFolderPath" Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom" Click="Button_PickLogFolderPath_Click" />
+
+                        <TextBlock x:Name="TextBlock_LogFolderPathValue" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="0,0,8,0" />
+
+                        <ToggleSwitch x:Name="ToggleSwitch_DisableRequestAndResponseLoggingWhenAppRestart" x:Uid="/Pages.GlobalSetting.GlobalSettingGeneralPage/ToggleSwitch_DisableRequestAndResponseLoggingWhenAppRestart" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,24,0,0" VerticalAlignment="Center" />
+                    </Grid>
+                </Expander.Content>
+            </Expander>
+
+            <!-- Display Language -->
+            <Expander Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" IsExpanded="True" Margin="0,8,0,0">
+                <Expander.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Uid="/Pages.GlobalSetting.GlobalSettingGeneralPage/TextBlock_DisplayLanguage" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"></TextBlock>
+                    </Grid>
+                </Expander.Header>
+                <Expander.Content>
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <ComboBox x:Name="ComboBox_Language" Grid.Row="0" Grid.Column="0" />
+                        <TextBlock x:Name="TextBlock_DisplayLanguageNotice" x:Uid="/Pages.GlobalSetting.GlobalSettingGeneralPage/TextBlock_DisplayLanguageNotice" Grid.Row="1" Grid.Column="0" Margin="0,8,0,0" />
+                    </Grid>
+                </Expander.Content>
+            </Expander>
+
+            <!-- Auto Redicrect -->
+            <Expander Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" IsExpanded="True" Margin="0,8,0,0">
+                <Expander.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Uid="/Pages.GlobalSetting.GlobalSettingGeneralPage/TextBlock_AllowAutoRedirectHeader" Grid.Column="0" VerticalAlignment="Center"></TextBlock>
+                        <ToggleSwitch x:Name="ToggleSwitch_AllowAutoRedirect" Grid.Column="1" VerticalAlignment="Center" />
+                    </Grid>
+                </Expander.Header>
+                <Expander.Content>
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Uid="/Pages.GlobalSetting.GlobalSettingGeneralPage/TextBlock_AllowAutoRedirectDescription" Grid.Row="0" Grid.Column="0" Margin="0,8,0,0" />
+                    </Grid>
+                </Expander.Content>
+            </Expander>
+
+            <!-- Execution History -->
+            <Expander Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" IsExpanded="True" Margin="0,8,0,0">
+                <Expander.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Uid="/Pages.GlobalSetting.GlobalSettingGeneralPage/TextBlock_ExecutionHistory" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"></TextBlock>
+                    </Grid>
+                </Expander.Header>
+                <Expander.Content>
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <NumberBox x:Name="NumberBox_MaxExecutionRecordCount" Grid.Row="0" Grid.Column="0" x:Uid="/Pages.GlobalSetting.GlobalSettingGeneralPage/NumberBox_MaxExecutionRecordCount" SpinButtonPlacementMode="Compact" SmallChange="1" LargeChange="5" Minimum="0" Maximum="100" Margin="0,8,0,0" />
+                    </Grid>
+                </Expander.Content>
+            </Expander>
+
+            <!-- URL Encoding -->
+            <Expander Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" IsExpanded="True" Margin="0,8,0,0">
+                <Expander.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Uid="/Pages.GlobalSetting.GlobalSettingGeneralPage/TextBlock_UrlEncoding" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"></TextBlock>
+                    </Grid>
+                </Expander.Header>
+                <Expander.Content>
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox Grid.Row="0" x:Name="CheckBox_EncodePlus" x:Uid="/Pages.GlobalSetting.GlobalSettingGeneralPage/CheckBox_EncodePlus"></CheckBox>
+                        <CheckBox Grid.Row="1" x:Name="CheckBox_EncodeSharp" x:Uid="/Pages.GlobalSetting.GlobalSettingGeneralPage/CheckBox_EncodeSharp"></CheckBox>
+                    </Grid>
+                </Expander.Content>
+            </Expander>
+
+            <!-- URL Encoding -->
+            <Expander Grid.Row="5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" IsExpanded="True" Margin="0,8,0,0">
+                <Expander.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Uid="/Pages.GlobalSetting.GlobalSettingGeneralPage/TextBlock_RequestConfirmation" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"></TextBlock>
+                    </Grid>
+                </Expander.Header>
+                <Expander.Content>
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Uid="/Pages.GlobalSetting.GlobalSettingGeneralPage/TextBlock_RequestSendingConfirmationHeader" VerticalAlignment="Center" Margin="0,0,0,16"></TextBlock>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="GET" VerticalAlignment="Center"></TextBlock>
+                        <ToggleSwitch Grid.Row="1" Grid.Column="1" x:Name="ToggleSwitch_EnableRequestConfirmation_GET" VerticalAlignment="Center" Margin="32,0,0,0" />
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="POST" VerticalAlignment="Center"></TextBlock>
+                        <ToggleSwitch Grid.Row="2" Grid.Column="1" x:Name="ToggleSwitch_EnableRequestConfirmation_POST" VerticalAlignment="Center" Margin="32,0,0,0"/>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="PUT" VerticalAlignment="Center"></TextBlock>
+                        <ToggleSwitch Grid.Row="3" Grid.Column="1" x:Name="ToggleSwitch_EnableRequestConfirmation_PUT" VerticalAlignment="Center" Margin="32,0,0,0" />
+
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="PATCH" VerticalAlignment="Center"></TextBlock>
+                        <ToggleSwitch Grid.Row="4" Grid.Column="1" x:Name="ToggleSwitch_EnableRequestConfirmation_PATCH" VerticalAlignment="Center" Margin="32,0,0,0" />
+
+                        <TextBlock Grid.Row="5" Grid.Column="0" Text="DELETE" VerticalAlignment="Center"></TextBlock>
+                        <ToggleSwitch Grid.Row="5" Grid.Column="1" x:Name="ToggleSwitch_EnableRequestConfirmation_DELETE" VerticalAlignment="Center" Margin="32,0,0,0" />
+                    </Grid>
+                </Expander.Content>
+            </Expander>
+        </Grid>
+    </ScrollViewer>
+</Page>

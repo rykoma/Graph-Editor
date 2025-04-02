@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="Graph_Editor.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Graph_Editor"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Graph Editor" Activated="Window_Activated">
+
+    <Grid>
+        <!-- Define the rows for the Grid -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Title Bar -->
+        <Grid x:Name="AppTitleBar" Height="40" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="LeftPaddingColumn" Width="0"/>
+                <ColumnDefinition/>
+                <ColumnDefinition x:Name="RightPaddingColumn" Width="0"/>
+            </Grid.ColumnDefinitions>
+            
+            <Image x:Name="TitleBarIcon" Source="ms-appx:///Assets/Icon.ico" Grid.Column="1" HorizontalAlignment="Left" Width="24" Height="24" Margin="8,0,0,0"/>
+            <TextBlock x:Name="TitleBarTextBlock" Text="Graph Editor" Style="{StaticResource CaptionTextBlockStyle}" Grid.Column="1" VerticalAlignment="Center" Margin="40,0,0,0"/>                                      
+        </Grid>
+
+        <!-- Main Navigation -->
+        <NavigationView x:Name="MainNavigation" Grid.Row="1" SelectionChanged="MainNavigation_SelectionChanged" PaneDisplayMode="LeftCompact" IsSettingsVisible="True" IsBackButtonVisible="Collapsed" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <NavigationView.MenuItems>
+                <NavigationViewItem x:Uid="/MainWindow/MainNavigationMenuItemEditor" Tag="MainEditor.MainEditorContainer" >
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE8A1;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem x:Uid="/MainWindow/MainNavigationMenuItemExecutionRecord" Tag="ExecutionRecordViewer.ExecutionRecordViewer" >
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE81C;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem x:Uid="/MainWindow/MainNavigationMenuItemSampleQuery" Tag="SampleQuery.SampleQueryContainer" >
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE82D;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.MenuItems>
+
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem x:Uid="/MainWindow/MainNavigationMenuItemAccessToken" Tag="AccessTokenWizard.AccessTokenWizardContainer" Icon="OtherUser" />
+                <NavigationViewItem x:Uid="/MainWindow/MainNavigationMenuItemAbout" Tag="About.AboutContainer">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE946;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.FooterMenuItems>
+
+            <Frame x:Name="contentFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="8"></Frame>
+        </NavigationView>
+
+        <!-- Status Bar -->
+        <StackPanel Grid.Row="2" Background="{ThemeResource AccentFillColorSecondaryBrush}">
+            <CommandBar HorizontalAlignment="Left" Height="26" Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}">
+                <AppBarElementContainer>
+                    <TextBlock x:Name="TextBlock_MainStatus" x:Uid="/MainWindow/TextBlock_MainStatus" FontSize="12" Margin="4"></TextBlock>
+                </AppBarElementContainer>
+            </CommandBar>
+        </StackPanel>
+
+    </Grid>
+</Window>

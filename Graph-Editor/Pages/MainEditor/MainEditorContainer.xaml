@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Graph_Editor.Pages.MainEditor.MainEditorContainer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Graph_Editor.Pages.MainEditor"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:editor="using:WinUIEditor"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    mc:Ignorable="d"
+    Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <!-- InfoBar -->
+        <InfoBar x:Name="InfoBar_Top" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Top" Margin="2" IsOpen="False" />
+
+        <!-- Method, URL and Run -->
+        <ComboBox x:Name="ComboBox_RequestMethod" Width="100" Grid.Row="1" Grid.Column="0" SelectedIndex="0" Margin="2">
+            <x:String>GET</x:String>
+            <x:String>POST</x:String>
+            <x:String>PUT</x:String>
+            <x:String>PATCH</x:String>
+            <x:String>DELETE</x:String>
+        </ComboBox>
+        <TextBox x:Name="TextBox_RequestUrl" Grid.Row="1" Grid.Column="1" PlaceholderText="https://graph.microsoft.com/v1.0/me" Margin="2" IsSpellCheckEnabled="False" KeyDown="TextBox_RequestUrl_KeyDown" TextChanged="TextBox_RequestUrl_TextChanged" />
+        <Button x:Name="Button_Run" x:Uid="/Pages.MainEditor.MainEditorContainer/Button_Run" Grid.Row="1" Grid.Column="2" Margin="2" Click="Button_Run_Click" />
+
+        <!-- Request details and response details -->
+        <Grid Grid.Row="2" Grid.ColumnSpan="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Request details -->
+            <Border Grid.Row="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="8" Margin="0,8,0,8">
+                <NavigationView x:Name="NavigationView_Request" PaneDisplayMode="Top" SelectionFollowsFocus="Enabled" IsBackButtonVisible="Collapsed" IsSettingsVisible="False" AlwaysShowHeader="False" SelectionChanged="NavigationView_Request_SelectionChanged">
+                    <NavigationView.PaneCustomContent>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <TextBlock x:Uid="/Pages.MainEditor.MainEditorContainer/TextBlock_SendBinaryToggleHeader" VerticalAlignment="Center" Margin="16,0,8,0"/>
+                            <ToggleSwitch x:Name="ToggleSwitch_SendBinary" VerticalAlignment="Center" Margin="0,0,8,0" OffContent="" OnContent="" Toggled="ToggleSwitch_SendBinary_Toggled"/>
+                            <TextBlock x:Name="TextBlock_BodyFileNameHeader" x:Uid="/Pages.MainEditor.MainEditorContainer/TextBlock_BodyFileNameHeader" VerticalAlignment="Center" Margin="0,0,8,0" Visibility="Collapsed"/>
+                            <TextBlock x:Name="TextBlock_BodyFileNameValue" Text="" VerticalAlignment="Center" Margin="0,0,8,0" Visibility="Collapsed"/>
+                        </StackPanel>
+                    </NavigationView.PaneCustomContent>
+                    <NavigationView.MenuItems>
+                        <NavigationViewItem x:Uid="/Pages.MainEditor.MainEditorContainer/NavigationView_RequestMenuItemHeader" Tag="MainEditorRequestHeader" />
+                        <NavigationViewItem x:Uid="/Pages.MainEditor.MainEditorContainer/NavigationView_RequestMenuItemBody" Tag="MainEditorRequestBody" />
+                    </NavigationView.MenuItems>
+                    <Frame x:Name="Frame_Request"/>
+                </NavigationView>
+            </Border>
+            
+            <!-- Splitter -->
+            <controls:GridSplitter Grid.Row="1"  Background="WhiteSmoke" />
+
+            <!-- Response details -->
+            <Border Grid.Row="2" BorderBrush="LightGray" BorderThickness="1" CornerRadius="8" Margin="0,8,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <InfoBar x:Name="InforBar_ResponseTop" VerticalAlignment="Top" Grid.Row="0" Margin="2" IsOpen="False" />
+
+                    <NavigationView x:Name="NavigationView_Response" Grid.Row="1" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed" IsSettingsVisible="False" AlwaysShowHeader="False" SelectionChanged="NavigationView_Response_SelectionChanged">
+                        <NavigationView.MenuItems>
+                            <NavigationViewItem x:Uid="/Pages.MainEditor.MainEditorContainer/NavigationView_ResponseMenuItemHeader" Tag="MainEditorResponseHeader" />
+                            <NavigationViewItem x:Uid="/Pages.MainEditor.MainEditorContainer/NavigationView_ResponseMenuItemBody" Tag="MainEditorResponseBody" />
+                        </NavigationView.MenuItems>
+                        <Frame x:Name="Frame_Response"/>
+                    </NavigationView>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>

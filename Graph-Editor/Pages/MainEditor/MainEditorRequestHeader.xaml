@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Graph_Editor.Pages.MainEditor.MainEditorRequestHeader"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Graph_Editor.Pages.MainEditor"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Margin="8,8,0,0">
+        <StackPanel>
+            <Button x:Name="Button_AddHeader" x:Uid="/Pages.MainEditor.MainEditorRequestHeader/Button_AddHeader" Click="Button_AddHeader_Click"/>
+            <ListView x:Name="ListView_HeaderList">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox x:Uid="/Pages.MainEditor.MainEditorRequestHeader/TextBox_HeaderName" Grid.Column="0" Text="{Binding HeaderName, Mode=TwoWay}" IsReadOnly="{Binding IsReadOnly, Mode=TwoWay}" IsEnabled="{Binding IsEnabled, Mode=TwoWay}" Margin="5" IsSpellCheckEnabled="False" />
+                            <TextBox x:Uid="/Pages.MainEditor.MainEditorRequestHeader/TextBox_HeaderValue" Grid.Column="1" Text="{Binding Value, Mode=TwoWay}" IsReadOnly="{Binding IsReadOnly, Mode=TwoWay}" IsEnabled="{Binding IsEnabled, Mode=TwoWay}" Margin="5" IsSpellCheckEnabled="False" />
+                            <Button x:Name="Button_EditHeader" Grid.Column="2" Content="{Binding EditButtonText, Mode=TwoWay}" ToolTipService.ToolTip="{Binding ToolTip, Mode=TwoWay}" Margin="5" Click="Button_EditHeader_Click" />
+                            <Button x:Name="Button_DeleteHeader" x:Uid="/Pages.MainEditor.MainEditorRequestHeader/Button_DeleteHeader" Grid.Column="3" Margin="5" Click="Button_DeleteHeader_Click" >
+                                <Button.Content>
+                                    <FontIcon Glyph="&#xE74D;" />
+                                </Button.Content>
+                            </Button>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Page>

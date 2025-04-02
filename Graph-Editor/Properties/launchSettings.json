@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Graph-Editor (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Graph-Editor (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

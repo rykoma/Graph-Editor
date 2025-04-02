@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Graph_Editor.Pages.AccessTokenWizard.AccessTokenWizardBuiltInPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Graph_Editor.Pages.AccessTokenWizard"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Margin="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <InfoBar x:Name="InforBar_AuthStatus" Grid.Row="0" IsOpen="False" Title="" Message="" >
+            <InfoBar.ContextFlyout>
+                <MenuFlyout>
+                    <MenuFlyoutItem x:Name="MenuFlyoutItem_Copy" x:Uid="/Pages.AccessTokenWizard.AccessTokenWizardBuiltInPage/MenuFlyoutItem_Copy" Click="MenuFlyoutItem_Copy_Click" />
+                </MenuFlyout>
+            </InfoBar.ContextFlyout>
+        </InfoBar>
+
+        <TextBlock x:Name="TextBlock_ListViewHeader" Grid.Row="1" x:Uid="/Pages.AccessTokenWizard.AccessTokenWizardBuiltInPage/TextBlock_ListViewHeader" />
+
+        <Grid Grid.Row="2" Margin="0,8,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="TextBlock_ScopeFilter" Grid.Column="0" x:Uid="/Pages.AccessTokenWizard.AccessTokenWizardBuiltInPage/TextBlock_ScopeFilter" Margin="0,0,8,0" VerticalAlignment="Center" />
+            <TextBox x:Name="TextBox_ScopeFilter" Grid.Column="1" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Stretch" TextChanged="TextBox_ScopeFilter_TextChanged" />
+        </Grid>
+        
+        <ListView x:Name="ListView_Scopes" Grid.Row="3" SelectionMode="Multiple" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" Margin="0,8,0,0" SelectionChanged="ListView_Scopes_SelectionChanged" BorderBrush="LightGray" BorderThickness="1" IsItemClickEnabled="True" ItemClick="ListView_Scopes_ItemClick">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="{Binding Name}" Margin="5" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Margin="0,8,0,0">
+            <Button x:Name="Button_SelectDefaultScopes" x:Uid="/Pages.AccessTokenWizard.AccessTokenWizardBuiltInPage/Button_SelectDefaultScopes" Margin="0,0,8,0" Click="Button_SelectDefaultScopes_Click" ></Button>
+            <Button x:Name="Button_UnelectAllScopes" x:Uid="/Pages.AccessTokenWizard.AccessTokenWizardBuiltInPage/Button_UnselectAllScopes" Margin="0,0,8,0" Click="Button_UnelectAllScopes_Click" ></Button>
+        </StackPanel>
+
+        <TextBlock x:Name="TextBlock_ScopesHeader" Grid.Row="5" x:Uid="/Pages.AccessTokenWizard.AccessTokenWizardBuiltInPage/TextBlock_ScopesHeader" Margin="0,16,0,0" />
+        
+        <!-- Wrap TextBlock_Scopes in a Border to set the background color -->
+        <Border Grid.Row="6" BorderBrush="LightGray" BorderThickness="1" Background="GhostWhite" Margin="0,8,0,8">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <TextBlock x:Name="TextBlock_Scopes" IsTextSelectionEnabled="True" TextWrapping="WrapWholeWords" Padding="8" />
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Page>

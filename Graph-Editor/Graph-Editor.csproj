@@ -1,0 +1,218 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <RootNamespace>Graph_Editor</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>x86;x64;ARM64</Platforms>
+    <RuntimeIdentifiers Condition="$([MSBuild]::GetTargetFrameworkVersion('$(TargetFramework)')) &gt;= 8">win-x86;win-x64;win-arm64</RuntimeIdentifiers>
+    <RuntimeIdentifiers Condition="$([MSBuild]::GetTargetFrameworkVersion('$(TargetFramework)')) &lt; 8">win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
+    <PublishProfile>win-$(Platform).pubxml</PublishProfile>
+    <UseWinUI>true</UseWinUI>
+    <EnableMsixTooling>true</EnableMsixTooling>
+    <StartupObject>Graph_Editor.Program</StartupObject>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>GraphEditor</AssemblyName>
+    <ApplicationIcon>Assets\Icon.ico</ApplicationIcon>
+    <SignAssembly>False</SignAssembly>
+	<WindowsAppSdkIncludeVersionInfo>true</WindowsAppSdkIncludeVersionInfo>
+	<GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
+	<GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+	<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+	<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+	<AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+	<AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
+	<GenerateTestArtifacts>False</GenerateTestArtifacts>
+	<AppxBundle>Never</AppxBundle>
+	<AppInstallerUri>\\rykoma002\C%24\temp</AppInstallerUri>
+	<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+	<PackageCertificateThumbprint>92C3C8D204D166E734F5E4EDC80279FE2BD06548</PackageCertificateThumbprint>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Data\SampleQuery\BuiltInSampleQuery.json" />
+    <None Remove="Pages\About\AboutContainer.xaml" />
+    <None Remove="Pages\AccessTokenWizard\AccessTokenWizardBuiltInPage.xaml" />
+    <None Remove="Pages\AccessTokenWizard\AccessTokenWizardClientSecretPage.xaml" />
+    <None Remove="Pages\AccessTokenWizard\AccessTokenWizardContainer.xaml" />
+    <None Remove="Pages\AccessTokenWizard\AccessTokenWizardMethodSelectionPage.xaml" />
+    <None Remove="Pages\AccessTokenWizard\AccessTokenWizardWelcomePage.xaml" />
+    <None Remove="Pages\AccessTokenWizard\CurrentAccessToken\CurrentAccessTokenDecodedClaimPage.xaml" />
+    <None Remove="Pages\AccessTokenWizard\CurrentAccessToken\CurrentAccessTokenDecodedHeaderPage.xaml" />
+    <None Remove="Pages\AccessTokenWizard\CurrentAccessToken\CurrentAccessTokenDecodedReadableClaimPage.xaml" />
+    <None Remove="Pages\AccessTokenWizard\CurrentAccessToken\CurrentAccessTokenDecodedSignaturePage.xaml" />
+    <None Remove="Pages\AccessTokenWizard\CurrentAccessToken\CurrentAccessTokenRawPage.xaml" />
+    <None Remove="Pages\ExecutionRecordViewer\ExecutionRecordViewer.xaml" />
+    <None Remove="Pages\GlobalSetting\GlobalSettingAppLibraryPage.xaml" />
+    <None Remove="Pages\GlobalSetting\GlobalSettingContainer.xaml" />
+    <None Remove="Pages\GlobalSetting\GlobalSettingCustomScopePage.xaml" />
+    <None Remove="Pages\GlobalSetting\GlobalSettingGeneralPage.xaml" />
+    <None Remove="Pages\MainEditor\MainEditorContainer.xaml" />
+    <None Remove="Pages\MainEditor\MainEditorRequestBody.xaml" />
+    <None Remove="Pages\MainEditor\MainEditorRequestHeader.xaml" />
+    <None Remove="Pages\MainEditor\MainEditorResponseBody.xaml" />
+    <None Remove="Pages\MainEditor\MainEditorResponseHeader.xaml" />
+    <None Remove="Pages\SampleQuery\SampleQueryContainer.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <EmbeddedResource Include="Data\SampleQuery\BuiltInSampleQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.Sizers" Version="8.1.240916" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.70.0" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3124.44" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250310001" />
+	<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	<PackageReference Include="WinUIEdit" Version="0.0.3-prerelease" />
+	<Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <!--
+    Defining the "Msix" ProjectCapability here allows the Single-project MSIX Packaging
+    Tools extension to be activated for this project even if the Windows App SDK Nuget
+    package has not yet been restored.
+  -->
+  <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+    <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\AccessTokenWizard\AccessTokenWizardBuiltInPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\AccessTokenWizard\AccessTokenWizardContainer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\AccessTokenWizard\AccessTokenWizardMethodSelectionPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\AccessTokenWizard\AccessTokenWizardWelcomePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\GlobalSetting\GlobalSettingContainer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\MainEditor\MainEditorContainer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <!--
+    Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution
+    Explorer "Package and Publish" context menu entry to be enabled for this project even if
+    the Windows App SDK Nuget package has not yet been restored.
+  -->
+  <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+    <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
+  </PropertyGroup>
+  <ItemGroup>
+    <CustomAdditionalCompileInputs Remove="Pages\MainEditor\MainEditorRequestBody.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Remove="Pages\MainEditor\MainEditorRequestBody.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\MainEditor\MainEditorRequestHeader.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomAdditionalCompileInputs Remove="Pages\MainEditor\MainEditorResponseHeader.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Remove="Pages\MainEditor\MainEditorResponseHeader.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\GlobalSetting\GlobalSettingCustomScopePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\GlobalSetting\GlobalSettingAppLibraryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\AccessTokenWizard\CurrentAccessToken\CurrentAccessTokenDecodedReadableClaimPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\AccessTokenWizard\CurrentAccessToken\CurrentAccessTokenDecodedSignaturePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\AccessTokenWizard\CurrentAccessToken\CurrentAccessTokenDecodedClaimPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\AccessTokenWizard\CurrentAccessToken\CurrentAccessTokenDecodedHeaderPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\MainEditor\MainEditorResponseBody.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\AccessTokenWizard\CurrentAccessToken\CurrentAccessTokenRawPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\ExecutionRecordViewer\ExecutionRecordViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\Example\ExampleContainer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\SampleQuery\SampleQueryContainer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\About\AboutContainer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+</Project>
