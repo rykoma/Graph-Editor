@@ -1,6 +1,10 @@
 # Graph Editor
 
-You can test Microsoft Graph easily.
+Graph Editor is your go-to tool for easily experimenting with Microsoft Graph. It beautifully displays requests and responses, making it easier for you to understand how Microsoft Graph works.
+
+Within Graph Editor, you can manage your execution history, allowing you to effortlessly compare various requests and responses. Plus, with a rich set of sample queries, you can send a variety of requests with ease.
+
+![image](https://github.com/user-attachments/assets/3223705c-6c48-4b5c-915a-456660996df5)
 
 ## Download options
 
@@ -23,6 +27,14 @@ You can see the sample queries for Microsoft Graph.
 ### Access Token
 
 You can use the built-in application ID to get the access token. You can also use your own application ID.
+
+## Known issues
+
+### UI Freezing
+
+If the window becomes unresponsive while you're using Graph Editor, try pressing Tab and Shift + Tab a few times.
+
+This issue can occur when switching back and forth between the Graph Editor and another window.
 
 ## Feedback
 
