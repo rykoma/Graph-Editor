@@ -17,5 +17,9 @@
         <Line X1="0" Y1="0" X2="300" Y2="0" Stroke="Black" StrokeThickness="1" Margin="0,10,0,10"/>
         <TextBlock x:Name="TextBlock_MsalVersion"/>
         <TextBlock x:Name="TextBlock_WindowsAppSdkVersion"/>
+
+        <Line X1="0" Y1="0" X2="300" Y2="0" Stroke="Black" StrokeThickness="1" Margin="0,10,0,10"/>
+        <HyperlinkButton Content="Report an issue" NavigateUri="https://github.com/rykoma/Graph-Editor/issues/new?template=issue-report.md"></HyperlinkButton>
+        <HyperlinkButton Content="Request new feature" NavigateUri="https://github.com/rykoma/Graph-Editor/issues/new?template=feature_request.md"></HyperlinkButton>
     </StackPanel>
 </Page>
