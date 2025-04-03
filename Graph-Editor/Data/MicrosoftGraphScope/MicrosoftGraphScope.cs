@@ -41,12 +41,7 @@ namespace Graph_Editor.Data.MicrosoftGraphScope
 
         public static List<MicrosoftGraphScope> WellKnownScopes { get; } = new()
         {
-            // Magical 2 lines of PowerShell to generate this list:
-            // 
-            // $DefaultScopes = @("Calendars.ReadWrite","Contacts.ReadWrite","Mail.ReadWrite","Mail.Send","MailboxSettings.ReadWrite","Tasks.ReadWrite","User.ReadWrite")
-            // [string]::Join(",$([Environment]::NewLine)", ( (Invoke-MgGraphRequest -Uri "https://graph.microsoft.com/v1.0/servicePrincipals(appId='00000003-0000-0000-c000-000000000000')?`$select=oauth2PermissionScopes").oauth2PermissionScopes | select @{n = "Scope"; e = {$_["value"]}}, @{n = "Identifier"; e = {$_["id"]}}, @{n = "Description"; e = {$_["adminConsentDescription"].Trim()}}, @{n = "AdminConsentRequired"; e = { ($_["type"] -eq "Admin")}} | Sort Scope | %{$("            new MicrosoftGraphScope(`"$($_.Scope)`", $($DefaultScopes.Contains($_.Scope).ToString().ToLower()))")} )) | clip
-            // 
-            // Before running this, make sure you have connected to Microsoft Graph with Application.Read.All permission.
+            // This code can be created using the Copy-MicrosoftGraphScopes cmdlet in the Copy-MicrosoftGraphScopes.ps1.
 
             new MicrosoftGraphScope("AccessReview.Read.All", false),
             new MicrosoftGraphScope("AccessReview.ReadWrite.All", false),
