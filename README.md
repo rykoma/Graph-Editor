@@ -8,7 +8,7 @@ Within Graph Editor, you can manage your execution history, allowing you to effo
 
 ## Download options
 
-Comming soon!
+You can [download Graph Editor from Microsoft Store](https://apps.microsoft.com/detail/9P7TCMNQ7ZHB?ocid=pdpshare).
 
 ## Features
 
