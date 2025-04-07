@@ -56,7 +56,7 @@
                   "Type": 1,
                   "Name": "Get a user account using a sign-in name",
                   "Method": "GET",
-                  "Url": "https://graph.microsoft.com/v1.0/users?$select=displayName,id\u0026$filter=identities/any(c:c/issuerAssignedId",
+                  "Url": "https://graph.microsoft.com/v1.0/users?$select=displayName,id\u0026$filter=identities/any(c:c/issuerAssignedId eq \u0027j.smith@yahoo.com\u0027 and c/issuer eq \u0027My B2C tenant\u0027)",
                   "Headers": {},
                   "Body": "",
                   "BinaryBodyRequired": false,
@@ -82,7 +82,7 @@
                 {
                   "Id": "cb19bcda-cc80-4b83-ab21-5bdd76c62921",
                   "Type": 1,
-                  "Name": "Use $filter and $top",
+                  "Name": "Use $filter and $top to get one user with a display name that starts with \u0027a\u0027 including a count of returned objects",
                   "Method": "GET",
                   "Url": "https://graph.microsoft.com/v1.0/users?$filter=startswith(displayName,\u0027a\u0027)\u0026$orderby=displayName\u0026$count=true\u0026$top=1",
                   "Headers": {
@@ -97,7 +97,7 @@
                 {
                   "Id": "5ca616e0-a4fa-4708-afdd-72fb1decf688",
                   "Type": 1,
-                  "Name": "Use $filter",
+                  "Name": "Use $filter to get all users with a mail that ends with \u0027a@contoso.com\u0027, including a count of returned objects, with the results ordered by userPrincipalName",
                   "Method": "GET",
                   "Url": "https://graph.microsoft.com/v1.0/users?$filter=endswith(mail,\u0027a@contoso.com\u0027)\u0026$orderby=userPrincipalName\u0026$count=true",
                   "Headers": {
@@ -112,7 +112,7 @@
                 {
                   "Id": "2d663404-5f95-4830-bc1f-5d99d4c6f63b",
                   "Type": 1,
-                  "Name": "Use $search",
+                  "Name": "Use $search to get users with display names that contain the letters \u0027wa\u0027 including a count of returned objects",
                   "Method": "GET",
                   "Url": "https://graph.microsoft.com/v1.0/users?$search=\u0022displayName:wa\u0022\u0026$orderby=displayName\u0026$count=true",
                   "Headers": {
@@ -127,7 +127,7 @@
                 {
                   "Id": "44f730ba-b170-4873-b2ca-36e64f15ac83",
                   "Type": 1,
-                  "Name": "Use $search and OR",
+                  "Name": "Use $search to get users with display names that contain the letters \u0027wa\u0027 or the letters \u0027ad\u0027 including a count of returned objects",
                   "Method": "GET",
                   "Url": "https://graph.microsoft.com/v1.0/users?$search=\u0022displayName:wa\u0022 OR \u0022displayName:ad\u0022\u0026$orderbydisplayName\u0026$count=true",
                   "Headers": {
@@ -1172,6 +1172,19 @@
                       "Url": "https://graph.microsoft.com/v1.0/directory/deleteditems/78bf875b-9343-4edc-9130-0d3958113563/restore",
                       "Headers": {},
                       "Body": "{\n  \u0022autoReconcileProxyConflict\u0022: true\n}",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "ff6cecc2-6bfc-4827-97eb-3c5715bba8cb",
+                      "Type": 1,
+                      "Name": "Restore a deleted user and assign them a new userPrincipalName",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/deleteditems/78bf875b-9343-4edc-9130-0d3958113563/restore",
+                      "Headers": {},
+                      "Body": "{\n  \u0022newUserPrincipalName\u0022: \u0022johndoe@contoso.com\u0022\n}",
                       "BinaryBodyRequired": false,
                       "Children": [],
                       "IsExpanded": false,
@@ -4173,8 +4186,1118 @@
                   "Children": [],
                   "IsExpanded": false,
                   "IsBuiltIn": true
+                },
+                {
+                  "Id": "47726e5d-9853-4b6f-b026-740a7d158e01",
+                  "Type": 1,
+                  "Name": "Delete thread",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "4c1463ec-eb86-4238-bf9d-7ee845b68283",
+                  "Type": 1,
+                  "Name": "List accepted senders",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/acceptedSenders",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "8ff6f022-fecf-45d6-962c-bc8ae9da8287",
+                  "Type": 1,
+                  "Name": "Add accepted sender",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/acceptedSenders/$ref",
+                  "Headers": {},
+                  "Body": "{\n  \u0022@odata.id\u0022:\u0022https://graph.microsoft.com/v1.0/users/${SampleInternalUser1Address}\u0022\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "48633708-92f0-4b16-a8eb-819d7b8cc02d",
+                  "Type": 1,
+                  "Name": "Remove accepted sender",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/acceptedSenders/$ref?$id=https://graph.microsoft.com/v1.0/users/{Id}",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "7b5da49d-60f3-434d-afcd-4a42e709f618",
+                  "Type": 1,
+                  "Name": "List rejected senders",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/rejectedSenders",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "16f22795-cd21-491b-9006-39ed483eb271",
+                  "Type": 1,
+                  "Name": "Add rejected sender",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/rejectedSenders/$ref",
+                  "Headers": {},
+                  "Body": "{\n  \u0022@odata.id\u0022:\u0022https://graph.microsoft.com/v1.0/users/${SampleInternalUser1Address}\u0022\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "7bf9fe73-b3ea-4b02-b934-2042c28aa7cd",
+                  "Type": 1,
+                  "Name": "Remove rejected sender",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/rejectedSenders/$ref?$id=https://graph.microsoft.com/v1.0/users/{Id}",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
                 }
               ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "a29ebfb0-2616-438b-8af4-e41b14aa7ed4",
+              "Type": 0,
+              "Name": "Directory objects",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "ba1ee3ca-fb1e-4f9f-adaa-c0cd131e8b7c",
+                  "Type": 0,
+                  "Name": "List deleted items",
+                  "Method": null,
+                  "Url": null,
+                  "Headers": {},
+                  "Body": null,
+                  "BinaryBodyRequired": false,
+                  "Children": [
+                    {
+                      "Id": "ba6d26cc-56a9-4dae-a403-042ee0559c65",
+                      "Type": 1,
+                      "Name": "Retrieve deleted groups",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/microsoft.graph.group",
+                      "Headers": {},
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "6aa98d7d-486b-44d6-9a10-34ac06a4ce2b",
+                      "Type": 1,
+                      "Name": "Retrieve the count of deleted user objects and order the results by the deletedDateTime property",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/microsoft.graph.group?$count=true\u0026$orderby=deletedDateTime asc\u0026$select=id,DisplayName,deletedDateTime",
+                      "Headers": {
+                        "ConsistencyLevel": "eventual"
+                      },
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "12d967fb-ba46-40dc-a6c3-bb79064fedb8",
+                  "Type": 1,
+                  "Name": "Get deleted item",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{object-id}",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "12e1debf-518c-4d34-b123-623e5f19d472",
+                  "Type": 0,
+                  "Name": "Restore deleted item",
+                  "Method": null,
+                  "Url": null,
+                  "Headers": {},
+                  "Body": null,
+                  "BinaryBodyRequired": false,
+                  "Children": [
+                    {
+                      "Id": "457fc5b9-bf5e-4561-b82e-6af34d7034f0",
+                      "Type": 1,
+                      "Name": "Restore a deleted item",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{id}/restore",
+                      "Headers": {},
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "cdd6bf10-90db-444c-8fb4-852cc6c073f2",
+                      "Type": 1,
+                      "Name": "Restore a deleted item and remove any conflicting proxy addresses",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/deleteditems/{id}/restore",
+                      "Headers": {},
+                      "Body": "{\n  \u0022autoReconcileProxyConflict\u0022: true\n}",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "b5452a81-a205-426a-8e1a-dbae26a68be2",
+                      "Type": 1,
+                      "Name": "Restore a deleted user and assign them a new userPrincipalName",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/deleteditems/{id}/restore",
+                      "Headers": {},
+                      "Body": "{\n  \u0022newUserPrincipalName\u0022: \u0022johndoe@contoso.com\u0022\n}",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "2aeb3441-d03d-4d62-8488-c80e24ef19a0",
+                  "Type": 1,
+                  "Name": "Permanently delete item",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{object-id}",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "856dd652-0a17-4530-8ca1-99d49074329d",
+                  "Type": 1,
+                  "Name": "List deleted items owned by user",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/getUserOwnedObjects",
+                  "Headers": {},
+                  "Body": "{\n  \u0022userId\u0022:\u0022{id}\u0022,\n  \u0022type\u0022:\u0022Group\u0022\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "5e2243a9-35ed-403a-9740-e45bb8156c7c",
+                  "Type": 0,
+                  "Name": "Check member groups",
+                  "Method": null,
+                  "Url": null,
+                  "Headers": {},
+                  "Body": null,
+                  "BinaryBodyRequired": false,
+                  "Children": [
+                    {
+                      "Id": "da8a2842-bd71-46c5-9bb6-1df2820f6f52",
+                      "Type": 1,
+                      "Name": "Check group memberships for a directory object",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/directoryObjects/{id}/checkMemberGroups",
+                      "Headers": {},
+                      "Body": "{\n    \u0022groupIds\u0022: [\n        \u0022f448435d-3ca7-4073-8152-a1fd73c0fd09\u0022,\n        \u0022bd7c6263-4dd5-4ae8-8c96-556e1c0bece6\u0022,\n        \u002293670da6-d731-4366-94b5-abed40b6016b\u0022,\n        \u0022f5484ab1-4d4d-41ec-a9b8-754b3957bfc7\u0022,\n        \u0022c9103f26-f3cf-4004-a611-2a14e81b8f79\u0022\n    ]\n}",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "e4006d3f-d985-4448-909f-6bd6b76e2362",
+                      "Type": 1,
+                      "Name": "Check group memberships for the signed-in user",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/me/checkMemberGroups",
+                      "Headers": {},
+                      "Body": "{\n  \u0022groupIds\u0022: [\n        \u0022fee2c45b-915a-4a64b130f4eb9e75525e\u0022,\n        \u00224fe90ae065a-478b9400e0a0e1cbd540\u0022\n  ]\n}",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "ab8231d9-18c7-457d-8af9-382ca6d8ab0e",
+                  "Type": 0,
+                  "Name": "Get member groups",
+                  "Method": null,
+                  "Url": null,
+                  "Headers": {},
+                  "Body": null,
+                  "BinaryBodyRequired": false,
+                  "Children": [
+                    {
+                      "Id": "18a34900-c473-4d3a-9d3b-0b4d3be76135",
+                      "Type": 1,
+                      "Name": "Check group memberships for a directory object",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/directoryObjects/{id}/getMemberGroups",
+                      "Headers": {},
+                      "Body": "{\n    \u0022securityEnabledOnly\u0022: false\n}",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "5bf2fd40-e32c-4188-a346-2db6181c0643",
+                      "Type": 1,
+                      "Name": "heck group memberships for the signed-in user",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/me/getMemberGroups",
+                      "Headers": {},
+                      "Body": "{\n  \u0022securityEnabledOnly\u0022: true\n}",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "887d9e61-1c33-4c66-9963-ac8bc99e3a2b",
+                  "Type": 1,
+                  "Name": "Check member objects",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/me/checkMemberObjects",
+                  "Headers": {},
+                  "Body": "{\n  \u0022ids\u0022: [\n    \u002280a963dd-84af-4eb8-b2a6-781e444d4fb0\u0022,\n    \u002262e90394-69f5-4237-9190-012177145e10\u0022,\n    \u002286a64f51-3a64-4cc6-a8c8-6b8f000c0f52\u0022,\n    \u0022ac38546e-ddf3-437a-ac5c-27a94cd7a0f1\u0022\n  ]\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "834a1d5e-11f2-433f-a808-a2b88e6e7e47",
+                  "Type": 1,
+                  "Name": "Get member objects",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/directoryObjects/{object-id}/getMemberObjects",
+                  "Headers": {},
+                  "Body": "{\n  \u0022securityEnabledOnly\u0022: true\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "3712d3b1-9f69-4460-9a99-7083e714a571",
+              "Type": 0,
+              "Name": "Drive",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "a7a8da98-6ce1-45cc-96c9-dafd31e01523",
+                  "Type": 1,
+                  "Name": "Get drive",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{groupId}/drive",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "f9b0722e-0012-4cbd-98e2-bb9d380035b8",
+                  "Type": 1,
+                  "Name": "List children",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/drives/{drive-id}/items/{item-id}/children",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "87d38dd5-b6ac-4a25-9f17-6ef3899890f7",
+              "Type": 0,
+              "Name": "Group settings",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "7a4883d2-8b40-4d94-8995-93d1f10c5ff7",
+                  "Type": 0,
+                  "Name": "List",
+                  "Method": null,
+                  "Url": null,
+                  "Headers": {},
+                  "Body": null,
+                  "BinaryBodyRequired": false,
+                  "Children": [
+                    {
+                      "Id": "b840fc6e-2b98-4603-b729-ce374ea56015",
+                      "Type": 1,
+                      "Name": "Retrieve the tenant-level group settings",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/groupSettings",
+                      "Headers": {},
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "b443bd28-9e17-4ad2-8b98-5d08ca561702",
+                      "Type": 1,
+                      "Name": "Retrieve the group settings for a specific group",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/groups/{id}/settings",
+                      "Headers": {},
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "571c8b4c-57a5-44b5-b394-3f2d55dad2b7",
+                  "Type": 0,
+                  "Name": "Create",
+                  "Method": null,
+                  "Url": null,
+                  "Headers": {},
+                  "Body": null,
+                  "BinaryBodyRequired": false,
+                  "Children": [
+                    {
+                      "Id": "8b2e8388-8079-418a-9751-410382339d0b",
+                      "Type": 1,
+                      "Name": "Create a new setting for all Microsoft 365 groups in the tenant",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/groupSettings",
+                      "Headers": {},
+                      "Body": "{\n    \u0022templateId\u0022: \u002262375ab9-6b52-47ed-826b-58e47e0e304b\u0022,\n    \u0022values\u0022: [\n        {\n            \u0022name\u0022: \u0022GuestUsageGuidelinesUrl\u0022,\n            \u0022value\u0022: \u0022https://privacy.contoso.com/privacystatement\u0022\n        },\n        {\n            \u0022name\u0022: \u0022EnableMSStandardBlockedWords\u0022,\n            \u0022value\u0022: \u0022true\u0022\n        },\n        {\n            \u0022name\u0022: \u0022EnableMIPLabels\u0022,\n            \u0022value\u0022: \u0022true\u0022\n        },\n        {\n            \u0022name\u0022: \u0022PrefixSuffixNamingRequirement\u0022,\n            \u0022value\u0022: \u0022[Contoso-][GroupName]\u0022\n        }\n    ]\n}",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "8af9d8e1-4c10-4ae1-99e0-ee3f2f405748",
+                      "Type": 1,
+                      "Name": "Create a setting to block guests for a specific Microsoft 365 group",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/groups/{id}/settings",
+                      "Headers": {},
+                      "Body": "{\n    \u0022templateId\u0022: \u002208d542b9-071f-4e16-94b0-74abb372e3d9\u0022,\n    \u0022values\u0022: [\n        {\n            \u0022name\u0022: \u0022AllowToAddGuests\u0022,\n            \u0022value\u0022: \u0022false\u0022\n        }\n    ]\n}",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "2f3e354e-061e-472f-a837-6d85fdcc66a9",
+                  "Type": 0,
+                  "Name": "Get",
+                  "Method": null,
+                  "Url": null,
+                  "Headers": {},
+                  "Body": null,
+                  "BinaryBodyRequired": false,
+                  "Children": [
+                    {
+                      "Id": "e4e9e18d-d9d0-44cb-b169-571ae3e364e1",
+                      "Type": 1,
+                      "Name": "Get a group setting for a specific group",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/groups/{id}/settings/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "79d11550-559a-4817-a086-7ba0f8db8981",
+                      "Type": 1,
+                      "Name": "Get the group settings for all Microsoft 365 groups",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/groupSettings/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "4fc716a6-410f-4750-997e-3b5b5b456fb5",
+                  "Type": 0,
+                  "Name": "Update",
+                  "Method": null,
+                  "Url": null,
+                  "Headers": {},
+                  "Body": null,
+                  "BinaryBodyRequired": false,
+                  "Children": [
+                    {
+                      "Id": "e611891e-cd6a-4e34-ace1-d034698ea34c",
+                      "Type": 1,
+                      "Name": "Update a tenant-wide group setting",
+                      "Method": "PATCH",
+                      "Url": "https://graph.microsoft.com/v1.0/groupSettings/{id}",
+                      "Headers": {},
+                      "Body": "{\n    \u0022values\u0022: [\n        {\n            \u0022name\u0022: \u0022AllowToAddGuests\u0022,\n            \u0022value\u0022: \u0022false\u0022\n        }\n    ]\n}",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "d7e5ef53-6cef-437e-b78f-64033f0c6706",
+                      "Type": 1,
+                      "Name": "Update a specific group setting",
+                      "Method": "PATCH",
+                      "Url": "https://graph.microsoft.com/v1.0/groups/{id}/settings/{id}",
+                      "Headers": {},
+                      "Body": "{\n  \u0022values\u0022: [\n    {\n      \u0022name\u0022: \u0022AllowToAddGuests\u0022,\n      \u0022value\u0022: \u0022true\u0022\n    }\n  ]\n}",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "e7a48083-c584-4314-8dca-6b368e7b6264",
+                  "Type": 1,
+                  "Name": "Delete",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/groupSettings/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "8bb6f43c-08d2-4a5e-94dc-a71422ad6437",
+                  "Type": 1,
+                  "Name": "List setting template",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/groupSettingTemplates",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "80b1e361-ef06-4f7a-a741-b523d413237c",
+                  "Type": 1,
+                  "Name": "Get setting template",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/groupSettingTemplates/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "0aac729c-bbb3-4420-821d-c70bb163932a",
+              "Type": 0,
+              "Name": "Notes",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "cd876720-4dca-4acc-934c-7122d204278a",
+                  "Type": 1,
+                  "Name": "List notebooks",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/onenote/notebooks",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "fd785c37-e9b6-4ce1-87e3-ab92175f1de9",
+                  "Type": 1,
+                  "Name": "Create notebook",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/onenote/notebooks",
+                  "Headers": {},
+                  "Body": "{\r\n    \u0022displayName\u0022: \u0022My Private notebook\u0022\r\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "1b5472b0-aab3-4525-a2bd-33b5238944be",
+              "Type": 0,
+              "Name": "Profile photo",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "84815fec-14b1-4311-8e7b-0d16a95e4694",
+                  "Type": 1,
+                  "Name": "Get",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/photo/$value",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "14cbe3cf-fcf7-49e3-91ab-b45bf4f5deeb",
+                  "Type": 1,
+                  "Name": "Update",
+                  "Method": "PUT",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/photo/$value",
+                  "Headers": {
+                    "Content-type": "image/jpeg"
+                  },
+                  "Body": "",
+                  "BinaryBodyRequired": true,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "2a0a32a1-89c2-4d8d-8a5a-803a8b541ca7",
+                  "Type": 1,
+                  "Name": "Delete",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/photo/$value",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "819a392f-6e48-42dc-8bb6-71e8db488f33",
+              "Type": 0,
+              "Name": "Planner",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "203ac249-cc33-465e-8ff8-4683be562e90",
+                  "Type": 1,
+                  "Name": "List plans",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/planner/plans",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "962be1f8-1564-4184-8bbb-31be608bb6b7",
+              "Type": 0,
+              "Name": "Posts",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "f653f3c8-0b22-41ec-98d3-d149c5330565",
+                  "Type": 1,
+                  "Name": "List",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}/posts",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "43773c9c-63c9-4bfd-8ada-6e47ec8d61b2",
+                  "Type": 1,
+                  "Name": "Get",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}/posts/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "1bb28e0e-97ee-4be1-964a-3b1759b988a6",
+                  "Type": 1,
+                  "Name": "Reply to post",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}/posts/{id}/reply",
+                  "Headers": {},
+                  "Body": "{\r\n  \u0022post\u0022: {\r\n    \u0022body\u0022: {\r\n      \u0022contentType\u0022: \u0022html\u0022,\r\n      \u0022content\u0022: \u0022\u003Chtml\u003E\u003Cbody\u003E\u003Cdiv\u003E\\r\\n\u003Cdiv\u003Ethis is reply body content \u003C/div\u003E\u003C/div\u003E\\r\\n\u003C/body\u003E\u003C/html\u003E\u0022\r\n    }\r\n  }\r\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "14ef0475-8a81-49b0-8ba8-e4d833a53469",
+                  "Type": 1,
+                  "Name": "Forward post",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}/posts/{id}/forward",
+                  "Headers": {},
+                  "Body": "{\n  \u0022comment\u0022: \u0022comment-value\u0022,\n  \u0022toRecipients\u0022: [\n    {\n      \u0022emailAddress\u0022: {\n        \u0022name\u0022: \u0022${SampleInternalUser1Address}\u0022,\n        \u0022address\u0022: \u0022${SampleInternalUser1Name}\u0022\n      }\n    }\n  ]\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "76aa96fd-f9dd-4618-b7a8-81f60a7b0acd",
+              "Type": 0,
+              "Name": "Other group resources",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "15d0d37b-bbc0-4bc7-8849-4e76dd5ff888",
+                  "Type": 1,
+                  "Name": "List permission grants",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/permissionGrants",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "c38b18ea-68cf-4dcf-9e0e-731369e34b9b",
+              "Type": 0,
+              "Name": "User settings",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "aa5e8503-bbe2-45dc-b23e-757e9a694d35",
+                  "Type": 1,
+                  "Name": "Add favorite",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/addFavorite",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "54ae9e06-a1ef-4e06-9e2b-a651aabf16a2",
+                  "Type": 1,
+                  "Name": "Remove favorite",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/removeFavorite",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "6d6252fd-7cf9-4e62-9ba1-121675134824",
+                  "Type": 0,
+                  "Name": "List member of",
+                  "Method": null,
+                  "Url": null,
+                  "Headers": {},
+                  "Body": null,
+                  "BinaryBodyRequired": false,
+                  "Children": [
+                    {
+                      "Id": "cfb0d89f-3d0f-4f93-86e0-bafc5853b09a",
+                      "Type": 1,
+                      "Name": "Get groups and administrative units that the group is a direct member of",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/groups/{id}/memberOf",
+                      "Headers": {},
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "cb87a902-62e1-4b2c-ac6d-709131ed5395",
+                      "Type": 1,
+                      "Name": "Get only a count of all memberships",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/groups/{id}/memberOf/$count",
+                      "Headers": {
+                        "ConsistencyLevel": "eventual"
+                      },
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "2559244c-7796-473d-bdf5-cf527e2285dd",
+                      "Type": 1,
+                      "Name": "Use OData cast to get only a count of group membership",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/devices/{id}/memberOf/microsoft.graph.group/$count",
+                      "Headers": {
+                        "ConsistencyLevel": "eventual"
+                      },
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "c99938d3-5ee4-4551-9350-6a69e1f19f04",
+                      "Type": 1,
+                      "Name": "Use OData cast and $search to get membership with display names that contain the letters \u0027Video\u0027 including a count of returned objects",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/groups/{id}/memberOf/microsoft.graph.group?$count=true\u0026$orderby=displayName\u0026$search=\u0022displayName:Video\u0022",
+                      "Headers": {
+                        "ConsistencyLevel": "eventual"
+                      },
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "5a41537a-d280-4767-9218-d9e319aa911b",
+                      "Type": 1,
+                      "Name": "Use OData cast and $filter to get membership with a display name that starts with the letter \u0027A\u0027 including a count of returned objects",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/groups/{id}/memberOf/microsoft.graph.group?$count=true\u0026$orderby=displayName\u0026$filter=startswith(displayName, \u0027A\u0027)",
+                      "Headers": {
+                        "ConsistencyLevel": "eventual"
+                      },
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "dd83cd99-6f01-4e55-98fd-a7164fccd56a",
+                  "Type": 1,
+                  "Name": "List joined teams",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/me/joinedTeams",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "1b8c1e9f-3a0f-4dd6-b1cf-fdd2cba367ff",
+                  "Type": 1,
+                  "Name": "List associated teams",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/me/teamwork/associatedTeams",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "e10264ba-2fd9-448f-977b-bb7da5e2dbfb",
+                  "Type": 1,
+                  "Name": "Subscribe by mail",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/subscribeByMail",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "63ce0965-1ef3-46e5-866a-906fdca2cb69",
+                  "Type": 1,
+                  "Name": "Unsubscribe by mail",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/unsubscribeByMail",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "1283ee6e-e232-4b66-a8f3-a8b1133e0221",
+                  "Type": 1,
+                  "Name": "Reset unseen count",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/resetUnseenCount",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            }
+          ],
+          "IsExpanded": false,
+          "IsBuiltIn": true
+        },
+        {
+          "Id": "8d260548-0880-443a-b481-25784d094368",
+          "Type": 0,
+          "Name": "Group lifecycle policy",
+          "Method": null,
+          "Url": null,
+          "Headers": {},
+          "Body": null,
+          "BinaryBodyRequired": false,
+          "Children": [
+            {
+              "Id": "d86da50b-f8a2-4423-9a18-4bbdb1b1c3fa",
+              "Type": 1,
+              "Name": "List",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/groupLifecyclePolicies",
+              "Headers": {},
+              "Body": "",
+              "BinaryBodyRequired": false,
+              "Children": [],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "0658d1e7-93ca-4045-8236-f39281bc5871",
+              "Type": 1,
+              "Name": "Create",
+              "Method": "POST",
+              "Url": "https://graph.microsoft.com/v1.0/groupLifecyclePolicies",
+              "Headers": {},
+              "Body": "{\n  \u0022groupLifetimeInDays\u0022: 100,\n  \u0022managedGroupTypes\u0022: \u0022Selected\u0022,\n  \u0022alternateNotificationEmails\u0022: \u0022${SampleInternalUser1Address}\u0022\n}",
+              "BinaryBodyRequired": false,
+              "Children": [],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "3d1a20b0-f41c-4a8a-95fa-3354ee600bac",
+              "Type": 1,
+              "Name": "Get",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/groupLifecyclePolicies/{id}",
+              "Headers": {},
+              "Body": "",
+              "BinaryBodyRequired": false,
+              "Children": [],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "e5f64d04-4b33-4508-bb37-aa6a837fcd60",
+              "Type": 1,
+              "Name": "Update",
+              "Method": "PATCH",
+              "Url": "https://graph.microsoft.com/v1.0/groupLifecyclePolicies/{id}",
+              "Headers": {},
+              "Body": "{\n  \u0022groupLifetimeInDays\u0022: 180,\n  \u0022managedGroupTypes\u0022: \u0022Selected\u0022,\n  \u0022alternateNotificationEmails\u0022: \u0022${SampleInternalUser1Address}\u0022\n}",
+              "BinaryBodyRequired": false,
+              "Children": [],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "85e617d2-f2d5-48a4-9c82-f55929a755d4",
+              "Type": 1,
+              "Name": "Delete",
+              "Method": "DELETE",
+              "Url": "https://graph.microsoft.com/v1.0/groupLifecyclePolicies/{id}",
+              "Headers": {},
+              "Body": "",
+              "BinaryBodyRequired": false,
+              "Children": [],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "3552a16b-e0d7-4753-a1b3-67f34e244cde",
+              "Type": 1,
+              "Name": "Add group",
+              "Method": "POST",
+              "Url": "https://graph.microsoft.com/v1.0/groupLifecyclePolicies/{id}/addGroup",
+              "Headers": {},
+              "Body": "{\n  \u0022groupId\u0022: \u0022{id}\u0022\n}",
+              "BinaryBodyRequired": false,
+              "Children": [],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "f21f6d65-c586-4d8f-b90e-3cfed04f2835",
+              "Type": 1,
+              "Name": "Remove group",
+              "Method": "POST",
+              "Url": "https://graph.microsoft.com/v1.0/groupLifecyclePolicies/{id}/removeGroup",
+              "Headers": {},
+              "Body": "{\n  \u0022groupId\u0022: \u0022{id}\u0022\n}",
+              "BinaryBodyRequired": false,
+              "Children": [],
               "IsExpanded": false,
               "IsBuiltIn": true
             }
