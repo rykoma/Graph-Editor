@@ -14,6 +14,7 @@
         <converters:MethodToColorConverter x:Key="MethodToColorConverter"/>
         <converters:UrlShortenerConverter x:Key="UrlShortenerConverter"/>
         <converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter"/>
+        <converters:HttpStatusCodeToIntConverter x:Key="HttpStatusCodeToIntConverter" />
 
         <Storyboard x:Key="DeleteAnimation">
             <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.1"/>
@@ -28,10 +29,10 @@
 
         <TextBlock x:Name="TextBlock_EmptyMessage" x:Uid="/Pages.ExecutionRecordViewer.ExecutionRecordViewer/TextBlock_EmptyMessage" Grid.Row="0" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-        <ListView x:Name="ListView_ExecutionRecordListView" Grid.Row="1" ItemsSource="{x:Bind executionRecords}" SelectionMode="None">
+        <ListView x:Name="ListView_ExecutionRecordListView" Grid.Row="1" ItemsSource="{x:Bind executionRecords}" SelectionMode="Single">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local1:ExecutionRecord">
-                    <Border Grid.Row="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="8" Margin="0,4,0,4" Padding="8">
+                    <Border Grid.Row="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="8" Margin="0,6,0,6" Padding="8,4,8,4">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"></RowDefinition>
@@ -44,8 +45,20 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Bind Request.Method}" Margin="0,0,8,0" Foreground="{Binding Request.Method, Converter={StaticResource MethodToColorConverter}}" />
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind Request.Url, Converter={StaticResource UrlShortenerConverter}}" />
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind Request.Url, Converter={StaticResource UrlShortenerConverter}}" ToolTipService.ToolTip="{x:Bind Request.Url}" />
                             <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" Orientation="Horizontal" VerticalAlignment="Center">
+                                <DropDownButton x:Name="DropDownButton_Copy" x:Uid="/Pages.ExecutionRecordViewer.ExecutionRecordViewer/DropDownButton_Copy" Margin="0,0,8,0">
+                                    <DropDownButton.Content>
+                                        <FontIcon Glyph="&#xE8C8;" FontSize="16" />
+                                    </DropDownButton.Content>
+                                    <DropDownButton.Flyout>
+                                        <MenuFlyout Placement="Bottom">
+                                            <MenuFlyoutItem x:Name="MenuFlyoutItem_CopyUrl" x:Uid="/Pages.ExecutionRecordViewer.ExecutionRecordViewer/MenuFlyoutItem_CopyUrl" Click="MenuFlyoutItem_CopyUrl_Click" />
+                                            <MenuFlyoutItem x:Name="MenuFlyoutItem_CopySimpleSummary" x:Uid="/Pages.ExecutionRecordViewer.ExecutionRecordViewer/MenuFlyoutItem_CopySimpleSummary" Click="MenuFlyoutItem_CopySimpleSummary_Click" />
+                                            <MenuFlyoutItem x:Name="MenuFlyoutItem_CopyFullSummary" x:Uid="/Pages.ExecutionRecordViewer.ExecutionRecordViewer/MenuFlyoutItem_CopyFullSummary" Click="MenuFlyoutItem_CopyFullSummary_Click" />
+                                        </MenuFlyout>
+                                    </DropDownButton.Flyout>
+                                </DropDownButton>
                                 <Button x:Name="Button_View" x:Uid="/Pages.ExecutionRecordViewer.ExecutionRecordViewer/Button_View" Margin="0,0,8,0" Click="Button_View_Click">
                                     <Button.Content>
                                         <FontIcon Glyph="&#xE890;" FontSize="16" />
@@ -63,7 +76,7 @@
                                 </Button>
                             </StackPanel>
 
-                            <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Bind Response.StatusCode}" />
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Bind Response.StatusCode}" ToolTipService.ToolTip="{x:Bind Response.StatusCode, Converter={StaticResource HttpStatusCodeToIntConverter}}" />
                             <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind Request.DateTime, Converter={StaticResource DateTimeToStringConverter}}" />
                         </Grid>
                     </Border>

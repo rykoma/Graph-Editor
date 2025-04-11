@@ -14,6 +14,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -43,6 +44,60 @@ namespace Graph_Editor.Pages.ExecutionRecordViewer
         private void ExecutionRecords_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             UpdateEmptyMessageVisibility();
+        }
+
+        private void MenuFlyoutItem_CopyUrl_Click(object sender, RoutedEventArgs e)
+        {
+            // Copy the URL to the clipboard
+
+            if (sender is MenuFlyoutItem { DataContext: ExecutionRecord executionRecord })
+            {
+                var url = executionRecord.Request.Url;
+                var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
+                dataPackage.SetText(url);
+                Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
+            }
+        }
+
+        private void MenuFlyoutItem_CopySimpleSummary_Click(object sender, RoutedEventArgs e)
+        {
+            // Copy the method, URL, and status code to the clipboard
+
+            if (sender is MenuFlyoutItem { DataContext: ExecutionRecord executionRecord })
+            {
+                var summary = new StringBuilder();
+                summary.AppendLine($"{executionRecord.Request.Method} {executionRecord.Request.Url}");
+                summary.AppendLine($"{(int)executionRecord.Response.StatusCode} {executionRecord.Response.StatusCode.ToString()}");
+                var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
+                dataPackage.SetText(summary.ToString());
+                Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
+            }
+        }
+
+        private void MenuFlyoutItem_CopyFullSummary_Click(object sender, RoutedEventArgs e)
+        {
+            // Copy the full summary to the clipboard
+
+            if (sender is MenuFlyoutItem { DataContext: ExecutionRecord executionRecord })
+            {
+                var summary = new StringBuilder();
+                summary.AppendLine($"{executionRecord.Request.Method} {executionRecord.Request.Url}");
+                summary.AppendLine("Request Headers:");
+                foreach (var header in executionRecord.Request.Headers)
+                {
+                    summary.AppendLine($"  {header.Key}: {header.Value}");
+                }
+                summary.AppendLine();
+                summary.AppendLine($"{(int)executionRecord.Response.StatusCode} {executionRecord.Response.StatusCode.ToString()}");
+                summary.AppendLine("Response Headers:");
+                foreach (var header in executionRecord.Response.Headers)
+                {
+                    summary.AppendLine($"  {header.Key}: {header.Value}");
+                }
+                var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
+                dataPackage.SetText(summary.ToString());
+                Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
+            }
         }
 
         private void Button_View_Click(object sender, RoutedEventArgs e)

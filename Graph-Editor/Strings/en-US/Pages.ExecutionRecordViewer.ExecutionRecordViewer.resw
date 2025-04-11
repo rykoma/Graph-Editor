@@ -129,4 +129,16 @@
   <data name="TextBlock_EmptyMessage.Text" xml:space="preserve">
     <value>No history record.</value>
   </data>
+  <data name="MenuFlyoutItem_CopyUrl.Text" xml:space="preserve">
+    <value>Copy URL</value>
+  </data>
+  <data name="MenuFlyoutItem_CopySimpleSummary.Text" xml:space="preserve">
+    <value>Copy Simple Summary</value>
+  </data>
+  <data name="MenuFlyoutItem_CopyFullSummary.Text" xml:space="preserve">
+    <value>Copy Full Summary</value>
+  </data>
+  <data name="DropDownButton_Copy.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Copy</value>
+  </data>
 </root>
