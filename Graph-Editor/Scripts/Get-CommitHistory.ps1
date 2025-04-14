@@ -1,23 +1,39 @@
-# Retrieve the commit history of a specified GitHub organization repository.
+# Define a global variable to store the cache
+$global:YamlCache = @{} 
+
+# Define a global variable to store the access token
+$global:AccessTokenCache = ""
+
+# Retrieve the commit history of a specified GitHub organization repository with authentication.
 # Filter the commits to include only those from a specified date.
 # For the filtered commits, get a list of files whose names start with "api-reference/v1.0/api/".
 # Finally, output the commits and the corresponding list of files.
+# Access token can be obtained from https://github.com/settings/tokens with "repo:status" and "public_repo" scopes, and SSO to MicrosoftDocs is required.
 function Get-CommitHistory {
+    [CmdletBinding()]
     param (
         [string]$Organization = "microsoftgraph",
         [string]$Repository = "microsoft-graph-docs-contrib",
-        [DateTime]$Date
+        [DateTime]$Date,
+        [ValidateNotNullOrEmpty()]
+        [string]$AccessToken
     )
 
     # Convert JST to UTC
     $utcStart = ($Date.Date).ToUniversalTime()
     $utcEnd = ($Date.Date.AddDays(1).AddSeconds(-1)).ToUniversalTime()
 
+    # store the access token in the global variable
+    $global:AccessTokenCache = $AccessToken
+
     # GitHub API URL
     $url = "https://api.github.com/repos/$Organization/$Repository/commits?since=$($utcStart.ToString('yyyy-MM-ddTHH:mm:ssZ'))&until=$($utcEnd.ToString('yyyy-MM-ddTHH:mm:ssZ'))&sha=main"
 
-    # Retrieve commit history from the GitHub API
-    $commits = Invoke-RestMethod -Uri $url -Method Get -Headers @{ "User-Agent" = "PowerShell" }
+    # Retrieve commit history from the GitHub API with authentication
+    $commits = Invoke-RestMethod -Uri $url -Method Get -Headers @{
+        "User-Agent"    = "PowerShell"
+        "Authorization" = "Bearer $global:AccessTokenCache"
+    }
 
     # Get the list of files included in each commit
     foreach ($commit in $commits) {
@@ -26,7 +42,10 @@ function Get-CommitHistory {
         $commitDateUtc = $commit.commit.author.date
         $commitDateLocal = [DateTime]::Parse($commitDateUtc).ToLocalTime()
         $commitUrl = "https://github.com/$Organization/$Repository/commit/$commitSha"
-        $response = Invoke-RestMethod -Uri "https://api.github.com/repos/$Organization/$Repository/commits/$commitSha" -Method Get -Headers @{ "User-Agent" = "PowerShell" }
+        $response = Invoke-RestMethod -Uri "https://api.github.com/repos/$Organization/$Repository/commits/$commitSha" -Method Get -Headers @{
+            "User-Agent"    = "PowerShell"
+            "Authorization" = "Bearer $global:AccessTokenCache"
+        }
 
         # Filter files whose names start with "api-reference/v1.0/api/"
         $filteredFiles = $response.files | Where-Object { $_.filename -like "api-reference/v1.0/api/*" }
@@ -49,9 +68,6 @@ function Get-CommitHistory {
     }
 }
 
-# Define a global variable to store the cache
-$global:YamlCache = @{} 
-
 # Function to fetch and parse the YAML file from the provided URL
 function Get-YamlContent {
     param (
@@ -63,9 +79,18 @@ function Get-YamlContent {
         return $global:YamlCache[$url]
     }
 
+    # Check if the access token is set
+    if ([string]::IsNullOrEmpty($global:AccessTokenCache)) {
+        Write-Error "Access token is not set. Please run Get-CommitHistory first."
+        return
+    }
+
     try {
-        # Fetch the YAML content from the URL
-        $yamlContent = Invoke-RestMethod -Uri $url -Method Get -Headers @{ "User-Agent" = "PowerShell" }
+        # Fetch the YAML content from the URL with authentication
+        $yamlContent = Invoke-RestMethod -Uri $url -Method Get -Headers @{
+            "User-Agent"    = "PowerShell"
+            "Authorization" = "Bearer $global:AccessTokenCache"
+        }
 
         # Parse the YAML content
         $parsedYaml = $yamlContent | ConvertFrom-Yaml
@@ -88,6 +113,12 @@ function Search-FilenameInYaml {
         [string]$filename,
         [string]$mainYamlUrl = "https://raw.githubusercontent.com/microsoftgraph/microsoft-graph-docs-contrib/refs/heads/main/api-reference/v1.0/toc.yml"
     )
+
+    # Check if the access token is set
+    if ([string]::IsNullOrEmpty($global:AccessTokenCache)) {
+        Write-Error "Access token is not set. Please run Get-CommitHistory first."
+        return
+    }
 
     # Get the parsed main YAML content
     $mainYamlData = Get-YamlContent -url $mainYamlUrl
