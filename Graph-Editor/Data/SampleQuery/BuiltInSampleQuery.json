@@ -5308,6 +5308,1381 @@
       ],
       "IsExpanded": false,
       "IsBuiltIn": true
+    },
+    {
+      "Id": "d261625f-89cb-4066-988f-f8c52cdadabc",
+      "Type": 0,
+      "Name": "Applications",
+      "Method": null,
+      "Url": null,
+      "Headers": {},
+      "Body": null,
+      "BinaryBodyRequired": false,
+      "Children": [
+        {
+          "Id": "deb4477c-ccfe-4b64-bb54-afffb80f2b21",
+          "Type": 0,
+          "Name": "Application",
+          "Method": null,
+          "Url": null,
+          "Headers": {},
+          "Body": null,
+          "BinaryBodyRequired": false,
+          "Children": [
+            {
+              "Id": "55585ad4-3dea-4945-82d7-6776a20a3762",
+              "Type": 0,
+              "Name": "List",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "53d089f2-4edd-4f1c-8f73-2e51a640f322",
+                  "Type": 1,
+                  "Name": "Get the list of applications",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/applications",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "f45fb52a-5e35-4d38-a216-7da2da909a26",
+                  "Type": 1,
+                  "Name": "Get only a count of applications",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/$count",
+                  "Headers": {
+                    "ConsistencyLevel": "eventual"
+                  },
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "7474ea13-0295-4729-a3cc-37c428658012",
+                  "Type": 1,
+                  "Name": "Use $filter and $top to get one application with a display name that starts with \u0027a\u0027 including a count of returned objects",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/applications?$filter=startswith(displayName, \u0027a\u0027)\u0026$count=true\u0026$top=1\u0026$orderby=displayName",
+                  "Headers": {
+                    "ConsistencyLevel": "eventual"
+                  },
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "7b5d3fae-c6d5-4a76-9a9f-3d97ff290079",
+                  "Type": 1,
+                  "Name": "Use $search to get applications with display names that contain the letters \u0027Web\u0027 including a count of returned objects",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/applications?$search=\u0022displayName:Web\u0022\u0026$count=true\u0026$select=appId,identifierUris,displayName,publisherDomain,signInAudience",
+                  "Headers": {
+                    "ConsistencyLevel": "eventual"
+                  },
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "5af5373c-db98-4f5d-84f1-4b923de908af",
+                  "Type": 1,
+                  "Name": "Get applications with less than two owners",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/applications?$filter=owners/$count eq 0 or owners/$count eq 1\u0026$count=true\u0026$select=id,displayName",
+                  "Headers": {
+                    "ConsistencyLevel": "eventual"
+                  },
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "350ac68a-7dce-41d8-9823-058974bfa2ff",
+              "Type": 0,
+              "Name": "Create",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "ab6595d9-9122-47fd-8cd0-9f108e906bd5",
+                  "Type": 1,
+                  "Name": "Create an application with the default settings",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/applications",
+                  "Headers": {},
+                  "Body": "{\n  \u0022displayName\u0022: \u0022Display name\u0022\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "9c10993c-50a6-4634-891c-d095110dd6e3",
+                  "Type": 1,
+                  "Name": "Create a new application and add a password secret",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/applications",
+                  "Headers": {},
+                  "Body": "{\n  \u0022displayName\u0022: \u0022MyAppName\u0022,\n  \u0022passwordCredentials\u0022: [\n    {\n      \u0022displayName\u0022: \u0022Password name\u0022\n    }\n  ]\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "7b38aa2f-e52a-4bf4-b363-e15428f457a0",
+              "Type": 0,
+              "Name": "Get",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "90bd57bd-6ee4-4b35-8830-8a7da3226092",
+                  "Type": 1,
+                  "Name": "Retrieve the properties of an application object",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "29cf5599-a22f-475b-9254-bb2bce5191bc",
+                  "Type": 1,
+                  "Name": "Retrieve an application by its appId and only specific properties",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/applications(appId=\u0027{id}\u0027)?$select=id,appId,displayName,requiredResourceAccess",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "2fafec3b-b54e-4dcf-8868-a454bed4ef00",
+              "Type": 0,
+              "Name": "Update",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "d96813f4-b408-40ff-8bf9-7bb3770fece9",
+                  "Type": 1,
+                  "Name": "Update the displayName for an application",
+                  "Method": "PATCH",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}",
+                  "Headers": {},
+                  "Body": "{\n  \u0022displayName\u0022: \u0022New display name\u0022\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "46a2969e-1dc0-4717-81af-65fc01a4b96c",
+                  "Type": 1,
+                  "Name": "Update the appRoles for an application",
+                  "Method": "PATCH",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}",
+                  "Headers": {},
+                  "Body": "{\n    \u0022appRoles\u0022: [\n        {\n            \u0022allowedMemberTypes\u0022: [\n                \u0022User\u0022,\n                \u0022Application\u0022\n            ],\n            \u0022description\u0022: \u0022Survey.Read\u0022,\n            \u0022displayName\u0022: \u0022Survey.Read\u0022,\n            \u0022id\u0022: \u0022ebb7c86c-fb47-4e3f-8191-420ff1b9de4a\u0022,\n            \u0022isEnabled\u0022: false,\n            \u0022origin\u0022: \u0022Application\u0022,\n            \u0022value\u0022: \u0022Survey.Read\u0022\n        }\n    ]\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "77053a3c-500c-44e8-b06f-3239d48eb8fa",
+              "Type": 0,
+              "Name": "Upsert",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "e718364b-5621-47cf-8fed-025a69c4fca1",
+                  "Type": 1,
+                  "Name": "Create a new application if it doesn\u0027t exist",
+                  "Method": "PATCH",
+                  "Url": "https://graph.microsoft.com/v1.0/applications(uniqueName=\u0027app-65278\u0027)",
+                  "Headers": {
+                    "Prefer": "create-if-missing"
+                  },
+                  "Body": "{\n  \u0022displayName\u0022: \u0022Display name\u0022\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "67bc4949-0170-45bd-91c4-3f7d7e9f13ea",
+                  "Type": 1,
+                  "Name": "Update an existing application",
+                  "Method": "PATCH",
+                  "Url": "https://graph.microsoft.com/v1.0/applications(uniqueName=\u0027app-65278\u0027)",
+                  "Headers": {
+                    "Prefer": "create-if-missing"
+                  },
+                  "Body": "{\n  \u0022displayName\u0022: \u0022Display name\u0022\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "ac3ef4c6-36ef-4dbb-a4e2-1efa3d11349b",
+              "Type": 1,
+              "Name": "Delete",
+              "Method": "DELETE",
+              "Url": "https://graph.microsoft.com/v1.0/applications/{id}",
+              "Headers": {},
+              "Body": "",
+              "BinaryBodyRequired": false,
+              "Children": [],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "e0a92430-3e54-43f1-98f3-7e40cd65cc64",
+              "Type": 1,
+              "Name": "Get delta",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/applications/delta",
+              "Headers": {},
+              "Body": "",
+              "BinaryBodyRequired": false,
+              "Children": [],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "250e18bf-eaad-48b6-8fdd-6fefbcc9fe80",
+              "Type": 0,
+              "Name": "Deleted items",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "dba66dc6-d97b-4691-851d-1a36bd53852d",
+                  "Type": 1,
+                  "Name": "List",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/directory/deleteditems/microsoft.graph.application",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "d98fdc22-f91c-4dcf-80e2-6af9292754ca",
+                  "Type": 1,
+                  "Name": "Get",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{object-id}",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "b60a2c8d-6f44-41ba-b572-74e8671d9751",
+                  "Type": 1,
+                  "Name": "Restore",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{id}/restore",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "d32f17ed-11ae-4633-9f94-0e7eb3ce2f14",
+                  "Type": 1,
+                  "Name": "Permanently delete",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{object-id}",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "3f3f1cf2-7b9b-4fb9-832c-69c05a898f78",
+                  "Type": 1,
+                  "Name": "List deleted items owned by user",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/getUserOwnedObjects",
+                  "Headers": {},
+                  "Body": "{\n  \u0022userId\u0022:\u002255ac777c-109e-4022-b58c-470c8fcb6892\u0022,\n  \u0022type\u0022:\u0022Group\u0022\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "506e8767-58da-4d0f-a124-ae107b0b196f",
+              "Type": 0,
+              "Name": "Certificates and secrets",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "2ad7cfb3-f39a-4d64-937b-9f7f6a23d9f8",
+                  "Type": 1,
+                  "Name": "Add password",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}/addPassword",
+                  "Headers": {},
+                  "Body": "{\n  \u0022passwordCredential\u0022: {\n    \u0022displayName\u0022: \u0022Password friendly name\u0022\n  }\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "57f46151-a5c5-4c9f-afbb-6e218bab3344",
+                  "Type": 1,
+                  "Name": "Remove password",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}/removePassword",
+                  "Headers": {},
+                  "Body": "{\n    \u0022keyId\u0022: \u0022f0b0b335-1d71-4883-8f98-567911bfdca6\u0022\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "1b40d62e-e55b-4613-88fe-7bf6788796c2",
+                  "Type": 0,
+                  "Name": "Add key",
+                  "Method": null,
+                  "Url": null,
+                  "Headers": {},
+                  "Body": null,
+                  "BinaryBodyRequired": false,
+                  "Children": [
+                    {
+                      "Id": "fccdb7d2-a607-40bf-87de-3cb466f8185f",
+                      "Type": 1,
+                      "Name": "Add a new key credential to an application",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/applications/{id}/addKey",
+                      "Headers": {},
+                      "Body": "{\n    \u0022keyCredential\u0022: {\n        \u0022type\u0022: \u0022AsymmetricX509Cert\u0022,\n        \u0022usage\u0022: \u0022Verify\u0022,\n        \u0022key\u0022: \u0022MIIDYDCCAki...\u0022\n    },\n    \u0022passwordCredential\u0022: null,\n    \u0022proof\u0022:\u0022eyJ0eXAiOiJ...\u0022\n}",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "63dc4fe6-36f5-4c20-a06f-e010c32950db",
+                      "Type": 1,
+                      "Name": "Add a key credential and an associated password for the key",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/applications/{id}/addKey",
+                      "Headers": {},
+                      "Body": "{\n    \u0022keyCredential\u0022: {\n        \u0022type\u0022: \u0022X509CertAndPassword\u0022,\n        \u0022usage\u0022: \u0022Sign\u0022,\n        \u0022key\u0022: \u0022MIIDYDCCAki...\u0022\n    },\n    \u0022passwordCredential\u0022: {\n        \u0022secretText\u0022: \u0022MKTr0w1...\u0022\n    },\n    \u0022proof\u0022:\u0022eyJ0eXAiOiJ...\u0022\n}",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "ecf8dfd0-adb3-4906-a9dc-4e26d71984af",
+                  "Type": 1,
+                  "Name": "Remove key",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}/removeKey",
+                  "Headers": {},
+                  "Body": "{\n    \u0022keyId\u0022: \u0022f0b0b335-1d71-4883-8f98-567911bfdca6\u0022,\n    \u0022proof\u0022:\u0022eyJ0eXAiOiJ...\u0022\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "a56cf763-f85e-4622-993a-25a481f29193",
+              "Type": 0,
+              "Name": "Owners",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "50762ba5-5ed7-4752-b9b8-d05a472c27c5",
+                  "Type": 1,
+                  "Name": "List",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/applications(appId=\u0027{id}\u0027)/owners",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "8195047a-a53b-4d04-8128-51e72b8393d8",
+                  "Type": 1,
+                  "Name": "Add",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}/owners/$ref",
+                  "Headers": {},
+                  "Body": "{\n    \u0022@odata.id\u0022: \u0022https://graph.microsoft.com/v1.0/directoryObjects/{id}\u0022\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "40ce38fc-a166-4f41-9957-63684120163a",
+                  "Type": 1,
+                  "Name": "Remove",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}/owners/{id}/$ref",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "a42eb8bb-35ae-4de4-a4d0-5dd48b6d9a66",
+              "Type": 0,
+              "Name": "Verified publisher",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "a33606c5-ee37-4f6c-aec6-4790798a19bc",
+                  "Type": 1,
+                  "Name": "Set",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}/setVerifiedPublisher",
+                  "Headers": {},
+                  "Body": "{\n    \u0022verifiedPublisherId\u0022: \u00221234567\u0022\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "800c3a8b-f772-4f9b-acc5-3604e736fd4c",
+                  "Type": 1,
+                  "Name": "Unset",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}/unsetVerifiedPublisher",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "f600976b-3845-4efc-b2c3-e2fbe326402c",
+              "Type": 0,
+              "Name": "Directory extension",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "1e16ad4d-2010-49b9-aee6-8aabfdd4509d",
+                  "Type": 1,
+                  "Name": "Create",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}/extensionProperties",
+                  "Headers": {},
+                  "Body": "{\n    \u0022name\u0022: \u0022jobGroup\u0022,\n    \u0022dataType\u0022: \u0022String\u0022,\n    \u0022isMultiValued\u0022: true,\n    \u0022targetObjects\u0022: [\n        \u0022User\u0022\n    ]\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "2c003290-2023-474d-887f-4c0a17b8d699",
+                  "Type": 1,
+                  "Name": "List",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}/extensionProperties",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "e9e15c00-cbba-4208-a3d1-859e45af08ad",
+                  "Type": 1,
+                  "Name": "Get",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}/extensionProperties/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "d0329b7a-d406-4fb4-a477-5b93449b31dc",
+                  "Type": 1,
+                  "Name": "Delete",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}/extensionProperties/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "58bfa844-7eec-4b20-95e6-ae32ba8b8482",
+                  "Type": 1,
+                  "Name": "Get available extension properties",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/directoryObjects/getAvailableExtensionProperties",
+                  "Headers": {},
+                  "Body": "{\n\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "8ab8200c-0595-4b38-96ce-27ef571447ab",
+              "Type": 0,
+              "Name": "Federated identity credential",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "58b7d2a6-52da-43aa-ae56-226837a20559",
+                  "Type": 1,
+                  "Name": "List",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}/federatedIdentityCredentials/",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "e52dbcb1-f773-4466-bb1c-8669cfaf0d25",
+                  "Type": 1,
+                  "Name": "Create",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}/federatedIdentityCredentials/",
+                  "Headers": {},
+                  "Body": "{\n    \u0022name\u0022: \u0022testing02\u0022,\n    \u0022issuer\u0022: \u0022https://login.microsoftonline.com/3d1e2be9-a10a-4a0c-8380-7ce190f98ed9/v2.0\u0022,\n    \u0022subject\u0022: \u0022a7d388c3-5e3f-4959-ac7d-786b3383006a\u0022,\n    \u0022audiences\u0022: [\n        \u0022api://AzureADTokenExchange\u0022\n    ]\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "fabdc3f1-b482-48eb-beac-a5c209a2c3f0",
+                  "Type": 1,
+                  "Name": "Get",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}/federatedIdentityCredentials/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "960ea256-c1d8-48b7-81b1-f4acd9441a56",
+                  "Type": 1,
+                  "Name": "Update",
+                  "Method": "PATCH",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}/federatedIdentityCredentials/{id}",
+                  "Headers": {},
+                  "Body": "{\n    \u0022name\u0022: \u0022testing02\u0022,\n    \u0022issuer\u0022: \u0022https://login.microsoftonline.com/3d1e2be9-a10a-4a0c-8380-7ce190f98ed9/v2.0\u0022,\n    \u0022subject\u0022: \u0022a7d388c3-5e3f-4959-ac7d-786b3383006a\u0022,\n    \u0022description\u0022: \u0022Updated description\u0022,\n    \u0022audiences\u0022: [\n        \u0022api://AzureADTokenExchange\u0022\n    ]\n}",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "144f408a-a0d9-46aa-9249-f2ea8d337e53",
+                  "Type": 0,
+                  "Name": "Upsert",
+                  "Method": null,
+                  "Url": null,
+                  "Headers": {},
+                  "Body": null,
+                  "BinaryBodyRequired": false,
+                  "Children": [
+                    {
+                      "Id": "235dd45d-e4bc-4f7c-87cf-88badd6609a7",
+                      "Type": 1,
+                      "Name": "Create a new federatedIdentityCredential if it doesn\u0027t exist",
+                      "Method": "PATCH",
+                      "Url": "https://graph.microsoft.com/v1.0/applications(uniqueName=\u0027app-65278\u0027)/federatedIdentityCredentials(name=\u0027fic01-app-65278\u0027)",
+                      "Headers": {},
+                      "Body": "{\n    \u0022issuer\u0022: \u0022https://login.microsoftonline.com/3d1e2be9-a10a-4a0c-8380-7ce190f98ed9/v2.0\u0022,\n    \u0022subject\u0022: \u0022a7d388c3-5e3f-4959-ac7d-786b3383006a\u0022,\n    \u0022audiences\u0022: [\n        \u0022api://AzureADTokenExchange\u0022\n    ]\n}",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "fdd933b8-eb88-4949-9734-58c28ae30aa7",
+                      "Type": 1,
+                      "Name": "Update an existing federatedIdentityCredential",
+                      "Method": "PATCH",
+                      "Url": "https://graph.microsoft.com/v1.0/applications(uniqueName=\u0027app-65278\u0027)/federatedIdentityCredentials(name=\u0027fic01-app-65278\u0027)",
+                      "Headers": {
+                        "Prefer": "create-if-missing"
+                      },
+                      "Body": "{\n    \u0022issuer\u0022: \u0022https://login.microsoftonline.com/3d1e2be9-a10a-4a0c-8380-7ce190f98ed9/v2.0\u0022,\n    \u0022subject\u0022: \u0022a7d388c3-5e3f-4959-ac7d-786b3383006a\u0022,\n    \u0022audiences\u0022: [\n        \u0022api://AzureADTokenExchange\u0022\n    ]\n}",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "80991c84-33f2-465f-b188-688f72f103c8",
+                  "Type": 1,
+                  "Name": "Delete",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}/federatedIdentityCredentials/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "90fcfa4e-3dfd-43d9-9399-9fa92c677b98",
+              "Type": 0,
+              "Name": "Policies",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "9bb43d34-8208-4347-a980-5610fa1945e6",
+                  "Type": 0,
+                  "Name": "Application management policy",
+                  "Method": null,
+                  "Url": null,
+                  "Headers": {},
+                  "Body": null,
+                  "BinaryBodyRequired": false,
+                  "Children": [
+                    {
+                      "Id": "6db1a2ff-aafc-43c2-af53-c0fd6db0ee40",
+                      "Type": 0,
+                      "Name": "App management policy",
+                      "Method": null,
+                      "Url": null,
+                      "Headers": {},
+                      "Body": null,
+                      "BinaryBodyRequired": false,
+                      "Children": [
+                        {
+                          "Id": "4e08ebf8-c04e-4903-9d2f-2f1ded6492e1",
+                          "Type": 1,
+                          "Name": "List",
+                          "Method": "GET",
+                          "Url": "https://graph.microsoft.com/v1.0/policies/appManagementPolicies",
+                          "Headers": {},
+                          "Body": "",
+                          "BinaryBodyRequired": false,
+                          "Children": [],
+                          "IsExpanded": false,
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "737a97e5-0b95-4de6-acc5-52f4b894adbb",
+                          "Type": 1,
+                          "Name": "Create",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/policies/appManagementPolicies",
+                          "Headers": {},
+                          "Body": "{\n    \u0022displayName\u0022: \u0022Credential management policy\u0022,\n    \u0022description\u0022: \u0022Cred policy sample\u0022,\n    \u0022isEnabled\u0022: true,\n    \u0022restrictions\u0022: {\n        \u0022passwordCredentials\u0022: [\n            {\n                \u0022restrictionType\u0022: \u0022passwordAddition\u0022,\n                \u0022state\u0022: \u0022enabled\u0022,\n                \u0022maxLifetime\u0022: null,\n                \u0022restrictForAppsCreatedAfterDateTime\u0022: \u00222019-10-19T10:37:00Z\u0022\n            },\n            {\n                \u0022restrictionType\u0022: \u0022passwordLifetime\u0022,\n                \u0022state\u0022: \u0022enabled\u0022,\n                \u0022maxLifetime\u0022: \u0022P90D\u0022,\n                \u0022restrictForAppsCreatedAfterDateTime\u0022: \u00222014-10-19T10:37:00Z\u0022\n            },\n            {\n                \u0022restrictionType\u0022: \u0022symmetricKeyAddition\u0022,\n                \u0022state\u0022: \u0022enabled\u0022,\n                \u0022maxLifetime\u0022: null,\n                \u0022restrictForAppsCreatedAfterDateTime\u0022: \u00222019-10-19T10:37:00Z\u0022\n            },\n            {\n                \u0022restrictionType\u0022: \u0022symmetricKeyLifetime\u0022,\n                \u0022state\u0022: \u0022enabled\u0022,\n                \u0022maxLifetime\u0022: \u0022P90D\u0022,\n                \u0022restrictForAppsCreatedAfterDateTime\u0022: \u00222014-10-19T10:37:00Z\u0022\n            }\n        ],\n        \u0022keyCredentials\u0022: [],\n        \u0022applicationRestrictions\u0022: {\n            \u0022identifierUris\u0022: {\n                \u0022nonDefaultUriAddition\u0022: {\n                    \u0022state\u0022: \u0022disabled\u0022,\n                    \u0022excludeAppsReceivingV2Tokens\u0022: true,\n                    \u0022excludeSaml\u0022: true\n                }\n            }\n        }\n    }\n}",
+                          "BinaryBodyRequired": false,
+                          "Children": [],
+                          "IsExpanded": false,
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "62bf276a-91ea-453c-a2b3-9b5c8fadb47f",
+                          "Type": 1,
+                          "Name": "Get",
+                          "Method": "GET",
+                          "Url": "https://graph.microsoft.com/v1.0/policies/appManagementPolicies/{id}",
+                          "Headers": {},
+                          "Body": "",
+                          "BinaryBodyRequired": false,
+                          "Children": [],
+                          "IsExpanded": false,
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "4ac6ae1c-278c-4cab-8c31-4a3c0ec41fec",
+                          "Type": 1,
+                          "Name": "Update",
+                          "Method": "PATCH",
+                          "Url": "https://graph.microsoft.com/v1.0/policies/appManagementPolicies/{id}",
+                          "Headers": {},
+                          "Body": "{\n    \u0022isEnabled\u0022: false\n}",
+                          "BinaryBodyRequired": false,
+                          "Children": [],
+                          "IsExpanded": false,
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "2c2ffdd6-1f70-4551-a4ce-15737a2323b0",
+                          "Type": 1,
+                          "Name": "Delete",
+                          "Method": "DELETE",
+                          "Url": "https://graph.microsoft.com/v1.0/policies/appManagementPolicies/{id}",
+                          "Headers": {},
+                          "Body": "",
+                          "BinaryBodyRequired": false,
+                          "Children": [],
+                          "IsExpanded": false,
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "fee88c88-21b4-4aeb-970d-3420b64c3584",
+                          "Type": 0,
+                          "Name": "List applies to",
+                          "Method": null,
+                          "Url": null,
+                          "Headers": {},
+                          "Body": null,
+                          "BinaryBodyRequired": false,
+                          "Children": [
+                            {
+                              "Id": "189f1dbf-0d7c-4d95-b5f0-4186c09aa0a2",
+                              "Type": 1,
+                              "Name": "Get applications and service principal objects applied to an app management policy",
+                              "Method": "GET",
+                              "Url": "https://graph.microsoft.com/v1.0/policies/appManagementPolicies/{id}/appliesTo",
+                              "Headers": {},
+                              "Body": "",
+                              "BinaryBodyRequired": false,
+                              "Children": [],
+                              "IsExpanded": false,
+                              "IsBuiltIn": true
+                            },
+                            {
+                              "Id": "14dd11bd-1ae7-4006-a2d5-bd644b782206",
+                              "Type": 1,
+                              "Name": "Get specific properties of applications and service principal objects applied to an app management policy using $select query option",
+                              "Method": "GET",
+                              "Url": "https://graph.microsoft.com/v1.0/policies/appManagementPolicies/{id}/appliesTo?$select=id,appId,displayName,createdDateTime",
+                              "Headers": {},
+                              "Body": "",
+                              "BinaryBodyRequired": false,
+                              "Children": [],
+                              "IsExpanded": false,
+                              "IsBuiltIn": true
+                            }
+                          ],
+                          "IsExpanded": false,
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "f95d0162-acd8-47bf-97eb-4eb8dd19461c",
+                          "Type": 0,
+                          "Name": "Create applies to",
+                          "Method": null,
+                          "Url": null,
+                          "Headers": {},
+                          "Body": null,
+                          "BinaryBodyRequired": false,
+                          "Children": [
+                            {
+                              "Id": "4fef25a9-3a41-41f6-b793-b67d5942bff9",
+                              "Type": 1,
+                              "Name": "Assign an appManagementPolicy to an application object",
+                              "Method": "POST",
+                              "Url": "https://graph.microsoft.com/v1.0/applications/{id}/appManagementPolicies/$ref",
+                              "Headers": {},
+                              "Body": "{\n \u0022@odata.id\u0022:\u0022https://graph.microsoft.com/v1.0/policies/appManagementPolicies/{id}\u0022\n}",
+                              "BinaryBodyRequired": false,
+                              "Children": [],
+                              "IsExpanded": false,
+                              "IsBuiltIn": true
+                            },
+                            {
+                              "Id": "e2e95ab7-084d-45a5-b295-d3be8990bfbf",
+                              "Type": 1,
+                              "Name": "Assign an appManagementPolicy to a service principal object",
+                              "Method": "POST",
+                              "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/appManagementPolicies/$ref",
+                              "Headers": {},
+                              "Body": "{\n \u0022@odata.id\u0022:\u0022https://graph.microsoft.com/v1.0/policies/appManagementPolicies/{id}\u0022\n}",
+                              "BinaryBodyRequired": false,
+                              "Children": [],
+                              "IsExpanded": false,
+                              "IsBuiltIn": true
+                            }
+                          ],
+                          "IsExpanded": false,
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "e6bf1aa2-f4f3-4c13-8c26-2f2757b1f188",
+                          "Type": 0,
+                          "Name": "Delete applies to",
+                          "Method": null,
+                          "Url": null,
+                          "Headers": {},
+                          "Body": null,
+                          "BinaryBodyRequired": false,
+                          "Children": [
+                            {
+                              "Id": "8c9d8506-d79e-4cc5-ac53-fd55cba6cf61",
+                              "Type": 1,
+                              "Name": "Remove an appManagementPolicy from an application object",
+                              "Method": "DELETE",
+                              "Url": "https://graph.microsoft.com/v1.0/applications/{id}/appManagementPolicies/{id}/$ref",
+                              "Headers": {},
+                              "Body": "",
+                              "BinaryBodyRequired": false,
+                              "Children": [],
+                              "IsExpanded": false,
+                              "IsBuiltIn": true
+                            },
+                            {
+                              "Id": "9f24c911-00b5-4a83-b055-a368ea4c7262",
+                              "Type": 1,
+                              "Name": "Remove an appManagementPolicy from a service principal object",
+                              "Method": "DELETE",
+                              "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/appManagementPolicies/{id}/$ref",
+                              "Headers": {},
+                              "Body": "",
+                              "BinaryBodyRequired": false,
+                              "Children": [],
+                              "IsExpanded": false,
+                              "IsBuiltIn": true
+                            }
+                          ],
+                          "IsExpanded": false,
+                          "IsBuiltIn": true
+                        }
+                      ],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "3930c590-b597-4226-94ff-657df9589925",
+                      "Type": 0,
+                      "Name": "Tenant app management policy",
+                      "Method": null,
+                      "Url": null,
+                      "Headers": {},
+                      "Body": null,
+                      "BinaryBodyRequired": false,
+                      "Children": [
+                        {
+                          "Id": "3a90cc04-dc4d-4b3e-82b9-72bb20c74b49",
+                          "Type": 1,
+                          "Name": "Get",
+                          "Method": "GET",
+                          "Url": "https://graph.microsoft.com/v1.0/policies/defaultAppManagementPolicy",
+                          "Headers": {},
+                          "Body": "",
+                          "BinaryBodyRequired": false,
+                          "Children": [],
+                          "IsExpanded": false,
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "e5828d0e-2ca7-4813-9c3a-fc45d999a80a",
+                          "Type": 1,
+                          "Name": "Update",
+                          "Method": "PATCH",
+                          "Url": "https://graph.microsoft.com/v1.0/policies/defaultAppManagementPolicy",
+                          "Headers": {},
+                          "Body": "{\n    \u0022isEnabled\u0022: true,\n    \u0022applicationRestrictions\u0022: {\n        \u0022passwordCredentials\u0022: [\n            {\n                \u0022restrictionType\u0022: \u0022passwordAddition\u0022,\n                \u0022maxLifetime\u0022: null,\n                \u0022restrictForAppsCreatedAfterDateTime\u0022: \u00222021-01-01T10:37:00Z\u0022\n            },\n            {\n                \u0022restrictionType\u0022: \u0022passwordLifetime\u0022,\n                \u0022maxLifetime\u0022: \u0022P4DT12H30M5S\u0022,\n                \u0022restrictForAppsCreatedAfterDateTime\u0022: \u00222017-01-01T10:37:00Z\u0022\n            },\n            {\n                \u0022restrictionType\u0022: \u0022symmetricKeyAddition\u0022,\n                \u0022maxLifetime\u0022: null,\n                \u0022restrictForAppsCreatedAfterDateTime\u0022: \u00222021-01-01T10:37:00Z\u0022\n            },\n            {\n                \u0022restrictionType\u0022: \u0022customPasswordAddition\u0022,\n                \u0022maxLifetime\u0022: null,\n                \u0022restrictForAppsCreatedAfterDateTime\u0022: \u00222015-01-01T10:37:00Z\u0022\n            },\n            {\n                \u0022restrictionType\u0022: \u0022symmetricKeyLifetime\u0022,\n                \u0022maxLifetime\u0022: \u0022P40D\u0022,\n                \u0022restrictForAppsCreatedAfterDateTime\u0022: \u00222015-01-01T10:37:00Z\u0022\n            }\n        ],\n        \u0022keyCredentials\u0022:[\n            {\n                \u0022restrictionType\u0022: \u0022asymmetricKeyLifetime\u0022,\n                \u0022maxLifetime\u0022: \u0022P30D\u0022,\n                \u0022restrictForAppsCreatedAfterDateTime\u0022: \u00222015-01-01T10:37:00Z\u0022\n            },\n        ]\n    }\n}",
+                          "BinaryBodyRequired": false,
+                          "Children": [],
+                          "IsExpanded": false,
+                          "IsBuiltIn": true
+                        }
+                      ],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "60c586bb-acd9-4950-ad26-fa70b8d04a44",
+                  "Type": 0,
+                  "Name": "Token issuance policy",
+                  "Method": null,
+                  "Url": null,
+                  "Headers": {},
+                  "Body": null,
+                  "BinaryBodyRequired": false,
+                  "Children": [
+                    {
+                      "Id": "9d1818ca-56e5-437d-bff7-e0e3194f8830",
+                      "Type": 1,
+                      "Name": "List",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/policies/tokenIssuancePolicies",
+                      "Headers": {},
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "8e00ee9c-da76-4775-80e5-c644f44b997d",
+                      "Type": 1,
+                      "Name": "Create",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/policies/tokenIssuancePolicies",
+                      "Headers": {},
+                      "Body": "{\n  \u0022definition\u0022: [\n    \u0022definition-value\u0022\n  ],\n  \u0022displayName\u0022: \u0022displayName-value\u0022,\n  \u0022isOrganizationDefault\u0022: true\n}",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "31a5f8ae-9135-4def-ae5f-1ab09d1e1e1a",
+                      "Type": 1,
+                      "Name": "Get",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/policies/tokenIssuancepolicies/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "4be37c51-cb45-4068-a516-97d07b590f28",
+                      "Type": 1,
+                      "Name": "Update",
+                      "Method": "PATCH",
+                      "Url": "https://graph.microsoft.com/v1.0/policies/tokenIssuancePolicies/{id}",
+                      "Headers": {},
+                      "Body": "{\n  \u0022definition\u0022: [\n    \u0022definition-value\u0022\n  ],\n  \u0022displayName\u0022: \u0022displayName-value\u0022,\n  \u0022isOrganizationDefault\u0022: true\n}",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "7503b820-307d-4747-ab33-cb5ad59b393a",
+                      "Type": 1,
+                      "Name": "Delete",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/policies/tokenIssuancePolicies/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "b6ac57be-26c3-45cb-8c6e-5e8ba219f44c",
+                      "Type": 1,
+                      "Name": "List applied to applications",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/policies/tokenIssuancePolicies/{id}/appliesTo",
+                      "Headers": {},
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "075b12c5-649c-40d0-a219-c5d1fb45aabb",
+                  "Type": 0,
+                  "Name": "Token lifetime policy",
+                  "Method": null,
+                  "Url": null,
+                  "Headers": {},
+                  "Body": null,
+                  "BinaryBodyRequired": false,
+                  "Children": [
+                    {
+                      "Id": "7a313877-731b-463b-a3df-7f5db48a2a35",
+                      "Type": 1,
+                      "Name": "List",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/policies/tokenLifetimePolicies",
+                      "Headers": {},
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "5db1a911-7388-440a-b42c-e48196536330",
+                      "Type": 1,
+                      "Name": "Create",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/policies/tokenLifetimePolicies",
+                      "Headers": {},
+                      "Body": "{\n    \u0022definition\u0022: [\n        \u0022{\\\u0022TokenLifetimePolicy\\\u0022:{\\\u0022Version\\\u0022:1,\\\u0022AccessTokenLifetime\\\u0022:\\\u00228:00:00\\\u0022}}\u0022\n    ],\n    \u0022displayName\u0022: \u0022Contoso token lifetime policy\u0022,\n    \u0022isOrganizationDefault\u0022: true\n}",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "5428ab7f-149a-4a55-a6e6-acbb49200e6e",
+                      "Type": 1,
+                      "Name": "Get",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/policies/tokenLifetimePolicies/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "17fc335a-aee3-48fc-820c-315ea69c4e84",
+                      "Type": 1,
+                      "Name": "Update",
+                      "Method": "PATCH",
+                      "Url": "https://graph.microsoft.com/v1.0/policies/tokenLifetimePolicies/{id}",
+                      "Headers": {},
+                      "Body": "{\n    \u0022definition\u0022: [\n        \u0022{\\\u0022TokenLifetimePolicy\\\u0022:{\\\u0022Version\\\u0022:1,\\\u0022AccessTokenLifetime\\\u0022:\\\u00225:30:00\\\u0022}}\u0022\n    ],\n    \u0022displayName\u0022: \u0022Contoso token lifetime policy\u0022,\n    \u0022isOrganizationDefault\u0022: true\n}",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "35f8db7b-551d-4b20-bd9b-ebed5428801f",
+                      "Type": 1,
+                      "Name": "Delete",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/policies/tokenLifetimePolicies/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "408758dd-fafe-4bb5-9d0f-179f1f1193cc",
+                      "Type": 1,
+                      "Name": "List applied to applications",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/policies/tokenLifetimePolicies/{id}/appliesTo",
+                      "Headers": {},
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            }
+          ],
+          "IsExpanded": false,
+          "IsBuiltIn": true
+        },
+        {
+          "Id": "2370ff6d-41ee-4456-9e91-ba32d145af1e",
+          "Type": 0,
+          "Name": "Application template",
+          "Method": null,
+          "Url": null,
+          "Headers": {},
+          "Body": null,
+          "BinaryBodyRequired": false,
+          "Children": [
+            {
+              "Id": "6043596e-ebc6-407e-b170-d070d2580b81",
+              "Type": 1,
+              "Name": "List",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/applicationTemplates",
+              "Headers": {},
+              "Body": "",
+              "BinaryBodyRequired": false,
+              "Children": [],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "c2f9057b-15c9-4be0-80a3-c16b040b1cd7",
+              "Type": 1,
+              "Name": "Get",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/applicationTemplates/{id}",
+              "Headers": {},
+              "Body": "",
+              "BinaryBodyRequired": false,
+              "Children": [],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "1b2931b6-478a-4f9f-a661-da784f33636f",
+              "Type": 1,
+              "Name": "Instantiate",
+              "Method": "POST",
+              "Url": "https://graph.microsoft.com/v1.0/applicationTemplates/{id}/instantiate",
+              "Headers": {},
+              "Body": "{\n    \u0022displayName\u0022: \u0022Azure AD SAML Toolkit\u0022\n}",
+              "BinaryBodyRequired": false,
+              "Children": [],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            }
+          ],
+          "IsExpanded": false,
+          "IsBuiltIn": true
+        },
+        {
+          "Id": "ad19d9e0-e2e5-4538-b7f7-d637b09e1e73",
+          "Type": 0,
+          "Name": "Service principal",
+          "Method": null,
+          "Url": null,
+          "Headers": {},
+          "Body": null,
+          "BinaryBodyRequired": false,
+          "Children": [
+            {
+              "Id": "27370ea5-ebf8-4aff-8604-97089692637e",
+              "Type": 0,
+              "Name": "List",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "1758e5f3-cec1-4cbc-877f-b9038da31347",
+                  "Type": 1,
+                  "Name": "Get a list of service principals",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/servicePrincipals",
+                  "Headers": {},
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "4f81ee26-721f-4600-9c8c-955295b9d90f",
+                  "Type": 1,
+                  "Name": "Get only a count of service principals",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/$count",
+                  "Headers": {
+                    "ConsistencyLevel": "eventual"
+                  },
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "1052b36d-43a8-403d-910f-1dad0bcc86b2",
+                  "Type": 1,
+                  "Name": "Use $filter and $top to get one service principal with a display name that starts with \u0027a\u0027 including a count of returned objects",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/servicePrincipals?$filter=startswith(displayName, \u0027a\u0027)\u0026$count=true\u0026$top=1\u0026$orderby=displayName",
+                  "Headers": {
+                    "ConsistencyLevel": "eventual"
+                  },
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "b4788478-def8-480e-a833-8a8776d3defb",
+                  "Type": 1,
+                  "Name": "Use $search to get service principals with display names that contain the letters \u0027Team\u0027 including a count of returned objects",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/servicePrincipals?$search=\u0022displayName:Team\u0022\u0026$count=true\u0026$select=accountEnabled,displayName,publisherName,servicePrincipalType,signInAudience",
+                  "Headers": {
+                    "ConsistencyLevel": "eventual"
+                  },
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "3b095469-2009-4719-abe2-3a09150d51c5",
+                  "Type": 1,
+                  "Name": "Get service principals with less than two owners",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/serviceprincipals?$filter=owners/$count eq 0 or owners/$count eq 1\u0026$count=true\u0026$select=id,displayName",
+                  "Headers": {
+                    "ConsistencyLevel": "eventual"
+                  },
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            }
+          ],
+          "IsExpanded": false,
+          "IsBuiltIn": true
+        }
+      ],
+      "IsExpanded": false,
+      "IsBuiltIn": true
     }
   ],
   "IsExpanded": false,
