@@ -59,6 +59,9 @@ function Get-CommitHistory {
             Write-Host "Files:" -ForegroundColor Magenta
             $filteredFiles | ForEach-Object {
                 Write-Host "  - $($_.filename) (Status: $($_.status))" -ForegroundColor White
+
+                # Search the file name
+                Search-FilenameInYaml -filename:($_.filename.Split("/") | Select-Object -Last 1)
             }
         }
         else {
@@ -144,6 +147,7 @@ function Search-FilenameInYaml {
         param (
             [string]$yamlUrl,
             [string]$filename,
+            [string]$topParentName,
             [System.Collections.Generic.List[System.String]]$locations
         )
 
@@ -164,8 +168,8 @@ function Search-FilenameInYaml {
 
             foreach ($node in $nodes) {
                 if (!([string]::IsNullOrEmpty($node.href)) -and $node.href.EndsWith($filename)) {
-                    write-Host "Found file: $($node.href)" -ForegroundColor Green
-                    $locations.Add($path + "/" + $node.name)
+                    # File is found. Add the location to the list.
+                    $locations.Add($topParentName + $path + "/" + $node.name)
                 }
 
                 if ($node.items) {
@@ -182,20 +186,19 @@ function Search-FilenameInYaml {
     foreach ($item in $apiReferenceNode.items) {
         $yamlUrl = "https://raw.githubusercontent.com/microsoftgraph/microsoft-graph-docs-contrib/refs/heads/main/api-reference/v1.0/$($item.href)"
         if ($yamlUrl.EndsWith("/toc.yml")) {
-            Search-InYamlFile -yamlUrl $yamlUrl -filename $filename -locations $locations
+            Search-InYamlFile -yamlUrl $yamlUrl -filename $filename -topParentName $item.name -locations $locations
         }
         else {
-            # If the item is not a toc.yml file, write the item name
-            Write-Host "Skipping non-toc.yml file: $($item.href)" -ForegroundColor Yellow
+            # If the item is not a toc.yml file, skip it
         }
     }
 
     # Output the locations
     if ($locations.Count -gt 0) {
-        Write-Host "The file '$filename' is found at the following locations:" -ForegroundColor Green
-        $locations | ForEach-Object { Write-Host $_ -ForegroundColor White }
+        Write-Host "    The file '$filename' is found at the following locations:" -ForegroundColor Green
+        $locations | ForEach-Object { Write-Host "      $_" -ForegroundColor White }
     }
     else {
-        Write-Host "The file '$filename' is not found in the YAML data." -ForegroundColor Red
+        Write-Host "    The file '$filename' is not found in the YAML data." -ForegroundColor Red
     }
 }
