@@ -19,7 +19,7 @@
 	<WindowsAppSdkIncludeVersionInfo>true</WindowsAppSdkIncludeVersionInfo>
 	<GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
 	<GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-	<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+	<AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>
 	<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
 	<AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
 	<AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
