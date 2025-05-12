@@ -41,6 +41,7 @@
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -53,6 +54,8 @@
                         <TextBlock x:Name="TextBlock_LogFolderPathValue" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="0,0,8,0" />
 
                         <ToggleSwitch x:Name="ToggleSwitch_DisableRequestAndResponseLoggingWhenAppRestart" x:Uid="/Pages.GlobalSetting.GlobalSettingGeneralPage/ToggleSwitch_DisableRequestAndResponseLoggingWhenAppRestart" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,24,0,0" VerticalAlignment="Center" />
+
+                        <ToggleSwitch x:Name="ToggleSwitch_ExcludeAuthorizationHeader" x:Uid="/Pages.GlobalSetting.GlobalSettingGeneralPage/ToggleSwitch_ExcludeAuthorizationHeader" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,24,0,0" VerticalAlignment="Center" />
                     </Grid>
                 </Expander.Content>
             </Expander>

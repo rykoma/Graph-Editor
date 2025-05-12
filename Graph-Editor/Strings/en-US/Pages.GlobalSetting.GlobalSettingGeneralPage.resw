@@ -162,4 +162,7 @@
   <data name="ToggleSwitch_DisableRequestAndResponseLoggingWhenAppRestart.Header" xml:space="preserve">
     <value>Disable request and response logging when the application is restarted:</value>
   </data>
+  <data name="ToggleSwitch_ExcludeAuthorizationHeader.Header" xml:space="preserve">
+    <value>Exclude Authorization header in request logs (Disabling this setting is not recommended)</value>
+  </data>
 </root>

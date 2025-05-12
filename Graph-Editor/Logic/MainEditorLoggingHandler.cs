@@ -34,7 +34,10 @@ namespace Graph_Editor.Logic
             {
                 if (header.Key == "Authorization")
                 {
-                    continue;
+                    if (GraphEditorApplication.GetSetting(GraphEditorApplication.Settings.GlobalSetting_ExcludeAuthorizationHeader, true))
+                    {
+                        continue;
+                    }
                 }
 
                 sb.AppendLine($"  {header.Key}: {string.Join(", ", header.Value)}");

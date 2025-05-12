@@ -162,4 +162,7 @@
   <data name="ToggleSwitch_DisableRequestAndResponseLoggingWhenAppRestart.Header" xml:space="preserve">
     <value>アプリケーションの再起動時にリクエストとレスポンスのログを無効にする:</value>
   </data>
+  <data name="ToggleSwitch_ExcludeAuthorizationHeader.Header" xml:space="preserve">
+    <value>リクエスト ログに Authorization ヘッダーを記録しない (この設定をオフにすることは推奨しません)</value>
+  </data>
 </root>

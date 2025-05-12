@@ -43,6 +43,9 @@ namespace Graph_Editor.Pages.GlobalSetting
             ToggleSwitch_DisableRequestAndResponseLoggingWhenAppRestart.IsOn = GraphEditorApplication.GetSetting(GraphEditorApplication.Settings.GlobalSetting_DisableRequestAndResponseLoggingWhenAppRestart, true);
             ToggleSwitch_DisableRequestAndResponseLoggingWhenAppRestart.Toggled += ToggleSwitch_DisableRequestAndResponseLoggingWhenAppRestart_Toggled;
 
+            ToggleSwitch_ExcludeAuthorizationHeader.IsOn = GraphEditorApplication.GetSetting(GraphEditorApplication.Settings.GlobalSetting_ExcludeAuthorizationHeader, true);
+            ToggleSwitch_ExcludeAuthorizationHeader.Toggled += ToggleSwitch_ExcludeAuthorizationHeader_Toggled;
+
             // Load supported languages
             string currentDisplayLanguageSetting = GraphEditorApplication.GetSetting(GraphEditorApplication.Settings.GlobalSetting_DisplayLanguageOverride, string.Empty);
 
@@ -105,6 +108,12 @@ namespace Graph_Editor.Pages.GlobalSetting
         {
             // Save the setting
             GraphEditorApplication.SaveSetting(GraphEditorApplication.Settings.GlobalSetting_DisableRequestAndResponseLoggingWhenAppRestart, ToggleSwitch_DisableRequestAndResponseLoggingWhenAppRestart.IsOn);
+        }
+
+        private void ToggleSwitch_ExcludeAuthorizationHeader_Toggled(object sender, RoutedEventArgs e)
+        {
+            // Save the setting
+            GraphEditorApplication.SaveSetting(GraphEditorApplication.Settings.GlobalSetting_ExcludeAuthorizationHeader, ToggleSwitch_ExcludeAuthorizationHeader.IsOn);
         }
 
         private async void Button_PickLogFolderPath_Click(object sender, RoutedEventArgs e)

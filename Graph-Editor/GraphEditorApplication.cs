@@ -232,6 +232,7 @@ namespace Graph_Editor
             GlobalSetting_RequestAndResponseLoggingEnabled,
             GlobalSetting_RequestAndResponseLoggingFolderPath,
             GlobalSetting_DisableRequestAndResponseLoggingWhenAppRestart,
+            GlobalSetting_ExcludeAuthorizationHeader,
             GlobalSetting_DisplayLanguageOverride,
             GlobalSetting_MaxExecutionRecordCount,
             GlobalSetting_EncodePlusCharacter,
