@@ -193,7 +193,7 @@ namespace Graph_Editor.Pages.AccessTokenWizard
                 .Build();
 
             AuthenticationResult result = null;
-            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30)); // 30 seconds timeout
+            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60)); // 60 seconds timeout
 
             try
             {
