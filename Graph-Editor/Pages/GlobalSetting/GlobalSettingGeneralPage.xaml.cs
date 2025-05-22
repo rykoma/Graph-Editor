@@ -46,6 +46,9 @@ namespace Graph_Editor.Pages.GlobalSetting
             ToggleSwitch_ExcludeAuthorizationHeader.IsOn = GraphEditorApplication.GetSetting(GraphEditorApplication.Settings.GlobalSetting_ExcludeAuthorizationHeader, true);
             ToggleSwitch_ExcludeAuthorizationHeader.Toggled += ToggleSwitch_ExcludeAuthorizationHeader_Toggled;
 
+            NumberBox_RequestAndResponseLoggingRetentionDays.Value = GraphEditorApplication.GetSetting(GraphEditorApplication.Settings.GlobalSetting_RequestAndResponseLoggingRetentionDays, 30);
+            NumberBox_RequestAndResponseLoggingRetentionDays.ValueChanged += NumberBox_RequestAndResponseLoggingRetentionDays_ValueChanged;
+
             // Load supported languages
             string currentDisplayLanguageSetting = GraphEditorApplication.GetSetting(GraphEditorApplication.Settings.GlobalSetting_DisplayLanguageOverride, string.Empty);
 
@@ -114,6 +117,24 @@ namespace Graph_Editor.Pages.GlobalSetting
         {
             // Save the setting
             GraphEditorApplication.SaveSetting(GraphEditorApplication.Settings.GlobalSetting_ExcludeAuthorizationHeader, ToggleSwitch_ExcludeAuthorizationHeader.IsOn);
+        }
+
+        private void NumberBox_RequestAndResponseLoggingRetentionDays_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
+        {
+            // Ensure the value is an integer between -1 and 365
+            int value = (int)sender.Value;
+            if (value < -1)
+            {
+                value = -1;
+            }
+            else if (value > 365)
+            {
+                value = 365;
+            }
+            sender.Value = value;
+
+            // Save the setting
+            GraphEditorApplication.SaveSetting(GraphEditorApplication.Settings.GlobalSetting_RequestAndResponseLoggingRetentionDays, value);
         }
 
         private async void Button_PickLogFolderPath_Click(object sender, RoutedEventArgs e)

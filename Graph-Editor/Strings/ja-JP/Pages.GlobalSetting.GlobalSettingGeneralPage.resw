@@ -165,4 +165,10 @@
   <data name="ToggleSwitch_ExcludeAuthorizationHeader.Header" xml:space="preserve">
     <value>リクエスト ログに Authorization ヘッダーを記録しない (この設定をオフにすることは推奨しません)</value>
   </data>
+  <data name="NumberBox_RequestAndResponseLoggingRetentionDays.Header" xml:space="preserve">
+    <value>リクエストとレスポンスのログの保持日数:</value>
+  </data>
+  <data name="TextBlock_RequestAndResponseLoggingRetentionDaysDescription.Text" xml:space="preserve">
+    <value>ログの保持日数は -1 ～ 365 の範囲で設定できます。-1 を指定すると、ログは削除されず無期限に保持されます。</value>
+  </data>
 </root>

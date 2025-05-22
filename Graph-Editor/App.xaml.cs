@@ -45,13 +45,29 @@ namespace Graph_Editor
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            // Load request and response logging settings
+            // Load request and response logging disabled setting
             if (GraphEditorApplication.GetSetting(GraphEditorApplication.Settings.GlobalSetting_DisableRequestAndResponseLoggingWhenAppRestart, true) && GraphEditorApplication.GetSetting(GraphEditorApplication.Settings.GlobalSetting_RequestAndResponseLoggingEnabled, false))
             {
                 // Disable request and response logging
                 GraphEditorApplication.SaveSetting(GraphEditorApplication.Settings.GlobalSetting_RequestAndResponseLoggingEnabled, false);
             }
 
+            // Load request and response logging retention period setting
+            int retentionPeriod = GraphEditorApplication.GetSetting(GraphEditorApplication.Settings.GlobalSetting_RequestAndResponseLoggingRetentionDays, 30);
+
+            if (retentionPeriod >= 0)
+            {
+                // Delete old request and response logs
+                try
+                {
+                    GraphEditorApplication.DeleteOldRequestAndResponseLogs(retentionPeriod);
+                }
+                catch
+                {
+                    // Ignore any exceptions
+                }
+            }
+            
             MainWindowAccessor = new MainWindow();
             MainWindowAccessor.ExtendsContentIntoTitleBar = true; // Hide default title bar
             MainWindowAccessor.Activate();

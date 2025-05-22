@@ -165,4 +165,10 @@
   <data name="ToggleSwitch_ExcludeAuthorizationHeader.Header" xml:space="preserve">
     <value>Exclude Authorization header in request logs (Disabling this setting is not recommended)</value>
   </data>
+  <data name="NumberBox_RequestAndResponseLoggingRetentionDays.Header" xml:space="preserve">
+    <value>Retention days for request and response logs:</value>
+  </data>
+  <data name="TextBlock_RequestAndResponseLoggingRetentionDaysDescription.Text" xml:space="preserve">
+    <value>The retention period can be set from -1 to 365 days. Setting -1 will retain the logs indefinitely.</value>
+  </data>
 </root>

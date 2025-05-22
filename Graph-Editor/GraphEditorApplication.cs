@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -178,6 +179,51 @@ namespace Graph_Editor
             return availaleTips.ElementAt(randomIndex);
         }
 
+        internal static void DeleteOldRequestAndResponseLogs(int retentionPeriod)
+        {
+            string settingLofFilePath = GraphEditorApplication.GetSetting(GraphEditorApplication.Settings.GlobalSetting_RequestAndResponseLoggingFolderPath, "");
+
+            if (!Directory.Exists(settingLofFilePath))
+            {
+                // Specified log folder path is not exsisting.
+                return;
+            }
+
+            // Get all log files in the specified folder and sort them by file name
+            var logFiles = Directory.GetFiles(settingLofFilePath, "MainEditorLog_*.log");
+            var sortedLogFiles = logFiles.OrderBy(f => f).ToList();
+
+            // Log file name format: MainEditorLog_yyyyMMdd.log
+            // Remove all log files older than the retention period
+            foreach (var logFile in sortedLogFiles)
+            {
+                DateTime fileDate;
+                string fileName = Path.GetFileName(logFile);
+
+                // Extract the date from the file name
+                string logPrefix = "MainEditorLog_";
+
+                if (fileName != null && fileName.StartsWith(logPrefix) && DateTime.TryParseExact(fileName.Substring(logPrefix.Length, 8), "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out fileDate))
+                {
+                    if ((DateTime.UtcNow - fileDate).TotalDays > retentionPeriod)
+                    {
+                        try
+                        {
+                            File.Delete(logFile);
+                        }
+                        catch (Exception)
+                        {
+                            // Handle exception if needed
+                        }
+                    }
+                    else
+                    {
+                        // If the file is within the retention period, break the loop
+                        break;
+                    }
+                }
+            }
+        }
 
         public static string DialogYesButtonText
         {
@@ -231,6 +277,7 @@ namespace Graph_Editor
             AccessTokenWizardClientSecretPage__PasswordBox_ClientSecret__Password,
             GlobalSetting_RequestAndResponseLoggingEnabled,
             GlobalSetting_RequestAndResponseLoggingFolderPath,
+            GlobalSetting_RequestAndResponseLoggingRetentionDays,
             GlobalSetting_DisableRequestAndResponseLoggingWhenAppRestart,
             GlobalSetting_ExcludeAuthorizationHeader,
             GlobalSetting_DisplayLanguageOverride,
