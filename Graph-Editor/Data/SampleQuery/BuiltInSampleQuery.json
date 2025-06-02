@@ -192,6 +192,21 @@
                   "Children": [],
                   "IsExpanded": false,
                   "IsBuiltIn": true
+                },
+                {
+                  "Id": "34caa55b-5571-445a-9135-11a3c7c3f7ee",
+                  "Type": 1,
+                  "Name": "Use $filter and endsWith to get users with a specified top-level domain in otherMails",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/users?$filter=otherMails/any(x:endswith(x,\u0027.edu\u0027))\u0026$count=true",
+                  "Headers": {
+                    "ConsistencyLevel": "eventual"
+                  },
+                  "Body": "",
+                  "BinaryBodyRequired": false,
+                  "Children": [],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
                 }
               ],
               "IsExpanded": false,
