@@ -58,7 +58,7 @@ function Get-CommitHistory {
         if ($filteredFiles) {
             Write-Host "Files:" -ForegroundColor Magenta
             $filteredFiles | ForEach-Object {
-                Write-Host "  - $($_.filename) (Status: $($_.status))" -ForegroundColor White
+                Write-Host "  - $($_.filename) (Status: $($_.status))" -ForegroundColor DarkBlue
 
                 # Search the file name
                 Search-FilenameInYaml -filename:($_.filename.Split("/") | Select-Object -Last 1)
