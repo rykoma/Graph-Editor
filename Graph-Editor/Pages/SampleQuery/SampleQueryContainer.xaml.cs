@@ -736,19 +736,22 @@ namespace Graph_Editor.Pages.SampleQuery
                     containers = GetSubSampleCategory(filteredSampleQueryDataSource[1], 0);
                 }
 
-                MenuFlyout_MoveSampleQuery.Items.Clear();
+                MenuFlyout_MoveSampleQueryLast.Items.Clear();
+                MenuFlyout_MoveSampleCategoryFirst.Items.Clear();
 
                 if (containers.Count == 0)
                 {
-                    DropDownButton_MoveSampleCategory.IsEnabled = false;
+                    DropDownButton_MoveSampleCategoryLast.IsEnabled = false;
+                    DropDownButton_MoveSampleCategoryFirst.IsEnabled = false;
                 }
                 else
                 {
-                    DropDownButton_MoveSampleCategory.IsEnabled = true;
+                    DropDownButton_MoveSampleCategoryLast.IsEnabled = true;
+                    DropDownButton_MoveSampleCategoryFirst.IsEnabled = true;
 
                     foreach (var container in containers)
                     {
-                        var menuFlyoutItem = new MenuFlyoutItem()
+                        var menuFlyoutItem_MoveSampleQueryLast = new MenuFlyoutItem()
                         {
                             DataContext = container.Key,
                             Text = (container.Key as SampleQueryItem).Name,
@@ -758,8 +761,21 @@ namespace Graph_Editor.Pages.SampleQuery
                             },
                             Margin = new Thickness(16 * container.Value, 0, 0, 0)
                         };
-                        menuFlyoutItem.Click += MenuFlyoutItem_MoveSampleQuery_Click;
-                        MenuFlyout_MoveSampleQuery.Items.Add(menuFlyoutItem);
+                        menuFlyoutItem_MoveSampleQueryLast.Click += MenuFlyoutItem_MoveSampleQueryLast_Click;
+                        MenuFlyout_MoveSampleQueryLast.Items.Add(menuFlyoutItem_MoveSampleQueryLast);
+
+                        var menuFlyoutItem_MoveSampleQueryFirst = new MenuFlyoutItem()
+                        {
+                            DataContext = container.Key,
+                            Text = (container.Key as SampleQueryItem).Name,
+                            Icon = new FontIcon
+                            {
+                                Glyph = "\uED41" // Container icon
+                            },
+                            Margin = new Thickness(16 * container.Value, 0, 0, 0)
+                        };
+                        menuFlyoutItem_MoveSampleQueryFirst.Click += MenuFlyoutItem_MoveSampleQueryFirst_Click;
+                        MenuFlyout_MoveSampleQueryFirst.Items.Add(menuFlyoutItem_MoveSampleQueryFirst);
                     }
                 }
 
@@ -793,7 +809,7 @@ namespace Graph_Editor.Pages.SampleQuery
             }
         }
 
-        private async void MenuFlyoutItem_MoveSampleQuery_Click(object sender, RoutedEventArgs e)
+        private async void MenuFlyoutItem_MoveSampleQueryLast_Click(object sender, RoutedEventArgs e)
         {
             if (TextBox_Filter.Text != string.Empty)
             {
@@ -827,6 +843,45 @@ namespace Graph_Editor.Pages.SampleQuery
                 // Add the selected item to the target category
                 var targetCategory = (SampleQueryItem)menuItem.DataContext;
                 targetCategory.Children.Add(selectedItem);
+
+                SaveCustomSampleQuery();
+            }
+        }
+
+        private async void MenuFlyoutItem_MoveSampleQueryFirst_Click(object sender, RoutedEventArgs e)
+        {
+            if (TextBox_Filter.Text != string.Empty)
+            {
+                // SampleQueryItem is filtered
+                // Show an error dialog
+                var contentDialog = new ContentDialog()
+                {
+                    XamlRoot = this.XamlRoot,
+                    Title = "Error",
+                    Content = "Cannot save sample query when using filter.",
+                    CloseButtonText = GraphEditorApplication.DialogCloseButtonText
+                };
+                await contentDialog.ShowAsync();
+
+                return;
+            }
+
+            var menuItem = sender as MenuFlyoutItem;
+            if (menuItem != null)
+            {
+                var selectedItem = (SampleQueryItem)TreeView_SampleQuery.SelectedItem;
+
+                // Find the parent of the selected item
+                var parent = FindParent(filteredSampleQueryDataSource, selectedItem);
+                if (parent != null)
+                {
+                    // Remove the selected item from the parent
+                    parent.Children.Remove(selectedItem);
+                }
+
+                // Add the selected item to the target category as the first child
+                var targetCategory = (SampleQueryItem)menuItem.DataContext;
+                targetCategory.Children.Insert(0, selectedItem);
 
                 SaveCustomSampleQuery();
             }
@@ -882,19 +937,22 @@ namespace Graph_Editor.Pages.SampleQuery
                 Button_SaveSampleCategory.IsEnabled = false;
             }
 
-            MenuFlyout_MoveSampleCategory.Items.Clear();
+            MenuFlyout_MoveSampleCategoryLast.Items.Clear();
+            MenuFlyout_MoveSampleCategoryFirst.Items.Clear();
 
             if (containers.Count == 0)
             {
-                DropDownButton_MoveSampleCategory.IsEnabled = false;
+                DropDownButton_MoveSampleCategoryLast.IsEnabled = false;
+                DropDownButton_MoveSampleCategoryFirst.IsEnabled = false;
             }
             else
             {
-                DropDownButton_MoveSampleCategory.IsEnabled = true;
+                DropDownButton_MoveSampleCategoryLast.IsEnabled = true;
+                DropDownButton_MoveSampleCategoryFirst.IsEnabled = true;
 
                 foreach (var container in containers)
                 {
-                    var menuFlyoutItem = new MenuFlyoutItem()
+                    var menuFlyoutItem_MoveSampleCategoryLast = new MenuFlyoutItem()
                     {
                         DataContext = container.Key,
                         Text = (container.Key as SampleQueryItem).Name,
@@ -904,8 +962,21 @@ namespace Graph_Editor.Pages.SampleQuery
                         },
                         Margin = new Thickness(16 * container.Value, 0, 0, 0)
                     };
-                    menuFlyoutItem.Click += MenuFlyoutItem_MoveSampleCategory_Click;
-                    MenuFlyout_MoveSampleCategory.Items.Add(menuFlyoutItem);
+                    menuFlyoutItem_MoveSampleCategoryLast.Click += MenuFlyoutItem_MoveSampleCategoryLast_Click;
+                    MenuFlyout_MoveSampleCategoryLast.Items.Add(menuFlyoutItem_MoveSampleCategoryLast);
+
+                    var menuFlyoutItem_MoveSampleCategoryFirst = new MenuFlyoutItem()
+                    {
+                        DataContext = container.Key,
+                        Text = (container.Key as SampleQueryItem).Name,
+                        Icon = new FontIcon
+                        {
+                            Glyph = "\uED41" // Container icon
+                        },
+                        Margin = new Thickness(16 * container.Value, 0, 0, 0)
+                    };
+                    menuFlyoutItem_MoveSampleCategoryFirst.Click += MenuFlyoutItem_MoveSampleCategoryFirst_Click;
+                    MenuFlyout_MoveSampleCategoryFirst.Items.Add(menuFlyoutItem_MoveSampleCategoryFirst);
                 }
             }
 
@@ -914,7 +985,7 @@ namespace Graph_Editor.Pages.SampleQuery
             Border_SampleCategoryEditor.Visibility = Visibility.Visible;
         }
 
-        private async void MenuFlyoutItem_MoveSampleCategory_Click(object sender, RoutedEventArgs e)
+        private async void MenuFlyoutItem_MoveSampleCategoryLast_Click(object sender, RoutedEventArgs e)
         {
             if (TextBox_Filter.Text != string.Empty)
             {
@@ -948,6 +1019,45 @@ namespace Graph_Editor.Pages.SampleQuery
                 // Add the selected item to the target category
                 var targetCategory = (SampleQueryItem)menuItem.DataContext;
                 targetCategory.Children.Add(selectedItem);
+
+                SaveCustomSampleQuery();
+            }
+        }
+
+        private async void MenuFlyoutItem_MoveSampleCategoryFirst_Click(object sender, RoutedEventArgs e)
+        {
+            if (TextBox_Filter.Text != string.Empty)
+            {
+                // SampleQueryItem is filtered
+                // Show an error dialog
+                var contentDialog = new ContentDialog()
+                {
+                    XamlRoot = this.XamlRoot,
+                    Title = "Error",
+                    Content = "Cannot save sample query when using filter.",
+                    CloseButtonText = GraphEditorApplication.DialogCloseButtonText
+                };
+                await contentDialog.ShowAsync();
+
+                return;
+            }
+
+            var menuItem = sender as MenuFlyoutItem;
+            if (menuItem != null)
+            {
+                var selectedItem = (SampleQueryItem)TreeView_SampleQuery.SelectedItem;
+
+                // Find the parent of the selected item
+                var parent = FindParent(filteredSampleQueryDataSource, selectedItem);
+                if (parent != null)
+                {
+                    // Remove the selected item from the parent
+                    parent.Children.Remove(selectedItem);
+                }
+
+                // Add the selected item to the target category as the first child
+                var targetCategory = (SampleQueryItem)menuItem.DataContext;
+                targetCategory.Children.Insert(0, selectedItem);
 
                 SaveCustomSampleQuery();
             }
@@ -1207,8 +1317,10 @@ namespace Graph_Editor.Pages.SampleQuery
 
             TextBlock_Name.Text = string.Empty;
             TextBox_Name.Text = string.Empty;
-            MenuFlyout_MoveSampleQuery.Items.Clear();
-            MenuFlyout_MoveSampleCategory.Items.Clear();
+            MenuFlyout_MoveSampleQueryLast.Items.Clear();
+            MenuFlyout_MoveSampleCategoryLast.Items.Clear();
+            MenuFlyout_MoveSampleQueryFirst.Items.Clear();
+            MenuFlyout_MoveSampleCategoryFirst.Items.Clear();
             TextBlock_Method.Text = string.Empty;
             ComboBox_Method.SelectedValue = null;
             TextBlock_Url.Text = string.Empty;

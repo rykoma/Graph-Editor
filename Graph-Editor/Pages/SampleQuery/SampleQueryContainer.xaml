@@ -161,9 +161,15 @@
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,8,0,8">
                     <Button x:Name="Button_SaveSampleQuery" x:Uid="/Pages.SampleQuery.SampleQueryContainer/Button_SaveSampleQuery" Margin="0,0,8,0" Click="Button_SaveSampleQuery_Click"></Button>
 
-                    <DropDownButton x:Name="DropDownButton_MoveSampleQuery" x:Uid="/Pages.SampleQuery.SampleQueryContainer/DropDownButton_MoveSampleQuery">
+                    <DropDownButton x:Name="DropDownButton_MoveSampleQueryLast" x:Uid="/Pages.SampleQuery.SampleQueryContainer/DropDownButton_MoveSampleQueryLast" Margin="0,0,8,0">
                         <DropDownButton.Flyout>
-                            <MenuFlyout x:Name="MenuFlyout_MoveSampleQuery"/>
+                            <MenuFlyout x:Name="MenuFlyout_MoveSampleQueryLast"/>
+                        </DropDownButton.Flyout>
+                    </DropDownButton>
+
+                    <DropDownButton x:Name="DropDownButton_MoveSampleQueryFirst" x:Uid="/Pages.SampleQuery.SampleQueryContainer/DropDownButton_MoveSampleQueryFirst" Margin="0,0,8,0">
+                        <DropDownButton.Flyout>
+                            <MenuFlyout x:Name="MenuFlyout_MoveSampleQueryFirst"/>
                         </DropDownButton.Flyout>
                     </DropDownButton>
                 </StackPanel>
@@ -248,9 +254,16 @@
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,8,0,8">
                     <Button x:Name="Button_SaveSampleCategory" x:Uid="/Pages.SampleQuery.SampleQueryContainer/Button_SaveSampleCategory" Margin="0,0,8,0" Click="Button_SaveSampleCategory_Click"></Button>
-                    <DropDownButton x:Name="DropDownButton_MoveSampleCategory" x:Uid="/Pages.SampleQuery.SampleQueryContainer/DropDownButton_MoveSampleCategory">
+                    
+                    <DropDownButton x:Name="DropDownButton_MoveSampleCategoryLast" x:Uid="/Pages.SampleQuery.SampleQueryContainer/DropDownButton_MoveSampleCategoryLast" Margin="0,0,8,0">
                         <DropDownButton.Flyout>
-                            <MenuFlyout x:Name="MenuFlyout_MoveSampleCategory"/>
+                            <MenuFlyout x:Name="MenuFlyout_MoveSampleCategoryLast"/>
+                        </DropDownButton.Flyout>
+                    </DropDownButton>
+
+                    <DropDownButton x:Name="DropDownButton_MoveSampleCategoryFirst" x:Uid="/Pages.SampleQuery.SampleQueryContainer/DropDownButton_MoveSampleCategoryFirst" Margin="0,0,8,0">
+                        <DropDownButton.Flyout>
+                            <MenuFlyout x:Name="MenuFlyout_MoveSampleCategoryFirst"/>
                         </DropDownButton.Flyout>
                     </DropDownButton>
                 </StackPanel>

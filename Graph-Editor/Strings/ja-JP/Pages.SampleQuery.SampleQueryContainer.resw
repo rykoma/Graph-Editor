@@ -171,13 +171,19 @@
   <data name="Button_SaveSampleQuery.Content" xml:space="preserve">
     <value>保存</value>
   </data>
-  <data name="DropDownButton_MoveSampleQuery.Content" xml:space="preserve">
-    <value>移動</value>
+  <data name="DropDownButton_MoveSampleQueryLast.Content" xml:space="preserve">
+    <value>末尾に移動</value>
   </data>
-  <data name="DropDownButton_MoveSampleCategory.Content" xml:space="preserve">
-    <value>移動</value>
+  <data name="DropDownButton_MoveSampleCategoryLast.Content" xml:space="preserve">
+    <value>末尾に移動</value>
   </data>
   <data name="TextBlock_Header.Text" xml:space="preserve">
     <value>ヘッダー</value>
+  </data>
+  <data name="DropDownButton_MoveSampleCategoryFirst.Content" xml:space="preserve">
+    <value>先頭に移動</value>
+  </data>
+  <data name="DropDownButton_MoveSampleQueryFirst.Content" xml:space="preserve">
+    <value>先頭に移動</value>
   </data>
 </root>
