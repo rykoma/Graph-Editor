@@ -546,6 +546,60 @@
               "IsBuiltIn": true
             },
             {
+              "Id": "9b8a999a-1d70-49f3-8149-b1f5c7762120",
+              "Type": 0,
+              "Name": "AI interaction",
+              "Method": null,
+              "Url": null,
+              "Headers": {},
+              "Body": null,
+              "BinaryBodyRequired": false,
+              "Children": [
+                {
+                  "Id": "bb819460-61da-4803-90ed-d682d0dddfd9",
+                  "Type": 0,
+                  "Name": "Get all enterprise interactions",
+                  "Method": null,
+                  "Url": null,
+                  "Headers": {},
+                  "Body": null,
+                  "BinaryBodyRequired": false,
+                  "Children": [
+                    {
+                      "Id": "3173322d-d4ed-422d-96f9-d33019f6177f",
+                      "Type": 1,
+                      "Name": "Retrieve all the Copilot interactions without any filters",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/copilot/users/{id}/interactionHistory/getAllEnterpriseInteractions",
+                      "Headers": {},
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "b1d12bb3-9743-4fbd-a946-7c8c7fd6c9fe",
+                      "Type": 1,
+                      "Name": "Get all the Copilot interactions for a user with app class filters",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/copilot/users/{id}/interactionHistory/getAllEnterpriseInteractions?$filter=appClass eq \u0027IPM.SkypeTeams.Message.Copilot.BizChat\u0027",
+                      "Headers": {},
+                      "Body": "",
+                      "BinaryBodyRequired": false,
+                      "Children": [],
+                      "IsExpanded": false,
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsExpanded": false,
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsExpanded": false,
+              "IsBuiltIn": true
+            },
+            {
               "Id": "13c5656f-a7b2-48ce-8522-76bfc2660931",
               "Type": 0,
               "Name": "App role assignments",
