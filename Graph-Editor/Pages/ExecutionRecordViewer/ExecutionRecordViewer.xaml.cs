@@ -111,11 +111,28 @@ namespace Graph_Editor.Pages.ExecutionRecordViewer
                 }
 
                 // Response body
-                if (string.IsNullOrEmpty(executionRecord.Response.BodyString) == false)
+                switch (executionRecord.Response.DisplayMode)
                 {
-                    details.AppendLine();
-                    GraphEditorApplication.TryParseJson(executionRecord.Response.BodyString, out string parsedJsonStringResult);
-                    details.AppendLine(GraphEditorApplication.RemoveProblematicCharacters(parsedJsonStringResult));
+                    case ResponseRecord.ResponseBodyDisplayMode.Json:
+                        details.AppendLine();
+                        GraphEditorApplication.TryParseJson(executionRecord.Response.BodyString, out string parsedJsonStringResult);
+                        details.AppendLine(GraphEditorApplication.RemoveProblematicCharacters(parsedJsonStringResult));
+                        break;
+                    case ResponseRecord.ResponseBodyDisplayMode.PlainText:
+                        if (string.IsNullOrEmpty(executionRecord.Response.BodyString) == false)
+                        {
+                            details.AppendLine();
+                            details.AppendLine(executionRecord.Response.BodyString);
+                        }
+                        break;
+                    case ResponseRecord.ResponseBodyDisplayMode.Image:
+                        details.AppendLine();
+                        details.AppendLine(executionRecord.Response.Base64EncodedBinaryBody);
+                        break;
+                    default:
+                        details.AppendLine();
+                        details.AppendLine("Unknown response body format.");
+                        break;
                 }
 
                 var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
