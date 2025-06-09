@@ -29,6 +29,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.System;
 using Windows.UI.Core;
+using static Graph_Editor.Data.ExecutionRecord.ResponseRecord;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -582,10 +583,10 @@ namespace Graph_Editor.Pages.MainEditor
             }
 
             // Show response in MainEditorResponseBody
-            ShowResponse(headerString, ResponseRecord.BodyString, bodyStream, bodyBitmapImage, ResponseRecord.ContentType, ResponseRecord.StatusCode);
+            ShowResponse(headerString, ResponseRecord.BodyString, bodyStream, bodyBitmapImage, ResponseRecord.DisplayMode, ResponseRecord.StatusCode);
         }
 
-        private void ShowResponse(string Header, string BodyString, Stream BodyStream, BitmapImage BodyBitmapImage, string ContentType, HttpStatusCode StatusCode)
+        private void ShowResponse(string Header, string BodyString, Stream BodyStream, BitmapImage BodyBitmapImage, ResponseBodyDisplayMode bodyDisplayMode, HttpStatusCode StatusCode)
         {
             MainEditorResponseHeader mainEditorResponseHeader = pageCache["MainEditorResponseHeader"] as MainEditorResponseHeader;
             mainEditorResponseHeader.Header.Text = Header;
@@ -593,38 +594,11 @@ namespace Graph_Editor.Pages.MainEditor
             MainEditorResponseBody mainEditorResponseBody = pageCache["MainEditorResponseBody"] as MainEditorResponseBody;
             mainEditorResponseBody.HideAllViewer();
 
-            string responseDisplayMode = "plaintext";
-
-            if (string.IsNullOrEmpty(ContentType))
+            switch (bodyDisplayMode)
             {
-                responseDisplayMode = "plaintext";
-            }
-            else if (string.Compare(ContentType, "application/json", StringComparison.OrdinalIgnoreCase) == 0)
-            {
-                responseDisplayMode = "json";
-            }
-            else if (string.Compare(ContentType, "text/plain", StringComparison.OrdinalIgnoreCase) == 0)
-            {
-                responseDisplayMode = "plaintext";
-            }
-            else if (string.Compare(ContentType, "application/octet-stream", StringComparison.OrdinalIgnoreCase) == 0)
-            {
-                responseDisplayMode = "plaintext";
-            }
-            else if (ContentType.StartsWith("image/", StringComparison.OrdinalIgnoreCase))
-            {
-                responseDisplayMode = "image";
-            }
-            else
-            {
-                responseDisplayMode = "plaintext";
-            }
-
-            switch (responseDisplayMode)
-            {
-                case "json":
+                case ResponseBodyDisplayMode.Json:
                     mainEditorResponseBody.TextResponseViewer.Editor.ReadOnly = false;
-                    mainEditorResponseBody.TextResponseViewer.HighlightingLanguage = responseDisplayMode;
+                    mainEditorResponseBody.TextResponseViewer.HighlightingLanguage = "json";
 
                     if (GraphEditorApplication.TryParseJson(BodyString, out string parsedJsonStringResult))
                     {
@@ -641,15 +615,15 @@ namespace Graph_Editor.Pages.MainEditor
                     mainEditorResponseBody.TextResponseViewer.Editor.ReadOnly = true;
 
                     break;
-                case "image":
+                case ResponseBodyDisplayMode.Image:
                     mainEditorResponseBody.ImageResponseViewerContent.Source = BodyBitmapImage;
                     mainEditorResponseBody.ImageResponseViewer.Visibility = Visibility.Visible;
                     GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorContainer", "Message_RequestComplete"));
                     break;
-                case "plaintext":
+                case ResponseBodyDisplayMode.PlainText:
                 default:
                     mainEditorResponseBody.TextResponseViewer.Editor.ReadOnly = false;
-                    mainEditorResponseBody.TextResponseViewer.HighlightingLanguage = responseDisplayMode;
+                    mainEditorResponseBody.TextResponseViewer.HighlightingLanguage = "plaintext";
                     mainEditorResponseBody.TextResponseViewer.Editor.SetText(GraphEditorApplication.RemoveProblematicCharacters(BodyString));
                     GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorContainer", "Message_RequestComplete"));
                     mainEditorResponseBody.TextResponseViewer.Visibility = Visibility.Visible;
