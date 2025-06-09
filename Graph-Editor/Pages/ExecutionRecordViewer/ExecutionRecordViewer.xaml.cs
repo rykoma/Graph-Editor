@@ -74,28 +74,52 @@ namespace Graph_Editor.Pages.ExecutionRecordViewer
             }
         }
 
-        private void MenuFlyoutItem_CopyFullSummary_Click(object sender, RoutedEventArgs e)
+        private void MenuFlyoutItem_CopyFullDetails_Click(object sender, RoutedEventArgs e)
         {
-            // Copy the full summary to the clipboard
+            // Copy the full details to the clipboard
 
             if (sender is MenuFlyoutItem { DataContext: ExecutionRecord executionRecord })
             {
-                var summary = new StringBuilder();
-                summary.AppendLine($"{executionRecord.Request.Method} {executionRecord.Request.Url}");
-                summary.AppendLine("Request Headers:");
+                var details = new StringBuilder();
+
+                // Request method and URL
+                details.AppendLine($"{executionRecord.Request.Method} {executionRecord.Request.Url}");
+
+                // Request eaders
                 foreach (var header in executionRecord.Request.Headers)
                 {
-                    summary.AppendLine($"  {header.Key}: {header.Value}");
+                    details.AppendLine($"{header.Key}: {header.Value}");
                 }
-                summary.AppendLine();
-                summary.AppendLine($"{(int)executionRecord.Response.StatusCode} {executionRecord.Response.StatusCode.ToString()}");
-                summary.AppendLine("Response Headers:");
+
+                // Request body
+                if (string.IsNullOrEmpty(executionRecord.Request.Body) == false)
+                {
+                    details.AppendLine();
+                    details.AppendLine(executionRecord.Request.Body);
+                }
+
+                // Blank line between request and response
+                details.AppendLine();
+
+                // Response status code
+                details.AppendLine($"{(int)executionRecord.Response.StatusCode} {executionRecord.Response.StatusCode.ToString()}");
+
+                // Response headers
                 foreach (var header in executionRecord.Response.Headers)
                 {
-                    summary.AppendLine($"  {header.Key}: {header.Value}");
+                    details.AppendLine($"{header.Key}: {header.Value}");
                 }
+
+                // Response body
+                if (string.IsNullOrEmpty(executionRecord.Response.BodyString) == false)
+                {
+                    details.AppendLine();
+                    GraphEditorApplication.TryParseJson(executionRecord.Response.BodyString, out string parsedJsonStringResult);
+                    details.AppendLine(GraphEditorApplication.RemoveProblematicCharacters(parsedJsonStringResult));
+                }
+
                 var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
-                dataPackage.SetText(summary.ToString());
+                dataPackage.SetText(details.ToString());
                 Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
             }
         }

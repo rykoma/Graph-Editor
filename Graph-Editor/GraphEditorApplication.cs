@@ -72,6 +72,22 @@ namespace Graph_Editor
             return false;
         }
 
+        public static string RemoveProblematicCharacters(string Input)
+        {
+            // Remove some characters that cause problems when searching text in the editor
+
+            // Replace NBSP from the input string
+            var temp = Input.Replace("\u00A0", " ");
+            // Replace NNBSP from the input string
+            temp = temp.Replace("\u202F", " ");
+            // Replace left and right single quotation marks with normal single quotation marks
+            temp = temp.Replace("\u2018", "'").Replace("\u2019", "'");
+            // Replace left and right double quotation marks with normal double quotation marks
+            temp = temp.Replace("\u201C", "\"").Replace("\u201D", "\"");
+
+            return temp;
+        }
+
         public static T GetSetting<T>(Settings Key, T DefaultValue)
         {
             if (string.IsNullOrEmpty(Key.ToString())) {

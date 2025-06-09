@@ -130,13 +130,13 @@
     <value>実行履歴がありません。</value>
   </data>
   <data name="MenuFlyoutItem_CopyUrl.Text" xml:space="preserve">
-    <value>URLをコピー</value>
+    <value>URL をコピー</value>
   </data>
   <data name="MenuFlyoutItem_CopySimpleSummary.Text" xml:space="preserve">
     <value>シンプルな概要をコピー</value>
   </data>
-  <data name="MenuFlyoutItem_CopyFullSummary.Text" xml:space="preserve">
-    <value>完全な概要をコピー</value>
+  <data name="MenuFlyoutItem_CopyFullDetails.Text" xml:space="preserve">
+    <value>完全な詳細をコピー</value>
   </data>
   <data name="DropDownButton_Copy.ToolTipService.ToolTip" xml:space="preserve">
     <value>コピー</value>

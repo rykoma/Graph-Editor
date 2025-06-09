@@ -55,7 +55,7 @@
                                         <MenuFlyout Placement="Bottom">
                                             <MenuFlyoutItem x:Name="MenuFlyoutItem_CopyUrl" x:Uid="/Pages.ExecutionRecordViewer.ExecutionRecordViewer/MenuFlyoutItem_CopyUrl" Click="MenuFlyoutItem_CopyUrl_Click" />
                                             <MenuFlyoutItem x:Name="MenuFlyoutItem_CopySimpleSummary" x:Uid="/Pages.ExecutionRecordViewer.ExecutionRecordViewer/MenuFlyoutItem_CopySimpleSummary" Click="MenuFlyoutItem_CopySimpleSummary_Click" />
-                                            <MenuFlyoutItem x:Name="MenuFlyoutItem_CopyFullSummary" x:Uid="/Pages.ExecutionRecordViewer.ExecutionRecordViewer/MenuFlyoutItem_CopyFullSummary" Click="MenuFlyoutItem_CopyFullSummary_Click" />
+                                            <MenuFlyoutItem x:Name="MenuFlyoutItem_CopyFullDetails" x:Uid="/Pages.ExecutionRecordViewer.ExecutionRecordViewer/MenuFlyoutItem_CopyFullDetails" Click="MenuFlyoutItem_CopyFullDetails_Click" />
                                         </MenuFlyout>
                                     </DropDownButton.Flyout>
                                 </DropDownButton>

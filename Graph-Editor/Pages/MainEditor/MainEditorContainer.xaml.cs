@@ -628,12 +628,12 @@ namespace Graph_Editor.Pages.MainEditor
 
                     if (GraphEditorApplication.TryParseJson(BodyString, out string parsedJsonStringResult))
                     {
-                        mainEditorResponseBody.TextResponseViewer.Editor.SetText(RemoveProblematicCharacters(parsedJsonStringResult));
+                        mainEditorResponseBody.TextResponseViewer.Editor.SetText(GraphEditorApplication.RemoveProblematicCharacters(parsedJsonStringResult));
                         GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorContainer", "Message_RequestComplete"));
                     }
                     else
                     {
-                        mainEditorResponseBody.TextResponseViewer.Editor.SetText(RemoveProblematicCharacters(BodyString));
+                        mainEditorResponseBody.TextResponseViewer.Editor.SetText(GraphEditorApplication.RemoveProblematicCharacters(BodyString));
                         GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorContainer", "Message_RequestCompleteWithJsonParseError"));
                     }
 
@@ -650,7 +650,7 @@ namespace Graph_Editor.Pages.MainEditor
                 default:
                     mainEditorResponseBody.TextResponseViewer.Editor.ReadOnly = false;
                     mainEditorResponseBody.TextResponseViewer.HighlightingLanguage = responseDisplayMode;
-                    mainEditorResponseBody.TextResponseViewer.Editor.SetText(RemoveProblematicCharacters(BodyString));
+                    mainEditorResponseBody.TextResponseViewer.Editor.SetText(GraphEditorApplication.RemoveProblematicCharacters(BodyString));
                     GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorContainer", "Message_RequestComplete"));
                     mainEditorResponseBody.TextResponseViewer.Visibility = Visibility.Visible;
                     mainEditorResponseBody.TextResponseViewer.Editor.ReadOnly = true;
@@ -806,22 +806,6 @@ namespace Graph_Editor.Pages.MainEditor
             InfoBar_Top.Title = "";
             InfoBar_Top.Message = "";
             InfoBar_Top.Content = null;
-        }
-
-        private string RemoveProblematicCharacters(string Input)
-        {
-            // Remove some characters that cause problems when searching text in the editor
-
-            // Replace NBSP from the input string
-            var temp = Input.Replace("\u00A0", " ");
-            // Replace NNBSP from the input string
-            temp = temp.Replace("\u202F", " ");
-            // Replace left and right single quotation marks with normal single quotation marks
-            temp = temp.Replace("\u2018", "'").Replace("\u2019", "'");
-            // Replace left and right double quotation marks with normal double quotation marks
-            temp = temp.Replace("\u201C", "\"").Replace("\u201D", "\"");
-
-            return temp;
         }
 
         internal async void LoadExecutionRecord(ExecutionRecord record, bool OnlyRequestToRerun = false)
