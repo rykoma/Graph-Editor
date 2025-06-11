@@ -171,4 +171,25 @@
   <data name="Message_RequestSendingConfirmationDialogContent" xml:space="preserve">
     <value>Are you sure you want to proceed with this request?</value>
   </data>
+  <data name="DropDownButton_InfoBar_ResponseTop_Copy.Content" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="MenuFlyoutItem_InfoBar_ResponseTop_CopyUrl.Text" xml:space="preserve">
+    <value>Copy Request URL</value>
+  </data>
+  <data name="MenuFlyoutItem_InfoBar_ResponseTop_CopySimpleSummary.Text" xml:space="preserve">
+    <value>Copy Simple Summary</value>
+  </data>
+  <data name="MenuFlyoutItem_InfoBar_ResponseTop_CopyFullDetails.Text" xml:space="preserve">
+    <value>Copy Full Details</value>
+  </data>
+  <data name="Message_CopiedUrlToClipboard" xml:space="preserve">
+    <value>Request URL copied to clipboard.</value>
+  </data>
+  <data name="Message_CopiedSimpleSummaryToClipboard" xml:space="preserve">
+    <value>Simple  summary copied to clipboard.</value>
+  </data>
+  <data name="Message_CopiedFullDetailsToClipboard" xml:space="preserve">
+    <value>Full details copied to clipboard.</value>
+  </data>
 </root>

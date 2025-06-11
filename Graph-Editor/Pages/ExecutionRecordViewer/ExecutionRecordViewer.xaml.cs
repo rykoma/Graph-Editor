@@ -65,11 +65,9 @@ namespace Graph_Editor.Pages.ExecutionRecordViewer
 
             if (sender is MenuFlyoutItem { DataContext: ExecutionRecord executionRecord })
             {
-                var summary = new StringBuilder();
-                summary.AppendLine($"{executionRecord.Request.Method} {executionRecord.Request.Url}");
-                summary.AppendLine($"{(int)executionRecord.Response.StatusCode} {executionRecord.Response.StatusCode.ToString()}");
+                var summary = executionRecord.CreateSimpleSummary();
                 var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
-                dataPackage.SetText(summary.ToString());
+                dataPackage.SetText(summary);
                 Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
             }
         }
@@ -80,63 +78,9 @@ namespace Graph_Editor.Pages.ExecutionRecordViewer
 
             if (sender is MenuFlyoutItem { DataContext: ExecutionRecord executionRecord })
             {
-                var details = new StringBuilder();
-
-                // Request method and URL
-                details.AppendLine($"{executionRecord.Request.Method} {executionRecord.Request.Url}");
-
-                // Request eaders
-                foreach (var header in executionRecord.Request.Headers)
-                {
-                    details.AppendLine($"{header.Key}: {header.Value}");
-                }
-
-                // Request body
-                if (string.IsNullOrEmpty(executionRecord.Request.Body) == false)
-                {
-                    details.AppendLine();
-                    details.AppendLine(executionRecord.Request.Body);
-                }
-
-                // Blank line between request and response
-                details.AppendLine();
-
-                // Response status code
-                details.AppendLine($"{(int)executionRecord.Response.StatusCode} {executionRecord.Response.StatusCode.ToString()}");
-
-                // Response headers
-                foreach (var header in executionRecord.Response.Headers)
-                {
-                    details.AppendLine($"{header.Key}: {header.Value}");
-                }
-
-                // Response body
-                switch (executionRecord.Response.DisplayMode)
-                {
-                    case ResponseRecord.ResponseBodyDisplayMode.Json:
-                        details.AppendLine();
-                        GraphEditorApplication.TryParseJson(executionRecord.Response.BodyString, out string parsedJsonStringResult);
-                        details.AppendLine(GraphEditorApplication.RemoveProblematicCharacters(parsedJsonStringResult));
-                        break;
-                    case ResponseRecord.ResponseBodyDisplayMode.PlainText:
-                        if (string.IsNullOrEmpty(executionRecord.Response.BodyString) == false)
-                        {
-                            details.AppendLine();
-                            details.AppendLine(executionRecord.Response.BodyString);
-                        }
-                        break;
-                    case ResponseRecord.ResponseBodyDisplayMode.Image:
-                        details.AppendLine();
-                        details.AppendLine(executionRecord.Response.Base64EncodedBinaryBody);
-                        break;
-                    default:
-                        details.AppendLine();
-                        details.AppendLine("Unknown response body format.");
-                        break;
-                }
-
+                var details = executionRecord.CreateFullDetails();
                 var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
-                dataPackage.SetText(details.ToString());
+                dataPackage.SetText(details);
                 Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
             }
         }

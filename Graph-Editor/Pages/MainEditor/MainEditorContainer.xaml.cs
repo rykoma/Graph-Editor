@@ -333,6 +333,54 @@ namespace Graph_Editor.Pages.MainEditor
             }
         }
 
+        private void MenuFlyoutItem_InfoBar_ResponseTop_CopyUrl_Click(object sender, RoutedEventArgs e)
+        {
+            // Copy the URL to the clipboard
+
+            if (InfoBar_ResponseTop.Tag != null && InfoBar_ResponseTop.Tag is ExecutionRecord executionRecord)
+            {
+                var url = executionRecord.Request.Url;
+                var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
+                dataPackage.SetText(url);
+                Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
+            }
+
+            // Update status bar
+            GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorContainer", "Message_CopiedUrlToClipboard"));
+        }
+
+        private void MenuFlyoutItem_InfoBar_ResponseTop_CopySimpleSummary_Click(object sender, RoutedEventArgs e)
+        {
+            // Copy the method, URL, and status code to the clipboard
+
+            if (InfoBar_ResponseTop.Tag != null && InfoBar_ResponseTop.Tag is ExecutionRecord executionRecord)
+            {
+                var summary = executionRecord.CreateSimpleSummary();
+                var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
+                dataPackage.SetText(summary);
+                Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
+            }
+
+            // Update status bar
+            GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorContainer", "Message_CopiedSimpleSummaryToClipboard"));
+        }
+
+        private void MenuFlyoutItem_InfoBar_ResponseTop_CopyFullDetails_Click(object sender, RoutedEventArgs e)
+        {
+            // Copy the full details to the clipboard
+
+            if (InfoBar_ResponseTop.Tag != null && InfoBar_ResponseTop.Tag is ExecutionRecord executionRecord)
+            {
+                var details = executionRecord.CreateFullDetails();
+                var dataPackage = new Windows.ApplicationModel.DataTransfer.DataPackage();
+                dataPackage.SetText(details);
+                Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
+            }
+
+            // Update status bar
+            GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorContainer", "Message_CopiedFullDetailsToClipboard"));
+        }
+
         private void Button_Run_Click(object sender, RoutedEventArgs e)
         {
             ExecureRequest();
@@ -342,7 +390,7 @@ namespace Graph_Editor.Pages.MainEditor
         {
             // Close InfoBar
             CloseInfoBarTop();
-            InforBar_ResponseTop.IsOpen = false;
+            CloseInfoBarResponseTop();
 
             if (Data.EditorAccessToken.EditorAccessToken.Instance.AuthenticationResult == null)
             {
@@ -517,7 +565,7 @@ namespace Graph_Editor.Pages.MainEditor
                 };
 
                 // Show response in MainEditorResponseBody
-                await ShowResponseAsync(executionRecord.Response);
+                await ShowResponseAsync(executionRecord);
 
                 // Save the request and response to the execution record list
                 try
@@ -567,10 +615,10 @@ namespace Graph_Editor.Pages.MainEditor
             return true;
         }
 
-        public async Task ShowResponseAsync(ResponseRecord ResponseRecord)
+        public async Task ShowResponseAsync(ExecutionRecord executionRecord)
         {
-            string headerString = ResponseRecord.Headers.Aggregate("", (current, header) => current + header.Key + ": " + header.Value + "\n");
-            Stream bodyStream = new MemoryStream(Convert.FromBase64String(ResponseRecord.Base64EncodedBinaryBody));
+            ResponseRecord responseRecord = executionRecord.Response;
+            Stream bodyStream = new MemoryStream(Convert.FromBase64String(responseRecord.Base64EncodedBinaryBody));
             BitmapImage bodyBitmapImage = new BitmapImage();
 
             try
@@ -583,13 +631,20 @@ namespace Graph_Editor.Pages.MainEditor
             }
 
             // Show response in MainEditorResponseBody
-            ShowResponse(headerString, ResponseRecord.BodyString, bodyStream, bodyBitmapImage, ResponseRecord.DisplayMode, ResponseRecord.StatusCode);
+            ShowResponse(executionRecord, bodyBitmapImage);
         }
 
-        private void ShowResponse(string Header, string BodyString, Stream BodyStream, BitmapImage BodyBitmapImage, ResponseBodyDisplayMode bodyDisplayMode, HttpStatusCode StatusCode)
+        private void ShowResponse(ExecutionRecord executionRecord, BitmapImage BodyBitmapImage)
         {
+            ResponseRecord responseRecord = executionRecord.Response;
+
+            string header = responseRecord.Headers.Aggregate("", (current, header) => current + header.Key + ": " + header.Value + "\n");
+            string bodyString = responseRecord.BodyString;
+            ResponseBodyDisplayMode bodyDisplayMode = responseRecord.DisplayMode;
+            HttpStatusCode StatusCode = responseRecord.StatusCode;
+
             MainEditorResponseHeader mainEditorResponseHeader = pageCache["MainEditorResponseHeader"] as MainEditorResponseHeader;
-            mainEditorResponseHeader.Header.Text = Header;
+            mainEditorResponseHeader.Header.Text = header;
 
             MainEditorResponseBody mainEditorResponseBody = pageCache["MainEditorResponseBody"] as MainEditorResponseBody;
             mainEditorResponseBody.HideAllViewer();
@@ -600,14 +655,14 @@ namespace Graph_Editor.Pages.MainEditor
                     mainEditorResponseBody.TextResponseViewer.Editor.ReadOnly = false;
                     mainEditorResponseBody.TextResponseViewer.HighlightingLanguage = "json";
 
-                    if (GraphEditorApplication.TryParseJson(BodyString, out string parsedJsonStringResult))
+                    if (GraphEditorApplication.TryParseJson(bodyString, out string parsedJsonStringResult))
                     {
                         mainEditorResponseBody.TextResponseViewer.Editor.SetText(GraphEditorApplication.RemoveProblematicCharacters(parsedJsonStringResult));
                         GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorContainer", "Message_RequestComplete"));
                     }
                     else
                     {
-                        mainEditorResponseBody.TextResponseViewer.Editor.SetText(GraphEditorApplication.RemoveProblematicCharacters(BodyString));
+                        mainEditorResponseBody.TextResponseViewer.Editor.SetText(GraphEditorApplication.RemoveProblematicCharacters(bodyString));
                         GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorContainer", "Message_RequestCompleteWithJsonParseError"));
                     }
 
@@ -624,7 +679,7 @@ namespace Graph_Editor.Pages.MainEditor
                 default:
                     mainEditorResponseBody.TextResponseViewer.Editor.ReadOnly = false;
                     mainEditorResponseBody.TextResponseViewer.HighlightingLanguage = "plaintext";
-                    mainEditorResponseBody.TextResponseViewer.Editor.SetText(GraphEditorApplication.RemoveProblematicCharacters(BodyString));
+                    mainEditorResponseBody.TextResponseViewer.Editor.SetText(GraphEditorApplication.RemoveProblematicCharacters(bodyString));
                     GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorContainer", "Message_RequestComplete"));
                     mainEditorResponseBody.TextResponseViewer.Visibility = Visibility.Visible;
                     mainEditorResponseBody.TextResponseViewer.Editor.ReadOnly = true;
@@ -635,26 +690,26 @@ namespace Graph_Editor.Pages.MainEditor
             // Show status code in InfoBar
 
             int numericStatusCode = (int)StatusCode;
+            InfoBarSeverity severity;
 
             if (numericStatusCode <= 199)
             {
-                InforBar_ResponseTop.Severity = InfoBarSeverity.Informational;
+                severity = InfoBarSeverity.Informational;
             }
             else if (numericStatusCode <= 299)
             {
-                InforBar_ResponseTop.Severity = InfoBarSeverity.Success;
+                severity = InfoBarSeverity.Success;
             }
             else if (numericStatusCode <= 399)
             {
-                InforBar_ResponseTop.Severity = InfoBarSeverity.Success;
+                severity = InfoBarSeverity.Success;
             }
             else
             {
-                InforBar_ResponseTop.Severity = InfoBarSeverity.Error;
+                severity = InfoBarSeverity.Error;
             }
 
-            InforBar_ResponseTop.Message = StatusCode.ToString() + " - " + numericStatusCode.ToString();
-            InforBar_ResponseTop.IsOpen = true;
+            OpenInfoBarResponseTop(severity, "", StatusCode.ToString() + " - " + numericStatusCode.ToString(), executionRecord);
         }
 
         private void ClearResponse()
@@ -672,8 +727,27 @@ namespace Graph_Editor.Pages.MainEditor
             mainEditorResponseBody.TextResponseViewer.Editor.ReadOnly = true;
 
             // Hide status code in InfoBar
-            InforBar_ResponseTop.Message = string.Empty;
-            InforBar_ResponseTop.IsOpen = false;
+            CloseInfoBarResponseTop();
+        }
+
+        private void OpenInfoBarResponseTop(InfoBarSeverity Severity, string Title, string Message, ExecutionRecord Record)
+        {
+            InfoBar_ResponseTop.Severity = Severity;
+            TextBlock_InfoBar_ResponseTop_Title.Text = Title;
+            TextBlock_InfoBar_ResponseTop_Message.Text = Message;
+            InfoBar_ResponseTop.Tag = Record;
+            InfoBar_ResponseTop.IsOpen = true;
+        }
+
+        private void CloseInfoBarResponseTop()
+        {
+            InfoBar_ResponseTop.IsOpen = false;
+            InfoBar_ResponseTop.Severity = InfoBarSeverity.Informational;
+            InfoBar_ResponseTop.Title = "";
+            InfoBar_ResponseTop.Message = "";
+            TextBlock_InfoBar_ResponseTop_Title.Text = "";
+            TextBlock_InfoBar_ResponseTop_Message.Text = "";
+            InfoBar_ResponseTop.Tag = null;
         }
 
         private void ShowRequest(RequestRecord RequestRecord)
@@ -787,21 +861,21 @@ namespace Graph_Editor.Pages.MainEditor
             // Close InfoBar
             CloseInfoBarTop();
 
+            // Clear response
+            ClearResponse();
+
             // Show request in MainEditorRequestHeader and MainEditorRequestBody
             ShowRequest(record.Request);
 
             if (OnlyRequestToRerun)
             {
-                // Clear response
-                ClearResponse();
-
                 // Open InfoBar and show message
                 OpenInfoBarTop(InfoBarSeverity.Informational, "Information", GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorContainer", "Message_ExecutionRecordLoadedForRerun"));
                 GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorContainer", "Message_ExecutionRecordLoadedForRerun"));
             }
             else
             {
-                await ShowResponseAsync(record.Response);
+                await ShowResponseAsync(record);
 
                 // Open InfoBar and show message
                 OpenInfoBarTop(InfoBarSeverity.Informational, "Information", GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorContainer", "Message_ExecutionRecordLoaded"));

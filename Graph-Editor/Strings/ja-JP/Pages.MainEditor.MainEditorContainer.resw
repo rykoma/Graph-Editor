@@ -171,4 +171,25 @@
   <data name="Message_RequestSendingConfirmationDialogContent" xml:space="preserve">
     <value>このリクエストを続行してもよろしいですか？</value>
   </data>
+  <data name="DropDownButton_InfoBar_ResponseTop_Copy.Content" xml:space="preserve">
+    <value>コピー</value>
+  </data>
+  <data name="MenuFlyoutItem_InfoBar_ResponseTop_CopyUrl.Text" xml:space="preserve">
+    <value>リクエスト URL をコピー</value>
+  </data>
+  <data name="MenuFlyoutItem_InfoBar_ResponseTop_CopySimpleSummary.Text" xml:space="preserve">
+    <value>シンプルな概要をコピー</value>
+  </data>
+  <data name="MenuFlyoutItem_InfoBar_ResponseTop_CopyFullDetails.Text" xml:space="preserve">
+    <value>完全な詳細をコピー</value>
+  </data>
+  <data name="Message_CopiedUrlToClipboard" xml:space="preserve">
+    <value>リクエスト URLをコピーしました</value>
+  </data>
+  <data name="Message_CopiedSimpleSummaryToClipboard" xml:space="preserve">
+    <value>シンプルな概要をコピーしました</value>
+  </data>
+  <data name="Message_CopiedFullDetailsToClipboard" xml:space="preserve">
+    <value>完全な詳細をコピーしました。</value>
+  </data>
 </root>

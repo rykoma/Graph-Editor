@@ -75,7 +75,21 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <InfoBar x:Name="InforBar_ResponseTop" VerticalAlignment="Top" Grid.Row="0" Margin="2" IsOpen="False" />
+                    <InfoBar x:Name="InfoBar_ResponseTop" VerticalAlignment="Top" Grid.Row="0" Margin="2" IsOpen="False">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                            <TextBlock x:Name="TextBlock_InfoBar_ResponseTop_Title" Margin="0,0,16,0" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
+                            <TextBlock x:Name="TextBlock_InfoBar_ResponseTop_Message" Margin="0,0,16,0" VerticalAlignment="Center"></TextBlock>
+                            <DropDownButton x:Name="DropDownButton_InfoBar_ResponseTop_Copy" x:Uid="/Pages.MainEditor.MainEditorContainer/DropDownButton_InfoBar_ResponseTop_Copy" Margin="0,0,8,0">
+                                <DropDownButton.Flyout>
+                                    <MenuFlyout Placement="Bottom">
+                                        <MenuFlyoutItem x:Name="MenuFlyoutItem_InfoBar_ResponseTop_CopyUrl" x:Uid="/Pages.MainEditor.MainEditorContainer/MenuFlyoutItem_InfoBar_ResponseTop_CopyUrl" Click="MenuFlyoutItem_InfoBar_ResponseTop_CopyUrl_Click" />
+                                        <MenuFlyoutItem x:Name="MenuFlyoutItem_InfoBar_ResponseTop_CopySimpleSummary" x:Uid="/Pages.MainEditor.MainEditorContainer/MenuFlyoutItem_InfoBar_ResponseTop_CopySimpleSummary" Click="MenuFlyoutItem_InfoBar_ResponseTop_CopySimpleSummary_Click" />
+                                        <MenuFlyoutItem x:Name="MenuFlyoutItem_InfoBar_ResponseTop_CopyFullDetails" x:Uid="/Pages.MainEditor.MainEditorContainer/MenuFlyoutItem_InfoBar_ResponseTop_CopyFullDetails" Click="MenuFlyoutItem_InfoBar_ResponseTop_CopyFullDetails_Click" />
+                                    </MenuFlyout>
+                                </DropDownButton.Flyout>
+                            </DropDownButton>
+                        </StackPanel>
+                    </InfoBar>
 
                     <NavigationView x:Name="NavigationView_Response" Grid.Row="1" PaneDisplayMode="Top" IsBackButtonVisible="Collapsed" IsSettingsVisible="False" AlwaysShowHeader="False" SelectionChanged="NavigationView_Response_SelectionChanged">
                         <NavigationView.MenuItems>
