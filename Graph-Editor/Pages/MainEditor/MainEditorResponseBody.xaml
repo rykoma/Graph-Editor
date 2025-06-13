@@ -17,7 +17,13 @@
 
         <editor:CodeEditorControl x:Name="CodeEditorControl_ResponseBody" Grid.Row="0" HighlightingLanguage="json" Visibility="Collapsed" KeyDown="CodeEditorControl_ResponseBody_KeyDown" />
         <ScrollViewer x:Name="ScrollViewer_ImageResponseBody" Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
-            <Image x:Name="Image_ResponseBody" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="None"></Image>
+            <Image x:Name="Image_ResponseBody" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="None">
+                <Image.ContextFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem x:Name="MenuFlyoutItem_Image_ResponseBody_SaveAs" x:Uid="/Pages.MainEditor.MainEditorResponseBody/MenuFlyoutItem_Image_ResponseBody_SaveAs" Click="MenuFlyoutItem_Image_ResponseBody_SaveAs_Click" />
+                    </MenuFlyout>
+                </Image.ContextFlyout>
+            </Image>
         </ScrollViewer>
         
         

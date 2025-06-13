@@ -672,6 +672,7 @@ namespace Graph_Editor.Pages.MainEditor
                     break;
                 case ResponseBodyDisplayMode.Image:
                     mainEditorResponseBody.ImageResponseViewerContent.Source = BodyBitmapImage;
+                    mainEditorResponseBody.ImageResponseViewerContent.Tag = responseRecord;
                     mainEditorResponseBody.ImageResponseViewer.Visibility = Visibility.Visible;
                     GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorContainer", "Message_RequestComplete"));
                     break;
@@ -725,6 +726,9 @@ namespace Graph_Editor.Pages.MainEditor
             mainEditorResponseBody.TextResponseViewer.Editor.SetText(string.Empty);
             mainEditorResponseBody.TextResponseViewer.Visibility = Visibility.Visible;
             mainEditorResponseBody.TextResponseViewer.Editor.ReadOnly = true;
+
+            mainEditorResponseBody.ImageResponseViewerContent.Source = null;
+            mainEditorResponseBody.ImageResponseViewerContent.Tag = null;
 
             // Hide status code in InfoBar
             CloseInfoBarResponseTop();

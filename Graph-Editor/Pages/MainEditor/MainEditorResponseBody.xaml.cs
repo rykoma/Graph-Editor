@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Graph_Editor.Data.ExecutionRecord;
+using Microsoft.UI.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -12,11 +7,18 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using WinUIEditor;
-using Microsoft.UI.Input;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.Search;
+using Windows.Storage.Pickers;
 using Windows.System;
 using Windows.UI.Core;
+using WinUIEditor;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -222,6 +224,101 @@ namespace Graph_Editor.Pages.MainEditor
         {
             CodeEditorControl_ResponseBody.Visibility = Visibility.Collapsed;
             ScrollViewer_ImageResponseBody.Visibility = Visibility.Collapsed;
+        }
+
+        private async void MenuFlyoutItem_Image_ResponseBody_SaveAs_Click(object sender, RoutedEventArgs e)
+        {
+            ResponseRecord responseRecord = (ResponseRecord)Image_ResponseBody.Tag;
+
+            if (responseRecord == null || responseRecord.Base64EncodedBinaryBody == null)
+            {
+                GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorResponseBody", "Message_NoImageToSave"));
+                return;
+            }
+
+            // Create a file picker
+            FileSavePicker savePicker = new FileSavePicker();
+
+            // Retrieve the window handle (HWND) of the main window.
+            var window = (Application.Current as App)?.MainWindowAccessor;
+            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
+
+            // Initialize the file picker with the window handle (HWND).
+            WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hWnd);
+
+            // Set options
+            savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
+
+            // Set the file type choices
+            string fileExtension = ".png"; // Default to PNG if ContentType is null or not recognized
+
+            if (!string.IsNullOrEmpty(responseRecord.ContentType))
+            {
+                string contentType = responseRecord.ContentType.ToLowerInvariant();
+                if (contentType.Contains("image/png"))
+                {
+                    fileExtension = ".png";
+                    savePicker.FileTypeChoices.Add("PNG Image", new List<string> { fileExtension });
+                }
+                else if (contentType.Contains("image/jpeg"))
+                {
+                    fileExtension = ".jpg";
+                    savePicker.FileTypeChoices.Add("JPEG Image", new List<string> { fileExtension });  
+                }
+                else if (contentType.Contains("image/gif"))
+                {
+                    fileExtension = ".gif";
+                    savePicker.FileTypeChoices.Add("GIF Image", new List<string> { fileExtension });
+                }
+                else if (contentType.Contains("image/bmp"))
+                {
+                    fileExtension = ".bmp";
+                    savePicker.FileTypeChoices.Add("BMP Image", new List<string> { fileExtension });
+                }
+                else
+                {
+                    // If the content type is not recognized, default to PNG
+                    savePicker.FileTypeChoices.Add("PNG Image", new List<string> { fileExtension });
+                }
+            }
+            else
+            {
+                // If ContentType is null or empty, default to PNG
+                savePicker.FileTypeChoices.Add("PNG Image", new List<string> { fileExtension });
+            }
+
+            savePicker.SuggestedFileName = $"ResponseImage{fileExtension}";
+            
+
+            var saveFile = await savePicker.PickSaveFileAsync();
+            if (null == saveFile)
+            {
+                return; // User cancelled the save operation                
+            }
+
+            byte[] imageBytes = Convert.FromBase64String(responseRecord.Base64EncodedBinaryBody);
+
+            try
+            {
+                await Windows.Storage.FileIO.WriteBytesAsync(saveFile, imageBytes);
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions that may occur during the save operation
+                // Show ContentDialog as an error dialog
+                var dialog = new ContentDialog
+                {
+                    Title = "Error",
+                    Content = $"Failed to save the image: {ex.Message}",
+                    CloseButtonText = "Ok"
+                };
+
+                await dialog.ShowAsync();
+                
+                return;
+            }
+            
+            GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorResponseBody", "Message_ImageSavedSuccessfully"));
         }
     }
 }
