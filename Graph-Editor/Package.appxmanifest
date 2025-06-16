@@ -10,9 +10,9 @@
   <Identity
     Name="RyutaroKoma.44929AC4F3C12"
     Publisher="CN=46E5A78C-B51C-4A49-B1B7-F679A49E1FBD"
-    Version="1.2025.5.0" />
+    Version="1.2025.6.0" />
 
-  <mp:PhoneIdentity PhoneProductId="bacd92d7-546e-491f-8587-c5390594cbaf" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="9ad324e9-be8b-40e7-893a-f9ed08a79d51" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Graph Editor</DisplayName>
