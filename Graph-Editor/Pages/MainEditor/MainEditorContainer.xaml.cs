@@ -1,4 +1,6 @@
-﻿using Graph_Editor.Data.EditorAccessToken;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using Graph_Editor.Data.EditorAccessToken;
 using Graph_Editor.Data.ExecutionRecord;
 using Graph_Editor.Data.MainEditorResponse;
 using Graph_Editor.Data.SampleQuery;
@@ -16,17 +18,22 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Mime;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.System;
 using Windows.UI.Core;
 using static Graph_Editor.Data.ExecutionRecord.ResponseRecord;
@@ -615,29 +622,10 @@ namespace Graph_Editor.Pages.MainEditor
             return true;
         }
 
-        public async Task ShowResponseAsync(ExecutionRecord executionRecord)
+        private async Task ShowResponseAsync(ExecutionRecord executionRecord)
         {
             ResponseRecord responseRecord = executionRecord.Response;
-            Stream bodyStream = new MemoryStream(Convert.FromBase64String(responseRecord.Base64EncodedBinaryBody));
-            BitmapImage bodyBitmapImage = new BitmapImage();
-
-            try
-            {
-                await bodyBitmapImage.SetSourceAsync(bodyStream.AsRandomAccessStream());
-            }
-            catch
-            {
-                bodyBitmapImage = null;
-            }
-
-            // Show response in MainEditorResponseBody
-            ShowResponse(executionRecord, bodyBitmapImage);
-        }
-
-        private void ShowResponse(ExecutionRecord executionRecord, BitmapImage BodyBitmapImage)
-        {
-            ResponseRecord responseRecord = executionRecord.Response;
-
+            
             string header = responseRecord.Headers.Aggregate("", (current, header) => current + header.Key + ": " + header.Value + "\n");
             string bodyString = responseRecord.BodyString;
             ResponseBodyDisplayMode bodyDisplayMode = responseRecord.DisplayMode;
@@ -671,11 +659,57 @@ namespace Graph_Editor.Pages.MainEditor
 
                     break;
                 case ResponseBodyDisplayMode.Image:
-                    mainEditorResponseBody.ImageResponseViewerContent.Source = BodyBitmapImage;
+                    Stream bodyStream = new MemoryStream(Convert.FromBase64String(responseRecord.Base64EncodedBinaryBody));
+                    BitmapImage bodyBitmapImage = new BitmapImage();
+
+                    try
+                    {
+                        await bodyBitmapImage.SetSourceAsync(bodyStream.AsRandomAccessStream());
+                    }
+                    catch
+                    {
+                        bodyBitmapImage = null;
+                    }
+
+                    mainEditorResponseBody.ImageResponseViewerContent.Source = bodyBitmapImage;
                     mainEditorResponseBody.ImageResponseViewerContent.Tag = responseRecord;
                     mainEditorResponseBody.ImageResponseViewer.Visibility = Visibility.Visible;
                     GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorContainer", "Message_RequestComplete"));
                     break;
+                case ResponseBodyDisplayMode.Csv:
+                    DataTable csvDataTable = GenerateCsvDataTable(bodyString);
+
+                    if (csvDataTable != null)
+                    {
+                        // Add columns to the DataGrid
+                        for (int i = 0; i < csvDataTable.Columns.Count; i++)
+                        {
+                            mainEditorResponseBody.CsvResponseViewer.Columns.Add(new CommunityToolkit.WinUI.UI.Controls.DataGridTextColumn()
+                            {
+                                Header = csvDataTable.Columns[i].ColumnName,
+                                Binding = new Binding { Path = new PropertyPath("[" + i.ToString() + "]") },
+                                CanUserReorder = false,
+                                CanUserSort = false
+                            });
+                        }
+
+                        // Convert DataTable rows to ObservableCollection<object> for DataGrid binding
+                        var csvDataCollection = new ObservableCollection<object>();
+                        foreach (DataRow row in csvDataTable.Rows)
+                        {
+                            csvDataCollection.Add(row.ItemArray);
+                        }
+
+                        mainEditorResponseBody.CsvResponseViewer.ItemsSource = csvDataCollection;
+                        mainEditorResponseBody.CsvResponseViewer.Visibility = Visibility.Visible;
+                        GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorContainer", "Message_RequestComplete"));
+
+                        break;
+                    }
+                    else
+                    {
+                        goto default; // If CSV parsing failed, treat it as plain text
+                    }
                 case ResponseBodyDisplayMode.PlainText:
                 default:
                     mainEditorResponseBody.TextResponseViewer.Editor.ReadOnly = false;
@@ -730,8 +764,93 @@ namespace Graph_Editor.Pages.MainEditor
             mainEditorResponseBody.ImageResponseViewerContent.Source = null;
             mainEditorResponseBody.ImageResponseViewerContent.Tag = null;
 
+            mainEditorResponseBody.CsvResponseViewer.ItemsSource = null;
+            mainEditorResponseBody.CsvResponseViewer.Columns.Clear();
+
             // Hide status code in InfoBar
             CloseInfoBarResponseTop();
+        }
+
+        private static DataTable GenerateCsvDataTable(string CsvData)
+        {
+            // Create a MemoryStream from the CSV data
+            var stream = new MemoryStream(Encoding.UTF8.GetBytes(CsvData));
+
+            // Use CsvHelper to read the CSV data
+            using var reader = new StreamReader(stream, Encoding.UTF8);
+            using var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                Encoding = Encoding.UTF8,
+                BadDataFound = null,
+                MissingFieldFound = null,
+                HeaderValidated = null,
+                IgnoreBlankLines = true
+            });
+
+            // Read the CSV data and convert into a dynamic list
+
+            var dynamicRecords = new List<dynamic>();
+            int errorCount = 0;
+            var enumerator = csv.GetRecords<dynamic>().GetEnumerator();
+            while (true)
+            {
+                try
+                {
+                    if (!enumerator.MoveNext())
+                        break;
+                    dynamicRecords.Add(enumerator.Current);
+                }
+                catch (Exception)
+                {
+                    errorCount++;
+                }
+            }
+
+            // Convert dynamic records to DataTable
+
+            DataTable dataTable = new DataTable();
+
+            // First, get the column names from the first element of dynamicRecords and create the DataTable
+            if (dynamicRecords.Count == 0)
+            {
+                // CSV file is empty
+                return null;
+            }
+            else
+            {
+                var firstRecord = dynamicRecords[0] as IDictionary<string, object>;
+                if (firstRecord == null)
+                {
+                    // CSV file is not valid
+                    return null;
+                }
+                else
+                {
+                    // Create columns in the DataTable based on the keys of the first record
+                    foreach (var key in firstRecord.Keys)
+                    {
+                        dataTable.Columns.Add(key);
+                    }
+                }
+            }
+
+            // Add data from dynamicRecords to the DataTable
+            foreach (var record in dynamicRecords)
+            {
+                var row = dataTable.NewRow();
+
+                if (record is IDictionary<string, object> dictRecord)
+                {
+                    foreach (var key in dictRecord.Keys)
+                    {
+                        row[key] = dictRecord[key] ?? DBNull.Value; // Convert null to DBNull
+                    }
+                }
+
+                dataTable.Rows.Add(row);
+            }
+
+            return dataTable;
         }
 
         private void OpenInfoBarResponseTop(InfoBarSeverity Severity, string Title, string Message, ExecutionRecord Record)

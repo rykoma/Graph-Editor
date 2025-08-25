@@ -1,3 +1,4 @@
+using CommunityToolkit.WinUI.UI.Controls;
 using Graph_Editor.Data.ExecutionRecord;
 using Microsoft.UI.Input;
 using Microsoft.UI.Xaml;
@@ -20,8 +21,9 @@ using Windows.System;
 using Windows.UI.Core;
 using WinUIEditor;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+// This application uses CsvHelper, which is licensed under the Apache License, Version 2.0.
+// CsvHelper Copyright (c) Josh Close and Contributors
+// See LICENSE-THIRD-PARTY-CSVHELPER for details.
 
 namespace Graph_Editor.Pages.MainEditor
 {
@@ -126,6 +128,7 @@ namespace Graph_Editor.Pages.MainEditor
         public CodeEditorControl TextResponseViewer => CodeEditorControl_ResponseBody;
         public Image ImageResponseViewerContent => Image_ResponseBody;
         public ScrollViewer ImageResponseViewer => ScrollViewer_ImageResponseBody;
+        public DataGrid CsvResponseViewer => DataGrid_CsvResponseBody;
 
         private void CodeEditorControl_ResponseBody_KeyDown(object sender, KeyRoutedEventArgs e)
         {
@@ -224,6 +227,7 @@ namespace Graph_Editor.Pages.MainEditor
         {
             CodeEditorControl_ResponseBody.Visibility = Visibility.Collapsed;
             ScrollViewer_ImageResponseBody.Visibility = Visibility.Collapsed;
+            DataGrid_CsvResponseBody.Visibility = Visibility.Collapsed;
         }
 
         private async void MenuFlyoutItem_Image_ResponseBody_SaveAs_Click(object sender, RoutedEventArgs e)

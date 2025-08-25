@@ -6,7 +6,7 @@
     xmlns:local="using:Graph_Editor.Pages.MainEditor"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:editor="using:WinUIEditor"
+    xmlns:editor="using:WinUIEditor" xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d"
     Loaded="Page_Loaded">
 
@@ -16,6 +16,7 @@
         </Grid.RowDefinitions>
 
         <editor:CodeEditorControl x:Name="CodeEditorControl_ResponseBody" Grid.Row="0" HighlightingLanguage="json" Visibility="Collapsed" KeyDown="CodeEditorControl_ResponseBody_KeyDown" />
+        
         <ScrollViewer x:Name="ScrollViewer_ImageResponseBody" Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
             <Image x:Name="Image_ResponseBody" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="None">
                 <Image.ContextFlyout>
@@ -25,8 +26,9 @@
                 </Image.ContextFlyout>
             </Image>
         </ScrollViewer>
-        
-        
+
+        <controls:DataGrid x:Name="DataGrid_CsvResponseBody" AutoGenerateColumns="False" Grid.Row="0" Visibility="Collapsed" />
+
         <!-- TextBox and Button for Search -->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>

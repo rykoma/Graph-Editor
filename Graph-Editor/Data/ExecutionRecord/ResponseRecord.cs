@@ -26,6 +26,8 @@ namespace Graph_Editor.Data.ExecutionRecord
         {
             get
             {
+                string contentDisposition = Headers.GetValueOrDefault("Content-Disposition", string.Empty);
+
                 if (string.IsNullOrEmpty(ContentType))
                 {
                     return ResponseBodyDisplayMode.PlainText;
@@ -37,6 +39,10 @@ namespace Graph_Editor.Data.ExecutionRecord
                 else if (string.Compare(ContentType, "text/plain", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     return ResponseBodyDisplayMode.PlainText;
+                }
+                else if (!string.IsNullOrEmpty(contentDisposition) && contentDisposition.Contains(".csv", StringComparison.OrdinalIgnoreCase))
+                {
+                    return ResponseBodyDisplayMode.Csv;
                 }
                 else if (string.Compare(ContentType, "application/octet-stream", StringComparison.OrdinalIgnoreCase) == 0)
                 {
@@ -58,7 +64,8 @@ namespace Graph_Editor.Data.ExecutionRecord
         {
             Json,
             PlainText,
-            Image
+            Image,
+            Csv
         }
     }
 }
