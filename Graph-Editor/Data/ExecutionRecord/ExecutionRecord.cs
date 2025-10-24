@@ -90,6 +90,7 @@ namespace Graph_Editor.Data.ExecutionRecord
                         details.AppendLine(GraphEditorApplication.RemoveProblematicCharacters(parsedJsonStringResult));
                         break;
                     case ResponseRecord.ResponseBodyDisplayMode.PlainText:
+                    case ResponseRecord.ResponseBodyDisplayMode.Csv:
                         if (string.IsNullOrEmpty(Response.BodyString) == false)
                         {
                             details.AppendLine();
