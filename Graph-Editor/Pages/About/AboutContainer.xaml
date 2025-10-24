@@ -15,11 +15,6 @@
         <TextBlock x:Name="TextBlock_License" Text="Licensed under the MIT License."/>
 
         <Line X1="0" Y1="0" X2="300" Y2="0" Stroke="Black" StrokeThickness="1" Margin="0,10,0,10"/>
-        <TextBlock>3rd party: CsvHelper (<Hyperlink NavigateUri="https://github.com/JoshClose/CsvHelper" ToolTipService.ToolTip="https://github.com/JoshClose/CsvHelper">https://github.com/JoshClose/CsvHelper</Hyperlink>)</TextBlock>
-        <TextBlock Text="Licensed under the Apache License, Version 2.0."/>
-        <TextBlock>See <Hyperlink NavigateUri="https://github.com/rykoma/Graph-Editor/blob/main/LICENSE-THIRD-PARTY-CSVHELPER" ToolTipService.ToolTip="https://github.com/rykoma/Graph-Editor/blob/main/LICENSE-THIRD-PARTY-CSVHELPER">LICENSE-THIRD-PARTY-CSVHELPER</Hyperlink>.</TextBlock>
-
-        <Line X1="0" Y1="0" X2="300" Y2="0" Stroke="Black" StrokeThickness="1" Margin="0,10,0,10"/>
         <TextBlock x:Name="TextBlock_MsalVersion"/>
         <TextBlock x:Name="TextBlock_WindowsAppSdkVersion"/>
 

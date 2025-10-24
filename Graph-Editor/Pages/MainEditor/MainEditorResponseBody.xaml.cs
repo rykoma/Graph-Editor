@@ -1,4 +1,3 @@
-using CommunityToolkit.WinUI.UI.Controls;
 using Graph_Editor.Data.ExecutionRecord;
 using Microsoft.UI.Input;
 using Microsoft.UI.Xaml;
@@ -128,7 +127,8 @@ namespace Graph_Editor.Pages.MainEditor
         public CodeEditorControl TextResponseViewer => CodeEditorControl_ResponseBody;
         public Image ImageResponseViewerContent => Image_ResponseBody;
         public ScrollViewer ImageResponseViewer => ScrollViewer_ImageResponseBody;
-        public DataGrid CsvResponseViewer => DataGrid_CsvResponseBody;
+        public ScrollViewer CsvResponseViewer => ScrollViewer_CsvResponseBody;
+        public StackPanel CsvResponseViewerContent => StackPanel_CsvResponseBody;
 
         private void CodeEditorControl_ResponseBody_KeyDown(object sender, KeyRoutedEventArgs e)
         {
@@ -227,7 +227,7 @@ namespace Graph_Editor.Pages.MainEditor
         {
             CodeEditorControl_ResponseBody.Visibility = Visibility.Collapsed;
             ScrollViewer_ImageResponseBody.Visibility = Visibility.Collapsed;
-            DataGrid_CsvResponseBody.Visibility = Visibility.Collapsed;
+            ScrollViewer_CsvResponseBody.Visibility = Visibility.Collapsed;
         }
 
         private async void MenuFlyoutItem_Image_ResponseBody_SaveAs_Click(object sender, RoutedEventArgs e)

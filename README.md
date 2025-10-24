@@ -36,14 +36,6 @@ If the window becomes unresponsive while you're using Graph Editor, try pressing
 
 This issue can occur when switching back and forth between the Graph Editor and another window.
 
-## Third-party libraries
-
-This application includes the following third-party library:
-
-- CsvHelper  
-  Copyright (c) Josh Close and Contributors
-  Licensed under the Apache License, Version 2.0. See [LICENSE-THIRD-PARTY-CSVHELPER](./LICENSE-THIRD-PARTY-CSVHELPER).
-
 ## Feedback
 
 If you have any feedback, please post it on the [issues](https://github.com/rykoma/Graph-Editor/issues) page.

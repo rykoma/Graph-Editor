@@ -1,6 +1,4 @@
-﻿using CsvHelper;
-using CsvHelper.Configuration;
-using Graph_Editor.Data.EditorAccessToken;
+﻿using Graph_Editor.Data.EditorAccessToken;
 using Graph_Editor.Data.ExecutionRecord;
 using Graph_Editor.Data.MainEditorResponse;
 using Graph_Editor.Data.SampleQuery;
@@ -681,26 +679,86 @@ namespace Graph_Editor.Pages.MainEditor
 
                     if (csvDataTable != null)
                     {
-                        // Add columns to the DataGrid
+                        // Calculate max width per column
+                        var maxLengths = new int[csvDataTable.Columns.Count];
+
                         for (int i = 0; i < csvDataTable.Columns.Count; i++)
                         {
-                            mainEditorResponseBody.CsvResponseViewer.Columns.Add(new CommunityToolkit.WinUI.UI.Controls.DataGridTextColumn()
-                            {
-                                Header = csvDataTable.Columns[i].ColumnName,
-                                Binding = new Binding { Path = new PropertyPath("[" + i.ToString() + "]") },
-                                CanUserReorder = false,
-                                CanUserSort = false
-                            });
+                            maxLengths[i] = csvDataTable.Columns[i].ColumnName.Length;
                         }
 
-                        // Convert DataTable rows to ObservableCollection<object> for DataGrid binding
-                        var csvDataCollection = new ObservableCollection<object>();
                         foreach (DataRow row in csvDataTable.Rows)
                         {
-                            csvDataCollection.Add(row.ItemArray);
+                            for (int i = 0; i < csvDataTable.Columns.Count && i < row.ItemArray.Length; i++)
+                            {
+                                if (row[i].ToString().Length > maxLengths[i])
+                                    maxLengths[i] = row[i].ToString().Length;
+                            }
                         }
 
-                        mainEditorResponseBody.CsvResponseViewer.ItemsSource = csvDataCollection;
+                        var columnWidths = maxLengths.Select(len => new GridLength(len * 8 + 20)).ToList();
+
+                        // Remove all existing headers and rows
+                        mainEditorResponseBody.CsvResponseViewerContent.Children.Clear();
+
+                        // Create header row
+
+                        var headerGrid = new Grid { Margin = new Thickness(2) };
+
+                        for (int i = 0; i < csvDataTable.Columns.Count; i++)
+                        {
+                            headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = columnWidths[i] });
+
+                            var border = new Border
+                            {
+                                BorderBrush = (Brush)Application.Current.Resources["SystemControlForegroundBaseLowBrush"],
+                                BorderThickness = new Thickness(0, 0, 1, 1)
+                            };
+
+                            var text = new TextBlock
+                            {
+                                Text = csvDataTable.Columns[i].ColumnName,
+                                Margin = new Thickness(4),
+                                FontWeight = Microsoft.UI.Text.FontWeights.Bold
+                            };
+
+                            border.Child = text;
+
+                            Grid.SetColumn(border, i);
+                            headerGrid.Children.Add(border);
+                        }
+
+                        mainEditorResponseBody.CsvResponseViewerContent.Children.Add(headerGrid);
+
+                        // Create data rows
+
+                        foreach (DataRow row in csvDataTable.Rows)
+                        {
+                            var rowGrid = new Grid { Margin = new Thickness(2) };
+                            for (int i = 0; i < csvDataTable.Columns.Count; i++)
+                            {
+                                rowGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = columnWidths[i] });
+
+                                var border = new Border
+                                {
+                                    BorderBrush = (Brush)Application.Current.Resources["SystemControlForegroundBaseLowBrush"],
+                                    BorderThickness = new Thickness(0, 0, 1, 1)
+                                };
+
+                                var text = new TextBlock
+                                {
+                                    Text = i < row.ItemArray.Length ? row[i].ToString() : "",
+                                    Margin = new Thickness(4)
+                                };
+
+                                border.Child = text;
+
+                                Grid.SetColumn(border, i);
+                                rowGrid.Children.Add(border);
+                            }
+                            mainEditorResponseBody.CsvResponseViewerContent.Children.Add(rowGrid);
+                        }
+
                         mainEditorResponseBody.CsvResponseViewer.Visibility = Visibility.Visible;
                         GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorContainer", "Message_RequestComplete"));
 
@@ -764,8 +822,7 @@ namespace Graph_Editor.Pages.MainEditor
             mainEditorResponseBody.ImageResponseViewerContent.Source = null;
             mainEditorResponseBody.ImageResponseViewerContent.Tag = null;
 
-            mainEditorResponseBody.CsvResponseViewer.ItemsSource = null;
-            mainEditorResponseBody.CsvResponseViewer.Columns.Clear();
+            mainEditorResponseBody.CsvResponseViewerContent.Children.Clear();
 
             // Hide status code in InfoBar
             CloseInfoBarResponseTop();
@@ -774,83 +831,107 @@ namespace Graph_Editor.Pages.MainEditor
         private static DataTable GenerateCsvDataTable(string CsvData)
         {
             // Create a MemoryStream from the CSV data
-            var stream = new MemoryStream(Encoding.UTF8.GetBytes(CsvData));
+            var stream = new MemoryStream(Encoding.UTF8.GetBytes(CsvData))
+            {
+                Position = 0 // Reset stream position to the beginning
+            };
 
-            // Use CsvHelper to read the CSV data
             using var reader = new StreamReader(stream, Encoding.UTF8);
-            using var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                Encoding = Encoding.UTF8,
-                BadDataFound = null,
-                MissingFieldFound = null,
-                HeaderValidated = null,
-                IgnoreBlankLines = true
-            });
+            var dataTable = new DataTable();
+            bool isHeader = true;
+            List<string> columnNames = new();
 
-            // Read the CSV data and convert into a dynamic list
-
-            var dynamicRecords = new List<dynamic>();
-            int errorCount = 0;
-            var enumerator = csv.GetRecords<dynamic>().GetEnumerator();
-            while (true)
+            while (!reader.EndOfStream)
             {
-                try
+                var line = reader.ReadLine();
+                if (line == null) continue;
+
+                var fields = ParseCsvLine(line);
+
+                if (isHeader)
                 {
-                    if (!enumerator.MoveNext())
-                        break;
-                    dynamicRecords.Add(enumerator.Current);
-                }
-                catch (Exception)
-                {
-                    errorCount++;
-                }
-            }
-
-            // Convert dynamic records to DataTable
-
-            DataTable dataTable = new DataTable();
-
-            // First, get the column names from the first element of dynamicRecords and create the DataTable
-            if (dynamicRecords.Count == 0)
-            {
-                // CSV file is empty
-                return null;
-            }
-            else
-            {
-                var firstRecord = dynamicRecords[0] as IDictionary<string, object>;
-                if (firstRecord == null)
-                {
-                    // CSV file is not valid
-                    return null;
+                    foreach (var columnName in fields)
+                    {
+                        dataTable.Columns.Add(columnName, typeof(string));
+                        columnNames.Add(columnName);
+                    }
+                    isHeader = false;
                 }
                 else
                 {
-                    // Create columns in the DataTable based on the keys of the first record
-                    foreach (var key in firstRecord.Keys)
+                    var row = dataTable.NewRow();
+
+                    for (int i = 0; i < columnNames.Count; i++)
                     {
-                        dataTable.Columns.Add(key);
+                        string columnName = columnNames[i];
+
+                        if (i < fields.Count)
+                        {
+                            string value = fields[i];
+                            row[columnName] = string.IsNullOrWhiteSpace(value) ? "" : value;
+                        }
+                        else
+                        {
+                            row[columnName] = "";
+                        }
                     }
+
+                    dataTable.Rows.Add(row);
                 }
-            }
-
-            // Add data from dynamicRecords to the DataTable
-            foreach (var record in dynamicRecords)
-            {
-                var row = dataTable.NewRow();
-
-                if (record is IDictionary<string, object> dictRecord)
-                {
-                    foreach (var key in dictRecord.Keys)
-                    {
-                        row[key] = dictRecord[key] ?? DBNull.Value; // Convert null to DBNull
-                    }
-                }
-
-                dataTable.Rows.Add(row);
             }
 
             return dataTable;
+        }
+
+        private static List<string> ParseCsvLine(string line)
+        {
+            var result = new List<string>();
+            bool inQuotes = false;
+            var field = new StringBuilder();
+
+            for (int i = 0; i < line.Length; i++)
+            {
+                char c = line[i];
+
+                if (inQuotes)
+                {
+                    if (c == '"')
+                    {
+                        if (i + 1 < line.Length && line[i + 1] == '"')
+                        {
+                            field.Append('"');
+                            i++; // skip next quote
+                        }
+                        else
+                        {
+                            inQuotes = false;
+                        }
+                    }
+                    else
+                    {
+                        field.Append(c);
+                    }
+                }
+                else
+                {
+                    if (c == '"')
+                    {
+                        inQuotes = true;
+                    }
+                    else if (c == ',')
+                    {
+                        result.Add(field.ToString());
+                        field.Clear();
+                    }
+                    else
+                    {
+                        field.Append(c);
+                    }
+                }
+            }
+
+            result.Add(field.ToString()); // Add the last field
+            return result;
         }
 
         private void OpenInfoBarResponseTop(InfoBarSeverity Severity, string Title, string Message, ExecutionRecord Record)
