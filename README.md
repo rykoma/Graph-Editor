@@ -36,6 +36,14 @@ If the window becomes unresponsive while you're using Graph Editor, try pressing
 
 This issue can occur when switching back and forth between the Graph Editor and another window.
 
+## Third-party libraries
+
+This application includes the following third-party library:
+
+- WinUIEdit  
+  Copyright 2025 by Breece Walker
+  See [https://github.com/BreeceW/WinUIEdit/blob/main/LICENSE](https://github.com/BreeceW/WinUIEdit/blob/main/LICENSE).
+
 ## Feedback
 
 If you have any feedback, please post it on the [issues](https://github.com/rykoma/Graph-Editor/issues) page.

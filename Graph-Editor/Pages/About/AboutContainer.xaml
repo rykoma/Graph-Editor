@@ -15,6 +15,10 @@
         <TextBlock x:Name="TextBlock_License" Text="Licensed under the MIT License."/>
 
         <Line X1="0" Y1="0" X2="300" Y2="0" Stroke="Black" StrokeThickness="1" Margin="0,10,0,10"/>
+        <TextBlock>3rd party: WinUIEdit (<Hyperlink NavigateUri="https://github.com/BreeceW/WinUIEdit" ToolTipService.ToolTip="https://github.com/BreeceW/WinUIEdit">https://github.com/BreeceW/WinUIEdit</Hyperlink>)</TextBlock>
+        <TextBlock>See <Hyperlink NavigateUri="https://github.com/BreeceW/WinUIEdit/blob/main/LICENSE" ToolTipService.ToolTip="https://github.com/BreeceW/WinUIEdit/blob/main/LICENSE">https://github.com/BreeceW/WinUIEdit/blob/main/LICENSE</Hyperlink>.</TextBlock>
+
+        <Line X1="0" Y1="0" X2="300" Y2="0" Stroke="Black" StrokeThickness="1" Margin="0,10,0,10"/>
         <TextBlock x:Name="TextBlock_MsalVersion"/>
         <TextBlock x:Name="TextBlock_WindowsAppSdkVersion"/>
 

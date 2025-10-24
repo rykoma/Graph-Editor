@@ -20,9 +20,9 @@ using Windows.System;
 using Windows.UI.Core;
 using WinUIEditor;
 
-// This application uses CsvHelper, which is licensed under the Apache License, Version 2.0.
-// CsvHelper Copyright (c) Josh Close and Contributors
-// See LICENSE-THIRD-PARTY-CSVHELPER for details.
+// This application uses WinUIEdit.
+// WinUIEdit Copyright 2025 by Breece Walker
+// See LICENSE-THIRD-PARTY-WINUIEDIT for details.
 
 namespace Graph_Editor.Pages.MainEditor
 {
