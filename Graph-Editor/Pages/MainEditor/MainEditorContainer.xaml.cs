@@ -24,10 +24,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Mime;
+using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -675,6 +677,9 @@ namespace Graph_Editor.Pages.MainEditor
                     GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorContainer", "Message_RequestComplete"));
                     break;
                 case ResponseBodyDisplayMode.Csv:
+                    string contentDisposition = responseRecord.Headers.GetValueOrDefault("Content-Disposition", string.Empty);
+                    string fileName = string.IsNullOrEmpty(contentDisposition) ? "data.csv" : contentDisposition.Split(';').Select(part => part.Trim()).FirstOrDefault(part => part.StartsWith("filename=", StringComparison.OrdinalIgnoreCase))?.Substring("filename=".Length).Trim('\"') ?? "data.csv";
+
                     DataTable csvDataTable = GenerateCsvDataTable(bodyString);
 
                     if (csvDataTable != null)
@@ -745,10 +750,13 @@ namespace Graph_Editor.Pages.MainEditor
                                     BorderThickness = new Thickness(0, 0, 1, 1)
                                 };
 
+                                string cellValue = i < row.ItemArray.Length ? row[i].ToString() : "";
+
                                 var text = new TextBlock
                                 {
-                                    Text = i < row.ItemArray.Length ? row[i].ToString() : "",
-                                    Margin = new Thickness(4)
+                                    Text = cellValue,
+                                    Margin = new Thickness(4),
+                                    ContextFlyout = CreateCellMenu(cellValue, row, csvDataTable, bodyString, fileName)
                                 };
 
                                 border.Child = text;
@@ -932,6 +940,112 @@ namespace Graph_Editor.Pages.MainEditor
 
             result.Add(field.ToString()); // Add the last field
             return result;
+        }
+
+        private static MenuFlyout CreateCellMenu(string SelectedCellValue, DataRow SelectedRow, DataTable EntireDataTable, string RowResponseBody, string FileName)
+        {
+            var menuFlyout_CsvCell = new MenuFlyout();
+            {
+                var menuFlyoutSubItem_copySubMenu = new MenuFlyoutSubItem { Text = "Copy" };
+                {
+                    var menuFlyoutItem_copyCellValue = new MenuFlyoutItem { Text = "Copy this cell" };
+                    menuFlyoutItem_copyCellValue.Click += (s, e) =>
+                    {
+                        var dataPackage = new DataPackage();
+                        dataPackage.SetText(SelectedCellValue);
+                        Clipboard.SetContent(dataPackage);
+                    };
+                    menuFlyoutSubItem_copySubMenu.Items.Add(menuFlyoutItem_copyCellValue);
+                }
+                menuFlyout_CsvCell.Items.Add(menuFlyoutSubItem_copySubMenu);
+
+                string[] columnNames = EntireDataTable.Columns.Cast<DataColumn>().Select(col => col.ColumnName).ToArray();
+                string[] rowData = SelectedRow.ItemArray.Select(item => item.ToString()).ToArray();
+
+                var menuFlyoutSubItem_copyRowSubMenu = new MenuFlyoutSubItem { Text = "Copy row" };
+                {
+                    var menuFlyoutItem_copyRowAsCsv = new MenuFlyoutItem { Text = "Copy row (CSV format)" };
+                    menuFlyoutItem_copyRowAsCsv.Click += (s, e) =>
+                    {
+                        var dataPackage = new DataPackage();
+                        dataPackage.SetText(string.Join(",", rowData));
+                        Clipboard.SetContent(dataPackage);
+                    };
+                    menuFlyoutSubItem_copyRowSubMenu.Items.Add(menuFlyoutItem_copyRowAsCsv);
+
+                    var menuFlyoutItem_copyRowAsTsv = new MenuFlyoutItem { Text = "Copy row (TSV format)" };
+                    menuFlyoutItem_copyRowAsTsv.Click += (s, e) =>
+                    {
+                        var dataPackage = new DataPackage();
+                        dataPackage.SetText(string.Join("\t", rowData));
+                        Clipboard.SetContent(dataPackage);
+                    };
+                    menuFlyoutSubItem_copyRowSubMenu.Items.Add(menuFlyoutItem_copyRowAsTsv);
+                }
+                menuFlyoutSubItem_copySubMenu.Items.Add(menuFlyoutSubItem_copyRowSubMenu);
+
+                var menuFlyoutSubItem_copyHeaderAndRowSubMenu = new MenuFlyoutSubItem { Text = "Copy header and row" };
+
+                {
+                    var menuFlyoutItem_copyHeaderAndRowAsCsv = new MenuFlyoutItem { Text = "Copy header and row (CSV format)" };
+                    menuFlyoutItem_copyHeaderAndRowAsCsv.Click += (s, e) =>
+                    {
+                        var dataPackage = new DataPackage();
+                        dataPackage.SetText(string.Join(",", columnNames) + System.Environment.NewLine + string.Join(",", rowData));
+                        Clipboard.SetContent(dataPackage);
+                    };
+                    menuFlyoutSubItem_copyHeaderAndRowSubMenu.Items.Add(menuFlyoutItem_copyHeaderAndRowAsCsv);
+
+                    var menuFlyoutItem_copyHeaderAndRowAsTsv = new MenuFlyoutItem { Text = "Copy header and row (TSV format)" };
+                    menuFlyoutItem_copyHeaderAndRowAsTsv.Click += (s, e) =>
+                    {
+                        var dataPackage = new DataPackage();
+                        dataPackage.SetText(string.Join("\t", columnNames) + System.Environment.NewLine + string.Join("\t", rowData));
+                        Clipboard.SetContent(dataPackage);
+                    };
+                    menuFlyoutSubItem_copyHeaderAndRowSubMenu.Items.Add(menuFlyoutItem_copyHeaderAndRowAsTsv);
+                }
+
+                var menuFlyoutSubItem_copyEntireTableSubMenu = new MenuFlyoutSubItem { Text = "Copy entire table" };
+                {
+                    var menuFlyoutItem_copyEntireTableAsCsv = new MenuFlyoutItem { Text = "Copy entire table (CSV format)" };
+                    menuFlyoutItem_copyEntireTableAsCsv.Click += (s, e) =>
+                    {
+                        var dataPackage = new DataPackage();
+                        dataPackage.SetText(RowResponseBody);
+                        Clipboard.SetContent(dataPackage);
+                    };
+                    menuFlyoutSubItem_copyEntireTableSubMenu.Items.Add(menuFlyoutItem_copyEntireTableAsCsv);
+
+                    var menuFlyoutItem_copyEntireTableAsTsv = new MenuFlyoutItem { Text = "Copy entire table (TSV format)" };
+                    menuFlyoutItem_copyEntireTableAsTsv.Click += (s, e) =>
+                    {
+                        var stringBuilder = new StringBuilder();
+                        stringBuilder.AppendLine(string.Join("\t", columnNames));
+                        foreach (DataRow row in EntireDataTable.Rows)
+                        {
+                            var rowValues = row.ItemArray.Select(item => item.ToString());
+                            stringBuilder.AppendLine(string.Join("\t", rowValues));
+                        }
+                        var dataPackage = new DataPackage();
+                        dataPackage.SetText(stringBuilder.ToString());
+                        Clipboard.SetContent(dataPackage);
+                    };
+                    menuFlyoutSubItem_copyEntireTableSubMenu.Items.Add(menuFlyoutItem_copyEntireTableAsTsv);
+                }
+                menuFlyoutSubItem_copySubMenu.Items.Add(menuFlyoutSubItem_copyEntireTableSubMenu);
+            }
+
+            {
+                var menuFlyoutItem_saveAsCsv = new MenuFlyoutItem { Text = "Save table as CSV file" };
+                menuFlyoutItem_saveAsCsv.Click += async (s, e) =>
+                {
+                    await MainEditorResponseBody.SaveCsvFileAsync(RowResponseBody, FileName);
+                };
+                menuFlyout_CsvCell.Items.Add(menuFlyoutItem_saveAsCsv);
+            }
+
+            return menuFlyout_CsvCell;
         }
 
         private void OpenInfoBarResponseTop(InfoBarSeverity Severity, string Title, string Message, ExecutionRecord Record)
