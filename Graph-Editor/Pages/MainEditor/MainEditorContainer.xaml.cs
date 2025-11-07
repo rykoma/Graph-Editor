@@ -55,6 +55,8 @@ namespace Graph_Editor.Pages.MainEditor
 
         private bool toggleSwithch_SendBinary_ToggledByCode = false;
 
+        private List<string> preNormalizedSampleUrls;
+
         public MainEditorContainer()
         {
             this.InitializeComponent();
@@ -95,7 +97,8 @@ namespace Graph_Editor.Pages.MainEditor
                 string linkText = GraphEditorApplication.GetResourceString("TipsString", tipsResourceName + "_LinkText");
                 string linkUrl = GraphEditorApplication.GetResourceString("TipsString", tipsResourceName + "_LinkUrl");
 
-                if (!string.IsNullOrEmpty(tipsString)) {
+                if (!string.IsNullOrEmpty(tipsString))
+                {
                     CloseInfoBarTop();
 
                     if (!string.IsNullOrEmpty(linkText) && !string.IsNullOrEmpty(linkUrl))
@@ -107,12 +110,14 @@ namespace Graph_Editor.Pages.MainEditor
                         OpenInfoBarTop(InfoBarSeverity.Informational, "Tips", tipsString);
                     }
                 }
-                
+
             }
+
+            preNormalizedSampleUrls = SampleQueryLoader.SampleUrls(SampleQueryLoader.LoadBuiltInSampleQueryData());
 
             GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Resources", "Message_Ready"));
 
-            TextBox_RequestUrl.Focus(FocusState.Pointer);
+            AutoSuggestBox_RequestUrl.Focus(FocusState.Pointer);
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -297,49 +302,6 @@ namespace Graph_Editor.Pages.MainEditor
             }
         }
 
-        private void TextBox_RequestUrl_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            // If the text starts with "GET ", "POST ", "PUT ", "PATCH ", or "DELETE ", set the ComboBox_RequestMethod.SelectedIndex to the corresponding index.
-            // And remove the method from the request URL
-
-            string requestUrl = TextBox_RequestUrl.Text;
-            if (!string.IsNullOrEmpty(requestUrl)) {
-                if (requestUrl.StartsWith("GET ", StringComparison.OrdinalIgnoreCase))
-                {
-                    ComboBox_RequestMethod.SelectedIndex = 0;
-                    TextBox_RequestUrl.Text = requestUrl.Substring(4);
-                }
-                else if (requestUrl.StartsWith("POST ", StringComparison.OrdinalIgnoreCase))
-                {
-                    ComboBox_RequestMethod.SelectedIndex = 1;
-                    TextBox_RequestUrl.Text = requestUrl.Substring(5);
-                }
-                else if (requestUrl.StartsWith("PUT ", StringComparison.OrdinalIgnoreCase))
-                {
-                    ComboBox_RequestMethod.SelectedIndex = 2;
-                    TextBox_RequestUrl.Text = requestUrl.Substring(4);
-                }
-                else if (requestUrl.StartsWith("PATCH ", StringComparison.OrdinalIgnoreCase))
-                {
-                    ComboBox_RequestMethod.SelectedIndex = 3;
-                    TextBox_RequestUrl.Text = requestUrl.Substring(6);
-                }
-                else if (requestUrl.StartsWith("DELETE ", StringComparison.OrdinalIgnoreCase))
-                {
-                    ComboBox_RequestMethod.SelectedIndex = 4;
-                    TextBox_RequestUrl.Text = requestUrl.Substring(7);
-                }
-            }
-        }
-
-        private void TextBox_RequestUrl_KeyDown(object sender, KeyRoutedEventArgs e)
-        {
-            if (e.Key == VirtualKey.Enter)
-            {
-                ExecureRequest();
-            }
-        }
-
         private void MenuFlyoutItem_InfoBar_ResponseTop_CopyUrl_Click(object sender, RoutedEventArgs e)
         {
             // Copy the URL to the clipboard
@@ -447,7 +409,7 @@ namespace Graph_Editor.Pages.MainEditor
             DateTime requestStartTime = DateTime.UtcNow;
 
             // Get request URL
-            string requestUrl = TextBox_RequestUrl.Text;
+            string requestUrl = AutoSuggestBox_RequestUrl.Text;
 
             // Get request headers
 
@@ -625,7 +587,7 @@ namespace Graph_Editor.Pages.MainEditor
         private async Task ShowResponseAsync(ExecutionRecord executionRecord)
         {
             ResponseRecord responseRecord = executionRecord.Response;
-            
+
             string header = responseRecord.Headers.Aggregate("", (current, header) => current + header.Key + ": " + header.Value + "\n");
             string bodyString = responseRecord.BodyString;
             ResponseBodyDisplayMode bodyDisplayMode = responseRecord.DisplayMode;
@@ -1076,7 +1038,7 @@ namespace Graph_Editor.Pages.MainEditor
         private void ShowRequest(string Method, string Url, Dictionary<string, string> Headers, string Body, string FileName, bool IsBinaryBody)
         {
             ComboBox_RequestMethod.SelectedValue = Method;
-            TextBox_RequestUrl.Text = Url;
+            AutoSuggestBox_RequestUrl.Text = Url;
 
             // Set request headers
             pageCache.TryGetValue("MainEditorRequestHeader", out Page requestHeaderPage);
@@ -1462,6 +1424,236 @@ namespace Graph_Editor.Pages.MainEditor
                 return authResult != null && authResult.Account != null
                 ? authResult.Account.Username.Split("@")[1]
                 : "contoso.com";
+            }
+        }
+
+        // Suggestion item for AutoSuggestBox
+        public class SuggestionItem
+        {
+            public string DisplayText { get; set; }
+            public string InsertText { get; set; }
+            public bool IsHistory { get; set; }
+            public override string ToString() => DisplayText;
+        }
+
+        // Normalize URL parts for comparison
+        // - /me → users/{id}
+        // - /users/<Actual values and placeholders> → users/{id}
+        private string[] NormalizeParts(string[] Parts, bool NormalizeMePart = true)
+        {
+            var wellKnownArrayPartNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                "calendars",
+                "events",
+                "groups",
+                "messages",
+                "mailFolders",
+                "sites",
+                "users"
+            };
+
+            var normalizedParts = new List<string>();
+            for (int i = 0; i < Parts.Length; i++)
+            {
+                var seg = Parts[i];
+
+                if (NormalizeMePart == true && seg.Equals("me", StringComparison.OrdinalIgnoreCase))
+                {
+                    normalizedParts.Add("users");
+                    normalizedParts.Add("{id}");
+                    continue;
+                }
+
+                if (wellKnownArrayPartNames.Contains(seg))
+                {
+                    normalizedParts.Add(seg);
+                    if (i + 1 < Parts.Length)
+                    {
+                        normalizedParts.Add("{id}");
+                        i++; // Skip actual values and any placeholders
+                    }
+                    continue;
+                }
+
+                normalizedParts.Add(seg);
+            }
+            return normalizedParts.ToArray();
+        }
+
+        private List<SuggestionItem> GetNextCandidates(string UserInputUrl)
+        {
+            if (string.IsNullOrWhiteSpace(UserInputUrl) || preNormalizedSampleUrls.Count == 0)
+            {
+                return new();
+            }
+
+            // Convert "/me/" for comparison
+            UserInputUrl = UserInputUrl.Replace("/me/", "/users/user01@contoso.com/", StringComparison.OrdinalIgnoreCase);
+
+            var userInputUrlParts = UserInputUrl.Split('/', StringSplitOptions.RemoveEmptyEntries);
+
+            // Split the URL into parts
+            // The last part is treated as input-in-progress
+            var userInputUrlLastPart = UserInputUrl.EndsWith('/') ? "" : userInputUrlParts.Last();
+            var userInputUrlPrefixParts = UserInputUrl.EndsWith('/') ? userInputUrlParts : userInputUrlParts.Take(userInputUrlParts.Length - 1).ToArray();
+
+            var normalizedUserInputUrlPrefixParts = NormalizeParts(userInputUrlPrefixParts);
+            var candidates = new List<SuggestionItem>();
+
+            foreach (var sampleUrl in preNormalizedSampleUrls)
+            {
+                var sampleUrlParts = sampleUrl.Split('/', StringSplitOptions.RemoveEmptyEntries);
+                var normalizedSampleUrlParts = NormalizeParts(sampleUrlParts, NormalizeMePart: false);
+
+                if (normalizedUserInputUrlPrefixParts.Length >= normalizedSampleUrlParts.Length)
+                {
+                    // Skip if the sample URL is shorter than or equal to the user input prefix
+                    continue;
+                }
+
+                // Compare normalized prefix parts
+                bool match = true;
+                for (int i = 0; i < normalizedUserInputUrlPrefixParts.Length; i++)
+                {
+                    if (!normalizedUserInputUrlPrefixParts[i].Equals(normalizedSampleUrlParts[i], StringComparison.OrdinalIgnoreCase))
+                    {
+                        match = false;
+                        break;
+                    }
+                }
+
+                if (match)
+                {
+                    // Get candidates from the matched sample URL
+                    // Here we don't use the normalized parts
+                    var nextPart = sampleUrlParts[normalizedUserInputUrlPrefixParts.Length];
+
+                    if (!string.IsNullOrEmpty(userInputUrlLastPart) && !nextPart.StartsWith(userInputUrlLastPart, StringComparison.OrdinalIgnoreCase))
+                    {
+                        // Skip if the next part does not match the input-in-progress
+                        continue;
+                    }
+
+                    // Resolve placeholders in the next part and add to candidates
+                    var example = ResolveSampleQueryPlaceholder(nextPart);
+                    candidates.Add(new SuggestionItem
+                    {
+                        DisplayText = example,
+                        InsertText = example
+                    });
+                }
+            }
+
+            return candidates
+                .GroupBy(c => c.DisplayText, StringComparer.OrdinalIgnoreCase)
+                .Select(g => g.First())
+                .OrderBy(c => c.DisplayText, StringComparer.OrdinalIgnoreCase)
+                .ToList();
+        }
+
+        private void AutoSuggestBox_RequestUrl_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                var candidates = GetNextCandidates(sender.Text);
+
+                // Add history matches as candidates (deduplicated, max 3, reversed)
+                var historyMatches = ExecutionRecordManager.ExecutionRecordList
+                    .Where(h => h.Request.Url.StartsWith(sender.Text, StringComparison.OrdinalIgnoreCase))
+                    .GroupBy(h => h.Request.Url, StringComparer.OrdinalIgnoreCase)
+                    .Select(g => g.First())
+                    .Take(3)
+                    .Reverse();
+
+                foreach ( var historyMatch in historyMatches ) {
+                    if (historyMatch != null)
+                    {
+                        // Get the part before the last slash in sender.Text
+                        var lastSlashIndex = sender.Text.LastIndexOf("/");
+                        var historyCandidateInsertText = historyMatch.Request.Url.Substring(lastSlashIndex + 1);
+                        var historyCandidateDisplayText = historyCandidateInsertText;
+
+                        candidates.Insert(0, new SuggestionItem { DisplayText = historyCandidateDisplayText, InsertText = historyCandidateInsertText, IsHistory = true });
+                    }
+                }
+
+                sender.ItemsSource = candidates.ToList();
+            }
+        }
+
+        private void AutoSuggestBox_RequestUrl_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            if (args.SelectedItem is SuggestionItem item)
+            {
+                // User selected a suggestion using mouse or touch
+                ApplyChosenSuggestionToRequestUrl(item.InsertText);
+            }
+        }
+
+        private void AutoSuggestBox_RequestUrl_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            if (args.ChosenSuggestion is SuggestionItem item)
+            {
+                // User selected a suggestion using Enter key
+                ApplyChosenSuggestionToRequestUrl(item.InsertText);
+            }
+            else
+            {
+                ExecureRequest();
+            }
+        }
+
+        private void AutoSuggestBox_RequestUrl_PreviewKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            // Check if the key is a combination of Ctrl + V
+            var ctrlDown = (Microsoft.UI.Input.InputKeyboardSource.GetKeyStateForCurrentThread(VirtualKey.Control) & CoreVirtualKeyStates.Down) == CoreVirtualKeyStates.Down;
+
+            if (ctrlDown && e.Key == VirtualKey.V)
+            {
+                bool parseResult = ExecutionRecordManager.TryParseClipboardTextToRequestRecord(out RequestRecord clipboardRequest);
+
+                if (parseResult)
+                {
+                    //LoadExecutionRecord(new ExecutionRecord { Request = clipboardRequest }, OnlyRequestToRerun: true);
+                    ShowRequest(clipboardRequest);
+
+                    // Successfully parsed clipboard text into RequestRecord
+                    e.Handled = true; // Mark the event as handled
+                }
+                else
+                {
+                    // Failed to parse clipboard text
+                    // Do nothing and allow the default paste behavior
+                }
+            }
+        }
+
+        private void ApplyChosenSuggestionToRequestUrl(string ChosenSuggestion)
+        {
+            if (string.IsNullOrEmpty(ChosenSuggestion))
+            {
+                return;
+            }
+
+            if (AutoSuggestBox_RequestUrl.Text == ChosenSuggestion)
+            {
+                return;
+            }
+
+            if (AutoSuggestBox_RequestUrl.Text.EndsWith(ChosenSuggestion, StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
+            // Replace the part after the last slash with the chosen suggestion
+            var slash = AutoSuggestBox_RequestUrl.Text.LastIndexOf('/');
+            if (slash >= 0)
+            {
+                AutoSuggestBox_RequestUrl.Text = AutoSuggestBox_RequestUrl.Text.Substring(0, slash + 1) + ChosenSuggestion;
+            }
+            else
+            {
+                AutoSuggestBox_RequestUrl.Text = ChosenSuggestion;
             }
         }
     }

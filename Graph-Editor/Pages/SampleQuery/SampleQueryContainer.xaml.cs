@@ -1,5 +1,6 @@
 using Graph_Editor.Data.ExecutionRecord;
 using Graph_Editor.Data.SampleQuery;
+using Graph_Editor.Logic;
 using Graph_Editor.Pages.MainEditor;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -52,14 +53,14 @@ namespace Graph_Editor.Pages.SampleQuery
 
             sampleQueryDataSource = new ObservableCollection<SampleQueryItem>();
 
-            var builtInSampleQuery = LoadBuiltInSampleQueryData();
+            var builtInSampleQuery = SampleQueryLoader.LoadBuiltInSampleQueryData();
             if (builtInSampleQuery != null)
             {
                 sampleQueryDataSource.Add(builtInSampleQuery);
             }
 
 #if DEBUG
-            sampleQueryDataSource.Add(LoadCustomSampleQueryData());
+            sampleQueryDataSource.Add(SampleQueryLoader.LoadCustomSampleQueryData());
 #endif
 
             if (sampleQueryDataSource.Count == 0)
@@ -167,43 +168,7 @@ namespace Graph_Editor.Pages.SampleQuery
             return result;
         }
         
-        internal static SampleQueryItem LoadBuiltInSampleQueryData()
-        {
-            // Load from resource JSON file
 
-            try
-            {
-                string json = string.Empty;
-                var assembly = Assembly.GetExecutingAssembly();
-                var resourceName = "Graph_Editor.Data.SampleQuery.BuiltInSampleQuery.json";
-
-                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    json = reader.ReadToEnd();
-                }
-
-                var records = JsonSerializer.Deserialize(json, typeof(SampleQueryItem), SourceGenerationContext.Default) as SampleQueryItem;
-                return records;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        internal static SampleQueryItem LoadCustomSampleQueryData()
-        {
-            // Load from JSON file
-            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string defaultRequestAndResponseLoggingFolderPath = Path.Join(documentsPath, "Graph Editor");
-            string path = Path.Join(defaultRequestAndResponseLoggingFolderPath, "CustomSampleQuery.json");
-
-            var json = File.ReadAllText(path);
-
-            var records = JsonSerializer.Deserialize(json, typeof(SampleQueryItem), SourceGenerationContext.Default) as SampleQueryItem;
-            return records;
-        }
 
         private void TreeViewItem_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
@@ -1064,74 +1029,28 @@ namespace Graph_Editor.Pages.SampleQuery
         }
 
         private void TextBox_Url_Paste(object sender, TextControlPasteEventArgs e)
-        {
-            string text = GetClipboardText();
+        {   
+            bool parseResult = ExecutionRecordManager.TryParseClipboardTextToRequestRecord(out RequestRecord clipboardRequest);
 
-            var lines = text.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-
-            if (lines.Length > 0)
+            if (parseResult)
             {
-                // Parse method and URL
-                string[] firstLineParts = lines[0].Split(' ');
-                var method = firstLineParts[0];
-                var url = string.Join(' ', firstLineParts.Skip(1));
-
-                if (!url.StartsWith("https://graph.microsoft.com/") && url.StartsWith("/"))
-                {
-                    url = "https://graph.microsoft.com/v1.0" + url;
-                }
-
-                url = url.Replace("/users/{id}", "/users/${UserObjectId}").Replace("/users/{user-id}", "/users/${UserObjectId}");
-
-                // Check the format of the first line
-                if ((method == "GET" || method == "POST" || method == "PUT" || method == "PATCH" || method == "DELETE") && url.StartsWith("https://"))
-                {
-                    // Valid format
-                    e.Handled = true; // Prevent the default paste action
-                }
-                else
-                {
-                    // Invalid format
-                    return;
-                }
-
-                // Parse headers
-                var headers = new Dictionary<string, string>();
-                int i = 1;
-                for (; i < lines.Length; i++)
-                {
-                    if (string.IsNullOrWhiteSpace(lines[i]))
-                    {
-                        break;
-                    }
-                    var headerParts = lines[i].Split(new[] { ':' }, 2);
-                    if (headerParts.Length == 2)
-                    {
-                        string headerName = headerParts[0].Trim();
-                        string headerValue = headerParts[1].Trim();
-
-                        if (headerName.ToLower() == "content-type" && headerValue.ToLower() == "application/json")
-                        {
-                            // Skip the Content-Type header
-                            continue;
-                        }
-
-                        headers[headerName] = headerValue;
-                    }
-                }
-
-                // Parse body
-                var body = string.Join("\n", lines.Skip(i + 1));
-
+                // Successfully parsed clipboard text into RequestRecord
                 // Set them to the corresponding UI elements
-                ComboBox_Method.SelectedValue = method;
-                TextBox_Url.Text = url;
+                ComboBox_Method.SelectedValue = clipboardRequest.Method;
+                TextBox_Url.Text = clipboardRequest.Url.Replace("/users/{id}", "/users/${UserObjectId}").Replace("/users/{user-id}", "/users/${UserObjectId}");
                 sampleHeaders.Clear();
-                foreach (var header in headers)
+                foreach (var header in clipboardRequest.Headers)
                 {
                     sampleHeaders.Add(new HeaderItem { HeaderName = header.Key, Value = header.Value, IsReadOnly = false });
                 }
-                CodeEditorControl_RequestBodyEditor.Editor.SetText(body);
+                CodeEditorControl_RequestBodyEditor.Editor.SetText(clipboardRequest.Body);
+
+                e.Handled = true; // Mark the event as handled
+            }
+            else
+            {
+                // Failed to parse clipboard text
+                // Do nothing and allow the default paste behavior
             }
         }
 
