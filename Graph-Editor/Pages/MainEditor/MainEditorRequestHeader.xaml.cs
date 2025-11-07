@@ -122,13 +122,6 @@ namespace Graph_Editor.Pages.MainEditor
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-            if (propertyName.Equals("IsReadOnly"))
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsEnabled)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(EditButtonText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ToolTip)));
-            }
         }
 
         public string HeaderName { get; set; }
@@ -143,50 +136,6 @@ namespace Graph_Editor.Pages.MainEditor
                 {
                     isReadOnly = value;
                     OnPropertyChanged(nameof(IsReadOnly));
-                }
-            }
-        }
-
-        public bool IsEnabled
-        {
-            get
-            {
-                return !isReadOnly;
-            }
-        }
-
-        public FontIcon EditButtonText
-        {
-            get
-            {
-                if (IsReadOnly)
-                {
-                    return new FontIcon()
-                    {
-                        Glyph = "\uE70F"
-                    };
-                }
-                else
-                {
-                    return new FontIcon()
-                    {
-                        Glyph = "\uE74E"
-                    };
-                }
-            }
-        }
-
-        public string ToolTip
-        {
-            get
-            {
-                if (IsReadOnly)
-                {
-                    return GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorRequestHeader", "Message_EditHeaderButtonToolTip");
-                }
-                else
-                {
-                    return GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorRequestHeader", "Message_SaveHeaderButtonToolTip");
                 }
             }
         }

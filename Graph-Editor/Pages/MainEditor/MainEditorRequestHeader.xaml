@@ -6,7 +6,14 @@
     xmlns:local="using:Graph_Editor.Pages.MainEditor"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local1="using:Graph_Editor.Converters"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <local1:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+        <local1:BoolToHeaderEditButtonFontIconConverter x:Key="BoolToHeaderEditButtonFontIconConverter" />
+        <local1:BoolToHeaderEditButtonToolTipConverter x:Key="BoolToHeaderEditButtonToolTipConverter" />
+    </Page.Resources>
 
     <Grid Margin="8,8,0,0">
         <StackPanel>
@@ -22,9 +29,9 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <TextBox x:Uid="/Pages.MainEditor.MainEditorRequestHeader/TextBox_HeaderName" Grid.Column="0" Text="{Binding HeaderName, Mode=TwoWay}" IsReadOnly="{Binding IsReadOnly, Mode=TwoWay}" IsEnabled="{Binding IsEnabled, Mode=TwoWay}" Margin="5" IsSpellCheckEnabled="False" />
-                            <TextBox x:Uid="/Pages.MainEditor.MainEditorRequestHeader/TextBox_HeaderValue" Grid.Column="1" Text="{Binding Value, Mode=TwoWay}" IsReadOnly="{Binding IsReadOnly, Mode=TwoWay}" IsEnabled="{Binding IsEnabled, Mode=TwoWay}" Margin="5" IsSpellCheckEnabled="False" />
-                            <Button x:Name="Button_EditHeader" Grid.Column="2" Content="{Binding EditButtonText, Mode=TwoWay}" ToolTipService.ToolTip="{Binding ToolTip, Mode=TwoWay}" Margin="5" Click="Button_EditHeader_Click" />
+                            <TextBox x:Uid="/Pages.MainEditor.MainEditorRequestHeader/TextBox_HeaderName" Grid.Column="0" Text="{Binding HeaderName, Mode=TwoWay}" IsReadOnly="{Binding IsReadOnly, Mode=TwoWay}" IsEnabled="{Binding IsReadOnly, Converter={StaticResource InverseBooleanConverter}, Mode=TwoWay}" Margin="5" IsSpellCheckEnabled="False" />
+                            <TextBox x:Uid="/Pages.MainEditor.MainEditorRequestHeader/TextBox_HeaderValue" Grid.Column="1" Text="{Binding Value, Mode=TwoWay}" IsReadOnly="{Binding IsReadOnly, Mode=TwoWay}" IsEnabled="{Binding IsReadOnly, Converter={StaticResource InverseBooleanConverter}, Mode=TwoWay}" Margin="5" IsSpellCheckEnabled="False" />
+                            <Button x:Name="Button_EditHeader" Grid.Column="2" Content="{Binding IsReadOnly, Converter={StaticResource BoolToHeaderEditButtonFontIconConverter}, Mode=TwoWay}" ToolTipService.ToolTip="{Binding IsReadOnly, Converter={StaticResource BoolToHeaderEditButtonToolTipConverter}, Mode=TwoWay}" Margin="5" Click="Button_EditHeader_Click" />
                             <Button x:Name="Button_DeleteHeader" x:Uid="/Pages.MainEditor.MainEditorRequestHeader/Button_DeleteHeader" Grid.Column="3" Margin="5" Click="Button_DeleteHeader_Click" >
                                 <Button.Content>
                                     <FontIcon Glyph="&#xE74D;" />
