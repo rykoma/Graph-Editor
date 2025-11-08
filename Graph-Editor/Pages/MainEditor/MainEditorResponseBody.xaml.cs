@@ -1,3 +1,4 @@
+using Graph_Editor.Controls;
 using Graph_Editor.Data.ExecutionRecord;
 using Microsoft.UI.Input;
 using Microsoft.UI.Xaml;
@@ -46,7 +47,7 @@ namespace Graph_Editor.Pages.MainEditor
         public Image ImageResponseViewerContent => Image_ResponseBody;
         public ScrollViewer ImageResponseViewer => ScrollViewer_ImageResponseBody;
         public ScrollViewer CsvResponseViewer => ScrollViewer_CsvResponseBody;
-        public StackPanel CsvResponseViewerContent => StackPanel_CsvResponseBody;
+        public CsvViewer CsvResponseViewerContent => CsvViewer_CsvResponseBody;
 
         private void CodeEditorControl_ResponseBody_KeyDown(object sender, KeyRoutedEventArgs e)
         {
@@ -241,54 +242,6 @@ namespace Graph_Editor.Pages.MainEditor
             }
             
             GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorResponseBody", "Message_ImageSavedSuccessfully"));
-        }
-
-        public static async Task SaveCsvFileAsync(string CsvContent, string FileName)
-        {
-            // Create a file picker
-            FileSavePicker savePicker = new FileSavePicker();
-
-            // Retrieve the window handle (HWND) of the main window.
-            var window = (Application.Current as App)?.MainWindowAccessor;
-            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
-
-            // Initialize the file picker with the window handle (HWND).
-            WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hWnd);
-
-            // Set options
-            savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
-
-            // Set the file type choices
-            savePicker.FileTypeChoices.Add("CSV File", new List<string> { ".csv" });
-            savePicker.SuggestedFileName = FileName;
-
-            var saveFile = await savePicker.PickSaveFileAsync();
-            if (null == saveFile)
-            {
-                return; // User cancelled the save operation
-            }
-
-            try
-            {
-                await Windows.Storage.FileIO.WriteTextAsync(saveFile, CsvContent);
-            }
-            catch (Exception ex)
-            {
-                // Handle any exceptions that may occur during the save operation
-                // Show ContentDialog as an error dialog
-                var dialog = new ContentDialog
-                {
-                    Title = "Error",
-                    Content = $"Failed to save the CSV file: {ex.Message}",
-                    CloseButtonText = "Ok"
-                };
-
-                await dialog.ShowAsync();
-
-                return;
-            }
-
-            //// GraphEditorApplication.UpdateStatusBarMainStatus(GraphEditorApplication.GetResourceString("Pages.MainEditor.MainEditorResponseBody", "Message_CsvSavedSuccessfully"));
         }
     }
 }

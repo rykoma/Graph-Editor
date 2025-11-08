@@ -117,13 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MenuFlyoutItem_Image_ResponseBody_SaveAs.Text" xml:space="preserve">
-    <value>名前を付けて保存</value>
+  <data name="menuFlyoutItem_copyCellValue_Text" xml:space="preserve">
+    <value>Copy this cell</value>
   </data>
-  <data name="Message_ImageSavedSuccessfully" xml:space="preserve">
-    <value>画像ファイルを保存しました。</value>
+  <data name="menuFlyoutItem_copyEntireTableAsCsv_Text" xml:space="preserve">
+    <value>Copy entire table (CSV format)</value>
   </data>
-  <data name="Message_NoImageToSave" xml:space="preserve">
-    <value>画像を保存できません。情報が不足しています。</value>
+  <data name="menuFlyoutItem_copyEntireTableAsTsv_Text" xml:space="preserve">
+    <value>Copy entire table (TSV format)</value>
+  </data>
+  <data name="menuFlyoutItem_copyHeaderAndRowAsCsv_Text" xml:space="preserve">
+    <value>Copy header and this row (CSV format)</value>
+  </data>
+  <data name="menuFlyoutItem_copyHeaderAndRowAsTsv_Text" xml:space="preserve">
+    <value>Copy header and this row (TSV format)</value>
+  </data>
+  <data name="menuFlyoutItem_copyRowAsCsv_Text" xml:space="preserve">
+    <value>Copy this row (CSV format)</value>
+  </data>
+  <data name="menuFlyoutItem_copyRowAsTsv_Text" xml:space="preserve">
+    <value>Copy this row (TSV format)</value>
+  </data>
+  <data name="menuFlyoutItem_saveAsCsv_Text" xml:space="preserve">
+    <value>Save table as CSV file</value>
+  </data>
+  <data name="menuFlyoutSubItem_copyEntireTableSubMenu_Text" xml:space="preserve">
+    <value>Copy entire table</value>
+  </data>
+  <data name="menuFlyoutSubItem_copyHeaderAndRowSubMenu_Text" xml:space="preserve">
+    <value>Copy header and this row</value>
+  </data>
+  <data name="menuFlyoutSubItem_copyRowSubMenu_Text" xml:space="preserve">
+    <value>Copy row</value>
+  </data>
+  <data name="menuFlyoutSubItem_copySubMenu_Text" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="Message_CsvSavedSuccessfully" xml:space="preserve">
+    <value>Csv file saved.</value>
   </data>
 </root>

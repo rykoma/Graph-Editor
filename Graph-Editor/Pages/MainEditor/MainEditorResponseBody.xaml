@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:editor="using:WinUIEditor"
+    xmlns:controls="using:Graph_Editor.Controls"
     mc:Ignorable="d"
     Loaded="Page_Loaded">
 
@@ -28,7 +29,7 @@
         </ScrollViewer>
 
         <ScrollViewer x:Name="ScrollViewer_CsvResponseBody" Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
-            <StackPanel x:Name="StackPanel_CsvResponseBody" />
+            <controls:CsvViewer x:Name="CsvViewer_CsvResponseBody" />
         </ScrollViewer>
 
         <!-- TextBox and Button for Search -->

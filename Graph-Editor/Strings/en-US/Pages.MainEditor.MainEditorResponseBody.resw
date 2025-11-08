@@ -121,7 +121,7 @@
     <value>Save As</value>
   </data>
   <data name="Message_ImageSavedSuccessfully" xml:space="preserve">
-    <value>Image saved.</value>
+    <value>Image file saved.</value>
   </data>
   <data name="Message_NoImageToSave" xml:space="preserve">
     <value>Cannot save image: insufficient information.</value>

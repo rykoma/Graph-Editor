@@ -117,13 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MenuFlyoutItem_Image_ResponseBody_SaveAs.Text" xml:space="preserve">
-    <value>名前を付けて保存</value>
+  <data name="menuFlyoutItem_copyCellValue_Text" xml:space="preserve">
+    <value>このセルをコピー</value>
   </data>
-  <data name="Message_ImageSavedSuccessfully" xml:space="preserve">
-    <value>画像ファイルを保存しました。</value>
+  <data name="menuFlyoutItem_copyEntireTableAsCsv_Text" xml:space="preserve">
+    <value>表全体をコピー (CSV 形式)</value>
   </data>
-  <data name="Message_NoImageToSave" xml:space="preserve">
-    <value>画像を保存できません。情報が不足しています。</value>
+  <data name="menuFlyoutItem_copyEntireTableAsTsv_Text" xml:space="preserve">
+    <value>表全体をコピー (TSV 形式)</value>
+  </data>
+  <data name="menuFlyoutItem_copyHeaderAndRowAsCsv_Text" xml:space="preserve">
+    <value>ヘッダーとこの行をコピー (CSV 形式)</value>
+  </data>
+  <data name="menuFlyoutItem_copyHeaderAndRowAsTsv_Text" xml:space="preserve">
+    <value>ヘッダーとこの行をコピー (TSV 形式)</value>
+  </data>
+  <data name="menuFlyoutItem_copyRowAsCsv_Text" xml:space="preserve">
+    <value>この行をコピー (CSV 形式)</value>
+  </data>
+  <data name="menuFlyoutItem_copyRowAsTsv_Text" xml:space="preserve">
+    <value>この行をコピー (TSV 形式)</value>
+  </data>
+  <data name="menuFlyoutItem_saveAsCsv_Text" xml:space="preserve">
+    <value>表を CSV ファイルとして保存</value>
+  </data>
+  <data name="menuFlyoutSubItem_copyEntireTableSubMenu_Text" xml:space="preserve">
+    <value>表全体をコピー</value>
+  </data>
+  <data name="menuFlyoutSubItem_copyHeaderAndRowSubMenu_Text" xml:space="preserve">
+    <value>ヘッダーとこの行をコピー</value>
+  </data>
+  <data name="menuFlyoutSubItem_copyRowSubMenu_Text" xml:space="preserve">
+    <value>行をコピー</value>
+  </data>
+  <data name="menuFlyoutSubItem_copySubMenu_Text" xml:space="preserve">
+    <value>コピー</value>
+  </data>
+  <data name="Message_CsvSavedSuccessfully" xml:space="preserve">
+    <value>CSV ファイルを保存しました。</value>
   </data>
 </root>
