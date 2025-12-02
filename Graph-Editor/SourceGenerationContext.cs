@@ -12,7 +12,10 @@ using System.Threading.Tasks;
 
 namespace Graph_Editor
 {
-    [JsonSourceGenerationOptions(WriteIndented = true)]
+    [JsonSourceGenerationOptions(
+        WriteIndented = true,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+        )]
     [JsonSerializable(typeof(List<ExecutionRecord>))]
     [JsonSerializable(typeof(SampleQueryItem))]
     internal partial class SourceGenerationContext : JsonSerializerContext

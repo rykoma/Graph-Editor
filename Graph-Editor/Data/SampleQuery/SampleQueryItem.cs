@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Graph_Editor.Data.SampleQuery
@@ -50,6 +51,7 @@ namespace Graph_Editor.Data.SampleQuery
 
         public string Body { get; set; }
 
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool BinaryBodyRequired { get; set; }
 
         public ObservableCollection<SampleQueryItem> Children
@@ -69,6 +71,7 @@ namespace Graph_Editor.Data.SampleQuery
             }
         }
 
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool IsExpanded
         {
             get

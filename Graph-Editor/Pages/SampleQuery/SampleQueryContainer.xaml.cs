@@ -135,7 +135,7 @@ namespace Graph_Editor.Pages.SampleQuery
                 Name = Source.Name,
                 Method = Source.Method,
                 Url = Source.Url,
-                Headers = new Dictionary<string, string>(),
+                Headers = null,
                 Body = Source.Body,
                 BinaryBodyRequired = Source.BinaryBodyRequired,
                 Children = new ObservableCollection<SampleQueryItem>(),
@@ -151,6 +151,8 @@ namespace Graph_Editor.Pages.SampleQuery
 
             if (Source.Headers != null)
             {
+                result.Headers = new Dictionary<string, string>();
+
                 foreach (var header in Source.Headers)
                 {
                     result.Headers.Add(header.Key, header.Value);
