@@ -3,37 +3,21 @@ using Graph_Editor.Data.ExecutionRecord;
 using Graph_Editor.Data.MainEditorResponse;
 using Graph_Editor.Data.SampleQuery;
 using Graph_Editor.Logic;
-using Microsoft.UI.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
-using Microsoft.UI.Xaml.Navigation;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data;
-using System.Diagnostics;
-using System.Globalization;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Net.Mime;
-using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.DataTransfer;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Storage;
-using Windows.Storage.Pickers;
 using Windows.System;
 using Windows.UI.Core;
 using static Graph_Editor.Data.ExecutionRecord.ResponseRecord;
@@ -1239,15 +1223,6 @@ namespace Graph_Editor.Pages.MainEditor
             }
         }
 
-        // Suggestion item for AutoSuggestBox
-        public class SuggestionItem
-        {
-            public string DisplayText { get; set; }
-            public string InsertText { get; set; }
-            public bool IsHistory { get; set; }
-            public override string ToString() => DisplayText;
-        }
-
         // Normalize URL parts for comparison
         // - /me → users/{id}
         // - /users/<Actual values and placeholders> → users/{id}
@@ -1351,7 +1326,8 @@ namespace Graph_Editor.Pages.MainEditor
                     candidates.Add(new SuggestionItem
                     {
                         DisplayText = example,
-                        InsertText = example
+                        InsertText = example,
+                        IsHistory = false
                     });
                 }
             }
@@ -1468,5 +1444,17 @@ namespace Graph_Editor.Pages.MainEditor
                 AutoSuggestBox_RequestUrl.Text = ChosenSuggestion;
             }
         }
+    }
+
+    // Suggestion item for AutoSuggestBox
+    public class SuggestionItem
+    {
+        public string DisplayText { get; set; }
+        public string InsertText { get; set; }
+        public bool IsHistory { get; set; }
+        public override string ToString() => DisplayText;
+
+        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicProperties, typeof(SuggestionItem))]
+        public SuggestionItem() { }
     }
 }
