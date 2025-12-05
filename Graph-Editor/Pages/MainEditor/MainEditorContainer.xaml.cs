@@ -1073,6 +1073,18 @@ namespace Graph_Editor.Pages.MainEditor
                 }
             },
             {
+                "${Date1DayLater}", () =>
+                {
+                    return DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+                }
+            },
+            {
+                "${Date120DayLater}", () =>
+                {
+                    return DateTime.Now.AddDays(120).ToString("yyyy-MM-dd");
+                }
+            },
+            {
                 "${DateTime0DayLater0}", () =>
                 {
                     return DateTime.Now.ToString("yyyy-MM-dd") + "T00:00:00";
@@ -1133,6 +1145,18 @@ namespace Graph_Editor.Pages.MainEditor
                 }
             },
             {
+                "${DateTime8DayLater18}", () =>
+                {
+                    return DateTime.Now.AddDays(8).ToString("yyyy-MM-dd") + "T18:00:00";
+                }
+            },
+            {
+                "${DateTime3DayLater17}", () =>
+                {
+                    return DateTime.Now.AddDays(3).ToString("yyyy-MM-dd") + "T17:00:00";
+                }
+            },
+            {
                 "${SampleInternalUser1Address}", () =>
                 {
                     return "AdeleV@" + SignInUserDomainName;
@@ -1187,27 +1211,27 @@ namespace Graph_Editor.Pages.MainEditor
                 }
             },
             {
-                "${SampleInternalUser6Address}", () =>
-                {
-                    return "frannis@" + SignInUserDomainName;
-                }
-            },
-            {
-                "${Guid}", () =>
-                {
-                    return Guid.NewGuid().ToString();
-                }
-            },
-            {
                 "${SampleInternalUser5Address}", () =>
                 {
                     return "meganb@" + SignInUserDomainName;
                 }
             },
             {
+                "${SampleInternalUser6Address}", () =>
+                {
+                    return "frannis@" + SignInUserDomainName;
+                }
+            },
+            {
                 "${SampleInternalUser7Address}", () =>
                 {
                     return "fannyd@" + SignInUserDomainName;
+                }
+            },
+            {
+                "${Guid}", () =>
+                {
+                    return Guid.NewGuid().ToString();
                 }
             }
         };

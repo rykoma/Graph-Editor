@@ -1039,13 +1039,13 @@ namespace Graph_Editor.Pages.SampleQuery
                 // Successfully parsed clipboard text into RequestRecord
                 // Set them to the corresponding UI elements
                 ComboBox_Method.SelectedValue = clipboardRequest.Method;
-                TextBox_Url.Text = clipboardRequest.Url.Replace("/users/{id}", "/users/${UserObjectId}").Replace("/users/{user-id}", "/users/${UserObjectId}");
+                TextBox_Url.Text = ReplaceProperPhrasesToPlaceholders(clipboardRequest.Url);
                 sampleHeaders.Clear();
                 foreach (var header in clipboardRequest.Headers)
                 {
-                    sampleHeaders.Add(new HeaderItem { HeaderName = header.Key, Value = header.Value, IsReadOnly = false });
+                    sampleHeaders.Add(new HeaderItem { HeaderName = header.Key, Value = ReplaceProperPhrasesToPlaceholders(header.Value), IsReadOnly = false });
                 }
-                CodeEditorControl_RequestBodyEditor.Editor.SetText(clipboardRequest.Body);
+                CodeEditorControl_RequestBodyEditor.Editor.SetText(ReplaceProperPhrasesToPlaceholders(clipboardRequest.Body));
 
                 e.Handled = true; // Mark the event as handled
             }
@@ -1054,6 +1054,20 @@ namespace Graph_Editor.Pages.SampleQuery
                 // Failed to parse clipboard text
                 // Do nothing and allow the default paste behavior
             }
+        }
+
+        private string ReplaceProperPhrasesToPlaceholders(string Input)
+        {
+            string output = Input.Replace("/users/{id}", "/users/${UserObjectId}").Replace("/users/{user-id}", "/users/${UserObjectId}");
+            output = output.Replace("Pacific Standard Time", "${LocalTimeZone}").Replace("Eastern Standard Time", "${LocalTimeZone}");
+            output = output.Replace("AdeleV@contoso.com", "${SampleInternalUser1Address}", true, null).Replace("Adele Vance", "${SampleInternalUser1Name}");
+            output = output.Replace("samanthab@contoso.com", "${SampleInternalUser2Address}", true, null).Replace("Samantha Booth", "${SampleInternalUser2Name}");
+            output = output.Replace("DanaS@contoso.com", "${SampleInternalUser3Address}", true, null).Replace("Dana Swope", "${SampleInternalUser3Name}");
+            output = output.Replace("AlexW@contoso.com", "${SampleInternalUser4Address}", true, null).Replace("Alex Wilber", "${SampleInternalUser4Name}");
+            output = output.Replace("meganb@contoso.com", "${SampleInternalUser5Address}", true, null);
+            output = output.Replace("frannis@contoso.com", "${SampleInternalUser6Address}", true, null);
+            output = output.Replace("fannyd@contoso.com", "${SampleInternalUser7Address}", true, null);
+            return output;
         }
 
         private void TextBox_Filter_TextChanged(object sender, TextChangedEventArgs e)
