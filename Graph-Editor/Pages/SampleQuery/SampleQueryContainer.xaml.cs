@@ -1039,7 +1039,7 @@ namespace Graph_Editor.Pages.SampleQuery
                 // Successfully parsed clipboard text into RequestRecord
                 // Set them to the corresponding UI elements
                 ComboBox_Method.SelectedValue = clipboardRequest.Method;
-                TextBox_Url.Text = ReplaceProperPhrasesToPlaceholders(clipboardRequest.Url);
+                TextBox_Url.Text = ReplaceSampleGuidToPlaceholder(ReplaceProperPhrasesToPlaceholders(clipboardRequest.Url));
                 sampleHeaders.Clear();
                 foreach (var header in clipboardRequest.Headers)
                 {
@@ -1059,6 +1059,8 @@ namespace Graph_Editor.Pages.SampleQuery
         private string ReplaceProperPhrasesToPlaceholders(string Input)
         {
             string output = Input.Replace("/users/{id}", "/users/${UserObjectId}").Replace("/users/{user-id}", "/users/${UserObjectId}");
+            output = output.Replace("/groups/{group-id}", "/groups/{id}");
+            output = output.Replace("/directoryObjects/{object-id}", "/directoryObjects/{id}");
             output = output.Replace("Pacific Standard Time", "${LocalTimeZone}").Replace("Eastern Standard Time", "${LocalTimeZone}");
             output = output.Replace("AdeleV@contoso.com", "${SampleInternalUser1Address}", true, null).Replace("Adele Vance", "${SampleInternalUser1Name}");
             output = output.Replace("samanthab@contoso.com", "${SampleInternalUser2Address}", true, null).Replace("Samantha Booth", "${SampleInternalUser2Name}");
@@ -1067,6 +1069,29 @@ namespace Graph_Editor.Pages.SampleQuery
             output = output.Replace("meganb@contoso.com", "${SampleInternalUser5Address}", true, null);
             output = output.Replace("frannis@contoso.com", "${SampleInternalUser6Address}", true, null);
             output = output.Replace("fannyd@contoso.com", "${SampleInternalUser7Address}", true, null);
+            output = output.Replace("alexd@contoso.com", "${SampleInternalUser8Address}", true, null).Replace("Alex Darrow", "${SampleInternalUser8Name}");
+            output = output.Replace("johndoe@contoso.com", "${SampleInternalUser9Address}", true, null);
+
+            return output;
+        }
+
+        private string ReplaceSampleGuidToPlaceholder(string Input)
+        {
+            // Replace GUIDs in various endpoint patterns with {id}
+            // Pattern matches endpoints followed by a GUID (with word boundary to handle query params)
+            
+            string output = Input;
+            
+            // Define endpoint patterns that should have GUIDs replaced with {id}
+            string[] endpoints = { "groups", "deletedItems", "deleteditems", "users", "sites", "drives", "applications", "directory", "directoryObjects", "groupSettings", "teams" };
+            
+            foreach (var endpoint in endpoints)
+            {
+                string pattern = $@"/{endpoint}/[0-9a-fA-F]{{8}}-[0-9a-fA-F]{{4}}-[0-9a-fA-F]{{4}}-[0-9a-fA-F]{{4}}-[0-9a-fA-F]{{12}}\b";
+                string replacement = $"/{endpoint}/{{id}}";
+                output = Regex.Replace(output, pattern, replacement, RegexOptions.IgnoreCase);
+            }
+            
             return output;
         }
 

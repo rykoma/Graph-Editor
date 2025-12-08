@@ -1229,6 +1229,24 @@ namespace Graph_Editor.Pages.MainEditor
                 }
             },
             {
+                "${SampleInternalUser8Address}", () =>
+                {
+                    return "alexd@" + SignInUserDomainName;
+                }
+            },
+            {
+                "${SampleInternalUser8Name}", () =>
+                {
+                    return "Alex Darrow";
+                }
+            },
+            {
+                "${SampleInternalUser9Address}", () =>
+                {
+                    return "johndoe@" + SignInUserDomainName;
+                }
+            },
+            {
                 "${Guid}", () =>
                 {
                     return Guid.NewGuid().ToString();
