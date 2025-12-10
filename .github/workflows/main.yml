@@ -48,8 +48,10 @@ jobs:
     - name: Decode the pfx
       run: |
         $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.BASE64_ENCODED_PFX }}")
-        $certificatePath = "GitHubActionsWorkflow.pfx"
+        $certificatePath = "Graph-Editor/GitHubActionsWorkflow.pfx"
         [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
+        $absolutePath = Resolve-Path $certificatePath
+        Write-Host "PFX file saved. Absolute path: $absolutePath"
 
     # Create the app package by building and packaging the project
     - name: Create the app package
