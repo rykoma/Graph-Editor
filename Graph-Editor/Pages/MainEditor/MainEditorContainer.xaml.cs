@@ -1157,6 +1157,12 @@ namespace Graph_Editor.Pages.MainEditor
                 }
             },
             {
+                "${DateTime1DayLater0Utc}", () =>
+                {
+                    return DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + "T00:00:00Z";
+                }
+            },
+            {
                 "${SampleInternalUser1Address}", () =>
                 {
                     return "AdeleV@" + SignInUserDomainName;

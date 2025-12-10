@@ -1061,6 +1061,10 @@ namespace Graph_Editor.Pages.SampleQuery
             string output = Input.Replace("/users/{id}", "/users/${UserObjectId}").Replace("/users/{user-id}", "/users/${UserObjectId}");
             output = output.Replace("/groups/{group-id}", "/groups/{id}");
             output = output.Replace("/directoryObjects/{object-id}", "/directoryObjects/{id}");
+            output = output.Replace("/deletedItems/{object-id}", "/deletedItems/{id}");
+            output = output.Replace("/servicePrincipals/{servicePrincipal-id}", "/servicePrincipals/{id}");
+            output = output.Replace("/appRoleAssignments/{appRoleAssignment-id}", "/appRoleAssignments/{id}");
+            output = output.Replace("/jobs/{jobId}", "/jobs/{id}");
             output = output.Replace("Pacific Standard Time", "${LocalTimeZone}").Replace("Eastern Standard Time", "${LocalTimeZone}");
             output = output.Replace("AdeleV@contoso.com", "${SampleInternalUser1Address}", true, null).Replace("Adele Vance", "${SampleInternalUser1Name}");
             output = output.Replace("samanthab@contoso.com", "${SampleInternalUser2Address}", true, null).Replace("Samantha Booth", "${SampleInternalUser2Name}");
@@ -1083,7 +1087,13 @@ namespace Graph_Editor.Pages.SampleQuery
             string output = Input;
             
             // Define endpoint patterns that should have GUIDs replaced with {id}
-            string[] endpoints = { "groups", "deletedItems", "deleteditems", "users", "sites", "drives", "applications", "directory", "directoryObjects", "groupSettings", "teams" };
+            string[] endpoints =
+            {
+                "groups", "deletedItems", "deleteditems", "users", "sites", "drives",
+                "applications", "directory", "directoryObjects", "groupSettings", "appManagementPolicies", "servicePrincipals", "tokenLifetimePolicies", "applicationTemplates",
+                "teams", "extensionProperties", "federatedIdentityCredentials", "homeRealmDiscoveryPolicies", "targetDeviceGroups",
+                "jobs"
+            };
             
             foreach (var endpoint in endpoints)
             {
