@@ -17,17 +17,15 @@
     <ApplicationIcon>Assets\Icon.ico</ApplicationIcon>
     <SignAssembly>False</SignAssembly>
 	<WindowsAppSdkIncludeVersionInfo>true</WindowsAppSdkIncludeVersionInfo>
-	<GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
+	<GenerateTemporaryStoreCertificate>False</GenerateTemporaryStoreCertificate>
 	<GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-	<AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>
+	<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
 	<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
 	<AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
 	<AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
 	<GenerateTestArtifacts>False</GenerateTestArtifacts>
 	<AppxBundle>Never</AppxBundle>
-	<AppInstallerUri>\\rykoma002\C%24\temp</AppInstallerUri>
 	<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-	<PackageCertificateThumbprint>92C3C8D204D166E734F5E4EDC80279FE2BD06548</PackageCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Data\SampleQuery\BuiltInSampleQuery.json" />
@@ -215,6 +213,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Scripts\" />
+    <Folder Include="GraphEditorSupportScripts\" />
   </ItemGroup>
 </Project>
