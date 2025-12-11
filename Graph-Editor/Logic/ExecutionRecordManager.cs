@@ -125,6 +125,12 @@ namespace Graph_Editor.Logic
                             continue;
                         }
 
+                        if (headerName.ToLower() == "authorization" && headerValue.ToLower().StartsWith("bearer "))
+                        {
+                            // Skip the Bearer token
+                            continue;
+                        }
+
                         headers[headerName] = headerValue;
                     }
                 }
