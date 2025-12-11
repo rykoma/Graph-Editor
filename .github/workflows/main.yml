@@ -71,4 +71,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: MSIX Package
-        path: Graph-Editor/AppPackages/**/*.msix
+        path: Graph-Editor/AppPackages/**/*
