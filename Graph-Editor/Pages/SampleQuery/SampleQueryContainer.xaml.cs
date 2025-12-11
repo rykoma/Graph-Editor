@@ -1075,6 +1075,9 @@ namespace Graph_Editor.Pages.SampleQuery
             output = output.Replace("fannyd@contoso.com", "${SampleInternalUser7Address}", true, null);
             output = output.Replace("alexd@contoso.com", "${SampleInternalUser8Address}", true, null).Replace("Alex Darrow", "${SampleInternalUser8Name}");
             output = output.Replace("johndoe@contoso.com", "${SampleInternalUser9Address}", true, null);
+            output = output.Replace("amala@contoso.com", "${SampleInternalUser10Address}", true, null);
+            output = output.Replace("conrad@contoso.com", "${SampleInternalUser11Address}", true, null);
+            output = output.Replace("lothar@contoso.com", "${SampleInternalUser12Address}", true, null);
 
             return output;
         }
@@ -1092,7 +1095,10 @@ namespace Graph_Editor.Pages.SampleQuery
                 "groups", "deletedItems", "deleteditems", "users", "sites", "drives",
                 "applications", "directory", "directoryObjects", "groupSettings", "appManagementPolicies", "servicePrincipals", "tokenLifetimePolicies", "applicationTemplates",
                 "teams", "extensionProperties", "federatedIdentityCredentials", "homeRealmDiscoveryPolicies", "targetDeviceGroups",
-                "jobs"
+                "jobs", "ProtectionPolicies", "exchangeProtectionPolicies", "oneDriveForBusinessProtectionPolicies", "sharePointProtectionPolicies", "siteInclusionRules", "driveInclusionRules", "mailboxInclusionRules",
+                "protectionUnits", "driveProtectionUnitsBulkAdditionJobs", "mailboxProtectionUnitsBulkAdditionJobs", "siteProtectionUnitsBulkAdditionJobs", "exchangeRestoreSessions", "oneDriveForBusinessRestoreSessions", "sharePointRestoreSessions",
+                "driveRestoreArtifactsBulkAdditionRequests", "mailboxRestoreArtifactsBulkAdditionRequests", "siteRestoreArtifactsBulkAdditionRequests",
+                "restoreSessions", "serviceApps"
             };
             
             foreach (var endpoint in endpoints)

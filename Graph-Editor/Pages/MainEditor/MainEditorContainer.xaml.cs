@@ -1253,6 +1253,24 @@ namespace Graph_Editor.Pages.MainEditor
                 }
             },
             {
+                "${SampleInternalUser10Address}", () =>
+                {
+                    return "amala@" + SignInUserDomainName;
+                }
+            },
+            {
+                "${SampleInternalUser11Address}", () =>
+                {
+                    return "conrad@" + SignInUserDomainName;
+                }
+            },
+            {
+                "${SampleInternalUser12Address}", () =>
+                {
+                    return "lothar@" + SignInUserDomainName;
+                }
+            },
+            {
                 "${Guid}", () =>
                 {
                     return Guid.NewGuid().ToString();
