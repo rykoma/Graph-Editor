@@ -1,4 +1,7 @@
 # Graph Editor
+![GitHub Release](https://img.shields.io/github/v/release/rykoma/Graph-Editor?style=flat&logo=GitHub&link=https%3A%2F%2Fgithub.com%2Frykoma%2FGraph-Editor%2Freleases)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/rykoma/Graph-Editor/main.yml?style=flat&logo=GitHub&link=https%3A%2F%2Fgithub.com%2Frykoma%2FGraph-Editor%2Factions%2Fworkflows%2Fmain.yml)
+![GitHub License](https://img.shields.io/github/license/rykoma/Graph-Editor?style=flat&logo=GitHub&link=https%3A%2F%2Fgithub.com%2Frykoma%2FGraph-Editor%2Fblob%2Fmain%2FLICENSE)
 
 Graph Editor is your go-to tool for easily experimenting with Microsoft Graph. It beautifully displays requests and responses, making it easier for you to understand how Microsoft Graph works.
 
