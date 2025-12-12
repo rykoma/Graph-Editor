@@ -14,7 +14,7 @@ jobs:
         path: ./drop
 
     - name: Publish to Microsoft Store
-      uses: microsoft/store-publish@v1
+      uses: microsoft/store-submission@v1
       with:
         command: upload
         tenant_id: ${{ secrets.TENANT_ID }}
