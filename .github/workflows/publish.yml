@@ -1,0 +1,24 @@
+name: Submit to Microsoft Store
+
+on:
+  workflow_dispatch:
+
+jobs:
+  upload-msix:
+    runs-on: windows-latest
+    steps:
+    - name: Download MSIX artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: MSIX Package
+        path: ./drop
+
+    - name: Publish to Microsoft Store
+      uses: microsoft/store-submission@v1
+      with:
+        command: upload
+        tenant_id: ${{ secrets.TENANT_ID }}
+        client_id: ${{ secrets.CLIENT_ID }}
+        client_secret: ${{ secrets.CLIENT_SECRET }}
+        product_id: ${{ secrets.PRODUCT_ID }}
+        package_path: ./drop/MSIX Package/Graph-Editor_*_x64_Test/*.msix
