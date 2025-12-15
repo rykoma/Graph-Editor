@@ -1031,6 +1031,39 @@ namespace Graph_Editor.Pages.MainEditor
             return result;
         }
 
+        private static DateTime CalculateNextThanksgiving()
+        {
+            var now = DateTime.Now;
+            var year = now.Year;
+            
+            // Start with November 1st of current year
+            var november = new DateTime(year, 11, 1);
+            
+            // Find first Thursday
+            var firstThursday = november;
+            while (firstThursday.DayOfWeek != DayOfWeek.Thursday)
+            {
+                firstThursday = firstThursday.AddDays(1);
+            }
+            
+            // 4th Thursday is 3 weeks after first Thursday
+            var thanksgiving = firstThursday.AddDays(21);
+            
+            // If this year's Thanksgiving has passed, get next year's
+            if (thanksgiving < now)
+            {
+                november = new DateTime(year + 1, 11, 1);
+                firstThursday = november;
+                while (firstThursday.DayOfWeek != DayOfWeek.Thursday)
+                {
+                    firstThursday = firstThursday.AddDays(1);
+                }
+                thanksgiving = firstThursday.AddDays(21);
+            }
+            
+            return thanksgiving;
+        }
+
         private readonly Dictionary<string, Func<string>> SampleQueryFunctions = new Dictionary<string, Func<string>>()
         {
             {
@@ -1157,9 +1190,51 @@ namespace Graph_Editor.Pages.MainEditor
                 }
             },
             {
+                "${DateTime7DayLater18}", () =>
+                {
+                    return DateTime.Now.AddDays(7).ToString("yyyy-MM-dd") + "T18:00:00";
+                }
+            },
+            {
+                "${DateTime7DayLater19}", () =>
+                {
+                    return DateTime.Now.AddDays(7).ToString("yyyy-MM-dd") + "T19:00:00";
+                }
+            },
+            {
+                "${DateTime30DayLater9}", () =>
+                {
+                    return DateTime.Now.AddDays(30).ToString("yyyy-MM-dd") + "T09:00:00";
+                }
+            },
+            {
                 "${DateTime1DayLater0Utc}", () =>
                 {
                     return DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + "T00:00:00Z";
+                }
+            },
+            {
+                "${DateTimeNextThanksGiving9}", () =>
+                {
+                    return CalculateNextThanksgiving().ToString("yyyy-MM-dd") + "T09:00:00";
+                }
+            },
+            {
+                "${DateTimeNextThanksGiving18}", () =>
+                {
+                    return CalculateNextThanksgiving().ToString("yyyy-MM-dd") + "T18:00:00";
+                }
+            },
+            {
+                "${DateTimeNextThanksGiving23}", () =>
+                {
+                    return CalculateNextThanksgiving().ToString("yyyy-MM-dd") + "T23:00:00";
+                }
+            },
+            {
+                "${DateTimeNextThanksGiving3DayLater21}", () =>
+                {
+                    return CalculateNextThanksgiving().AddDays(3).ToString("yyyy-MM-dd") + "T21:00:00";
                 }
             },
             {
@@ -1268,6 +1343,48 @@ namespace Graph_Editor.Pages.MainEditor
                 "${SampleInternalUser12Address}", () =>
                 {
                     return "lothar@" + SignInUserDomainName;
+                }
+            },
+            {
+                "${SampleInternalUser13Address}", () =>
+                {
+                    return "Terrie@" + SignInUserDomainName;
+                }
+            },
+            {
+                "${SampleInternalUser13Name}", () =>
+                {
+                    return "Terrie Barrera";
+                }
+            },
+            {
+                "${SampleInternalUser14Address}", () =>
+                {
+                    return "Lauren@" + SignInUserDomainName;
+                }
+            },
+            {
+                "${SampleInternalUser14Name}", () =>
+                {
+                    return "Lauren Solis";
+                }
+            },
+            {
+                "${SampleInternalUser15Address}", () =>
+                {
+                    return "rufus@" + SignInUserDomainName;
+                }
+            },
+            {
+                "${SampleInternalUser16Address}", () =>
+                {
+                    return "randiw@" + SignInUserDomainName;
+                }
+            },
+            {
+                "${SampleInternalUser16Name}", () =>
+                {
+                    return "Randi Welch";
                 }
             },
             {

@@ -1039,7 +1039,7 @@ namespace Graph_Editor.Pages.SampleQuery
                 // Successfully parsed clipboard text into RequestRecord
                 // Set them to the corresponding UI elements
                 ComboBox_Method.SelectedValue = clipboardRequest.Method;
-                TextBox_Url.Text = ReplaceSampleGuidToPlaceholder(ReplaceProperPhrasesToPlaceholders(clipboardRequest.Url));
+                TextBox_Url.Text = ReplaceSampleEntryIdToPlaceholder(ReplaceSampleGuidToPlaceholder(ReplaceProperPhrasesToPlaceholders(clipboardRequest.Url)));
                 sampleHeaders.Clear();
                 foreach (var header in clipboardRequest.Headers)
                 {
@@ -1078,6 +1078,10 @@ namespace Graph_Editor.Pages.SampleQuery
             output = output.Replace("amala@contoso.com", "${SampleInternalUser10Address}", true, null);
             output = output.Replace("conrad@contoso.com", "${SampleInternalUser11Address}", true, null);
             output = output.Replace("lothar@contoso.com", "${SampleInternalUser12Address}", true, null);
+            output = output.Replace("Terrie@contoso.com", "${SampleInternalUser13Address}", true, null).Replace("Terrie Barrera", "${SampleInternalUser13Name}");
+            output = output.Replace("Lauren@contoso.com", "${SampleInternalUser14Address}", true, null).Replace("Lauren Solis", "${SampleInternalUser14Name}");
+            output = output.Replace("rufus@contoso.com", "${SampleInternalUser15Address}", true, null);
+            output = output.Replace("randiw@contoso.com", "${SampleInternalUser16Address}", true, null).Replace("Randi Welch", "${SampleInternalUser16Name}");
 
             return output;
         }
@@ -1098,12 +1102,36 @@ namespace Graph_Editor.Pages.SampleQuery
                 "jobs", "ProtectionPolicies", "exchangeProtectionPolicies", "oneDriveForBusinessProtectionPolicies", "sharePointProtectionPolicies", "siteInclusionRules", "driveInclusionRules", "mailboxInclusionRules",
                 "protectionUnits", "driveProtectionUnitsBulkAdditionJobs", "mailboxProtectionUnitsBulkAdditionJobs", "siteProtectionUnitsBulkAdditionJobs", "exchangeRestoreSessions", "oneDriveForBusinessRestoreSessions", "sharePointRestoreSessions",
                 "driveRestoreArtifactsBulkAdditionRequests", "mailboxRestoreArtifactsBulkAdditionRequests", "siteRestoreArtifactsBulkAdditionRequests",
-                "restoreSessions", "serviceApps"
+                "restoreSessions", "serviceApps",
+                "masterCategories", "ediscoveryCases", "caseMembers"
             };
             
             foreach (var endpoint in endpoints)
             {
                 string pattern = $@"/{endpoint}/[0-9a-fA-F]{{8}}-[0-9a-fA-F]{{4}}-[0-9a-fA-F]{{4}}-[0-9a-fA-F]{{4}}-[0-9a-fA-F]{{12}}\b";
+                string replacement = $"/{endpoint}/{{id}}";
+                output = Regex.Replace(output, pattern, replacement, RegexOptions.IgnoreCase);
+            }
+            
+            return output;
+        }
+
+        private string ReplaceSampleEntryIdToPlaceholder(string Input)
+        {
+            string output = Input;
+            
+            // Define endpoint patterns that should have entry IDs replaced with {id}
+            string[] endpoints =
+            {
+                "messages", "calendars", "events", "attachments", "threads", "posts", "calendarGroups", "calendarPermissions"
+            };
+            
+            foreach (var endpoint in endpoints)
+            {
+                // Pattern matches: /endpoint/[anything until next / or ? or end of string]
+                // [^/\?]+ means one or more characters that are not / or ?
+                // (?!createUploadSession) ensures the captured part is not "createUploadSession"
+                string pattern = $@"/{endpoint}/(?!createUploadSession)([^/\?]+)";
                 string replacement = $"/{endpoint}/{{id}}";
                 output = Regex.Replace(output, pattern, replacement, RegexOptions.IgnoreCase);
             }
