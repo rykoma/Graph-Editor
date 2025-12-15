@@ -51938,11 +51938,64 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "60c3061d-5e6b-5d00-88f0-34c1d1009245",
+              "Id": "2c799284-505b-4af6-b091-b288405af782",
               "Type": 0,
-              "Name": "Complex types",
+              "Name": "eDiscovery case member",
+              "Children": [
+                {
+                  "Id": "cf888d00-fa30-461c-b07f-dfbf7f974425",
+                  "Type": 1,
+                  "Name": "List",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/security/cases/ediscoveryCases/{id}/caseMembers",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "f1c4f785-e4c6-4719-b21d-203ada311167",
+              "Type": 0,
+                  "Name": "Add",
+                  "Children": [
+                    {
+                      "Id": "463b648c-ab97-42c9-a359-45175b7cfe62",
+                      "Type": 1,
+                      "Name": "Add a case member of type user using smtpAddress",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/security/cases/ediscoveryCases/{id}/caseMembers",
+                      "Headers": {},
+                      "Body": "{\n    \u0022recipientType\u0022: \u0022user\u0022,\n    \u0022smtpAddress\u0022: \u0022johnadams@microsoft.com\u0022\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "724bc9f1-7b1a-44cd-8660-5df437621e14",
+                      "Type": 1,
+                      "Name": "Add a case member of type roleGroup using displayName",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/security/cases/ediscoveryCases/{id}/caseMembers",
+                      "Headers": {},
+                      "Body": "{\n    \u0022recipientType\u0022: \u0022roleGroup\u0022,\n    \u0022displayName\u0022: \u0022Security Administrator\u0022\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "6ee0cd03-6f5a-4b81-86bd-f8dbb364c230",
+                  "Type": 1,
+                  "Name": "Remove",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/security/cases/ediscoveryCases/{id}/caseMembers/{id}",
+                  "Headers": {},
+                  "Body": "",
               "Children": [],
               "IsBuiltIn": true
+            }
+          ],
+          "IsBuiltIn": true
             }
           ],
           "IsBuiltIn": true
