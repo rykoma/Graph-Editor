@@ -161,7 +161,12 @@
                 <TextBox x:Name="TextBox_Name" Grid.Row="0" FontSize="30" FontWeight="Bold" Margin="0,0,0,8"></TextBox>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,8,0,8">
-                    <Button x:Name="Button_SaveSampleQuery" x:Uid="/Pages.SampleQuery.SampleQueryContainer/Button_SaveSampleQuery" Margin="0,0,8,0" Click="Button_SaveSampleQuery_Click"></Button>
+                    <Button x:Name="Button_SaveSampleQuery" Margin="0,0,8,0" Click="Button_SaveSampleQuery_Click">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <FontIcon x:Name="FontIcon_SaveSuccess" Glyph="&#xE73E;" Visibility="Collapsed" Foreground="Green" />
+                            <TextBlock x:Name="TextBlock_SaveSampleQueryContent" x:Uid="/Pages.SampleQuery.SampleQueryContainer/TextBlock_SaveSampleQueryContent" />
+                        </StackPanel>
+                    </Button>
 
                     <DropDownButton x:Name="DropDownButton_MoveSampleQueryLast" x:Uid="/Pages.SampleQuery.SampleQueryContainer/DropDownButton_MoveSampleQueryLast" Margin="0,0,8,0">
                         <DropDownButton.Flyout>

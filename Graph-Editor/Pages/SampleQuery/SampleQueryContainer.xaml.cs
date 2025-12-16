@@ -581,6 +581,9 @@ namespace Graph_Editor.Pages.SampleQuery
 
             SaveCustomSampleQuery();
 
+            // Show success feedback
+            ShowSaveSuccessFeedback();
+
             if (reloadTreeView)
             {
                 // Get the selected SampleQueryItem and its parent
@@ -614,6 +617,18 @@ namespace Graph_Editor.Pages.SampleQuery
 
                 } while (exitLoop == false);
             }
+        }
+
+        private async void ShowSaveSuccessFeedback()
+        {
+            // Show check mark icon
+            FontIcon_SaveSuccess.Visibility = Visibility.Visible;
+
+            // Wait for 1 second
+            await Task.Delay(500);
+
+            // Hide check mark icon
+            FontIcon_SaveSuccess.Visibility = Visibility.Collapsed;
         }
 
         private void Button_AddHeader_Click(object sender, RoutedEventArgs e)

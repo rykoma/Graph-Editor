@@ -168,7 +168,7 @@
   <data name="TextBlock_SendBinaryToggleHeader.Text" xml:space="preserve">
     <value>ファイルの内容をバイナリ データとして送信する</value>
   </data>
-  <data name="Button_SaveSampleQuery.Content" xml:space="preserve">
+  <data name="TextBlock_SaveSampleQueryContent.Text" xml:space="preserve">
     <value>保存</value>
   </data>
   <data name="DropDownButton_MoveSampleQueryLast.Content" xml:space="preserve">
