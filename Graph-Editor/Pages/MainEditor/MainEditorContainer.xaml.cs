@@ -1388,6 +1388,36 @@ namespace Graph_Editor.Pages.MainEditor
                 }
             },
             {
+                "${SamplePlace1Address}", () =>
+                {
+                    return "bldg1@" + SignInUserDomainName;
+                }
+            },
+            {
+                "${SamplePlace2Address}", () =>
+                {
+                    return "bldg2@" + SignInUserDomainName;
+                }
+            },
+            {
+                "${SampleRoomList1Address}", () =>
+                {
+                    return "Building1RroomList@" + SignInUserDomainName;
+                }
+            },
+            {
+                "${SampleConfRoom1Address}", () =>
+                {
+                    return "cf100@" + SignInUserDomainName;
+                }
+            },
+            {
+                "${SampleWorkspace1Address}", () =>
+                {
+                    return "ws100@" + SignInUserDomainName;
+                }
+            },
+            {
                 "${Guid}", () =>
                 {
                     return Guid.NewGuid().ToString();
