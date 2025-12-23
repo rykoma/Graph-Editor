@@ -1080,6 +1080,12 @@ namespace Graph_Editor.Pages.SampleQuery
             output = output.Replace("/servicePrincipals/{servicePrincipal-id}", "/servicePrincipals/{id}");
             output = output.Replace("/appRoleAssignments/{appRoleAssignment-id}", "/appRoleAssignments/{id}");
             output = output.Replace("/jobs/{jobId}", "/jobs/{id}");
+            output = output.Replace("/subscriptions/{subscriptionsId}", "/subscriptions/{id}");
+            output = output.Replace("/activities/{activity-id}", "/activities/{id}");
+            output = output.Replace("/historyItems/{item-id}", "/historyItems/{id}");
+            output = output.Replace("/items/{cloudClipboardItemId}", "/items/{id}");
+            output = output.Replace("/windows/{windowsSettingId}", "/windows/{id}");
+            output = output.Replace("/instances/{windowsSettingInstanceId}", "/instances/{id}");
             output = output.Replace("Pacific Standard Time", "${LocalTimeZone}").Replace("Eastern Standard Time", "${LocalTimeZone}");
             output = output.Replace("AdeleV@contoso.com", "${SampleInternalUser1Address}", true, null).Replace("Adele Vance", "${SampleInternalUser1Name}");
             output = output.Replace("samanthab@contoso.com", "${SampleInternalUser2Address}", true, null).Replace("Samantha Booth", "${SampleInternalUser2Name}");
@@ -1124,7 +1130,8 @@ namespace Graph_Editor.Pages.SampleQuery
                 "driveRestoreArtifactsBulkAdditionRequests", "mailboxRestoreArtifactsBulkAdditionRequests", "siteRestoreArtifactsBulkAdditionRequests",
                 "restoreSessions", "serviceApps",
                 "masterCategories", "ediscoveryCases", "caseMembers",
-                "places"
+                "places", "levels", "fixtures", "sections", "units",
+                "subscriptions"
             };
             
             foreach (var endpoint in endpoints)
@@ -1144,7 +1151,7 @@ namespace Graph_Editor.Pages.SampleQuery
             // Define endpoint patterns that should have entry IDs replaced with {id}
             string[] endpoints =
             {
-                "messages", "calendars", "events", "attachments", "threads", "posts", "calendarGroups", "calendarPermissions", "checkIns"
+                "messages", "calendars", "events", "attachments", "threads", "posts", "calendarGroups", "calendarPermissions", "checkIns", "occurrences", "recurrences"
             };
             
             foreach (var endpoint in endpoints)
