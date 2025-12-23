@@ -8,6 +8,9 @@ $global:AccessTokenCache = ""
 $global:GitHubOrganization = ""
 $global:GitHubRepository = ""
 
+# Define a global variable to store file last commit date cache
+$global:FileLastCommitCache = @{}
+
 # Helper function to invoke GitHub API with rate limit handling
 function Invoke-GitHubApi {
     [CmdletBinding()]
@@ -123,6 +126,35 @@ function Connect-GitHubRepository {
     Write-Host "Connected to GitHub repository: $Organization/$Repository" -ForegroundColor Green
 }
 
+# Helper function to check if a file has recent commits (not old commits from bulk merges)
+function Test-FileHasRecentCommits {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true)]
+        [hashtable]$FileInfo,
+        [Parameter(Mandatory = $true)]
+        [DateTime]$TargetDate,
+        [int]$ToleranceDays = 7
+    )
+
+    # Check if any commit's author date is within tolerance days of the target date
+    # This filters out old commits that were bulk-merged from forks
+    $targetDateUtc = $TargetDate.ToUniversalTime()
+    $minDate = $targetDateUtc.AddDays(-$ToleranceDays)
+    $maxDate = $targetDateUtc.AddDays($ToleranceDays)
+
+    foreach ($commit in $FileInfo.Commits) {
+        $commitDateUtc = $commit.Date.ToUniversalTime()
+        if ($commitDateUtc -ge $minDate -and $commitDateUtc -le $maxDate) {
+            # Found at least one commit within tolerance period
+            return $true
+        }
+    }
+
+    # All commits are too old (likely from bulk merge), filter out as noise
+    return $false
+}
+
 # Retrieve the commit history of a specified GitHub organization repository with authentication.
 # Filter the commits to include only those from a specified date.
 # For the filtered commits, get a list of files whose names start with "api-reference/v1.0/api/".
@@ -157,12 +189,33 @@ function Get-CommitHistory {
     # Convert JST to UTC
     $utcStart = ($Date.Date).ToUniversalTime()
     $utcEnd = ($Date.Date.AddDays(1).AddSeconds(-1)).ToUniversalTime()
-    # GitHub API URL
-    $url = "https://api.github.com/repos/$Organization/$Repository/commits?since=$($utcStart.ToString('yyyy-MM-ddTHH:mm:ssZ'))&until=$($utcEnd.ToString('yyyy-MM-ddTHH:mm:ssZ'))&sha=main"
-
-    # Retrieve commit history from the GitHub API with authentication
+    
+    # Retrieve commit history from the GitHub API with authentication (with pagination)
     Write-Host "Fetching commits..." -ForegroundColor Cyan
-    $commits = Invoke-GitHubApi -Uri $url -Method Get
+    $commits = @()
+    $page = 1
+    $perPage = 100  # Maximum allowed by GitHub API
+    
+    do {
+        $url = "https://api.github.com/repos/$Organization/$Repository/commits?since=$($utcStart.ToString('yyyy-MM-ddTHH:mm:ssZ'))&until=$($utcEnd.ToString('yyyy-MM-ddTHH:mm:ssZ'))&sha=main&per_page=$perPage&page=$page"
+        Write-Host "  Fetching page $page..." -ForegroundColor DarkGray
+        $response = Invoke-GitHubApi -Uri $url -Method Get
+        
+        if ($response -and $response.Count -gt 0) {
+            $commits += $response
+            $page++
+        }
+        else {
+            break
+        }
+        
+        # If we got fewer results than per_page, we've reached the end
+        if ($response.Count -lt $perPage) {
+            break
+        }
+    } while ($true)
+    
+    Write-Host "Fetched $($commits.Count) commits in total" -ForegroundColor Cyan
 
     # Create a hashtable to store files and their commits
     $fileCommitMap = @{}
@@ -203,10 +256,43 @@ function Get-CommitHistory {
     # Complete progress bar
     Write-Progress -Activity "Processing commits" -Completed
 
+    # Filter files: only include files with commits whose author date is recent (within tolerance)
+    # This filters out old commits that were bulk-merged from forks
+    Write-Host "Filtering files by commit recency (excluding old bulk-merged commits)..." -ForegroundColor Cyan
+    $filteredFileCommitMap = @{}
+    $skippedFilesCount = 0
+    $fileIndex = 0
+    $totalFiles = $fileCommitMap.Count
+    $toleranceDays = 7  # Only include files with commits within 7 days of target date
+
+    foreach ($filename in $fileCommitMap.Keys) {
+        $fileIndex++
+        Write-Progress -Activity "Filtering files" -Status "File $fileIndex of $totalFiles" -PercentComplete (($fileIndex / $totalFiles) * 100)
+        
+        # Check if this file has any commits with recent author dates
+        $hasRecentCommits = Test-FileHasRecentCommits -FileInfo $fileCommitMap[$filename] -TargetDate $Date -ToleranceDays $toleranceDays
+        
+        if ($hasRecentCommits) {
+            # File has recent commits, include it
+            $filteredFileCommitMap[$filename] = $fileCommitMap[$filename]
+        }
+        else {
+            # All commits are too old (likely from bulk merge), skip it (noise)
+            $skippedFilesCount++
+        }
+    }
+
+    # Complete progress bar
+    Write-Progress -Activity "Filtering files" -Completed
+
+    if ($skippedFilesCount -gt 0) {
+        Write-Host "Filtered out $skippedFilesCount file(s) with only old commits (bulk merge noise)" -ForegroundColor Yellow
+    }
+
     # Output the results grouped by file
-    if ($fileCommitMap.Count -gt 0) {
+    if ($filteredFileCommitMap.Count -gt 0) {
         Write-Host ""
-        Write-Host "Summary of changes on $($Date.ToString('yyyy-MM-dd')): $($fileCommitMap.Count) files" -ForegroundColor Green
+        Write-Host "Summary of changes on $($Date.ToString('yyyy-MM-dd')): $($filteredFileCommitMap.Count) files" -ForegroundColor Green
         Write-Host ""
 
         # Write log entry
@@ -215,15 +301,15 @@ function Get-CommitHistory {
             if (-not (Test-Path $logDir)) {
                 New-Item -Path $logDir -ItemType Directory -Force | Out-Null
             }
-            $logEntry = "[$timestampWithTz] Get-CommitHistory - Date: $($Date.ToString('yyyy-MM-dd')), Files: $($fileCommitMap.Count), Commits: $($commits.Count)`n"
+            $logEntry = "[$timestampWithTz] Get-CommitHistory - Date: $($Date.ToString('yyyy-MM-dd')), Files: $($filteredFileCommitMap.Count) (filtered from $($fileCommitMap.Count)), Commits: $($commits.Count), Skipped: $skippedFilesCount`n"
             Add-Content -Path $LogPath -Value $logEntry -Encoding UTF8
         }
         catch {
             Write-Warning "Failed to write log: $_"
         }
 
-        foreach ($filename in $fileCommitMap.Keys | Sort-Object) {
-            $fileInfo = $fileCommitMap[$filename]
+        foreach ($filename in $filteredFileCommitMap.Keys | Sort-Object) {
+            $fileInfo = $filteredFileCommitMap[$filename]
             Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor DarkGray
             Write-Host "File: $filename" -ForegroundColor Magenta
             
@@ -245,7 +331,16 @@ function Get-CommitHistory {
             # Search the file name in YAML structure (inline output)
             $yamlLocations = Search-FilenameInYaml -filename:($filename.Split("/") | Select-Object -Last 1) -returnOnly
             if ($yamlLocations -and $yamlLocations.Count -gt 0) {
-                Write-Host "TOC:  $($yamlLocations -join ' | ')" -ForegroundColor Green
+                $isFirst = $true
+                foreach ($location in $yamlLocations) {
+                    if ($isFirst) {
+                        Write-Host "TOC:  $location" -ForegroundColor Green
+                        $isFirst = $false
+                    }
+                    else {
+                        Write-Host "      $location" -ForegroundColor Green
+                    }
+                }
             }
             
             # Show commits count and URLs only
@@ -271,6 +366,251 @@ function Get-CommitHistory {
                 New-Item -Path $logDir -ItemType Directory -Force | Out-Null
             }
             $logEntry = "[$timestampWithTz] Get-CommitHistory - Date: $($Date.ToString('yyyy-MM-dd')), No changes`n"
+            Add-Content -Path $LogPath -Value $logEntry -Encoding UTF8
+        }
+        catch {
+            Write-Warning "Failed to write log: $_"
+        }
+    }
+}
+
+# Retrieve merged pull requests from a specified date and list changed files.
+# This version filters by PR merge date, avoiding noise from bulk-merged old commits.
+# For merged PRs, get a list of files whose names start with "api-reference/v1.0/api/".
+# Access token can be obtained from https://github.com/settings/tokens with "repo:status" and "public_repo" scopes, and SSO to MicrosoftDocs is required.
+function Get-CommitHistoryV2 {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true)]
+        [DateTime]$Date,
+        [string]$LogPath = [System.IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'Graph Editor', 'GraphEditorSupportScripts.log')
+    )
+
+    # Check if the repository connection is established
+    if ([string]::IsNullOrEmpty($global:GitHubOrganization) -or 
+        [string]::IsNullOrEmpty($global:GitHubRepository) -or 
+        [string]::IsNullOrEmpty($global:AccessTokenCache)) {
+        Write-Error "GitHub repository connection is not established. Please run Connect-GitHubRepository first."
+        return
+    }
+
+    $Organization = $global:GitHubOrganization
+    $Repository = $global:GitHubRepository
+
+    # Get current time with timezone for logging
+    $now = Get-Date
+    $timezone = [System.TimeZoneInfo]::Local
+    $timezoneOffset = $timezone.GetUtcOffset($now).ToString("hh\:mm")
+    $timezoneSign = if ($timezone.GetUtcOffset($now).TotalMinutes -ge 0) { "+" } else { "-" }
+    $timestampWithTz = $now.ToString("yyyy-MM-dd HH:mm:ss") + " (UTC$timezoneSign$timezoneOffset)"
+
+    # Convert local date to UTC
+    $utcStart = ($Date.Date).ToUniversalTime()
+    $utcEnd = ($Date.Date.AddDays(1).AddSeconds(-1)).ToUniversalTime()
+    
+    # Retrieve merged pull requests from the GitHub API (with pagination)
+    Write-Host "Fetching merged pull requests..." -ForegroundColor Cyan
+    $allPRs = @()
+    $page = 1
+    $perPage = 100  # Maximum allowed by GitHub API
+    
+    # We need to search for PRs that were updated around the target date
+    # GitHub doesn't have a direct "merged_at" filter, so we use updated and filter later
+    # Get PRs updated within a wider range to ensure we don't miss any
+    $searchStart = $utcStart.AddDays(-1)  # Include PRs updated 1 day before
+    
+    do {
+        # Get closed PRs sorted by updated date
+        $url = "https://api.github.com/repos/$Organization/$Repository/pulls?state=closed&sort=updated&direction=desc&per_page=$perPage&page=$page"
+        Write-Host "  Fetching PR page $page..." -ForegroundColor DarkGray
+        $response = Invoke-GitHubApi -Uri $url -Method Get
+        
+        if ($response -and $response.Count -gt 0) {
+            # Filter to only merged PRs
+            $mergedPRs = $response | Where-Object { 
+                $_.merged_at -and 
+                [DateTime]::Parse($_.merged_at) -ge $utcStart -and 
+                [DateTime]::Parse($_.merged_at) -le $utcEnd
+            }
+            
+            if ($mergedPRs) {
+                $allPRs += $mergedPRs
+            }
+            
+            # Check if the last PR in this page was updated before our search start
+            # If so, we can stop searching
+            $lastUpdated = [DateTime]::Parse($response[-1].updated_at)
+            if ($lastUpdated -lt $searchStart) {
+                Write-Host "  Reached PRs older than search range, stopping..." -ForegroundColor DarkGray
+                break
+            }
+            
+            $page++
+            
+            # If we got fewer results than per_page, we've reached the end
+            if ($response.Count -lt $perPage) {
+                break
+            }
+        }
+        else {
+            break
+        }
+    } while ($true)
+    
+    Write-Host "Found $($allPRs.Count) merged PR(s) on $($Date.ToString('yyyy-MM-dd'))" -ForegroundColor Cyan
+
+    if ($allPRs.Count -eq 0) {
+        Write-Host "No merged pull requests found on $($Date.ToString('yyyy-MM-dd'))" -ForegroundColor Red
+        
+        # Write log entry
+        try {
+            $logDir = Split-Path -Path $LogPath -Parent
+            if (-not (Test-Path $logDir)) {
+                New-Item -Path $logDir -ItemType Directory -Force | Out-Null
+            }
+            $logEntry = "[$timestampWithTz] Get-CommitHistoryV2 - Date: $($Date.ToString('yyyy-MM-dd')), No merged PRs`n"
+            Add-Content -Path $LogPath -Value $logEntry -Encoding UTF8
+        }
+        catch {
+            Write-Warning "Failed to write log: $_"
+        }
+        return
+    }
+
+    # Create a hashtable to store files and their PRs
+    $fileCommitMap = @{}
+
+    # Get the list of files changed in each PR
+    Write-Host "Processing $($allPRs.Count) pull request(s)..." -ForegroundColor Cyan
+    $prIndex = 0
+    foreach ($pr in $allPRs) {
+        $prIndex++
+        $prNumber = $pr.number
+        $prTitle = $pr.title
+        $prMergedAt = [DateTime]::Parse($pr.merged_at).ToLocalTime()
+        $prUrl = $pr.html_url
+        
+        Write-Progress -Activity "Processing pull requests" -Status "PR #$prNumber ($prIndex of $($allPRs.Count))" -PercentComplete (($prIndex / $allPRs.Count) * 100)
+        
+        # Get files changed in this PR (with pagination)
+        $prFiles = @()
+        $filePage = 1
+        $filePerPage = 100
+        
+        do {
+            $filesUrl = "https://api.github.com/repos/$Organization/$Repository/pulls/$prNumber/files?per_page=$filePerPage&page=$filePage"
+            $filesResponse = Invoke-GitHubApi -Uri $filesUrl -Method Get
+            
+            if ($filesResponse -and $filesResponse.Count -gt 0) {
+                $prFiles += $filesResponse
+                $filePage++
+                
+                if ($filesResponse.Count -lt $filePerPage) {
+                    break
+                }
+            }
+            else {
+                break
+            }
+        } while ($true)
+
+        # Filter files whose names start with "api-reference/v1.0/api/"
+        $filteredFiles = $prFiles | Where-Object { $_.filename -like "api-reference/v1.0/api/*" }
+
+        # Group files by filename
+        foreach ($file in $filteredFiles) {
+            if (-not $fileCommitMap.ContainsKey($file.filename)) {
+                $fileCommitMap[$file.filename] = @{
+                    Status = $file.status
+                    PRs    = @()
+                }
+            }
+            $fileCommitMap[$file.filename].PRs += @{
+                Number   = $prNumber
+                Title    = $prTitle
+                MergedAt = $prMergedAt
+                Url      = $prUrl
+            }
+        }
+    }
+
+    # Complete progress bar
+    Write-Progress -Activity "Processing pull requests" -Completed
+
+    # Output the results grouped by file
+    if ($fileCommitMap.Count -gt 0) {
+        Write-Host ""
+        Write-Host "Summary of changes on $($Date.ToString('yyyy-MM-dd')): $($fileCommitMap.Count) files in $($allPRs.Count) PR(s)" -ForegroundColor Green
+        Write-Host ""
+
+        # Write log entry
+        try {
+            $logDir = Split-Path -Path $LogPath -Parent
+            if (-not (Test-Path $logDir)) {
+                New-Item -Path $logDir -ItemType Directory -Force | Out-Null
+            }
+            $logEntry = "[$timestampWithTz] Get-CommitHistoryV2 - Date: $($Date.ToString('yyyy-MM-dd')), Files: $($fileCommitMap.Count), PRs: $($allPRs.Count)`n"
+            Add-Content -Path $LogPath -Value $logEntry -Encoding UTF8
+        }
+        catch {
+            Write-Warning "Failed to write log: $_"
+        }
+
+        foreach ($filename in $fileCommitMap.Keys | Sort-Object) {
+            $fileInfo = $fileCommitMap[$filename]
+            Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor DarkGray
+            Write-Host "File: $filename" -ForegroundColor Magenta
+            
+            # Generate GitHub URL to view the file
+            $fileUrl = "https://github.com/$Organization/$Repository/blob/main/$filename"
+            Write-Host "View: $fileUrl" -ForegroundColor Cyan
+            
+            # Search the file name in YAML structure (inline output)
+            $yamlLocations = Search-FilenameInYaml -filename:($filename.Split("/") | Select-Object -Last 1) -returnOnly
+            if ($yamlLocations -and $yamlLocations.Count -gt 0) {
+                $isFirst = $true
+                foreach ($location in $yamlLocations) {
+                    if ($isFirst) {
+                        Write-Host "TOC:  $location" -ForegroundColor Green
+                        $isFirst = $false
+                    }
+                    else {
+                        Write-Host "      $location" -ForegroundColor Green
+                    }
+                }
+            }
+            
+            # Generate file hash for diff anchor
+            $fileHash = [System.BitConverter]::ToString([System.Text.Encoding]::UTF8.GetBytes($filename)).Replace("-", "").ToLower()
+            
+            # Show PR count and URLs with file-specific diff links
+            if ($fileInfo.PRs.Count -eq 1) {
+                $pr = $fileInfo.PRs[0]
+                $prDiffUrl = "https://github.com/$Organization/$Repository/pull/$($pr.Number)/files#diff-$fileHash"
+                Write-Host "PR:    #$($pr.Number) - $($pr.Title)" -ForegroundColor DarkGray
+                Write-Host "       $prDiffUrl" -ForegroundColor DarkGray
+            }
+            else {
+                Write-Host "PRs ($($fileInfo.PRs.Count)):" -ForegroundColor DarkGray
+                foreach ($pr in $fileInfo.PRs) {
+                    $prDiffUrl = "https://github.com/$Organization/$Repository/pull/$($pr.Number)/files#diff-$fileHash"
+                    Write-Host "       #$($pr.Number) - $($pr.Title)" -ForegroundColor DarkGray
+                    Write-Host "       $prDiffUrl" -ForegroundColor DarkGray
+                }
+            }
+            Write-Host ""
+        }
+    }
+    else {
+        Write-Host "No matching files found in merged pull requests." -ForegroundColor Red
+
+        # Write log entry
+        try {
+            $logDir = Split-Path -Path $LogPath -Parent
+            if (-not (Test-Path $logDir)) {
+                New-Item -Path $logDir -ItemType Directory -Force | Out-Null
+            }
+            $logEntry = "[$timestampWithTz] Get-CommitHistoryV2 - Date: $($Date.ToString('yyyy-MM-dd')), No matching files`n"
             Add-Content -Path $LogPath -Value $logEntry -Encoding UTF8
         }
         catch {
