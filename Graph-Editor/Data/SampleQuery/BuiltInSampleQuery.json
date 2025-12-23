@@ -9099,8 +9099,8 @@
               "Id": "b67c7e3d-878e-5521-b1c2-ef2031693283",
               "Type": 1,
               "Name": "Delete",
-              "Method": "",
-              "Url": "",
+              "Method": "DELETE",
+              "Url": "https://graph.microsoft.com/v1.0/me/calendars/{id}",
               "Headers": {},
               "Body": "",
               "Children": [],
@@ -9497,7 +9497,7 @@
               "Type": 1,
               "Name": "Permanently delete",
               "Method": "POST",
-              "Url": "https://graph.microsoft.com/v1.0/users/{id}/AAasdijs0acjdjlksca=/permanentDelete",
+              "Url": "https://graph.microsoft.com/v1.0/users/{id}/events/{id}/permanentDelete",
               "Headers": {},
               "Body": "",
               "Children": [],
@@ -11988,6 +11988,36 @@
               "IsBuiltIn": true
             },
             {
+              "Id": "c158b6f0-aa36-5224-84e0-3f2f03777e35",
+              "Type": 0,
+              "Name": "Check-in claim",
+              "Children": [
+                {
+                  "Id": "08759017-3217-5682-a865-8e169ab09818",
+                  "Type": 1,
+                  "Name": "Create",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/places/{id}/checkIns",
+                  "Headers": {},
+                  "Body": "{\n  \u0022@odata.type\u0022: \u0022#microsoft.graph.checkInClaim\u0022,\n  \u0022calendarEventId\u0022: \u0022040000008200E00074C5B7101A82E00800000000D02AC02D26EFDB010000000000000000100000005A18ADA04F0A24489AE13ED3CC367978\u0022,\n  \u0022checkInMethod\u0022: \u0022verified\u0022\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "760aeacf-17d8-5288-a827-0ae8e84f316e",
+                  "Type": 1,
+                  "Name": "Get",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/places/{id}/checkIns/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
               "Id": "50cd9780-8221-5798-b363-e76e00dd2c3d",
               "Type": 0,
               "Name": "Room list",
@@ -12273,104 +12303,392 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "c158b6f0-aa36-5224-84e0-3f2f03777e35",
+              "Id": "67a1c0e9-5e0b-4e35-b8ae-0e8480337f14",
               "Type": 0,
-              "Name": "Check-in claim",
+              "Name": "Maps",
               "Children": [
                 {
-                  "Id": "08759017-3217-5682-a865-8e169ab09818",
+                  "Id": "1b1babb5-8ad1-47c4-ada1-32bb8fc53d44",
+                  "Type": 0,
+                  "Name": "Building map",
+                  "Children": [
+                    {
+                      "Id": "9b44f12a-fbcd-4d04-a8c7-bf7ac6bbf956",
                   "Type": 1,
-                  "Name": "Create",
-                  "Method": "POST",
-                  "Url": "https://graph.microsoft.com/v1.0/places/{id}/checkIns",
+                      "Name": "Get",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map",
                   "Headers": {},
-                  "Body": "{\n  \u0022@odata.type\u0022: \u0022#microsoft.graph.checkInClaim\u0022,\n  \u0022calendarEventId\u0022: \u0022040000008200E00074C5B7101A82E00800000000D02AC02D26EFDB010000000000000000100000005A18ADA04F0A24489AE13ED3CC367978\u0022,\n  \u0022checkInMethod\u0022: \u0022verified\u0022\n}",
+                      "Body": "",
                   "Children": [],
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "760aeacf-17d8-5288-a827-0ae8e84f316e",
+                      "Id": "aefb0432-3425-4275-87d6-354263927b4d",
                   "Type": 1,
-                  "Name": "Get",
+                      "Name": "Delete",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "3f0b15c5-cb73-46b1-9626-21f8af06e01d",
+                      "Type": 1,
+                      "Name": "List footprints",
                   "Method": "GET",
-                  "Url": "https://graph.microsoft.com/v1.0/places/{id}/checkIns/{id}",
+                      "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/footprints",
                   "Headers": {},
                   "Body": "",
                   "Children": [],
                   "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "335ca7b7-872f-4c83-99dd-c6979549485e",
+                      "Type": 1,
+                      "Name": "List levels",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
                 }
               ],
               "IsBuiltIn": true
             },
             {
-              "Id": "4efca37e-9107-5ef5-bb4e-180283f60151",
+                  "Id": "a2b0c38a-0818-4d38-88ec-0de43e35e282",
               "Type": 0,
-              "Name": "Complex types",
+                  "Name": "Fixture map",
+                  "Children": [
+                    {
+                      "Id": "42641742-c490-4feb-b320-91d71e598da1",
+                      "Type": 1,
+                      "Name": "List",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels/{id}/fixtures",
+                      "Headers": {},
+                      "Body": "",
               "Children": [],
               "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "06f7be1c-67dd-4cc8-a1da-736c42797c72",
+                      "Type": 0,
+                      "Name": "Update",
+                      "Children": [
+                        {
+                          "Id": "3b267e6c-a8b6-450a-880d-bedcc4713557",
+                          "Type": 1,
+                          "Name": "Update an existing fixtureMap",
+                          "Method": "PATCH",
+                          "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels/{id}/fixtures/{id}",
+                          "Headers": {},
+                          "Body": "{\n  \u0022placeId\u0022: \u002267149ec1-4b99-42d4-88a4-d92cd23cb606\u0022,\n  \u0022properties\u0022: \u0022{\\\u0022id\\\u0022:\\\u0022005eb3b8-c95d-4d35-a8a0-22d3cb4d6002\\\u0022,\\\u0022type\\\u0022:\\\u0022Feature\\\u0022,\\\u0022feature_type\\\u0022:\\\u0022fixture\\\u0022,\\\u0022geometry\\\u0022:{\\\u0022type\\\u0022:\\\u0022Polygon\\\u0022,\\\u0022coordinates\\\u0022:[[[-121.8889415,37.3295396],[-121.8889137,37.329503],[-121.8889082,37.3294956],[-121.888907,37.3294941],[-121.8888551,37.3295189],[-121.8888895,37.3295644],[-121.8889415,37.3295396]]]},\\\u0022properties\\\u0022:{\\\u0022name\\\u0022:{\\\u0022en\\\u0022:\\\u0022Test Fixture update\\\u0022},\\\u0022level_id\\\u0022:\\\u0022e537d463-475b-43c3-a650-184566c68bc9\\\u0022,\\\u0022display_point\\\u0022:{\\\u0022type\\\u0022:\\\u0022Point\\\u0022,\\\u0022coordinates\\\u0022:[-121.8888983,37.3295292]}}}\u0022\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "1b47221f-5f3d-4a8e-b49e-3f77b260fb57",
+                          "Type": 1,
+                          "Name": "Create a fixtureMap if it doesn\u0027t exist",
+                          "Method": "PATCH",
+                          "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels/{id}/fixtures/{id}",
+                          "Headers": {},
+                          "Body": "{\n  \u0022placeId\u0022: \u002267149ec1-4b99-42d4-88a4-d92cd23cb606\u0022,\n  \u0022properties\u0022: \u0022{\\\u0022id\\\u0022:\\\u0022005eb3b8-c95d-4d35-a8a0-22d3cb4d6002\\\u0022,\\\u0022type\\\u0022:\\\u0022Feature\\\u0022,\\\u0022feature_type\\\u0022:\\\u0022fixture\\\u0022,\\\u0022geometry\\\u0022:{\\\u0022type\\\u0022:\\\u0022Polygon\\\u0022,\\\u0022coordinates\\\u0022:[[[-121.8889415,37.3295396],[-121.8889137,37.329503],[-121.8889082,37.3294956],[-121.888907,37.3294941],[-121.8888551,37.3295189],[-121.8888895,37.3295644],[-121.8889415,37.3295396]]]},\\\u0022properties\\\u0022:{\\\u0022name\\\u0022:{\\\u0022en\\\u0022:\\\u0022Test Fixture 01\\\u0022},\\\u0022level_id\\\u0022:\\\u0022e537d463-475b-43c3-a650-184566c68bc9\\\u0022,\\\u0022display_point\\\u0022:{\\\u0022type\\\u0022:\\\u0022Point\\\u0022,\\\u0022coordinates\\\u0022:[-121.8888983,37.3295292]}}}\u0022\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
             }
           ],
           "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "c261ab6c-2d85-455b-aafc-00af4e20566a",
+                      "Type": 1,
+                      "Name": "Delete",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels/{id}/fixtures/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
         }
       ],
       "IsBuiltIn": true
     },
     {
-      "Id": "15df7ac3-15b5-594a-97b9-d3dd1759f43d",
+                  "Id": "b03ced8e-b36c-417e-886f-c0db5ae4f08e",
       "Type": 0,
-      "Name": "Change notifications",
+                  "Name": "Footprint map",
       "Children": [
         {
-          "Id": "71a607df-1cb5-5a54-a26b-37daa1448d79",
+                      "Id": "18c7c85d-2ae7-4e8b-b327-04e9692d24be",
+                      "Type": 1,
+                      "Name": "List",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/footprints",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "0a15b10f-e6c1-4c93-a9c9-9b8238e4ffca",
           "Type": 0,
-          "Name": "Subscription",
+                  "Name": "Level map",
           "Children": [
             {
-              "Id": "3d6e6989-8320-5b9c-857a-39751c06ab92",
+                      "Id": "6810b198-e0d7-4bee-a3bf-4fea6fbdedac",
               "Type": 1,
               "Name": "List",
-              "Method": "",
-              "Url": "",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels",
               "Headers": {},
               "Body": "",
               "Children": [],
               "IsBuiltIn": true
             },
             {
-              "Id": "6c1038f2-6c35-530a-a5ed-d4542e1e8762",
+                      "Id": "de19a77e-0456-4a8f-b3dc-5791dd08a2db",
+                      "Type": 1,
+                      "Name": "List fixtures",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels/{id}/fixtures",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "b7c4e7c2-4de2-49b7-8018-f69973c642cb",
+                      "Type": 1,
+                      "Name": "List sections",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels/{id}/sections",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "38f67d8e-348a-4d14-ac9b-7a5a895571ae",
+                      "Type": 1,
+                      "Name": "New Query",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/me",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "94dd44be-f422-4908-a5a4-3aa2e06895a6",
               "Type": 0,
-              "Name": "Create",
+                  "Name": "Section map",
               "Children": [
                 {
-                  "Id": "7f1e14bd-7c40-530d-89fb-52af5010eaf3",
+                      "Id": "265bc4d0-ae32-4233-8689-7e71ed456bb5",
                   "Type": 1,
-                  "Name": "Duplicate subscription behavior",
-                  "Method": "",
-                  "Url": "",
+                      "Name": "List",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels/{id}/sections",
                   "Headers": {},
                   "Body": "",
                   "Children": [],
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "e00ee2bd-333a-5863-9e44-24568954f732",
+                      "Id": "5f6f8665-3aa4-4ba6-bd00-1916e1b296d3",
+                      "Type": 0,
+                      "Name": "Update",
+                      "Children": [
+                        {
+                          "Id": "32ca258a-97ff-44bd-87e4-85faba0cb935",
                   "Type": 1,
-                  "Name": "Resources examples",
-                  "Method": "",
-                  "Url": "",
+                          "Name": "Update an existing sectionMap",
+                          "Method": "PATCH",
+                          "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels/{id}/sections/{id}",
+                  "Headers": {},
+                          "Body": "{\n  \u0022placeId\u0022: \u002267149ec1-4b99-42d4-88a4-d92cd23cb606\u0022,\n  \u0022properties\u0022: \u0022{\\\u0022id\\\u0022:\\\u0022005eb3b8-c95d-4d35-a8a0-22d6nb4d6003\\\u0022,\\\u0022type\\\u0022:\\\u0022Feature\\\u0022,\\\u0022feature_type\\\u0022:\\\u0022section\\\u0022,\\\u0022geometry\\\u0022:{\\\u0022type\\\u0022:\\\u0022Polygon\\\u0022,\\\u0022coordinates\\\u0022:[[[-121.8889415,37.3295396],[-121.8889137,37.329503],[-121.8889082,37.3294956],[-121.888907,37.3294941],[-121.8888551,37.3295189],[-121.8888895,37.3295644],[-121.8889415,37.3295396]]]},\\\u0022properties\\\u0022:{\\\u0022name\\\u0022:{\\\u0022en\\\u0022:\\\u0022Test section update\\\u0022},\\\u0022restriction\\\u0022:\\\u0022restricted222222\\\u0022,\\\u0022level_id\\\u0022:\\\u0022e537d463-475b-43c3-a650-184566c68bc9\\\u0022,\\\u0022address_id\\\u0022:\\\u0022mockAddressId\\\u0022,\\\u0022accessibility\\\u0022:\\\u0022wheelchair222222\\\u0022,\\\u0022display_point\\\u0022:{\\\u0022type\\\u0022:\\\u0022Point\\\u0022,\\\u0022coordinates\\\u0022:[-121.8888983,37.3295292]},\\\u0022places_category\\\u0022:\\\u0022unspecified\\\u0022}}\u0022\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "d2f64922-bbbf-427e-adfb-b8fd26a42c0f",
+                          "Type": 1,
+                          "Name": "Create a sectionMap if it doesn\u0027t exist",
+                          "Method": "PATCH",
+                          "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels/{id}/sections/{id}",
+                          "Headers": {},
+                          "Body": "{\n  \u0022placeId\u0022: \u002267149ec1-4b99-42d4-88a4-d92cd23cb606\u0022,\n  \u0022properties\u0022: \u0022{\\\u0022id\\\u0022:\\\u0022005eb3b8-c95d-4d35-a8a0-22d6nb4d6003\\\u0022,\\\u0022type\\\u0022:\\\u0022Feature\\\u0022,\\\u0022feature_type\\\u0022:\\\u0022section\\\u0022,\\\u0022geometry\\\u0022:{\\\u0022type\\\u0022:\\\u0022Polygon\\\u0022,\\\u0022coordinates\\\u0022:[[[-121.8889415,37.3295396],[-121.8889137,37.329503],[-121.8889082,37.3294956],[-121.888907,37.3294941],[-121.8888551,37.3295189],[-121.8888895,37.3295644],[-121.8889415,37.3295396]]]},\\\u0022properties\\\u0022:{\\\u0022name\\\u0022:{\\\u0022en\\\u0022:\\\u0022Test section 02\\\u0022},\\\u0022restriction\\\u0022:\\\u0022restricted222222\\\u0022,\\\u0022level_id\\\u0022:\\\u0022e537d463-475b-43c3-a650-184566c68bc9\\\u0022,\\\u0022address_id\\\u0022:\\\u0022mockAddressId\\\u0022,\\\u0022accessibility\\\u0022:\\\u0022wheelchair222222\\\u0022,\\\u0022display_point\\\u0022:{\\\u0022type\\\u0022:\\\u0022Point\\\u0022,\\\u0022coordinates\\\u0022:[-121.8888983,37.3295292]},\\\u0022places_category\\\u0022:\\\u0022unspecified\\\u0022}}\u0022\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        }
+                      ],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "69c37018-be6e-4241-b7c9-84ff09e0d14d",
+                      "Type": 1,
+                      "Name": "Delete",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels/{id}/sections/{id}",
+                      "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "f8debbce-b065-4dea-bdc0-a50b2846bb00",
+                  "Type": 0,
+                  "Name": "Unit map",
+                  "Children": [
+                    {
+                      "Id": "43e505d0-6610-4278-9280-93341ad56c33",
+                  "Type": 1,
+                      "Name": "List",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels/{id}/units",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "04366f11-8a5b-4134-aac2-7655ea7f58c7",
+                      "Type": 0,
+                      "Name": "Update",
+                      "Children": [
+                        {
+                          "Id": "03563157-d1a8-4aa0-bfc9-174e77f9d0a8",
+                          "Type": 1,
+                          "Name": "Update an existing unitMap",
+                          "Method": "PATCH",
+                          "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels/{id}/units/{id}",
+                          "Headers": {},
+                          "Body": "{\n  \u0022placeId\u0022: null,\n  \u0022properties\u0022: \u0022{\\\u0022id\\\u0022:\\\u0022005eb3b8-c95d-4d35-a8a0-22d3cb4d6542\\\u0022,\\\u0022type\\\u0022:\\\u0022Feature\\\u0022,\\\u0022feature_type\\\u0022:\\\u0022unit\\\u0022,\\\u0022geometry\\\u0022:{\\\u0022type\\\u0022:\\\u0022Polygon\\\u0022,\\\u0022coordinates\\\u0022:[[[-121.8889415,37.3295396],[-121.8889137,37.329503],[-121.8889082,37.3294956],[-121.888907,37.3294941],[-121.8888551,37.3295189],[-121.8888895,37.3295644],[-121.8889415,37.3295396]]]},\\\u0022properties\\\u0022:{\\\u0022name\\\u0022:{\\\u0022en\\\u0022:\\\u0022Test room from Test Floor 1 (120.3)\\\u0022},\\\u0022level_id\\\u0022:\\\u0022e537d463-475b-43c3-a650-184566c68bc9\\\u0022,\\\u0022display_point\\\u0022:{\\\u0022type\\\u0022:\\\u0022Point\\\u0022,\\\u0022coordinates\\\u0022:[-121.8888983,37.3295292]},\\\u0022category\\\u0022:\\\u0022room\\\u0022}}\u0022\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "7c75a98a-6295-4801-b0fa-66ceca89cf70",
+                          "Type": 1,
+                          "Name": "Create a unitMap if it doesn\u0027t exist",
+                          "Method": "PATCH",
+                          "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels/{id}/units/{id}",
+                          "Headers": {},
+                          "Body": "{\n  \u0022properties\u0022: \u0022{\\\u0022id\\\u0022:\\\u0022005eb3b8-c95d-4d35-a8a0-22d3cb4d6996\\\u0022,\\\u0022type\\\u0022:\\\u0022Feature\\\u0022,\\\u0022feature_type\\\u0022:\\\u0022unit\\\u0022,\\\u0022geometry\\\u0022:{\\\u0022type\\\u0022:\\\u0022Polygon\\\u0022,\\\u0022coordinates\\\u0022:[[[-121.8889415,37.3295396],[-121.8889137,37.329503],[-121.8889082,37.3294956],[-121.888907,37.3294941],[-121.8888551,37.3295189],[-121.8888895,37.3295644],[-121.8889415,37.3295396]]]},\\\u0022properties\\\u0022:{\\\u0022name\\\u0022:{\\\u0022en\\\u0022:\\\u0022Test Create room111111111111\\\u0022},\\\u0022level_id\\\u0022:\\\u0022e537d463-475b-43c3-a650-184566c68bc9\\\u0022,\\\u0022display_point\\\u0022:{\\\u0022type\\\u0022:\\\u0022Point\\\u0022,\\\u0022coordinates\\\u0022:[-121.8888983,37.3295292]},\\\u0022category\\\u0022:\\\u0022room\\\u0022}}\u0022\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        }
+                      ],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "0520c145-3f8a-4cde-90b1-db1e87d603ed",
+                      "Type": 1,
+                      "Name": "Delete",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels/{id}/units/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+          "Id": "8cb917ff-06e6-43d7-a4f6-ee42ccc4d760",
+          "Type": 0,
+          "Name": "Work hours and locations",
+          "Children": [
+            {
+              "Id": "af43080e-7cd4-4af7-a8d3-f0423e3f2dd4",
+              "Type": 0,
+              "Name": "Work hours and locations setting",
+              "Children": [
+                {
+                  "Id": "bbc99e3f-438f-418e-8b8d-c71f2d78c7d2",
+              "Type": 1,
+              "Name": "Get",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+                  "Id": "fb289cb0-fd8f-4dca-9e7d-97236bb12e51",
+              "Type": 1,
+              "Name": "Update",
+                  "Method": "PATCH",
+                  "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations",
+              "Headers": {},
+                  "Body": "{\n  \u0022maxSharedWorkLocationDetails\u0022: \u0022approximate\u0022\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "7e7fd755-a35d-484f-b7f2-4c1ed56ab325",
+                  "Type": 1,
+                  "Name": "Occurrences view",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations/occurrencesView(startDateTime=\u0027${DateTime1DayLater0Utc}\u0027,endDateTime=\u0027${DateTime1DayLater235959Utc}\u0027)",
+                  "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+                  "Id": "34903953-3a43-422f-be8c-7df76f2cd0d9",
+              "Type": 1,
+                  "Name": "List recurrences",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations/recurrences",
                   "Headers": {},
                   "Body": "",
                   "Children": [],
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "6810a702-bceb-5a58-8efe-5b38cd519247",
+                  "Id": "4136d671-2bd8-41bb-a123-b85abdf76ede",
                   "Type": 1,
-                  "Name": "Notification endpoint validation",
-                  "Method": "",
-                  "Url": "",
+                  "Name": "Create recurrence",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations/recurrences",
                   "Headers": {},
-                  "Body": "",
+                  "Body": "{\n  \u0022start\u0022: {\n    \u0022dateTime\u0022: \u0022${DateTime1DayLater9}\u0022,\n    \u0022timeZone\u0022: \u0022${LocalTimeZone}\u0022\n  },\n  \u0022end\u0022: {\n    \u0022dateTime\u0022: \u0022${DateTime1DayLater18}\u0022,\n    \u0022timeZone\u0022: \u0022${LocalTimeZone}\u0022\n  },\n  \u0022workLocationType\u0022: \u0022office\u0022,\n  \u0022recurrence\u0022: {\n    \u0022pattern\u0022: {\n      \u0022type\u0022: \u0022weekly\u0022,\n      \u0022interval\u0022: 1,\n      \u0022firstDayOfWeek\u0022: \u0022sunday\u0022,\n      \u0022daysOfWeek\u0022: [\u0022thursday\u0022]\n    },\n    \u0022range\u0022: {\n      \u0022type\u0022: \u0022noEnd\u0022,\n      \u0022startDate\u0022: \u0022${Date1DayLater}\u0022,\n      \u0022recurrenceTimeZone\u0022: \u0022${LocalTimeZone}\u0022\n    }\n  }\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "7ede1475-441c-42fb-8a5f-03b5bf112eab",
+                  "Type": 1,
+                  "Name": "Create occurrence",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations/occurrences",
+                  "Headers": {},
+                  "Body": "{\n  \u0022start\u0022: {\n    \u0022dateTime\u0022: \u0022${DateTime1DayLater0}\u0022,\n    \u0022timeZone\u0022: \u0022${LocalTimeZone}\u0022\n  },\n  \u0022end\u0022: {\n    \u0022dateTime\u0022: \u0022${DateTime1DayLater235959}\u0022,\n    \u0022timeZone\u0022: \u0022${LocalTimeZone}\u0022\n  },\n  \u0022workLocationType\u0022: \u0022timeOff\u0022,\n  \u0022timeOffDetails\u0022: {\n    \u0022subject\u0022: \u0022Personal Day\u0022,\n    \u0022isAllDay\u0022: false\n  }\n}",
                   "Children": [],
                   "IsBuiltIn": true
                 }
@@ -12378,45 +12696,80 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "267827e4-5f13-58b9-968d-0a4879803594",
-              "Type": 1,
-              "Name": "Get",
-              "Method": "",
-              "Url": "",
-              "Headers": {},
-              "Body": "",
-              "Children": [],
-              "IsBuiltIn": true
-            },
-            {
-              "Id": "4ec4f6dd-9ac9-5667-ae72-ce0f24508029",
-              "Type": 1,
-              "Name": "Update",
-              "Method": "",
-              "Url": "",
-              "Headers": {},
-              "Body": "",
-              "Children": [],
-              "IsBuiltIn": true
-            },
-            {
-              "Id": "74002539-300f-515d-a601-7374f57f8ba6",
-              "Type": 1,
+              "Id": "5943d79d-783c-4448-94ec-c6eb9d18c72f",
+              "Type": 0,
+              "Name": "Work plan occurrence",
+              "Children": [
+                {
+                  "Id": "f1d96c21-c683-48c8-ab48-f5d97e5bc6d0",
+                  "Type": 1,
+                  "Name": "Create",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations/occurrences",
+                  "Headers": {},
+                  "Body": "{\r\n  \u0022start\u0022: {\r\n    \u0022dateTime\u0022: \u0022${DateTime1DayLater0}\u0022,\r\n    \u0022timeZone\u0022: \u0022${LocalTimeZone}\u0022\r\n  },\r\n  \u0022end\u0022: {\r\n    \u0022dateTime\u0022: \u0022${DateTime1DayLater235959}\u0022,\r\n    \u0022timeZone\u0022: \u0022${LocalTimeZone}\u0022\r\n  },\r\n  \u0022workLocationType\u0022: \u0022timeOff\u0022,\r\n  \u0022timeOffDetails\u0022: {\r\n    \u0022subject\u0022: \u0022Personal Day\u0022,\r\n    \u0022isAllDay\u0022: false\r\n  }\r\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "e473e00d-5e18-4833-b68f-ff253de64cd3",
+                  "Type": 1,
+                  "Name": "Update",
+                  "Method": "PUT",
+                  "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations/occurrences/{id}",
+                  "Headers": {},
+                  "Body": "{\n  \u0022start\u0022: {\n    \u0022dateTime\u0022: \u0022${DateTime1DayLater8}\u0022,\n    \u0022timeZone\u0022: \u0022${LocalTimeZone}\u0022\n  },\n  \u0022end\u0022: {\n    \u0022dateTime\u0022: \u0022${DateTime1DayLater12}\u0022,\n    \u0022timeZone\u0022: \u0022${LocalTimeZone}\u0022\n  },\n  \u0022workLocationType\u0022: \u0022timeOff\u0022,\n  \u0022timeOffDetails\u0022: {\n    \u0022subject\u0022: \u0022Doctor Appointment\u0022,\n    \u0022isAllDay\u0022: false\n  }\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "999420b5-67d1-49ec-af0f-9b1ae939eeb6",
+                  "Type": 1,
               "Name": "Delete",
-              "Method": "",
-              "Url": "",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations/occurrences/{id}",
               "Headers": {},
               "Body": "",
               "Children": [],
               "IsBuiltIn": true
             },
             {
-              "Id": "c9ebb2e3-0bf1-5bc4-98ce-effae7e309bf",
+                  "Id": "84161319-a813-4eab-85be-f3ab2854a229",
+                  "Type": 0,
+                  "Name": "Set current location",
+                  "Children": [
+                    {
+                      "Id": "34343775-c285-4c59-a7ad-9b48645b8521",
               "Type": 1,
-              "Name": "Reauthorize",
-              "Method": "",
-              "Url": "",
+                      "Name": "Set the current location to office",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations/occurrences/{id}",
               "Headers": {},
+                      "Body": "{\n  \u0022updateScope\u0022: \u0022currentDay\u0022,\n  \u0022workLocationType\u0022: \u0022office\u0022,\n  \u0022placeId\u0022: \u002212345678-1234-1234-1234-123456789012\u0022\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "e72da1a7-c6fc-4d30-b3d1-2b2658d17594",
+                      "Type": 1,
+                      "Name": " Set current location to remote",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations/occurrences/{id}",
+                      "Headers": {},
+                      "Body": "{\n  \u0022updateScope\u0022: \u0022currentSegment\u0022,\n  \u0022workLocationType\u0022: \u0022remote\u0022\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "82ea8ea9-aceb-4cbe-8d7a-43c2bd5d010a",
+                  "Type": 1,
+                  "Name": "Occurrences view",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations/occurrencesView(startDateTime=\u0027${DateTime1DayLater0Utc}\u0027,endDateTime=\u0027${DateTime1DayLater235959Utc}\u0027)",
+                  "Headers": {},
               "Body": "",
               "Children": [],
               "IsBuiltIn": true
@@ -12425,10 +12778,58 @@
           "IsBuiltIn": true
         },
         {
-          "Id": "5aa4f53c-a653-51f5-bc47-e7f2e5139770",
+              "Id": "6ef0d7d8-9257-474c-81ad-a2ab81362f89",
           "Type": 0,
-          "Name": "Complex types",
+              "Name": "Work plan recurrence",
+              "Children": [
+                {
+                  "Id": "0a4b1658-efc4-4a7f-bbe2-8946a44ab824",
+                  "Type": 1,
+                  "Name": "List",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations/recurrences",
+                  "Headers": {},
+                  "Body": "",
           "Children": [],
+          "IsBuiltIn": true
+                },
+                {
+                  "Id": "d9471855-7174-46d9-903f-2a323751a5b9",
+                  "Type": 1,
+                  "Name": "Create",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations/recurrences",
+                  "Headers": {},
+                  "Body": "{\r\n  \u0022start\u0022: {\r\n    \u0022dateTime\u0022: \u0022${DateTime1DayLater9}\u0022,\r\n    \u0022timeZone\u0022: \u0022${LocalTimeZone}\u0022\r\n  },\r\n  \u0022end\u0022: {\r\n    \u0022dateTime\u0022: \u0022${DateTime1DayLater18}\u0022,\r\n    \u0022timeZone\u0022: \u0022${LocalTimeZone}\u0022\r\n  },\r\n  \u0022workLocationType\u0022: \u0022office\u0022,\r\n  \u0022recurrence\u0022: {\r\n    \u0022pattern\u0022: {\r\n      \u0022type\u0022: \u0022weekly\u0022,\r\n      \u0022interval\u0022: 1,\r\n      \u0022firstDayOfWeek\u0022: \u0022sunday\u0022,\r\n      \u0022daysOfWeek\u0022: [\u0022thursday\u0022]\r\n    },\r\n    \u0022range\u0022: {\r\n      \u0022type\u0022: \u0022noEnd\u0022,\r\n      \u0022startDate\u0022: \u0022${Date1DayLater}\u0022,\r\n      \u0022recurrenceTimeZone\u0022: \u0022${LocalTimeZone}\u0022\r\n    }\r\n  }\r\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "383a453a-da5e-43dd-b84e-a43b5d6039cb",
+                  "Type": 1,
+                  "Name": "Update",
+                  "Method": "PUT",
+                  "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations/recurrences/{id}",
+                  "Headers": {},
+                  "Body": "{\n  \u0022start\u0022: {\n    \u0022dateTime\u0022: \u0022${DateTime1DayLater9}\u0022,\n    \u0022timeZone\u0022: \u0022${LocalTimeZone}\u0022\n  },\n  \u0022end\u0022: {\n    \u0022dateTime\u0022: \u0022${DateTime1DayLater18}\u0022,\n    \u0022timeZone\u0022: \u0022${LocalTimeZone}\u0022\n  },\n  \u0022workLocationType\u0022: \u0022office\u0022,\n  \u0022recurrence\u0022: {\n    \u0022pattern\u0022: {\n      \u0022type\u0022: \u0022weekly\u0022,\n      \u0022interval\u0022: 1,\n      \u0022firstDayOfWeek\u0022: \u0022sunday\u0022,\n      \u0022daysOfWeek\u0022: [\u0022thursday\u0022]\n    },\n    \u0022range\u0022: {\n      \u0022type\u0022: \u0022noEnd\u0022,\n      \u0022startDate\u0022: \u0022${Date1DayLater}\u0022,\n      \u0022recurrenceTimeZone\u0022: \u0022${LocalTimeZone}\u0022\n    }\n  }\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "df9763fc-ce2c-4533-8f77-2267e62470f8",
+                  "Type": 1,
+                  "Name": "Delete",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations/recurrences/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+        }
+      ],
+      "IsBuiltIn": true
+            }
+          ],
           "IsBuiltIn": true
         }
       ],
