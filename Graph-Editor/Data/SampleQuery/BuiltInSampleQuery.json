@@ -12314,18 +12314,18 @@
                   "Children": [
                     {
                       "Id": "9b44f12a-fbcd-4d04-a8c7-bf7ac6bbf956",
-                  "Type": 1,
+                      "Type": 1,
                       "Name": "Get",
                       "Method": "GET",
                       "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map",
-                  "Headers": {},
+                      "Headers": {},
                       "Body": "",
-                  "Children": [],
-                  "IsBuiltIn": true
-                },
-                {
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
                       "Id": "aefb0432-3425-4275-87d6-354263927b4d",
-                  "Type": 1,
+                      "Type": 1,
                       "Name": "Delete",
                       "Method": "DELETE",
                       "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map",
@@ -12338,12 +12338,12 @@
                       "Id": "3f0b15c5-cb73-46b1-9626-21f8af06e01d",
                       "Type": 1,
                       "Name": "List footprints",
-                  "Method": "GET",
+                      "Method": "GET",
                       "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/footprints",
-                  "Headers": {},
-                  "Body": "",
-                  "Children": [],
-                  "IsBuiltIn": true
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
                     },
                     {
                       "Id": "335ca7b7-872f-4c83-99dd-c6979549485e",
@@ -12355,13 +12355,13 @@
                       "Body": "",
                       "Children": [],
                       "IsBuiltIn": true
-                }
-              ],
-              "IsBuiltIn": true
-            },
-            {
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
                   "Id": "a2b0c38a-0818-4d38-88ec-0de43e35e282",
-              "Type": 0,
+                  "Type": 0,
                   "Name": "Fixture map",
                   "Children": [
                     {
@@ -12372,8 +12372,8 @@
                       "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels/{id}/fixtures",
                       "Headers": {},
                       "Body": "",
-              "Children": [],
-              "IsBuiltIn": true
+                      "Children": [],
+                      "IsBuiltIn": true
                     },
                     {
                       "Id": "06f7be1c-67dd-4cc8-a1da-736c42797c72",
@@ -12401,9 +12401,9 @@
                           "Body": "{\n  \u0022placeId\u0022: \u002267149ec1-4b99-42d4-88a4-d92cd23cb606\u0022,\n  \u0022properties\u0022: \u0022{\\\u0022id\\\u0022:\\\u0022005eb3b8-c95d-4d35-a8a0-22d3cb4d6002\\\u0022,\\\u0022type\\\u0022:\\\u0022Feature\\\u0022,\\\u0022feature_type\\\u0022:\\\u0022fixture\\\u0022,\\\u0022geometry\\\u0022:{\\\u0022type\\\u0022:\\\u0022Polygon\\\u0022,\\\u0022coordinates\\\u0022:[[[-121.8889415,37.3295396],[-121.8889137,37.329503],[-121.8889082,37.3294956],[-121.888907,37.3294941],[-121.8888551,37.3295189],[-121.8888895,37.3295644],[-121.8889415,37.3295396]]]},\\\u0022properties\\\u0022:{\\\u0022name\\\u0022:{\\\u0022en\\\u0022:\\\u0022Test Fixture 01\\\u0022},\\\u0022level_id\\\u0022:\\\u0022e537d463-475b-43c3-a650-184566c68bc9\\\u0022,\\\u0022display_point\\\u0022:{\\\u0022type\\\u0022:\\\u0022Point\\\u0022,\\\u0022coordinates\\\u0022:[-121.8888983,37.3295292]}}}\u0022\n}",
                           "Children": [],
                           "IsBuiltIn": true
-            }
-          ],
-          "IsBuiltIn": true
+                        }
+                      ],
+                      "IsBuiltIn": true
                     },
                     {
                       "Id": "c261ab6c-2d85-455b-aafc-00af4e20566a",
@@ -12415,16 +12415,16 @@
                       "Body": "",
                       "Children": [],
                       "IsBuiltIn": true
-        }
-      ],
-      "IsBuiltIn": true
-    },
-    {
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
                   "Id": "b03ced8e-b36c-417e-886f-c0db5ae4f08e",
-      "Type": 0,
+                  "Type": 0,
                   "Name": "Footprint map",
-      "Children": [
-        {
+                  "Children": [
+                    {
                       "Id": "18c7c85d-2ae7-4e8b-b327-04e9692d24be",
                       "Type": 1,
                       "Name": "List",
@@ -12440,21 +12440,21 @@
                 },
                 {
                   "Id": "0a15b10f-e6c1-4c93-a9c9-9b8238e4ffca",
-          "Type": 0,
+                  "Type": 0,
                   "Name": "Level map",
-          "Children": [
-            {
+                  "Children": [
+                    {
                       "Id": "6810b198-e0d7-4bee-a3bf-4fea6fbdedac",
-              "Type": 1,
-              "Name": "List",
+                      "Type": 1,
+                      "Name": "List",
                       "Method": "GET",
                       "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels",
-              "Headers": {},
-              "Body": "",
-              "Children": [],
-              "IsBuiltIn": true
-            },
-            {
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
                       "Id": "de19a77e-0456-4a8f-b3dc-5791dd08a2db",
                       "Type": 1,
                       "Name": "List fixtures",
@@ -12492,32 +12492,32 @@
                 },
                 {
                   "Id": "94dd44be-f422-4908-a5a4-3aa2e06895a6",
-              "Type": 0,
+                  "Type": 0,
                   "Name": "Section map",
-              "Children": [
-                {
+                  "Children": [
+                    {
                       "Id": "265bc4d0-ae32-4233-8689-7e71ed456bb5",
-                  "Type": 1,
+                      "Type": 1,
                       "Name": "List",
                       "Method": "GET",
                       "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels/{id}/sections",
-                  "Headers": {},
-                  "Body": "",
-                  "Children": [],
-                  "IsBuiltIn": true
-                },
-                {
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
                       "Id": "5f6f8665-3aa4-4ba6-bd00-1916e1b296d3",
                       "Type": 0,
                       "Name": "Update",
                       "Children": [
                         {
                           "Id": "32ca258a-97ff-44bd-87e4-85faba0cb935",
-                  "Type": 1,
+                          "Type": 1,
                           "Name": "Update an existing sectionMap",
                           "Method": "PATCH",
                           "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels/{id}/sections/{id}",
-                  "Headers": {},
+                          "Headers": {},
                           "Body": "{\n  \u0022placeId\u0022: \u002267149ec1-4b99-42d4-88a4-d92cd23cb606\u0022,\n  \u0022properties\u0022: \u0022{\\\u0022id\\\u0022:\\\u0022005eb3b8-c95d-4d35-a8a0-22d6nb4d6003\\\u0022,\\\u0022type\\\u0022:\\\u0022Feature\\\u0022,\\\u0022feature_type\\\u0022:\\\u0022section\\\u0022,\\\u0022geometry\\\u0022:{\\\u0022type\\\u0022:\\\u0022Polygon\\\u0022,\\\u0022coordinates\\\u0022:[[[-121.8889415,37.3295396],[-121.8889137,37.329503],[-121.8889082,37.3294956],[-121.888907,37.3294941],[-121.8888551,37.3295189],[-121.8888895,37.3295644],[-121.8889415,37.3295396]]]},\\\u0022properties\\\u0022:{\\\u0022name\\\u0022:{\\\u0022en\\\u0022:\\\u0022Test section update\\\u0022},\\\u0022restriction\\\u0022:\\\u0022restricted222222\\\u0022,\\\u0022level_id\\\u0022:\\\u0022e537d463-475b-43c3-a650-184566c68bc9\\\u0022,\\\u0022address_id\\\u0022:\\\u0022mockAddressId\\\u0022,\\\u0022accessibility\\\u0022:\\\u0022wheelchair222222\\\u0022,\\\u0022display_point\\\u0022:{\\\u0022type\\\u0022:\\\u0022Point\\\u0022,\\\u0022coordinates\\\u0022:[-121.8888983,37.3295292]},\\\u0022places_category\\\u0022:\\\u0022unspecified\\\u0022}}\u0022\n}",
                           "Children": [],
                           "IsBuiltIn": true
@@ -12543,9 +12543,9 @@
                       "Method": "DELETE",
                       "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels/{id}/sections/{id}",
                       "Headers": {},
-                  "Body": "",
-                  "Children": [],
-                  "IsBuiltIn": true
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
                     }
                   ],
                   "IsBuiltIn": true
@@ -12557,14 +12557,14 @@
                   "Children": [
                     {
                       "Id": "43e505d0-6610-4278-9280-93341ad56c33",
-                  "Type": 1,
+                      "Type": 1,
                       "Name": "List",
                       "Method": "GET",
                       "Url": "https://graph.microsoft.com/v1.0/places/{id}/microsoft.graph.building/map/levels/{id}/units",
-                  "Headers": {},
-                  "Body": "",
-                  "Children": [],
-                  "IsBuiltIn": true
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
                     },
                     {
                       "Id": "04366f11-8a5b-4134-aac2-7655ea7f58c7",
@@ -12612,11 +12612,11 @@
                 }
               ],
               "IsBuiltIn": true
-                }
-              ],
-              "IsBuiltIn": true
-            },
-            {
+            }
+          ],
+          "IsBuiltIn": true
+        },
+        {
           "Id": "8cb917ff-06e6-43d7-a4f6-ee42ccc4d760",
           "Type": 0,
           "Name": "Work hours and locations",
@@ -12628,22 +12628,22 @@
               "Children": [
                 {
                   "Id": "bbc99e3f-438f-418e-8b8d-c71f2d78c7d2",
-              "Type": 1,
-              "Name": "Get",
+                  "Type": 1,
+                  "Name": "Get",
                   "Method": "GET",
                   "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations",
-              "Headers": {},
-              "Body": "",
-              "Children": [],
-              "IsBuiltIn": true
-            },
-            {
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
                   "Id": "fb289cb0-fd8f-4dca-9e7d-97236bb12e51",
-              "Type": 1,
-              "Name": "Update",
+                  "Type": 1,
+                  "Name": "Update",
                   "Method": "PATCH",
                   "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations",
-              "Headers": {},
+                  "Headers": {},
                   "Body": "{\n  \u0022maxSharedWorkLocationDetails\u0022: \u0022approximate\u0022\n}",
                   "Children": [],
                   "IsBuiltIn": true
@@ -12655,13 +12655,13 @@
                   "Method": "GET",
                   "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations/occurrencesView(startDateTime=\u0027${DateTime1DayLater0Utc}\u0027,endDateTime=\u0027${DateTime1DayLater235959Utc}\u0027)",
                   "Headers": {},
-              "Body": "",
-              "Children": [],
-              "IsBuiltIn": true
-            },
-            {
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
                   "Id": "34903953-3a43-422f-be8c-7df76f2cd0d9",
-              "Type": 1,
+                  "Type": 1,
                   "Name": "List recurrences",
                   "Method": "GET",
                   "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations/recurrences",
@@ -12725,26 +12725,26 @@
                 {
                   "Id": "999420b5-67d1-49ec-af0f-9b1ae939eeb6",
                   "Type": 1,
-              "Name": "Delete",
+                  "Name": "Delete",
                   "Method": "DELETE",
                   "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations/occurrences/{id}",
-              "Headers": {},
-              "Body": "",
-              "Children": [],
-              "IsBuiltIn": true
-            },
-            {
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
                   "Id": "84161319-a813-4eab-85be-f3ab2854a229",
                   "Type": 0,
                   "Name": "Set current location",
                   "Children": [
                     {
                       "Id": "34343775-c285-4c59-a7ad-9b48645b8521",
-              "Type": 1,
+                      "Type": 1,
                       "Name": "Set the current location to office",
                       "Method": "POST",
                       "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations/occurrences/{id}",
-              "Headers": {},
+                      "Headers": {},
                       "Body": "{\n  \u0022updateScope\u0022: \u0022currentDay\u0022,\n  \u0022workLocationType\u0022: \u0022office\u0022,\n  \u0022placeId\u0022: \u002212345678-1234-1234-1234-123456789012\u0022\n}",
                       "Children": [],
                       "IsBuiltIn": true
@@ -12770,16 +12770,16 @@
                   "Method": "GET",
                   "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations/occurrencesView(startDateTime=\u0027${DateTime1DayLater0Utc}\u0027,endDateTime=\u0027${DateTime1DayLater235959Utc}\u0027)",
                   "Headers": {},
-              "Body": "",
-              "Children": [],
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
               "IsBuiltIn": true
-            }
-          ],
-          "IsBuiltIn": true
-        },
-        {
+            },
+            {
               "Id": "6ef0d7d8-9257-474c-81ad-a2ab81362f89",
-          "Type": 0,
+              "Type": 0,
               "Name": "Work plan recurrence",
               "Children": [
                 {
@@ -12790,8 +12790,8 @@
                   "Url": "https://graph.microsoft.com/v1.0/me/settings/workHoursAndLocations/recurrences",
                   "Headers": {},
                   "Body": "",
-          "Children": [],
-          "IsBuiltIn": true
+                  "Children": [],
+                  "IsBuiltIn": true
                 },
                 {
                   "Id": "d9471855-7174-46d9-903f-2a323751a5b9",
@@ -12825,9 +12825,9 @@
                   "Body": "",
                   "Children": [],
                   "IsBuiltIn": true
-        }
-      ],
-      "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
             }
           ],
           "IsBuiltIn": true
@@ -14284,6 +14284,36 @@
                   "IsBuiltIn": true
                 },
                 {
+                  "Id": "3e38741a-72dd-5410-a1ab-0063c4cffeef",
+                  "Type": 0,
+                  "Name": "Reprovision",
+                  "Children": [
+                    {
+                      "Id": "47bbe57f-1115-50db-9fc1-6f2f9f3eedc8",
+                      "Type": 1,
+                      "Name": "Reprovision the cloudPC for the administrator",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "3ac3c666-1f94-5f66-9328-13f571d7a5b0",
+                      "Type": 1,
+                      "Name": "Reprovision the cloudPC for the signed-in user",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
                   "Id": "40d367d8-0d3f-561a-af11-6255e5c2b457",
                   "Type": 1,
                   "Name": "Resize",
@@ -14667,6 +14697,44 @@
                   "Headers": {},
                   "Body": "",
                   "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "fccecbf2-aed0-5720-a960-a729159b70d7",
+              "Type": 0,
+              "Name": "Cloud PC report",
+              "Children": [
+                {
+                  "Id": "a78b20dc-35ec-54c8-88c6-e27e970531a0",
+                  "Type": 0,
+                  "Name": "Retrieve Cloud PC recommendation reports",
+                  "Children": [
+                    {
+                      "Id": "ade09215-1d65-54f7-a214-429a55ee1d86",
+                      "Type": 1,
+                      "Name": "Get device recommendation reports grouped by service plan and usage category",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "aed176f1-d29b-5b8b-ac1c-315abe1b3d9c",
+                      "Type": 1,
+                      "Name": "Get device usage category reports for Cloud PCs",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
                   "IsBuiltIn": true
                 }
               ],
@@ -31057,6 +31125,285 @@
               "Id": "3d4c8327-4a42-5fd4-ba11-0d3f3f0f3035",
               "Type": 1,
               "Name": "Provision migration containers",
+              "Method": "",
+              "Url": "",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            }
+          ],
+          "IsBuiltIn": true
+        },
+        {
+          "Id": "9bb24f61-ffa6-5350-9c90-18fd049c4d9c",
+          "Type": 0,
+          "Name": "File storage container type",
+          "Children": [
+            {
+              "Id": "d76276ac-f233-5487-8b2b-b921cc36c69e",
+              "Type": 1,
+              "Name": "List",
+              "Method": "",
+              "Url": "",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "dee16711-0d6f-5763-a5c2-02272c5fd028",
+              "Type": 1,
+              "Name": "Create",
+              "Method": "",
+              "Url": "",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "42903dbb-da5b-5b4e-86e6-5f74c9ae4bf3",
+              "Type": 1,
+              "Name": "Get",
+              "Method": "",
+              "Url": "",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "5c164d8d-834f-5c73-8e16-30f062100231",
+              "Type": 0,
+              "Name": "Update",
+              "Children": [
+                {
+                  "Id": "bd1393d0-e227-5ff4-b73e-8c20cee3741c",
+                  "Type": 1,
+                  "Name": "Update a fileStorageContainerType",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "e2e167da-78a6-5bf5-9586-7d03799c9feb",
+                  "Type": 1,
+                  "Name": "Update a fileStorageContainerType without ETag",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "52be412a-2d24-500c-96f7-f1d82635c69b",
+              "Type": 1,
+              "Name": "Delete",
+              "Method": "",
+              "Url": "",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            }
+          ],
+          "IsBuiltIn": true
+        },
+        {
+          "Id": "f19be721-96bd-5841-a5ce-2f1af166b691",
+          "Type": 0,
+          "Name": "File storage container type app permission grant",
+          "Children": [
+            {
+              "Id": "36d7168a-63f5-513b-a82a-a8da8e8bf567",
+              "Type": 1,
+              "Name": "List",
+              "Method": "",
+              "Url": "",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "20cb3a4b-f164-52b2-a934-877a1fc45ec4",
+              "Type": 1,
+              "Name": "Create",
+              "Method": "",
+              "Url": "",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "f664df82-2721-55de-a54f-3bc1a700f4bc",
+              "Type": 1,
+              "Name": "Get",
+              "Method": "",
+              "Url": "",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "3d9fdd41-fe43-51ce-b179-3cd62b8f6d26",
+              "Type": 1,
+              "Name": "Update",
+              "Method": "",
+              "Url": "",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "d4dd7291-3320-5a50-8637-f0b00aa73595",
+              "Type": 1,
+              "Name": "Delete",
+              "Method": "",
+              "Url": "",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            }
+          ],
+          "IsBuiltIn": true
+        },
+        {
+          "Id": "a370e7ea-54e1-5c4e-9dd8-e40cb79e4ffc",
+          "Type": 0,
+          "Name": "File storage container type registration",
+          "Children": [
+            {
+              "Id": "8d6e19e8-2f2e-54cc-aff3-98fedcb6eb30",
+              "Type": 1,
+              "Name": "List",
+              "Method": "",
+              "Url": "",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "aed94ab8-18e9-56a0-b9f9-48b82fa8a825",
+              "Type": 0,
+              "Name": "Create",
+              "Children": [
+                {
+                  "Id": "dcbe3e8f-ff69-5a96-84f8-b894d321d520",
+                  "Type": 1,
+                  "Name": "Create a fileStorageContainerTypeRegistration for a trial fileStorageContainerType",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "b55bc364-538f-5cdf-b06f-a0f7566ef794",
+                  "Type": 1,
+                  "Name": "Create a fileStorageContainerTypeRegistration for a standard fileStorageContainerType where billing setup isn\u0027t completed",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "fe25e558-c8c1-512c-ba22-51aaa9c4f484",
+              "Type": 1,
+              "Name": "Get",
+              "Method": "",
+              "Url": "",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "f43fe28d-52ea-5cfa-aa7e-f4b9cc20638d",
+              "Type": 0,
+              "Name": "Update",
+              "Children": [
+                {
+                  "Id": "3bd64946-80e1-5e0f-8fab-d6d91e16f053",
+                  "Type": 1,
+                  "Name": "Update a fileStorageContainerTypeRegistration setting",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "289e16fe-5259-5c5b-ada1-b7a5011203e1",
+                  "Type": 1,
+                  "Name": "Update a fileStorageContainerTypeRegistration without ETag",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "92463987-b55e-57fd-a48c-ec42ef171917",
+                  "Type": 1,
+                  "Name": "Update a non-overridable fileStorageContainerTypeRegistration setting",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "9e92b7e0-0eaf-56b0-92a1-b8f04b178301",
+              "Type": 1,
+              "Name": "Delete",
+              "Method": "",
+              "Url": "",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "9508830c-1259-50c9-adff-dceafc411556",
+              "Type": 1,
+              "Name": "List application permission grants",
+              "Method": "",
+              "Url": "",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "b6643f3d-2167-5006-a9d1-25a0659db817",
+              "Type": 1,
+              "Name": "Create file storage container type app permission grant",
               "Method": "",
               "Url": "",
               "Headers": {},
@@ -57495,6 +57842,51 @@
       "Name": "Teamwork and communications",
       "Children": [
         {
+          "Id": "67417e57-3643-53bc-b04e-154fab25fa63",
+          "Type": 0,
+          "Name": "Administration",
+          "Children": [
+            {
+              "Id": "e6ddb099-7fd6-5310-ba10-5dc336347616",
+              "Type": 0,
+              "Name": "Teams user configuration",
+              "Children": [
+                {
+                  "Id": "3acb85b1-ef7a-5698-9351-b655305b1bd6",
+                  "Type": 1,
+                  "Name": "List",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "4f8a3b5e-1b74-58ef-8562-23365d70fd1c",
+                  "Type": 1,
+                  "Name": "Get",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "c9919a40-6955-55e9-a0eb-57f6fdd9ae28",
+              "Type": 0,
+              "Name": "Complex types",
+              "Children": [],
+              "IsBuiltIn": true
+            }
+          ],
+          "IsBuiltIn": true
+        },
+        {
           "Id": "f011ab25-31e8-5c5f-83c2-abc11aa91384",
           "Type": 0,
           "Name": "Apps",
@@ -60531,6 +60923,50 @@
                       "IsBuiltIn": true
                     }
                   ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "1ca96530-27d5-54db-af50-ad1e50e1ecc3",
+                  "Type": 1,
+                  "Name": "Set automatic location",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "c320fd23-88ed-5a5d-a7c8-85fae5f17a8f",
+                  "Type": 1,
+                  "Name": "Set manual location",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "95e60377-cc64-5892-8b04-f0a7a36e25be",
+                  "Type": 1,
+                  "Name": "Clear automatic location",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "136d7b69-0685-5163-926d-3f431012355f",
+                  "Type": 1,
+                  "Name": "Clear location",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
                   "IsBuiltIn": true
                 }
               ],
