@@ -62677,12 +62677,75 @@
                   "Name": "Chat management",
                   "Children": [
                     {
-                      "Id": "6c94e8ad-a9f2-54b4-80bc-923237faa1c7",
+                      "Id": "2630aec5-1278-5ee5-93c6-ca26415c4b7b",
                       "Type": 0,
-                      "Name": "Create chat",
+                      "Name": "List",
                       "Children": [
                         {
-                          "Id": "d3649052-1d28-5ff8-82ab-b069c1939d3c",
+                          "Id": "45beece6-9a68-52ce-81f9-18fafb72ea36",
+                          "Type": 1,
+                          "Name": "List all chats",
+                          "Method": "",
+                          "Url": "",
+                          "Headers": {},
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "ba97c88e-7075-5845-b3fb-1933a27ad4c3",
+                          "Type": 1,
+                          "Name": "List all chats along with the members of each chat",
+                          "Method": "",
+                          "Url": "",
+                          "Headers": {},
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "43c0e642-d269-56a0-8bba-91835968e843",
+                          "Type": 1,
+                          "Name": "List all chats in order of the most to least recent chat messages",
+                          "Method": "",
+                          "Url": "",
+                          "Headers": {},
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "089f3648-7ef6-5dcf-8916-f3446ba3f481",
+                          "Type": 1,
+                          "Name": "List chats along with the preview of the last message sent in the chat",
+                          "Method": "",
+                          "Url": "",
+                          "Headers": {},
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "605622b8-a1e7-5c6e-8ee9-bd5b01d229fb",
+                          "Type": 1,
+                          "Name": "List all chats where the app is installed",
+                          "Method": "",
+                          "Url": "",
+                          "Headers": {},
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        }
+                      ],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "925e4083-d27c-56ec-b4fb-bd8da4867390",
+                      "Type": 0,
+                      "Name": "Create",
+                      "Children": [
+                        {
+                          "Id": "8237e7ad-4ba7-56f3-82b8-4ba282999dad",
                           "Type": 1,
                           "Name": "Create a one-on-one chat",
                           "Method": "",
@@ -62693,7 +62756,7 @@
                           "IsBuiltIn": true
                         },
                         {
-                          "Id": "cc0c0fcc-ac66-58ae-8010-686c26ef5c19",
+                          "Id": "4f5c641a-d6a4-5dbb-83a9-2ef25de2b402",
                           "Type": 1,
                           "Name": "Create a group chat",
                           "Method": "",
@@ -62704,7 +62767,7 @@
                           "IsBuiltIn": true
                         },
                         {
-                          "Id": "2a942057-a85d-5a25-a62e-f98d3fd4dcf9",
+                          "Id": "aa3aebf3-dce1-56cd-ace9-1bdab75a51d1",
                           "Type": 1,
                           "Name": "Create a one-on-one chat with installed apps",
                           "Method": "",
@@ -62715,7 +62778,7 @@
                           "IsBuiltIn": true
                         },
                         {
-                          "Id": "741ac560-c71b-57b1-bb88-ed4b5215cff1",
+                          "Id": "a16ca36f-fdfc-5f29-bf0c-573ded7feb03",
                           "Type": 1,
                           "Name": "Create a one-on-one chat with RSC-granted apps",
                           "Method": "",
@@ -62726,7 +62789,7 @@
                           "IsBuiltIn": true
                         },
                         {
-                          "Id": "a187afc2-be2c-5718-96ed-0ca3f0ad0445",
+                          "Id": "49d0c2b5-083f-57ea-8989-0db3f41b219c",
                           "Type": 1,
                           "Name": "Create a one-on-one chat using user principal name",
                           "Method": "",
@@ -62737,7 +62800,7 @@
                           "IsBuiltIn": true
                         },
                         {
-                          "Id": "413178a5-6d41-5049-860a-2ad6e05552de",
+                          "Id": "7681c466-79d9-5d1b-bf1b-81359f0729aa",
                           "Type": 1,
                           "Name": "Create a group chat with tenant guest user",
                           "Method": "",
@@ -62748,7 +62811,7 @@
                           "IsBuiltIn": true
                         },
                         {
-                          "Id": "c6d0ba02-14a0-52d4-a1a5-e646ed624fca",
+                          "Id": "f8dedb16-cabe-5ae1-862e-72de541750f8",
                           "Type": 1,
                           "Name": "Create a one-on-one chat with a federated user (outside of own organization)",
                           "Method": "",
@@ -62762,12 +62825,12 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "d658233f-1534-5cb7-93bf-b132cc2a3a3c",
+                      "Id": "8463a084-c945-54d1-bc12-66bede9a9bcd",
                       "Type": 0,
-                      "Name": "Get chat",
+                      "Name": "Get",
                       "Children": [
                         {
-                          "Id": "a8876565-8726-5611-86a4-5a7624636b0a",
+                          "Id": "9a69ea57-fdad-550b-bd9b-e39b060b6172",
                           "Type": 1,
                           "Name": "Get a group chat",
                           "Method": "",
@@ -62778,7 +62841,7 @@
                           "IsBuiltIn": true
                         },
                         {
-                          "Id": "3b16fe7a-1552-5bdf-aee4-423cb5863609",
+                          "Id": "7c67bd24-f5dc-58e0-880e-6fc45116e1e3",
                           "Type": 1,
                           "Name": "Get a user\u0027s one on one chat",
                           "Method": "",
@@ -62789,7 +62852,7 @@
                           "IsBuiltIn": true
                         },
                         {
-                          "Id": "7170c5bd-7d2d-502c-a6e6-bb30821de49c",
+                          "Id": "86409c13-14eb-5c96-aa22-2a5375711a54",
                           "Type": 1,
                           "Name": "Get a chat and all its members",
                           "Method": "",
@@ -62800,7 +62863,7 @@
                           "IsBuiltIn": true
                         },
                         {
-                          "Id": "e85fa1a0-852b-55d6-abbf-90224d4b1f4c",
+                          "Id": "d544d6a1-0d74-5d67-a3f8-d5acc99db234",
                           "Type": 1,
                           "Name": "Get the meeting details of a chat associated with a Microsoft Teams meeting",
                           "Method": "",
@@ -62811,7 +62874,7 @@
                           "IsBuiltIn": true
                         },
                         {
-                          "Id": "4fa8fb97-a746-51ff-a175-ba5140b38e98",
+                          "Id": "7cae37d1-3e68-5bf0-9e75-998207e4b728",
                           "Type": 1,
                           "Name": "Get the chat along with the preview of the last message sent in the chat",
                           "Method": "",
@@ -62825,9 +62888,9 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "3e7d45a5-625b-52bd-8936-53d02d1df054",
+                      "Id": "529644a1-0cce-5494-8e81-123f91ee7ccd",
                       "Type": 1,
-                      "Name": "Update chat",
+                      "Name": "Update",
                       "Method": "",
                       "Url": "",
                       "Headers": {},
