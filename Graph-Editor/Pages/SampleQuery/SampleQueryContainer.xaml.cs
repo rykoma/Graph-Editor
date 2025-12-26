@@ -1054,7 +1054,7 @@ namespace Graph_Editor.Pages.SampleQuery
                 // Successfully parsed clipboard text into RequestRecord
                 // Set them to the corresponding UI elements
                 ComboBox_Method.SelectedValue = clipboardRequest.Method;
-                TextBox_Url.Text = ReplaceSampleEntryIdToPlaceholder(ReplaceSampleGuidToPlaceholder(ReplaceProperPhrasesToPlaceholders(clipboardRequest.Url)));
+                TextBox_Url.Text = ReplaceSampleUpnToPlaceholder(ReplaceSampleEntryIdToPlaceholder(ReplaceSampleGuidToPlaceholder(ReplaceProperPhrasesToPlaceholders(clipboardRequest.Url))));
                 sampleHeaders.Clear();
                 foreach (var header in clipboardRequest.Headers)
                 {
@@ -1132,7 +1132,8 @@ namespace Graph_Editor.Pages.SampleQuery
                 "restoreSessions", "serviceApps",
                 "masterCategories", "ediscoveryCases", "caseMembers",
                 "places", "levels", "fixtures", "sections", "units",
-                "subscriptions", "subjectRightsRequests"
+                "subscriptions", "subjectRightsRequests",
+                "customQuestions", "customers", "services", "staffMembers"
             };
             
             foreach (var endpoint in endpoints)
@@ -1152,7 +1153,8 @@ namespace Graph_Editor.Pages.SampleQuery
             // Define endpoint patterns that should have entry IDs replaced with {id}
             string[] endpoints =
             {
-                "messages", "calendars", "events", "attachments", "threads", "posts", "calendarGroups", "calendarPermissions", "checkIns", "occurrences", "recurrences"
+                "messages", "calendars", "events", "attachments", "threads", "posts", "calendarGroups", "calendarPermissions",
+                "checkIns", "occurrences", "recurrences", "appointments"
             };
             
             foreach (var endpoint in endpoints)
@@ -1161,6 +1163,31 @@ namespace Graph_Editor.Pages.SampleQuery
                 // [^/\?]+ means one or more characters that are not / or ?
                 // (?!createUploadSession) ensures the captured part is not "createUploadSession"
                 string pattern = $@"/{endpoint}/(?!createUploadSession)([^/\?]+)";
+                string replacement = $"/{endpoint}/{{id}}";
+                output = Regex.Replace(output, pattern, replacement, RegexOptions.IgnoreCase);
+            }
+            
+            return output;
+        }
+
+        private string ReplaceSampleUpnToPlaceholder(string Input)
+        {
+            string output = Input;
+            
+            // Define endpoint patterns that should have UPNs replaced with {id}
+            string[] endpoints =
+            {
+                "bookingBusinesses"
+            };
+            
+            foreach (var endpoint in endpoints)
+            {
+                // Pattern matches: /endpoint/[UPN format: username@domain]
+                // [a-zA-Z0-9._-]+ matches the username part
+                // @ is the literal @ symbol
+                // [a-zA-Z0-9.-]+ matches the domain part
+                // \b ensures word boundary to handle query params
+                string pattern = $@"/{endpoint}/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\b";
                 string replacement = $"/{endpoint}/{{id}}";
                 output = Regex.Replace(output, pattern, replacement, RegexOptions.IgnoreCase);
             }
