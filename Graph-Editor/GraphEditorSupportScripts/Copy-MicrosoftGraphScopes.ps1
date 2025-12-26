@@ -2,7 +2,7 @@
 # The copied output is intended to be pasted as the code for the WellKnownScopes property section in Data\MicrosoftGraphScope\MicrosoftGraphScope.cs.
 function Copy-MicrosoftGraphScopes {
     Write-Host "Connecting to Microsoft Graph..."
-    Connect-MgGraph -Scopes Application.Read.All
+    Connect-MgGraph -Scopes Application.Read.All -UseDeviceCode -NoWelcome -ContextScope Process
 
     $DefaultScopes = @(
         "Calendars.ReadWrite",
