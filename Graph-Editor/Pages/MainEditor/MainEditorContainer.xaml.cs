@@ -1106,6 +1106,18 @@ namespace Graph_Editor.Pages.MainEditor
                 }
             },
             {
+                "${DayOfWeek0DayLater}", () =>
+                {
+                    return DateTime.Now.DayOfWeek.ToString().ToLower();
+                }
+            },
+            {
+                "${Date0DayLater}", () =>
+                {
+                    return DateTime.Now.ToString("yyyy-MM-dd");
+                }
+            },
+            {
                 "${Date1DayLater}", () =>
                 {
                     return DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
@@ -1121,6 +1133,12 @@ namespace Graph_Editor.Pages.MainEditor
                 "${DateTime0DayLater0}", () =>
                 {
                     return DateTime.Now.ToString("yyyy-MM-dd") + "T00:00:00";
+                }
+            },
+            {
+                "${DateTime0DayLater9}", () =>
+                {
+                    return DateTime.Now.ToString("yyyy-MM-dd") + "T09:00:00";
                 }
             },
             {
@@ -1225,13 +1243,13 @@ namespace Graph_Editor.Pages.MainEditor
                     return DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + "T00:00:00Z";
                 }
             },
-                        {
+            {
                 "${DateTime1DayLater235959Utc}", () =>
                 {
                     return DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + "T23:59:59";
                 }
             },
-                        {
+            {
                 "${DateTime7DayLater0Utc}", () =>
                 {
                     return DateTime.Now.AddDays(7).ToString("yyyy-MM-dd") + "T00:00:00Z";
