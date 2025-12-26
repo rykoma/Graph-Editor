@@ -1085,6 +1085,7 @@ namespace Graph_Editor.Pages.SampleQuery
             output = output.Replace("/historyItems/{item-id}", "/historyItems/{id}");
             output = output.Replace("/items/{cloudClipboardItemId}", "/items/{id}");
             output = output.Replace("/windows/{windowsSettingId}", "/windows/{id}");
+            output = output.Replace("/subjectRightsRequests/{subjectRightsRequestId}", "/subjectRightsRequests/{id}");
             output = output.Replace("/instances/{windowsSettingInstanceId}", "/instances/{id}");
             output = output.Replace("Pacific Standard Time", "${LocalTimeZone}").Replace("Eastern Standard Time", "${LocalTimeZone}");
             output = output.Replace("AdeleV@contoso.com", "${SampleInternalUser1Address}", true, null).Replace("Adele Vance", "${SampleInternalUser1Name}");
@@ -1131,7 +1132,7 @@ namespace Graph_Editor.Pages.SampleQuery
                 "restoreSessions", "serviceApps",
                 "masterCategories", "ediscoveryCases", "caseMembers",
                 "places", "levels", "fixtures", "sections", "units",
-                "subscriptions"
+                "subscriptions", "subjectRightsRequests"
             };
             
             foreach (var endpoint in endpoints)
