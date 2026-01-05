@@ -13048,7 +13048,7 @@
                       "Method": "PUT",
                       "Url": "https://graph.microsoft.com/v1.0/me/activities/3F12345",
                       "Headers": {},
-                      "Body": "{\n  \u0022activitySourceHost\u0022: \u0022https://contoso.com\u0022,\n  \u0022createdDateTime\u0022: \u00222017-06-09T20:54:43.969Z\u0022,\n  \u0022lastModifiedDateTime\u0022: \u00222017-06-09T20:54:43.969Z\u0022,\n  \u0022id\u0022: \u002214332800362997268276\u0022,\n  \u0022appActivityId\u0022: \u0022/article?12345\u0022,\n  \u0022status\u0022: \u0022updated\u0022,\n  \u0022expirationDateTime\u0022: \u00222017-02-26T20:20:48.114Z\u0022,\n  \u0022visualElements\u0022: {\n    \u0022displayText\u0022: \u0022Contoso How-To: How to Tie a Reef Knot\u0022,\n    \u0022description\u0022: \u0022How to Tie a Reef Knot. A step-by-step visual guide to the art of nautical knot-tying.\u0022,\n    \u0022attribution\u0022: {\n      \u0022iconUrl\u0022: \u0022https://www.contoso.com/icon\u0022,\n      \u0022alternateText\u0022: \u0022Contoso Ltd\u0022,\n      \u0022addImageQuery\u0022: false\n    },\n    \u0022backgroundColor\u0022: \u0022#ff0000\u0022,\n    \u0022content\u0022: {\n      \u0022$schema\u0022: \u0022https://adaptivecards.io/schemas/adaptive-card.json\u0022,\n      \u0022type\u0022: \u0022AdaptiveCard\u0022,\n      \u0022body\u0022: [\n        {\n          \u0022type\u0022: \u0022TextBlock\u0022,\n          \u0022text\u0022: \u0022Contoso MainPage\u0022\n        }\n      ]\n    }\n  }\n}",
+                      "Body": "{\n  \u0022activitySourceHost\u0022: \u0022https://contoso.com\u0022,\n  \u0022createdDateTime\u0022: \u00222017-06-09T20:54:43.969Z\u0022,\n  \u0022lastModifiedDateTime\u0022: \u00222017-06-09T20:54:43.969Z\u0022,\n  \u0022id\u0022: \u002214332800362997268276\u0022,\n  \u0022appActivityId\u0022: \u0022/article?12345\u0022,\n  \u0022status\u0022: \u0022updated\u0022,\n  \u0022expirationDateTime\u0022: \u00222017-02-26T20:20:48.114Z\u0022,\n  \u0022visualElements\u0022: {\n    \u0022displayText\u0022: \u0022Contoso How-To: How to Tie a Reef Knot\u0022,\n    \u0022description\u0022: \u0022How to Tie a Reef Knot. A step-by-step visual guide to the art of nautical knot-tying.\u0022,\n    \u0022attribution\u0022: {\n      \u0022iconUrl\u0022: \u0022https://www.contoso.com/icon\u0022,\n      \u0022alternateText\u0022: \u0022Contoso Ltd\u0022,\n      \u0022addImageQuery\u0022: false\n    },\n    \u0022backgroundColor\u0022: \u0022#ff0000\u0022,\n    \u0022content\u0022: {\n      \u0022$schema\u0022: \u0022https://adaptivecards.io/schemas/adaptive-card.json\u0022,\n      \u0022type\u0022: \u0022AdaptiveCard\u0022,\n      \u0022body\u0022: [\n        {\n          \u0022type\u0022: \u0022TextBlock\u0022,\n          \u0022text\u0022: \u0022Contoso MainPage\u0022\n        }\n      ]\n    }\n  },\n  \u0022activationUrl\u0022: \u0022https://www.contoso.com/article?id=12345\u0022\n}",
                       "Children": [],
                       "IsBuiltIn": true
                     },
@@ -13122,7 +13122,7 @@
                   "Id": "782bf053-685d-5ced-a337-e31c8eff61e5",
                   "Type": 1,
                   "Name": "Delete a history item",
-                  "Method": "PUT",
+                  "Method": "DELETE",
                   "Url": "https://graph.microsoft.com/v1.0/me/activities/{id}/historyItems/{id}",
                   "Headers": {},
                   "Body": "",
