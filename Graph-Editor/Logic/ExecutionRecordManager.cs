@@ -111,7 +111,14 @@ namespace Graph_Editor.Logic
                 {
                     if (string.IsNullOrWhiteSpace(lines[i]))
                     {
-                        break;
+                        if (i == 1)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
                     var headerParts = lines[i].Split(new[] { ':' }, 2);
                     if (headerParts.Length == 2)
@@ -131,8 +138,24 @@ namespace Graph_Editor.Logic
                             continue;
                         }
 
+                        if (headerName.ToLower() == "content-length")
+                        {
+                            // Skipt the Content-length header
+                            continue;
+                        }
+
                         headers[headerName] = headerValue;
                     }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                if (i == 2)
+                {
+                    // No header section found
+                    i = 1;
                 }
 
                 // Parse body
