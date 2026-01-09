@@ -1087,6 +1087,109 @@ namespace Graph_Editor.Pages.SampleQuery
             output = output.Replace("/windows/{windowsSettingId}", "/windows/{id}");
             output = output.Replace("/subjectRightsRequests/{subjectRightsRequestId}", "/subjectRightsRequests/{id}");
             output = output.Replace("/instances/{windowsSettingInstanceId}", "/instances/{id}");
+            output = output.Replace("/connectors/{printConnectorId}", "/connectors/{id}");
+            output = output.Replace("/printers/{printerId}", "/printers/{id}");
+            output = output.Replace("/jobs/{printJobId}", "/jobs/{id}");
+            output = output.Replace("/documents/{printDocumentId}", "/documents/{id}");
+            output = output.Replace("/shares/{printerShareId}", "/shares/{id}");
+            output = output.Replace("/operations/{printOperationId}", "/operations/{id}");
+            output = output.Replace("/services/{printServiceId}", "/services/{id}");
+            output = output.Replace("/endpoints/{printServiceEndpointId}", "/endpoints/{id}");
+            output = output.Replace("/taskDefinitions/{printTaskDefinitionId}", "/taskDefinitions/{id}");
+            output = output.Replace("/taskDefinitions/{taskDefinitionId}", "/taskDefinitions/{id}");
+            output = output.Replace("/tasks/{taskId}", "/tasks/{id}");
+            output = output.Replace("/taskTriggers/{printTaskTriggerId}", "/taskTriggers/{id}");
+            output = output.Replace("/allowedUsers/{userId}", "/allowedUsers/{id}");
+            output = output.Replace("/allowedGroups/{groupId}", "/allowedGroups/{id}");
+            output = output.Replace("/mobileApps/{mobileAppId}", "/mobileApps/{id}");
+            output = output.Replace("/managedEBooks/{managedEBookId}", "/managedEBooks/{id}");
+            output = output.Replace("/deviceStates/{deviceInstallStateId}", "/deviceStates/{id}");
+            output = output.Replace("/enterpriseCodeSigningCertificates/{enterpriseCodeSigningCertificateId}", "/enterpriseCodeSigningCertificates/{id}");
+            output = output.Replace("/iosLobAppProvisioningConfigurations/{iosLobAppProvisioningConfigurationId}", "/iosLobAppProvisioningConfigurations/{id}");
+            output = output.Replace("/assignments/{iosLobAppProvisioningConfigurationAssignmentId}", "/assignments/{id}");
+            output = output.Replace("/mobileAppConfigurations/{managedDeviceMobileAppConfigurationId}", "/mobileAppConfigurations/{id}");
+            output = output.Replace("/assignments/{managedEBookAssignmentId}", "/assignments/{id}");
+            output = output.Replace("/assignments/{managedDeviceMobileAppConfigurationAssignmentId}", "/assignments/{id}");
+            output = output.Replace("/deviceStatuses/{managedDeviceMobileAppConfigurationDeviceStatusId}", "/deviceStatuses/{id}");
+            output = output.Replace("/userStatuses/{managedDeviceMobileAppConfigurationUserStatusId}", "/userStatuses/{id}");
+            output = output.Replace("/assignments/{mobileAppAssignmentId}", "/assignments/{id}");
+            output = output.Replace("/mobileAppCategories/{mobileAppCategoryId}", "/mobileAppCategories/{id}");
+            output = output.Replace("/contentVersions/{mobileAppContentId}", "/contentVersions/{id}");
+            output = output.Replace("/files/{mobileAppContentFileId}", "/files/{id}");
+            output = output.Replace("/containedApps/{mobileContainedAppId}", "/containedApps/{id}");
+            output = output.Replace("/userStateSummary/{userInstallStateSummaryId}", "/userStateSummary/{id}");
+            output = output.Replace("/termsAndConditions/{termsAndConditionsId}", "/termsAndConditions/{id}");
+            output = output.Replace("/acceptanceStatuses/{termsAndConditionsAcceptanceStatusId}", "/acceptanceStatuses/{id}");
+            output = output.Replace("/assignments/{termsAndConditionsAssignmentId}", "/assignments/{id}");
+            output = output.Replace("/importedWindowsAutopilotDeviceIdentities/{importedWindowsAutopilotDeviceIdentityId}", "/importedWindowsAutopilotDeviceIdentities/{id}");
+            output = output.Replace("/windowsAutopilotDeviceIdentities/{windowsAutopilotDeviceIdentityId}", "/windowsAutopilotDeviceIdentities/{id}");
+            output = output.Replace("/deviceCompliancePolicies/{deviceCompliancePolicyId}", "/deviceCompliancePolicies/{id}");
+            output = output.Replace("/deviceConfigurations/{deviceConfigurationId}", "/deviceConfigurations/{id}");
+            output = output.Replace("/scheduledActionsForRule/{deviceComplianceScheduledActionForRuleId}", "/scheduledActionsForRule/{id}");
+            output = output.Replace("/scheduledActionConfigurations/{deviceComplianceActionItemId}", "/scheduledActionConfigurations/{id}");
+            output = output.Replace("/deviceStatuses/{deviceComplianceDeviceStatusId}", "/deviceStatuses/{id}");
+            output = output.Replace("/assignments/{deviceCompliancePolicyAssignmentId}", "/assignments/{id}");
+            output = output.Replace("/deviceCompliancePolicySettingStateSummaries/{deviceCompliancePolicySettingStateSummaryId}", "/deviceCompliancePolicySettingStateSummaries/{id}");
+            output = output.Replace("/deviceComplianceSettingStates/{deviceComplianceSettingStateId}", "/deviceComplianceSettingStates/{id}");
+            output = output.Replace("/userStatuses/{deviceComplianceUserStatusId}", "/userStatuses/{id}");
+            output = output.Replace("/assignments/{deviceConfigurationAssignmentId}", "/assignments/{id}");
+            output = output.Replace("/deviceStatuses/{deviceConfigurationDeviceStatusId}", "/deviceStatuses/{id}");
+            output = output.Replace("/userStatuses/{deviceConfigurationUserStatusId}", "/userStatuses/{id}");
+            output = output.Replace("/iosUpdateStatuses/{iosUpdateDeviceStatusId}", "/iosUpdateStatuses/{id}");
+            output = output.Replace("/deviceSettingStateSummaries/{settingStateDeviceSummaryId}", "/deviceSettingStateSummaries/{id}");
+            output = output.Replace("/mobileAppTroubleshootingEvents/{mobileAppTroubleshootingEventId}", "/mobileAppTroubleshootingEvents/{id}");
+            output = output.Replace("/appLogCollectionRequests/{appLogCollectionRequestId}", "/appLogCollectionRequests/{id}");
+            output = output.Replace("/detectedApps/{detectedAppId}", "/detectedApps/{id}");
+            output = output.Replace("/managedDevices/{managedDeviceId}", "/managedDevices/{id}");
+            output = output.Replace("/logCollectionRequests/{deviceLogCollectionResponseId}", "/logCollectionRequests/{id}");
+            output = output.Replace("/windowsMalwareInformation/{windowsMalwareInformationId}", "/windowsMalwareInformation/{id}");
+            output = output.Replace("/deviceMalwareStates/{malwareStateForWindowsDeviceId}", "/deviceMalwareStates/{id}");
+            output = output.Replace("/userExperienceAnalyticsAppHealthApplicationPerformanceByAppVersionDetails/{userExperienceAnalyticsAppHealthAppPerformanceByAppVersionDetailsId}", "/userExperienceAnalyticsAppHealthApplicationPerformanceByAppVersionDetails/{id}");
+            output = output.Replace("/userExperienceAnalyticsAppHealthApplicationPerformanceByAppVersionDeviceId/{userExperienceAnalyticsAppHealthAppPerformanceByAppVersionDeviceIdId}", "/userExperienceAnalyticsAppHealthApplicationPerformanceByAppVersionDeviceId/{id}");
+            output = output.Replace("/userExperienceAnalyticsAppHealthApplicationPerformanceByOSVersion/{userExperienceAnalyticsAppHealthAppPerformanceByOSVersionId}", "/userExperienceAnalyticsAppHealthApplicationPerformanceByOSVersion/{id}");
+            output = output.Replace("/userExperienceAnalyticsAppHealthApplicationPerformance/{userExperienceAnalyticsAppHealthApplicationPerformanceId}", "/userExperienceAnalyticsAppHealthApplicationPerformance/{id}");
+            output = output.Replace("/userExperienceAnalyticsAppHealthDeviceModelPerformance/{userExperienceAnalyticsAppHealthDeviceModelPerformanceId}", "/userExperienceAnalyticsAppHealthDeviceModelPerformance/{id}");
+            output = output.Replace("/userExperienceAnalyticsAppHealthDevicePerformance/{userExperienceAnalyticsAppHealthDevicePerformanceId}", "/userExperienceAnalyticsAppHealthDevicePerformance/{id}");
+            output = output.Replace("/userExperienceAnalyticsAppHealthDevicePerformanceDetails/{userExperienceAnalyticsAppHealthDevicePerformanceDetailsId}", "/userExperienceAnalyticsAppHealthDevicePerformanceDetails/{id}");
+            output = output.Replace("/userExperienceAnalyticsAppHealthOSVersionPerformance/{userExperienceAnalyticsAppHealthOSVersionPerformanceId}", "/userExperienceAnalyticsAppHealthOSVersionPerformance/{id}");
+            output = output.Replace("/userExperienceAnalyticsBaselines/{userExperienceAnalyticsBaselineId}", "/userExperienceAnalyticsBaselines/{id}");
+            output = output.Replace("/userExperienceAnalyticsDevicePerformance/{userExperienceAnalyticsDevicePerformanceId}", "/userExperienceAnalyticsDevicePerformance/{id}");
+            output = output.Replace("/userExperienceAnalyticsDeviceScores/{userExperienceAnalyticsDeviceScoresId}", "/userExperienceAnalyticsDeviceScores/{id}");
+            output = output.Replace("/userExperienceAnalyticsDeviceStartupHistory/{userExperienceAnalyticsDeviceStartupHistoryId}", "/userExperienceAnalyticsDeviceStartupHistory/{id}");
+            output = output.Replace("/userExperienceAnalyticsDeviceStartupProcesses/{userExperienceAnalyticsDeviceStartupProcessId}", "/userExperienceAnalyticsDeviceStartupProcesses/{id}");
+            output = output.Replace("/userExperienceAnalyticsMetricHistory/{userExperienceAnalyticsMetricHistoryId}", "/userExperienceAnalyticsMetricHistory/{id}");
+            output = output.Replace("/userExperienceAnalyticsModelScores/{userExperienceAnalyticsModelScoresId}", "/userExperienceAnalyticsModelScores/{id}");
+            output = output.Replace("/userExperienceAnalyticsScoreHistory/{userExperienceAnalyticsScoreHistoryId}", "/userExperienceAnalyticsScoreHistory/{id}");
+            output = output.Replace("/userExperienceAnalyticsWorkFromAnywhereMetrics/{userExperienceAnalyticsWorkFromAnywhereMetricId}", "/userExperienceAnalyticsWorkFromAnywhereMetrics/{id}");
+            output = output.Replace("/metricDevices/{userExperienceAnalyticsWorkFromAnywhereDeviceId}", "/metricDevices/{id}");
+            output = output.Replace("/userExperienceAnalyticsWorkFromAnywhereModelPerformance/{userExperienceAnalyticsWorkFromAnywhereModelPerformanceId}", "/userExperienceAnalyticsWorkFromAnywhereModelPerformance/{id}");
+            output = output.Replace("/detectedMalwareState/{windowsDeviceMalwareStateId}", "/detectedMalwareState/{id}");
+            output = output.Replace("/androidManagedAppProtections/{androidManagedAppProtectionId}", "/androidManagedAppProtections/{id}");
+            output = output.Replace("/managedAppRegistrations/{managedAppRegistrationId}", "/managedAppRegistrations/{id}");
+            output = output.Replace("/defaultManagedAppProtections/{defaultManagedAppProtectionId}", "/defaultManagedAppProtections/{id}");
+            output = output.Replace("/iosManagedAppProtections/{iosManagedAppProtectionId}", "/iosManagedAppProtections/{id}");
+            output = output.Replace("/managedAppPolicies/{managedAppPolicyId}", "/managedAppPolicies/{id}");
+            output = output.Replace("/operations/{managedAppOperationId}", "/operations/{id}");
+            output = output.Replace("/managedAppStatuses/{managedAppStatusId}", "/managedAppStatuses/{id}");
+            output = output.Replace("/apps/{managedMobileAppId}", "/apps/{id}");
+            output = output.Replace("/mdmWindowsInformationProtectionPolicies/{mdmWindowsInformationProtectionPolicyId}", "/mdmWindowsInformationProtectionPolicies/{id}");
+            output = output.Replace("/targetedManagedAppConfigurations/{targetedManagedAppConfigurationId}", "/targetedManagedAppConfigurations/{id}");
+            output = output.Replace("/assignments/{targetedManagedAppPolicyAssignmentId}", "/assignments/{id}");
+            output = output.Replace("/windowsInformationProtectionPolicies/{windowsInformationProtectionPolicyId}", "/windowsInformationProtectionPolicies/{id}");
+            output = output.Replace("/exemptAppLockerFiles/{windowsInformationProtectionAppLockerFileId}", "/exemptAppLockerFiles/{id}");
+            output = output.Replace("/windowsInformationProtectionAppLearningSummaries/{windowsInformationProtectionAppLearningSummaryId}", "/windowsInformationProtectionAppLearningSummaries/{id}");
+            output = output.Replace("/windowsInformationProtectionNetworkLearningSummaries/{windowsInformationProtectionNetworkLearningSummaryId}", "/windowsInformationProtectionNetworkLearningSummaries/{id}");
+            output = output.Replace("/deviceEnrollmentConfigurations/{deviceEnrollmentConfigurationId}", "/deviceEnrollmentConfigurations/{id}");
+            output = output.Replace("/exchangeConnectors/{deviceManagementExchangeConnectorId}", "/exchangeConnectors/{id}");
+            output = output.Replace("/complianceManagementPartners/{complianceManagementPartnerId}", "/complianceManagementPartners/{id}");
+            output = output.Replace("/deviceManagementPartners/{deviceManagementPartnerId}", "/deviceManagementPartners/{id}");
+            output = output.Replace("/assignments/{enrollmentConfigurationAssignmentId}", "/assignments/{id}");
+            output = output.Replace("/mobileThreatDefenseConnectors/{mobileThreatDefenseConnectorId}", "/mobileThreatDefenseConnectors/{id}");
+            output = output.Replace("/vppTokens/{vppTokenId}", "/vppTokens/{id}");
+            output = output.Replace("/roleAssignments/{deviceAndAppManagementRoleAssignmentId}", "/roleAssignments/{id}");
+            output = output.Replace("/roleDefinitions/{roleDefinitionId}", "/roleDefinitions/{id}");
+            output = output.Replace("/resourceOperations/{resourceOperationId}", "/resourceOperations/{id}");
+            output = output.Replace("/roleAssignments/{roleAssignmentId}", "/roleAssignments/{id}");
             output = output.Replace("Pacific Standard Time", "${LocalTimeZone}").Replace("Eastern Standard Time", "${LocalTimeZone}");
             output = output.Replace("AdeleV@contoso.com", "${SampleInternalUser1Address}", true, null).Replace("Adele Vance", "${SampleInternalUser1Name}");
             output = output.Replace("samanthab@contoso.com", "${SampleInternalUser2Address}", true, null).Replace("Samantha Booth", "${SampleInternalUser2Name}");
@@ -1133,7 +1236,9 @@ namespace Graph_Editor.Pages.SampleQuery
                 "masterCategories", "ediscoveryCases", "caseMembers",
                 "places", "levels", "fixtures", "sections", "units",
                 "subscriptions", "subjectRightsRequests",
-                "customQuestions", "customers", "services", "staffMembers"
+                "customQuestions", "customers", "services", "staffMembers",
+                "siteLists", "sharedCookies", "cloudPCs", "deviceImages", "provisioningPolicies", "userSettings",
+                "connectors"
             };
             
             foreach (var endpoint in endpoints)
@@ -1154,7 +1259,8 @@ namespace Graph_Editor.Pages.SampleQuery
             string[] endpoints =
             {
                 "messages", "calendars", "events", "attachments", "threads", "posts", "calendarGroups", "calendarPermissions",
-                "checkIns", "occurrences", "recurrences", "appointments"
+                "checkIns", "occurrences", "recurrences", "appointments",
+                "issues"
             };
             
             foreach (var endpoint in endpoints)
