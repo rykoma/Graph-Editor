@@ -154,8 +154,9 @@ namespace Graph_Editor.Logic
 
                 if (i == 2)
                 {
-                    // No header section found
-                    i = 1;
+                    if (lines.Count() >= 3 && !string.IsNullOrEmpty(lines[i])) {
+                        i = 1;
+                    }
                 }
 
                 // Parse body
