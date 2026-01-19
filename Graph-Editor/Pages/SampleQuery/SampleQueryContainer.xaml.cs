@@ -1190,6 +1190,8 @@ namespace Graph_Editor.Pages.SampleQuery
             output = output.Replace("/roleDefinitions/{roleDefinitionId}", "/roleDefinitions/{id}");
             output = output.Replace("/resourceOperations/{resourceOperationId}", "/resourceOperations/{id}");
             output = output.Replace("/roleAssignments/{roleAssignmentId}", "/roleAssignments/{id}");
+            output = output.Replace("/schools/{school-id}", "/schools/{id}");
+            output = output.Replace("/classes/{class-id}", "/classes/{id}");
             output = output.Replace("Pacific Standard Time", "${LocalTimeZone}").Replace("Eastern Standard Time", "${LocalTimeZone}");
             output = output.Replace("AdeleV@contoso.com", "${SampleInternalUser1Address}", true, null).Replace("Adele Vance", "${SampleInternalUser1Name}");
             output = output.Replace("samanthab@contoso.com", "${SampleInternalUser2Address}", true, null).Replace("Samantha Booth", "${SampleInternalUser2Name}");
@@ -1238,7 +1240,9 @@ namespace Graph_Editor.Pages.SampleQuery
                 "subscriptions", "subjectRightsRequests",
                 "customQuestions", "customers", "services", "staffMembers",
                 "siteLists", "sharedCookies", "cloudPCs", "deviceImages", "provisioningPolicies", "userSettings",
-                "connectors"
+                "connectors",
+                "schools", "classes", "assignments", "resources", "categories", "gradingCategories", "assignmentCategories", "submissions", "outcomes",
+                "gradingSchemes", "modules", "rubrics"
             };
             
             foreach (var endpoint in endpoints)

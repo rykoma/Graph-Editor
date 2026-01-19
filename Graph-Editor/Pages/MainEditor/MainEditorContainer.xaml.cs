@@ -1130,6 +1130,18 @@ namespace Graph_Editor.Pages.MainEditor
                 }
             },
             {
+                "${DateTime2DayAgo0Utc}", () =>
+                {
+                    return DateTime.Now.AddDays(-2).ToString("yyyy-MM-dd") + "T00:00:00Z";
+                }
+            },
+            {
+                "${DateTime1DayAgo0Utc}", () =>
+                {
+                    return DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") + "T00:00:00Z";
+                }
+            },
+            {
                 "${DateTime0DayLater0}", () =>
                 {
                     return DateTime.Now.ToString("yyyy-MM-dd") + "T00:00:00";
