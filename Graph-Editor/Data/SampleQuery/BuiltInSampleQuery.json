@@ -57979,6 +57979,55 @@
           "Name": "Administration",
           "Children": [
             {
+              "Id": "c724291f-9e6c-5daf-a34a-ee83ea7a36e4",
+              "Type": 0,
+              "Name": "Teams policy assignment",
+              "Children": [
+                {
+                  "Id": "d9b239f4-e411-58f0-aa1b-df442428000f",
+                  "Type": 1,
+                  "Name": "Get policy ID",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "c3e78d94-95c2-593c-8553-ea189c5de607",
+              "Type": 0,
+              "Name": "Teams policy user assignment",
+              "Children": [
+                {
+                  "Id": "8e34586f-7669-5933-97ca-4b6abf808185",
+                  "Type": 1,
+                  "Name": "Assign",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "5b304390-917c-5405-a3e2-26f1a744fec6",
+                  "Type": 1,
+                  "Name": "Unassign",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
               "Id": "e6ddb099-7fd6-5310-ba10-5dc336347616",
               "Type": 0,
               "Name": "Teams user configuration",
