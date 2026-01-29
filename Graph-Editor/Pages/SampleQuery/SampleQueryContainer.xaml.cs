@@ -1243,7 +1243,8 @@ namespace Graph_Editor.Pages.SampleQuery
                 "connectors",
                 "schools", "classes", "assignments", "resources", "categories", "gradingCategories", "assignmentCategories", "submissions", "outcomes",
                 "gradingSchemes", "modules", "rubrics",
-                "roles", "members"
+                "roles", "members",
+                "operations"
             };
             
             foreach (var endpoint in endpoints)
@@ -1266,7 +1267,8 @@ namespace Graph_Editor.Pages.SampleQuery
                 "messages", "calendars", "events", "attachments", "threads", "posts", "calendarGroups", "calendarPermissions",
                 "checkIns", "occurrences", "recurrences", "appointments",
                 "issues",
-                "communities", "engagementAsyncOperations"
+                "communities", "engagementAsyncOperations",
+                "connections", "items", "groups", "members"
             };
             
             foreach (var endpoint in endpoints)
