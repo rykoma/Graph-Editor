@@ -40031,6 +40031,58 @@
                   "IsBuiltIn": true
                 },
                 {
+                  "Id": "4203007d-65e0-57e8-aba2-d37d4d48cbf2",
+                  "Type": 0,
+                  "Name": "External authentication method",
+                  "Children": [
+                    {
+                      "Id": "25f0b4f9-2263-505c-b8f1-42b5c8d2aed3",
+                      "Type": 1,
+                      "Name": "List",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "915d3fc1-edcf-59ee-a565-e1f3a1944301",
+                      "Type": 1,
+                      "Name": "Create",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "91be7fd8-e640-5037-bbbe-df7fa50b6418",
+                      "Type": 1,
+                      "Name": "Get",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "2a94d675-5f0e-5abc-a92c-42413fa2a8e8",
+                      "Type": 1,
+                      "Name": "Delete",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
                   "Id": "3cf4336d-59f0-5481-a197-04c43768f540",
                   "Type": 0,
                   "Name": "FIDO2",
@@ -42181,6 +42233,96 @@
               "IsBuiltIn": true
             },
             {
+              "Id": "d8eea186-7140-5636-9b1c-53799f876a20",
+              "Type": 0,
+              "Name": "Fraud protection provider",
+              "Children": [
+                {
+                  "Id": "9aee42ac-ba84-5f81-8bae-2d515000f6cb",
+                  "Type": 0,
+                  "Name": "Fraud protection provider",
+                  "Children": [
+                    {
+                      "Id": "eb8eab99-9aa1-5a2f-9f10-0e223ced231b",
+                      "Type": 1,
+                      "Name": "List",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "4f59581e-ca0d-5482-9125-38e59ade6dda",
+                      "Type": 0,
+                      "Name": "Create",
+                      "Children": [
+                        {
+                          "Id": "eefef214-5fbc-598b-9404-fac69dfb9b93",
+                          "Type": 1,
+                          "Name": "Create a new arkoseFraudProtectionProvider object",
+                          "Method": "",
+                          "Url": "",
+                          "Headers": {},
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "ef0976b0-edb5-5dea-8ac0-5d7209b4dc5f",
+                          "Type": 1,
+                          "Name": "Create a new humanSecurityFraudProtectionProvider object",
+                          "Method": "",
+                          "Url": "",
+                          "Headers": {},
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        }
+                      ],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "9c092284-99e5-5398-9abc-02283e7f2d90",
+                      "Type": 1,
+                      "Name": "Get",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "d05b4edd-5fd4-5991-8f37-740fc159ae86",
+                      "Type": 1,
+                      "Name": "Update",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "327bec64-9405-51d7-a2d4-082933e94409",
+                      "Type": 1,
+                      "Name": "Delete",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
               "Id": "979e3bb9-84df-5831-8c8e-c93fcffbb628",
               "Type": 0,
               "Name": "Identity protection",
@@ -42406,88 +42548,6 @@
                       "Id": "fe57157c-7d1e-56f0-bdd8-924be143481a",
                       "Type": 1,
                       "Name": "List history",
-                      "Method": "",
-                      "Url": "",
-                      "Headers": {},
-                      "Body": "",
-                      "Children": [],
-                      "IsBuiltIn": true
-                    }
-                  ],
-                  "IsBuiltIn": true
-                },
-                {
-                  "Id": "08459358-df23-5e32-9511-83e108d074d0",
-                  "Type": 0,
-                  "Name": "Fraud protection provider",
-                  "Children": [
-                    {
-                      "Id": "ad884fad-25cf-5c12-b4c0-669cbb7fbebe",
-                      "Type": 1,
-                      "Name": "List",
-                      "Method": "",
-                      "Url": "",
-                      "Headers": {},
-                      "Body": "",
-                      "Children": [],
-                      "IsBuiltIn": true
-                    },
-                    {
-                      "Id": "bfa00c59-7837-5e0d-a347-516b6b6e2cae",
-                      "Type": 0,
-                      "Name": "Create",
-                      "Children": [
-                        {
-                          "Id": "73b103dc-26da-5875-b469-bd95a9ce1777",
-                          "Type": 1,
-                          "Name": "Create a new arkoseFraudProtectionProvider object",
-                          "Method": "",
-                          "Url": "",
-                          "Headers": {},
-                          "Body": "",
-                          "Children": [],
-                          "IsBuiltIn": true
-                        },
-                        {
-                          "Id": "20e46ed9-399c-5285-83de-a62d6aa228ba",
-                          "Type": 1,
-                          "Name": "Create a new humanSecurityFraudProtectionProvider object",
-                          "Method": "",
-                          "Url": "",
-                          "Headers": {},
-                          "Body": "",
-                          "Children": [],
-                          "IsBuiltIn": true
-                        }
-                      ],
-                      "IsBuiltIn": true
-                    },
-                    {
-                      "Id": "e3b76439-10dc-5065-8fb1-99afa687b90d",
-                      "Type": 1,
-                      "Name": "Get",
-                      "Method": "",
-                      "Url": "",
-                      "Headers": {},
-                      "Body": "",
-                      "Children": [],
-                      "IsBuiltIn": true
-                    },
-                    {
-                      "Id": "7c0d25f8-c727-5a64-bbdd-ecccdfd0d9e2",
-                      "Type": 1,
-                      "Name": "Update",
-                      "Method": "",
-                      "Url": "",
-                      "Headers": {},
-                      "Body": "",
-                      "Children": [],
-                      "IsBuiltIn": true
-                    },
-                    {
-                      "Id": "028fc513-4930-5f77-8518-af979c990b35",
-                      "Type": 1,
-                      "Name": "Delete",
                       "Method": "",
                       "Url": "",
                       "Headers": {},
