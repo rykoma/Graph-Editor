@@ -40575,6 +40575,47 @@
                   "IsBuiltIn": true
                 },
                 {
+                  "Id": "e2d540ee-e634-5864-a3b8-91780d16f7d1",
+                  "Type": 0,
+                  "Name": "External authentication method",
+                  "Children": [
+                    {
+                      "Id": "5a1768eb-7332-51f4-bb77-cc7cfde7c4d4",
+                      "Type": 1,
+                      "Name": "Get",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "d247e1fc-ede8-5035-a7fb-3420924a1a87",
+                      "Type": 1,
+                      "Name": "Update",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "3362da27-0e69-5435-81e0-caffe1490748",
+                      "Type": 1,
+                      "Name": "Delete",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
                   "Id": "d48e1dbf-6496-5ce2-9c71-563b5c8b129a",
                   "Type": 0,
                   "Name": "FIDO2",
@@ -50352,95 +50393,9 @@
                   "IsBuiltIn": true
                 }
               ],
-              "IsBuiltIn": true
+          "IsBuiltIn": true
             }
           ],
-          "IsBuiltIn": true
-        }
-      ],
-      "IsBuiltIn": true
-    },
-    {
-      "Id": "b8da3cbf-29a7-5d35-9d67-5e7cb3950934",
-      "Type": 0,
-      "Name": "Audit log query",
-      "Children": [
-        {
-          "Id": "48e9a93e-2391-5718-b1eb-2d24fa667e95",
-          "Type": 0,
-          "Name": "Audit log query",
-          "Children": [
-            {
-              "Id": "ffad76f1-9e2c-5c18-ad7f-78366b05f063",
-              "Type": 1,
-              "Name": "List audit log queries",
-              "Method": "",
-              "Url": "",
-              "Headers": {},
-              "Body": "",
-              "Children": [],
-              "IsBuiltIn": true
-            },
-            {
-              "Id": "8eea0c27-fd98-5f00-9247-82c10b5d2b85",
-              "Type": 1,
-              "Name": "Create audit log query",
-              "Method": "",
-              "Url": "",
-              "Headers": {},
-              "Body": "",
-              "Children": [],
-              "IsBuiltIn": true
-            },
-            {
-              "Id": "bdb89eef-070c-59e9-bea7-0ebff0d4882d",
-              "Type": 1,
-              "Name": "Get audit log query",
-              "Method": "",
-              "Url": "",
-              "Headers": {},
-              "Body": "",
-              "Children": [],
-              "IsBuiltIn": true
-            },
-            {
-              "Id": "61af4557-d1cf-56c5-b30c-17e9be263bb3",
-              "Type": 1,
-              "Name": "List records",
-              "Method": "",
-              "Url": "",
-              "Headers": {},
-              "Body": "",
-              "Children": [],
-              "IsBuiltIn": true
-            }
-          ],
-          "IsBuiltIn": true
-        },
-        {
-          "Id": "8932079a-1aa7-5238-9e8d-4180146f1f05",
-          "Type": 0,
-          "Name": "Audit log record",
-          "Children": [
-            {
-              "Id": "fe1f7719-a114-52c1-8089-e3159a525193",
-              "Type": 1,
-              "Name": "List",
-              "Method": "",
-              "Url": "",
-              "Headers": {},
-              "Body": "",
-              "Children": [],
-              "IsBuiltIn": true
-            }
-          ],
-          "IsBuiltIn": true
-        },
-        {
-          "Id": "28ea12c0-fcba-548d-9089-7c34052abe5a",
-          "Type": 0,
-          "Name": "Complex types",
-          "Children": [],
           "IsBuiltIn": true
         }
       ],
@@ -51569,6 +51524,69 @@
                       "IsBuiltIn": true
                     }
                   ],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            }
+          ],
+          "IsBuiltIn": true
+        },
+        {
+          "Id": "c308309c-9f33-58e5-8554-5cf46eef2591",
+          "Type": 0,
+          "Name": "Audit log query",
+          "Children": [
+            {
+              "Id": "01dc2976-78c4-5ba7-8a6f-684ca5d73640",
+              "Type": 0,
+              "Name": "Audit log query",
+              "Children": [
+                {
+                  "Id": "70b4653e-7537-5d8b-83e5-583dca778688",
+                  "Type": 1,
+                  "Name": "List audit log queries",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "50347af8-01be-50a7-8039-af0c71c458ed",
+                  "Type": 1,
+                  "Name": "Create audit log query",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "dde1cfe4-1386-5a1f-9e37-e78565ee2d9e",
+                  "Type": 1,
+                  "Name": "Get audit log query",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "35bbc31e-16ee-59b7-8684-23fb58180092",
+                  "Type": 1,
+                  "Name": "List records",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
                   "IsBuiltIn": true
                 }
               ],
