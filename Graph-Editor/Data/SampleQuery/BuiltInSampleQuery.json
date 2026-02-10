@@ -1385,17 +1385,6 @@
               "Name": "Insights",
               "Children": [
                 {
-                  "Id": "1bbf7afb-28be-5fa8-b766-208d511874d2",
-                  "Type": 1,
-                  "Name": "List shared",
-                  "Method": "GET",
-                  "Url": "https://graph.microsoft.com/v1.0/me/insights/shared",
-                  "Headers": {},
-                  "Body": "",
-                  "Children": [],
-                  "IsBuiltIn": true
-                },
-                {
                   "Id": "04f90448-6ffb-56cf-87fc-e0120b313fd4",
                   "Type": 1,
                   "Name": "List trending",
@@ -1404,36 +1393,6 @@
                   "Headers": {},
                   "Body": "",
                   "Children": [],
-                  "IsBuiltIn": true
-                },
-                {
-                  "Id": "da041773-702d-5bd1-812b-9ac4ac6bfdd6",
-                  "Type": 0,
-                  "Name": "List used",
-                  "Children": [
-                    {
-                      "Id": "4009073c-9e1d-50e1-9c21-83efbc748370",
-                      "Type": 1,
-                      "Name": "Return documents that user has modified",
-                      "Method": "GET",
-                      "Url": "https://graph.microsoft.com/v1.0/me/insights/used",
-                      "Headers": {},
-                      "Body": "",
-                      "Children": [],
-                      "IsBuiltIn": true
-                    },
-                    {
-                      "Id": "cddd05ce-4990-5469-9a82-5a1ed99930bb",
-                      "Type": 1,
-                      "Name": "Return the most recently viewed documents that the signed-in user might or might not have modified",
-                      "Method": "GET",
-                      "Url": "https://graph.microsoft.com/v1.0/me/insights/used?$orderby=LastUsed/LastAccessedDateTime desc",
-                      "Headers": {},
-                      "Body": "",
-                      "Children": [],
-                      "IsBuiltIn": true
-                    }
-                  ],
                   "IsBuiltIn": true
                 },
                 {
@@ -1449,14 +1408,58 @@
                 },
                 {
                   "Id": "ed569069-9d49-59be-bd17-d8439740b0dc",
-                  "Type": 1,
+                      "Type": 1,
                   "Name": "Update content discovery settings",
                   "Method": "PATCH",
                   "Url": "https://graph.microsoft.com/v1.0/me/settings",
-                  "Headers": {},
+                      "Headers": {},
                   "Body": "{\n  \u0022contributionToContentDiscoveryDisabled\u0022: true\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                  "Id": "cb5952e5-1205-5ed6-9665-c934e446d572",
+                      "Type": 1,
+                  "Name": "List shared (deprecated)",
+                      "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/me/insights/shared",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "0114e237-5386-5b18-ba44-e3a38d8c72b6",
+                  "Type": 0,
+                  "Name": "List used (deprecated)",
+                  "Children": [
+                    {
+                      "Id": "3d8ca556-288f-56d7-93ac-b2b8d9618d64",
+                  "Type": 1,
+                      "Name": "Return documents that user has modified",
+                  "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/me/insights/used",
+                  "Headers": {},
+                  "Body": "",
                   "Children": [],
                   "IsBuiltIn": true
+                },
+                {
+                      "Id": "b581de04-3ac3-5441-b6c8-51f75d7ea4f9",
+                  "Type": 1,
+                      "Name": "Return the most recently viewed documents that the signed-in user might or might not have modified",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/me/insights/used?$orderby=LastUsed/LastAccessedDateTime desc",
+                  "Headers": {},
+                      "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
                 }
               ],
               "IsBuiltIn": true
@@ -27936,7 +27939,7 @@
               "Name": "Create module resource",
               "Children": [
                 {
-                  "Id": "16cea11c-9fc5-4157-8ad2-dbb4bd3765e4",
+                  "Id": "001deacc-1b35-5490-8ec2-62f6672b8131",
                   "Type": 1,
                   "Name": "Create an educationLinkResource",
                   "Method": "POST",
@@ -27947,7 +27950,7 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "3e2cd2a7-80a8-4e38-a325-89fac3005a3c",
+                  "Id": "260c12b9-65cc-5048-ae2f-3d9dd93a56f2",
                   "Type": 1,
                   "Name": "Create an educationWordResource",
                   "Method": "POST",
@@ -27958,7 +27961,7 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "4d4912fb-e2c6-4f7c-9d6d-3c13cf858d67",
+                  "Id": "0dfa3649-7e14-5503-ac58-cbc9afc12bea",
                   "Type": 1,
                   "Name": "Create an educationFileResource",
                   "Method": "POST",
@@ -27969,7 +27972,7 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "70b45237-3450-4cce-8db0-d241ceb35cbd",
+                  "Id": "9ef8abba-e921-5fe7-a1e6-bfcf7e5e7442",
                   "Type": 1,
                   "Name": "Create an educationExcelResource",
                   "Method": "POST",
@@ -27980,7 +27983,7 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "bc333c52-eb1a-4735-b934-eff0c01c4630",
+                  "Id": "d625a8a6-f06c-5796-8533-71e1fee0b4d4",
                   "Type": 1,
                   "Name": "Create an educationPowerPointResource",
                   "Method": "POST",
@@ -27991,7 +27994,7 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "ce4aea40-cb0a-441c-aaee-eb7f49a37428",
+                  "Id": "06f536b8-9b13-59bd-a5aa-bd8c4d954ebd",
                   "Type": 1,
                   "Name": "Create an educationMediaResource",
                   "Method": "POST",
@@ -28002,7 +28005,7 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "813afc30-9588-45a5-a85c-58eef0a95961",
+                  "Id": "a3316c44-5f66-5144-83b8-91ffeb6cd808",
                   "Type": 1,
                   "Name": "Create an educationChannelResource",
                   "Method": "POST",
@@ -28013,7 +28016,7 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "4a51e052-1b82-4569-8afa-743d24b5881a",
+                  "Id": "e065aef6-fa11-5d6e-bb01-a0edf6c596db",
                   "Type": 1,
                   "Name": "Create an educationLinkedAssignmentResource",
                   "Method": "POST",
@@ -47239,6 +47242,77 @@
           "IsBuiltIn": true
         },
         {
+          "Id": "3a685b7e-af71-5223-ba5f-1446b52514a4",
+          "Type": 0,
+          "Name": "Message trace",
+          "Children": [
+            {
+              "Id": "905d0811-1e6c-516a-81c8-8b7c0ac2163e",
+              "Type": 0,
+              "Name": "List message traces",
+              "Children": [
+                {
+                  "Id": "c0367590-0cb5-5ec8-8645-01f2fecdee9c",
+                  "Type": 1,
+                  "Name": "List message traces",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "0d219f6c-f756-5f48-bdae-5274f8c93fd4",
+                  "Type": 1,
+                  "Name": "Get message trace by message trace ID",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "ccc6f450-3c0b-5b10-82e2-ceecdf64b932",
+                  "Type": 1,
+                  "Name": "Retrieve message traces for a specific time period",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "5ea17e1d-8b19-505e-8cb2-de79bf8c5872",
+                  "Type": 1,
+                  "Name": "List message traces by subject and recipient",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "d95889d4-83b0-5ac7-b840-93870a2341ea",
+              "Type": 1,
+              "Name": "Get details by recipient",
+              "Method": "",
+              "Url": "",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            }
+          ],
+          "IsBuiltIn": true
+        },
+        {
           "Id": "87c4e068-bb84-53e5-a770-3a2e242f6fcf",
           "Type": 0,
           "Name": "Focused Inbox",
@@ -48004,9 +48078,9 @@
               "Name": "Shared insight",
               "Children": [
                 {
-                  "Id": "4ff19429-e9ae-58e5-9030-2f457662e3e5",
+                  "Id": "7627f252-3322-5c0f-bf66-44e8312385ce",
                   "Type": 1,
-                  "Name": "List shared",
+                  "Name": "List shared (deprecated)",
                   "Method": "",
                   "Url": "",
                   "Headers": {},
@@ -48042,12 +48116,12 @@
               "Name": "Used insight",
               "Children": [
                 {
-                  "Id": "92f4c594-f81a-54c7-88d6-0bb45ef15794",
+                  "Id": "a00f2947-e520-5c2e-809e-d58690e91004",
                   "Type": 0,
-                  "Name": "List used",
+                  "Name": "List used (deprecated)",
                   "Children": [
                     {
-                      "Id": "93c68e2e-d2c9-5c99-b132-ca1c5a212ccb",
+                      "Id": "4e60bbbc-fe39-5881-b07a-7c3e966f29c5",
                       "Type": 1,
                       "Name": "Return documents that user has modified",
                       "Method": "",
@@ -48058,7 +48132,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "ab919a38-af56-5afb-8b78-ad276a048d18",
+                      "Id": "9771e792-166d-5614-872d-bf55195570de",
                       "Type": 1,
                       "Name": "Return the most recently viewed documents that the signed-in user might or might not have modified",
                       "Method": "",
@@ -51587,6 +51661,22 @@
                   "IsBuiltIn": true
                 }
               ],
+                  "IsBuiltIn": true
+            },
+            {
+              "Id": "8c2118e6-f0ad-57ba-9b9d-5237e6da8a1e",
+              "Type": 0,
+              "Name": "Audit log record",
+              "Children": [
+                {
+                  "Id": "4e4a1df1-fc86-5e3c-b5dc-4552bd80a9b2",
+                  "Type": 1,
+                  "Name": "List",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
                   "IsBuiltIn": true
                 }
               ],
