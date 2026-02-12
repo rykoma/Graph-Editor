@@ -1192,6 +1192,13 @@ namespace Graph_Editor.Pages.SampleQuery
             output = output.Replace("/roleAssignments/{roleAssignmentId}", "/roleAssignments/{id}");
             output = output.Replace("/schools/{school-id}", "/schools/{id}");
             output = output.Replace("/classes/{class-id}", "/classes/{id}");
+            output = output.Replace("/drives/{drive-id}", "/drives/{id}");
+            output = output.Replace("/drives/987def", "/drives/{id}");
+            output = output.Replace("/thumbnails/{thumb-id}", "/thumbnails/{id}");
+            output = output.Replace("/permissions/{perm-id}", "/permissions/{id}");
+            output = output.Replace("/versions/{version-id}", "/versions/{id}");
+            output = output.Replace("/bundles/{bundle-id}", "/bundles/{id}");
+            output = output.Replace("/children/{item-id}", "/children/{id}");
             output = output.Replace("Pacific Standard Time", "${LocalTimeZone}").Replace("Eastern Standard Time", "${LocalTimeZone}");
             output = output.Replace("AdeleV@contoso.com", "${SampleInternalUser1Address}", true, null).Replace("Adele Vance", "${SampleInternalUser1Name}");
             output = output.Replace("samanthab@contoso.com", "${SampleInternalUser2Address}", true, null).Replace("Samantha Booth", "${SampleInternalUser2Name}");
@@ -1244,7 +1251,8 @@ namespace Graph_Editor.Pages.SampleQuery
                 "schools", "classes", "assignments", "resources", "categories", "gradingCategories", "assignmentCategories", "submissions", "outcomes",
                 "gradingSchemes", "modules", "rubrics",
                 "roles", "members",
-                "operations"
+                "operations",
+                "containerTypes", "containerTypeRegistrations","applicationPermissionGrants"
             };
             
             foreach (var endpoint in endpoints)
@@ -1268,15 +1276,16 @@ namespace Graph_Editor.Pages.SampleQuery
                 "checkIns", "occurrences", "recurrences", "appointments",
                 "issues",
                 "communities", "engagementAsyncOperations",
-                "connections", "items", "groups", "members"
+                "connections", "items", "groups", "members",
+                "drives", "containers", "deletedContainers", "storageContainers", "permissions", "migrationJobs"
             };
             
             foreach (var endpoint in endpoints)
             {
                 // Pattern matches: /endpoint/[anything until next / or ? or end of string]
                 // [^/\?]+ means one or more characters that are not / or ?
-                // (?!createUploadSession) ensures the captured part is not "createUploadSession"
-                string pattern = $@"/{endpoint}/(?!createUploadSession)([^/\?]+)";
+                // (?!createUploadSession|delete) ensures the captured part is not "createUploadSession" or "delete"
+                string pattern = $@"/{endpoint}/(?!createUploadSession|delete)([^/\?]+)";
                 string replacement = $"/{endpoint}/{{id}}";
                 output = Regex.Replace(output, pattern, replacement, RegexOptions.IgnoreCase);
             }
