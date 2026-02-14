@@ -3055,14 +3055,74 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "f368f61f-72b9-5d10-90f4-235e4050a5ba",
+                  "Id": "22f33014-54aa-5992-9a53-76ed7d94ba9d",
+                  "Type": 0,
+                  "Name": "List memberships",
+                  "Children": [
+                    {
+                      "Id": "f0be40fd-569a-5189-aba7-6615c8011b71",
                   "Type": 1,
-                  "Name": "List group lifecycle policies",
+                      "Name": "Get groups and administrative units that the group is a direct member of",
                   "Method": "GET",
-                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/groupLifecyclePolicies",
+                      "Url": "https://graph.microsoft.com/v1.0/groups/{id}/memberOf",
                   "Headers": {},
                   "Body": "",
                   "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                      "Id": "ed4dead9-3fbf-5085-9782-acccf4948aff",
+                      "Type": 1,
+                      "Name": "Get only a count of all memberships",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/groups/{id}/memberOf/$count",
+                      "Headers": {
+                        "ConsistencyLevel": "eventual"
+                      },
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "3ad8e654-4dcc-5a1f-8694-19fabf0a9e84",
+                      "Type": 1,
+                      "Name": "Use OData cast to get only a count of group membership",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/devices/{id}/memberOf/microsoft.graph.group/$count",
+                      "Headers": {
+                        "ConsistencyLevel": "eventual"
+                      },
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "b3b2a69b-f537-53b1-be44-a470fbddda2e",
+                      "Type": 1,
+                      "Name": "Use OData cast and $search to get membership with display names that contain the letters \u0027Video\u0027 including a count of returned objects",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/groups/{id}/memberOf/microsoft.graph.group?$count=true\u0026$orderby=displayName\u0026$search=\u0022displayName:Video\u0022",
+                      "Headers": {
+                        "ConsistencyLevel": "eventual"
+                      },
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "fcdaffea-1e47-5461-bd91-6b22ec6f28f8",
+                      "Type": 1,
+                      "Name": "Use OData cast and $filter to get membership with a display name that starts with the letter \u0027A\u0027 including a count of returned objects",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/groups/{id}/memberOf/microsoft.graph.group?$count=true\u0026$orderby=displayName\u0026$filter=startswith(displayName, \u0027A\u0027)",
+                      "Headers": {
+                        "ConsistencyLevel": "eventual"
+                      },
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
                   "IsBuiltIn": true
                 },
                 {
@@ -3137,12 +3197,12 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "b01da973-7973-56f0-bb08-ebd50c97a04c",
+                  "Id": "943ab501-e62c-5ced-b0a0-8e30435f907c",
                   "Type": 0,
-                  "Name": "List transitive member of",
+                  "Name": "List transitive memberships",
                   "Children": [
                     {
-                      "Id": "0aa34952-f8ee-556d-8591-8daab3b9b5d0",
+                      "Id": "b0f03bcc-3192-507e-bfc8-b7214a74cce6",
                       "Type": 1,
                       "Name": "Get groups and administrative units that the group is a transitive member of",
                       "Method": "GET",
@@ -3153,7 +3213,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "2d962c8c-43ed-54d7-b412-7c6900cad7ad",
+                      "Id": "8aac6b1e-5978-5967-8262-8f0f064af374",
                       "Type": 1,
                       "Name": "Get only a count of all transitive membership",
                       "Method": "GET",
@@ -3166,7 +3226,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "c04645aa-8595-540a-9645-42b340a58d4a",
+                      "Id": "b28bedde-5e0a-5b12-be1c-4f83dcef7433",
                       "Type": 1,
                       "Name": "Use OData cast to get only a count of transitive membership in groups",
                       "Method": "GET",
@@ -3179,7 +3239,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "8f2b9c46-c61f-56d3-83de-b510eaf63ddb",
+                      "Id": "7806ecf8-34b7-57d8-92e1-128a55b97cd8",
                       "Type": 1,
                       "Name": "Use OData cast and $search to get membership in groups with display names that contain the letters \u0027tier\u0027 including a count of returned objects",
                       "Method": "GET",
@@ -3192,7 +3252,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "5dab4bff-01bf-5ae9-a03f-40e3fb6ed91a",
+                      "Id": "0657b667-0c47-55d1-b337-808d20125b31",
                       "Type": 1,
                       "Name": "Use OData cast and $filter to get membership with a display name that starts with \u0027A\u0027 including a count of returned objects",
                       "Method": "GET",
@@ -3205,6 +3265,17 @@
                       "IsBuiltIn": true
                     }
                   ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "f368f61f-72b9-5d10-90f4-235e4050a5ba",
+                  "Type": 1,
+                  "Name": "List group lifecycle policies",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/groupLifecyclePolicies",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
                   "IsBuiltIn": true
                 },
                 {
