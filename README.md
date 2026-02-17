@@ -1,7 +1,7 @@
 # Graph Editor
-![GitHub Release](https://img.shields.io/github/v/release/rykoma/Graph-Editor?style=flat&logo=GitHub&link=https%3A%2F%2Fgithub.com%2Frykoma%2FGraph-Editor%2Freleases)
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/rykoma/Graph-Editor/main.yml?style=flat&logo=GitHub&link=https%3A%2F%2Fgithub.com%2Frykoma%2FGraph-Editor%2Factions%2Fworkflows%2Fmain.yml)
-![GitHub License](https://img.shields.io/github/license/rykoma/Graph-Editor?style=flat&logo=GitHub&link=https%3A%2F%2Fgithub.com%2Frykoma%2FGraph-Editor%2Fblob%2Fmain%2FLICENSE)
+[![GitHub Release](https://img.shields.io/github/v/release/rykoma/Graph-Editor?style=flat&logo=GitHub)](../../releases)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/rykoma/Graph-Editor/main.yml?style=flat&logo=GitHub)](../../actions)
+[![GitHub License](https://img.shields.io/github/license/rykoma/Graph-Editor?style=flat&logo=GitHub)](./LICENSE)
 
 Graph Editor is your go-to tool for easily experimenting with Microsoft Graph. It beautifully displays requests and responses, making it easier for you to understand how Microsoft Graph works.
 
@@ -11,7 +11,13 @@ Within Graph Editor, you can manage your execution history, allowing you to effo
 
 ## Download options
 
-You can [download Graph Editor from Microsoft Store](https://apps.microsoft.com/detail/9P7TCMNQ7ZHB?ocid=pdpshare).
+Click the badge below to download the installer directly:
+
+<a href="https://get.microsoft.com/installer/download/9P7TCMNQ7ZHB?referrer=appbadge" target="_self" >
+	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+</a>
+
+You can also [visit the Microsoft Store page](https://apps.microsoft.com/detail/9P7TCMNQ7ZHB) to view more details.
 
 ## Features
 
