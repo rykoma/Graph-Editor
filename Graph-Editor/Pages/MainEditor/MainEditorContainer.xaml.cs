@@ -887,39 +887,19 @@ namespace Graph_Editor.Pages.MainEditor
         private void OpenInfoBarTop(InfoBarSeverity Severity, string Title, string Message, string LinkText, string URL)
         {
             InfoBar_Top.Severity = Severity;
+            InfoBar_Top.Title = Title;
+            InfoBar_Top.Message = Message;
 
             HyperlinkButton hyperlinkButton = new HyperlinkButton()
             {
                 Content = LinkText,
                 NavigateUri = new Uri(URL),
-                VerticalAlignment = VerticalAlignment.Center
-            };
-
-            InfoBar_Top.Content = new StackPanel()
-            {
-                Orientation = Orientation.Horizontal,
-                VerticalAlignment = VerticalAlignment.Bottom,
-                Children =
-                {
-                    new TextBlock()
-                    {
-                        Text = Title,
-                        Margin = new Thickness(0, 0, 16, 0),
-                        VerticalAlignment = VerticalAlignment.Center,
-                        FontWeight = Microsoft.UI.Text.FontWeights.Bold
-                    },
-                    new TextBlock()
-                    {
-                        Text = Message,
-                        Margin = new Thickness(0, 0, 4, 0),
-                        VerticalAlignment = VerticalAlignment.Center
-                    },
-                    hyperlinkButton
-                }
+                Margin = new Thickness(-12, -4, 0, 0)
             };
 
             ToolTipService.SetToolTip(hyperlinkButton, "Open " + URL);
 
+            InfoBar_Top.Content = hyperlinkButton;
             InfoBar_Top.IsOpen = true;
         }
 
