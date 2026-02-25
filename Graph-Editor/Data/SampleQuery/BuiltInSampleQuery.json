@@ -40948,7 +40948,7 @@
                           "Name": "Create or update",
                           "Children": [
                             {
-                              "Id": "5e51b25c-c5e3-4e6a-b1ec-8997042aedee",
+                              "Id": "0ee4e74f-ea05-58a1-b679-8d90d924dbc9",
                               "Type": 1,
                               "Name": "Create a standard QR code",
                               "Method": "PATCH",
@@ -40959,7 +40959,7 @@
                               "IsBuiltIn": true
                             },
                             {
-                              "Id": "7eceb29a-4ba3-4ea0-b070-8db8dc95ea85",
+                              "Id": "abe922fc-5da1-53c9-9a9b-d9ebbdce117c",
                               "Type": 1,
                               "Name": "Update a standard QR code",
                               "Method": "PATCH",
@@ -43237,7 +43237,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "93073eee-4b23-4e64-beb6-86492b066c8b",
+                      "Id": "935f59c7-21ac-5f33-892d-0daa868216d1",
                       "Type": 1,
                       "Name": "Get",
                       "Method": "GET",
