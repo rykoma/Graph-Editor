@@ -39,11 +39,17 @@ You can use the built-in application ID to get the access token. You can also us
 
 ## Known issues
 
-### UI Freezing
+### Sample query with unimplemented data
 
-If the window becomes unresponsive while you're using Graph Editor, try pressing Tab and Shift + Tab a few times.
+Some sample queries are not yet fully implemented. We are systematically implementing sample queries based on the Microsoft Graph API reference, with new queries added in each release.
 
-This issue can occur when switching back and forth between the Graph Editor and another window.
+**What you can do:** Use the main editor to send any Microsoft Graph request manually. Enter the endpoint URL, select the HTTP method, and configure headers and body as needed.
+
+### App Library in Settings page is not available
+
+The App Library feature for managing multiple Microsoft Entra ID application registrations is under development and will be available in a future update.
+
+**What you can do:** Manually enter your application credentials in the Access Token wizard. Consider documenting your application details in a secure location for quick reference.
 
 ## Third-party libraries
 

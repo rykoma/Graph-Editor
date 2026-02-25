@@ -186,7 +186,8 @@ namespace Graph_Editor
             var availaleTips = new List<string>
             {
                 "Message_WelcomeMessage",
-                "Message_KnownIssue_UIFreezing"
+                "Message_KnownIssue_SampleQueryIncomplete",
+                "Message_KnownIssue_AppLibraryNotAvailable"
             };
 
             // Randomly select a tip from the available tips

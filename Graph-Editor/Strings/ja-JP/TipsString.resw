@@ -117,13 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Message_KnownIssue_UIFreezing" xml:space="preserve">
-    <value>Graph Editor の操作中にウィンドウが応答しなくなった時は、Tab と Shift + Tab を何回か押してください。</value>
+  <data name="Message_KnownIssue_SampleQueryIncomplete" xml:space="preserve">
+    <value>サンプル クエリはまだ実装途中です。Microsoft Graph のリファレンスをもとに順次サンプル クエリを実装しているため、まだすべての実装が完了していません。今後のアップデートですべての Microsoft Graph のリファレンスの内容をサンプル クエリとして実装予定です。</value>
   </data>
-  <data name="Message_KnownIssue_UIFreezing_LinkText" xml:space="preserve">
+  <data name="Message_KnownIssue_SampleQueryIncomplete_LinkText" xml:space="preserve">
     <value>詳細</value>
   </data>
-  <data name="Message_KnownIssue_UIFreezing_LinkUrl" xml:space="preserve">
+  <data name="Message_KnownIssue_SampleQueryIncomplete_LinkUrl" xml:space="preserve">
+    <value>https://github.com/rykoma/Graph-Editor</value>
+  </data>
+  <data name="Message_KnownIssue_AppLibraryNotAvailable" xml:space="preserve">
+    <value>設定ページの [アプリ ライブラリ] はまだ利用できません。今後のアップデートで実装予定です。</value>
+  </data>
+  <data name="Message_KnownIssue_AppLibraryNotAvailable_LinkText" xml:space="preserve">
+    <value>詳細</value>
+  </data>
+  <data name="Message_KnownIssue_AppLibraryNotAvailable_LinkUrl" xml:space="preserve">
     <value>https://github.com/rykoma/Graph-Editor</value>
   </data>
   <data name="Message_WelcomeMessage" xml:space="preserve">
