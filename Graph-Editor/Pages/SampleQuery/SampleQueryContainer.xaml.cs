@@ -1073,7 +1073,9 @@ namespace Graph_Editor.Pages.SampleQuery
 
         private string ReplaceProperPhrasesToPlaceholders(string Input)
         {
-            string output = Input.Replace("/users/{id}", "/users/${UserObjectId}").Replace("/users/{user-id}", "/users/${UserObjectId}");
+            string output = Input.Replace("/users/{id}", "/users/${UserObjectId}");
+            output = output.Replace("/users/{user-id}", "/users/${UserObjectId}");
+            output = output.Replace("/users/{id | userPrincipalName}", "/users/${UserObjectId}");
             output = output.Replace("/groups/{group-id}", "/groups/{id}");
             output = output.Replace("/directoryObjects/{object-id}", "/directoryObjects/{id}");
             output = output.Replace("/deletedItems/{object-id}", "/deletedItems/{id}");
@@ -1199,6 +1201,32 @@ namespace Graph_Editor.Pages.SampleQuery
             output = output.Replace("/versions/{version-id}", "/versions/{id}");
             output = output.Replace("/bundles/{bundle-id}", "/bundles/{id}");
             output = output.Replace("/children/{item-id}", "/children/{id}");
+            output = output.Replace("/domains/{domain-name}", "/domains/{id}");
+            output = output.Replace("/accessPackages/{accessPackageId}", "/accessPackages/{id}");
+            output = output.Replace("/assignmentRequests/{accessPackageAssignmentRequestId}", "/assignmentRequests/{id}");
+            output = output.Replace("/catalogs/{accessPackageCatalogId}", "/catalogs/{id}");
+            output = output.Replace("/catalogs/{catalogId}", "/catalogs/{id}");
+            output = output.Replace("/connectedOrganizations/{connectedOrganizationId}", "/connectedOrganizations/{id}");
+            output = output.Replace("/assignments/{accessPackageAssignmentId}", "/assignments/{id}");
+            output = output.Replace("/workflows/{workflowId}", "/workflows/{id}");
+            output = output.Replace("/executionScope/{userProcessingResultId}", "/executionScope/{id}");
+            output = output.Replace("/reprocessedRuns/{runId}", "/reprocessedRuns/{id}");
+            output = output.Replace("/servicePrincipals/{resource-SP-id}", "/servicePrincipals/{id}");
+            output = output.Replace("/externalAuthenticationMethods/{externalAuthenticationMethodId}", "/externalAuthenticationMethods/{id}");
+            output = output.Replace("/authenticationStrengthPolicies/{authenticationStrengthPolicyId}", "/authenticationStrengthPolicies/{id}");
+            output = output.Replace("/policies/{authenticationStrengthPolicyId}", "/policies/{id}");
+            output = output.Replace("/riskyUsers/{riskyUserId}", "/riskyUsers/{id}");
+            output = output.Replace("/servicePrincipalRiskDetections/{servicePrincipalRiskDetectionId}", "/servicePrincipalRiskDetections/{id}");
+            output = output.Replace("/riskyServicePrincipals/{riskyServicePrincipalId}", "/riskyServicePrincipals/{id}");
+            output = output.Replace("/domains/{domainsId}", "/domains/{id}");
+            output = output.Replace("/certificateBasedAuthConfigurations/{certificateBasedAuthPkiId}", "/certificateBasedAuthConfigurations/{id}");
+            output = output.Replace("/certificateAuthorities/{certificateAuthorityDetailId}", "/certificateAuthorities/{id}");
+            output = output.Replace("/apiConnectors/{identityApiConnectorId}", "/apiConnectors/{id}");
+            output = output.Replace("/webApplicationFirewallProviders/{webApplicationFirewallProviderId}", "/webApplicationFirewallProviders/{id}");
+            output = output.Replace("/webApplicationFirewallVerifications/{webApplicationFirewallVerificationModelId}", "/webApplicationFirewallVerifications/{id}");
+            output = output.Replace("/users/kim@contoso.com", "/users/{id}");
+            output = output.Replace("/users/sandeep@contoso.com", "/users/{id}");
+            output = output.Replace("/users/anirban@contoso.com", "/users/{id}");
             output = output.Replace("Pacific Standard Time", "${LocalTimeZone}").Replace("Eastern Standard Time", "${LocalTimeZone}");
             output = output.Replace("AdeleV@contoso.com", "${SampleInternalUser1Address}", true, null).Replace("Adele Vance", "${SampleInternalUser1Name}");
             output = output.Replace("samanthab@contoso.com", "${SampleInternalUser2Address}", true, null).Replace("Samantha Booth", "${SampleInternalUser2Name}");
@@ -1252,7 +1280,22 @@ namespace Graph_Editor.Pages.SampleQuery
                 "gradingSchemes", "modules", "rubrics",
                 "roles", "members",
                 "operations",
-                "containerTypes", "containerTypeRegistrations","applicationPermissionGrants"
+                "containerTypes", "containerTypeRegistrations","applicationPermissionGrants",
+                "recoveryKeys", "devices", "deviceLocalCredentials", "directoryRoles", "directoryRoleTemplates", "settings", "groupSettingTemplates",
+                "contacts", "definitions", "instances", "stages", "decisions", "historyDefinitions", "appConsentRequests", "userConsentRequests",
+                "accessPackages", "incompatibleAccessPackages", "incompatibleGroups", "accessPackageAssignmentApprovals", "assignmentPolicies",
+                "assignmentRequests", "accessPackageAssignmentRequests", "catalogs", "accessPackageCatalogs", "customWorkflowExtensions",
+                "connectedOrganizations", "workflows", "tasks", "userProcessingResults", "runs", "taskReports", "executionScope", "reprocessedRuns",
+                "taskProcessingResults", "workflowTemplates", "taskDefinitions", "customTaskExtensions", "roleAssignmentScheduleRequests",
+                "roleAssignmentSchedules", "roleEligibilityScheduleRequests", "roleEligibilitySchedules",
+                "assignmentScheduleRequests", "assignmentSchedules", "eligibilityScheduleRequests", "eligibilitySchedules", "agreements",
+                "authenticationEventListeners", "emailMethods", "passwordMethods", "methods", "phoneMethods", "softwareOathMethods",
+                "temporaryAccessPassMethods", "authenticationMethodConfigurations", "authenticationStrengthPolicies", "policies",
+                "combinationConfigurations", "namedLocations", "templates", "partners", "customAuthenticationExtensions", "fraudProtectionProviders",
+                "riskDetections", "riskyUsers", "riskyServicePrincipals", "graph.samlOrWsFedExternalDomainFederation", "federationConfigurations",
+                "microsoft.graph.samlOrWsFedExternalDomainFederation", "federationConfiguration", "tenants", "activityBasedTimeoutPolicies",
+                "featureRolloutPolicies", "appliesTo", "authenticationEventsFlows", "includeApplications", "apiConnectors",
+                "webApplicationFirewallProviders", "delegatedAdminCustomers", "requests"
             };
             
             foreach (var endpoint in endpoints)
@@ -1268,7 +1311,7 @@ namespace Graph_Editor.Pages.SampleQuery
         private string ReplaceSampleEntryIdToPlaceholder(string Input)
         {
             string output = Input;
-            
+
             // Define endpoint patterns that should have entry IDs replaced with {id}
             string[] endpoints =
             {
@@ -1277,19 +1320,24 @@ namespace Graph_Editor.Pages.SampleQuery
                 "issues",
                 "communities", "engagementAsyncOperations",
                 "connections", "items", "groups", "members",
-                "drives", "containers", "deletedContainers", "storageContainers", "permissions", "migrationJobs"
+                "drives", "containers", "deletedContainers", "storageContainers", "permissions", "migrationJobs",
+                "administrativeUnits", "subscribedSkus", "organization", "roleDefinitions", "roleAssignments", "roleAssignmentScheduleInstances",
+                "roleEligibilityScheduleInstances", "roleManagementPolicies", "rules", "roleManagementPolicyAssignments", "assignmentScheduleInstances",
+                "eligibilityScheduleInstances", "appRoleAssignedTo", "appRoleAssignments", "fido2Methods", "microsoftAuthenticatorMethods",
+                "platformCredentialMethods", "windowsHelloForBusinessMethods", "oauth2PermissionGrants", "userFlowAttributes", "b2xUserFlows",
+                "identityProviders", "userAttributeAssignments", "b2cUserFlows", "languages", "delegatedAdminRelationships", "accessAssignments"
             };
-            
+
             foreach (var endpoint in endpoints)
             {
                 // Pattern matches: /endpoint/[anything until next / or ? or end of string]
-                // [^/\?]+ means one or more characters that are not / or ?
-                // (?!createUploadSession|delete) ensures the captured part is not "createUploadSession" or "delete"
-                string pattern = $@"/{endpoint}/(?!createUploadSession|delete)([^/\?]+)";
+                // [^/\?$]+ means one or more characters that are not /, ?, or $
+                // (?!createUploadSession|delete|\$ref) ensures the captured part is not "createUploadSession", "delete", or "$ref"
+                string pattern = $@"/{endpoint}/(?!createUploadSession|delete|\$ref|filterByCurrentUser|delta|getOrder|setOrder)([^/\?$]+)";
                 string replacement = $"/{endpoint}/{{id}}";
                 output = Regex.Replace(output, pattern, replacement, RegexOptions.IgnoreCase);
             }
-            
+
             return output;
         }
 
