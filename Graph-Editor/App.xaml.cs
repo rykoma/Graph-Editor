@@ -45,6 +45,9 @@ namespace Graph_Editor
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
+            // Migrate all settings to GUID keys (runs once)
+            GraphEditorApplication.MigrateAllSettingsToGuidKeys();
+
             // Load request and response logging disabled setting
             if (GraphEditorApplication.GetSetting(GraphEditorApplication.Settings.GlobalSetting_DisableRequestAndResponseLoggingWhenAppRestart, true) && GraphEditorApplication.GetSetting(GraphEditorApplication.Settings.GlobalSetting_RequestAndResponseLoggingEnabled, false))
             {
