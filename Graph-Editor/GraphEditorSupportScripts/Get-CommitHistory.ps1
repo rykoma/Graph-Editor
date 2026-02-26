@@ -1,3 +1,31 @@
+# This script provides functions to retrieve commit history and merged pull requests from a GitHub repository,
+# targeting changes to Microsoft Graph API reference documentation files (api-reference/v1.0/api/).
+# It resolves the table-of-contents (TOC) location of each changed file from the microsoft-graph-docs-contrib repository.
+#
+# Prerequisites:
+#   - A GitHub personal access token with "repo:status" and "public_repo" scopes.
+#     SSO authorization for the MicrosoftDocs organization is required.
+#     Obtain from: https://github.com/settings/tokens
+#   - The "powershell-yaml" module (Install-Module -Name powershell-yaml -Scope CurrentUser)
+#   - Call Connect-GitHubRepository before calling Get-CommitHistory or Get-CommitHistoryV2.
+#
+# Functions:
+#   Connect-GitHubRepository  - Stores the target GitHub organization, repository, and access token in global variables.
+#   Get-CommitHistory         - Retrieves commits pushed on the specified date and lists changed api-reference/v1.0/api/ files.
+#                               Filters out noise caused by bulk-merged old commits using a date-tolerance check.
+#   Get-CommitHistoryV2       - Retrieves pull requests merged on the specified date and lists changed api-reference/v1.0/api/ files.
+#                               Recommended over Get-CommitHistory because it avoids bulk-merge noise by design.
+#   Get-YamlContent           - Fetches and parses a YAML file from a URL, with in-memory caching.
+#   Search-FilenameInYaml     - Searches the Microsoft Graph docs TOC YAML tree for the given filename and returns its location path(s).
+#   Test-FileHasRecentCommits - Returns $true if any commit for a file has an author date within the tolerance window of the target date.
+#   Invoke-GitHubApi          - Calls the GitHub REST API with Bearer authentication and automatic exponential-backoff retry on rate-limit errors.
+#
+# Usage:
+#   . .\Get-CommitHistory.ps1
+#   Connect-GitHubRepository -Organization "microsoftgraph" -Repository "microsoft-graph-docs-contrib" -AccessToken "<token>"
+#   Get-CommitHistoryV2 -Date (Get-Date "2024-01-15")   # Recommended: PR-based
+#   Get-CommitHistory   -Date (Get-Date "2024-01-15")   # Alternative: commit-based
+
 # Define a global variable to store the cache
 $global:YamlCache = @{} 
 
