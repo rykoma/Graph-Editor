@@ -58,7 +58,7 @@
                                     <StackPanel Orientation="Horizontal">
                                         <FontIcon Glyph="{x:Bind Type, Converter={StaticResource SampleQueryTypeToFontIconConverter}}" Foreground="{x:Bind Type, Converter={StaticResource SampleQueryTypeToColorConverter}}"/>
                                         <TextBlock Margin="0,0,10,0"/>
-                                        <TextBlock Text="{x:Bind Name}" />
+                                        <TextBlock Text="{x:Bind Name}" ToolTipService.ToolTip="{x:Bind Name}" />
                                     </StackPanel>
                                 </TreeViewItem>
                             </DataTemplate>
