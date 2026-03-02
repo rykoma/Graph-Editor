@@ -40561,12 +40561,12 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "4203007d-65e0-57e8-aba2-d37d4d48cbf2",
+                  "Id": "2877f60e-f1df-5975-b4be-1701465d2bca",
                   "Type": 0,
-                  "Name": "External authentication method",
+                  "Name": "External MFA",
                   "Children": [
                     {
-                      "Id": "25f0b4f9-2263-505c-b8f1-42b5c8d2aed3",
+                      "Id": "04939f32-9eae-5dc7-8fba-72d236bc9b3b",
                       "Type": 1,
                       "Name": "List",
                       "Method": "GET",
@@ -40577,7 +40577,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "915d3fc1-edcf-59ee-a565-e1f3a1944301",
+                      "Id": "4366c947-ab40-5dcb-a566-c1ce210adc81",
                       "Type": 1,
                       "Name": "Create",
                       "Method": "POST",
@@ -40588,7 +40588,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "91be7fd8-e640-5037-bbbe-df7fa50b6418",
+                      "Id": "2bb2310b-930e-551a-8799-32d2c6d0f7af",
                       "Type": 1,
                       "Name": "Get",
                       "Method": "GET",
@@ -40599,7 +40599,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "2a94d675-5f0e-5abc-a92c-42413fa2a8e8",
+                      "Id": "7d8bcf67-83fe-557a-afb9-f83145d40637",
                       "Type": 1,
                       "Name": "Delete",
                       "Method": "DELETE",
@@ -41244,12 +41244,12 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "e2d540ee-e634-5864-a3b8-91780d16f7d1",
+                  "Id": "3b592b70-1090-5c50-bdbd-3a55a0dd5b90",
                   "Type": 0,
-                  "Name": "External authentication method",
+                  "Name": "External MFA",
                   "Children": [
                     {
-                      "Id": "5a1768eb-7332-51f4-bb77-cc7cfde7c4d4",
+                      "Id": "1cbe291d-dea1-5aba-b71d-47e30564121e",
                       "Type": 1,
                       "Name": "Get",
                       "Method": "GET",
@@ -41260,7 +41260,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "d247e1fc-ede8-5035-a7fb-3420924a1a87",
+                      "Id": "d1541b39-f737-5d29-9c5d-0cdfe0f8b915",
                       "Type": 1,
                       "Name": "Update",
                       "Method": "PATCH",
@@ -41271,7 +41271,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "3362da27-0e69-5435-81e0-caffe1490748",
+                      "Id": "c2c5bfd1-b9f8-5861-8f3e-1f95a041041e",
                       "Type": 1,
                       "Name": "Delete",
                       "Method": "DELETE",
@@ -58956,6 +58956,230 @@
               "IsBuiltIn": true
             },
             {
+              "Id": "5eabc5f0-69e0-50a2-9464-5dea1a8a04a4",
+              "Type": 0,
+              "Name": "Number assignment",
+              "Children": [
+                {
+                  "Id": "7d250ce8-f9ec-5dfd-88e5-6f2f22e7c13a",
+                  "Type": 0,
+                  "Name": "List assignment",
+                  "Children": [
+                    {
+                      "Id": "618714f3-8ca6-5687-b137-8cb65ea574dc",
+                      "Type": 1,
+                      "Name": "Example 1",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "12db1c8b-52c1-5482-b2fe-07978ca93697",
+                      "Type": 1,
+                      "Name": "Example 2",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "f2e9bf57-a110-5d20-8eb4-a6ffde4831e9",
+                      "Type": 1,
+                      "Name": "Example 3",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "d30f27d6-cca5-558b-bb2b-51b8e5f58502",
+                      "Type": 1,
+                      "Name": "Example 4",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "86b62a21-9842-5f68-8f01-f1bb308562a1",
+                  "Type": 1,
+                  "Name": "Get assignment",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "e6c14641-5ae6-52a3-b151-caf733701ecf",
+                  "Type": 1,
+                  "Name": "Assign number",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "43040a30-47d3-5ef7-ac1a-b94098946175",
+                  "Type": 1,
+                  "Name": "Unassign number",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "8d6d865c-0d2c-5ccc-b502-488ea6df3b5f",
+                  "Type": 0,
+                  "Name": "Update number",
+                  "Children": [
+                    {
+                      "Id": "77a471bf-a991-53e7-85e7-63c68459293a",
+                      "Type": 1,
+                      "Name": "Update location ID",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "bcc7be68-9dfb-50c2-8635-58f9e528bfd7",
+                      "Type": 1,
+                      "Name": "Update network site ID",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "185c8c66-2f2f-5430-84ad-4f022e9ac9bc",
+                      "Type": 1,
+                      "Name": "Update reverse number lookup options",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "3e205532-de9a-5c17-ad0e-bd26810d197e",
+                      "Type": 1,
+                      "Name": "Clear location ID",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "895a786e-609a-578e-883d-69d855a6e754",
+              "Type": 0,
+              "Name": "Telephone number long running operation",
+              "Children": [
+                {
+                  "Id": "6b38a1e9-1eaf-577c-9245-e66f9c445b3e",
+                  "Type": 1,
+                  "Name": "Get",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "6b085a01-791b-5b2b-969d-613683e27fa4",
+              "Type": 0,
+              "Name": "Telephone number management root",
+              "Children": [
+                {
+                  "Id": "6db64748-70ef-58e3-b0d1-2c2c85396a70",
+                  "Type": 0,
+                  "Name": "List number assignments",
+                  "Children": [
+                    {
+                      "Id": "4afd24f3-931f-5331-a4f4-3ad79147d32f",
+                      "Type": 1,
+                      "Name": "Example 1",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "af32a951-2049-56d2-a0c4-1381124f68b5",
+                      "Type": 1,
+                      "Name": "Example 2",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "678f48f4-606c-5053-8c60-04f088d6effd",
+                      "Type": 1,
+                      "Name": "Example 3",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "4e5f2278-5f7d-52f5-8923-9ecd780f790d",
+                      "Type": 1,
+                      "Name": "Example 4",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
               "Id": "c9919a40-6955-55e9-a0eb-57f6fdd9ae28",
               "Type": 0,
               "Name": "Complex types",
@@ -65987,6 +66211,17 @@
                           "IsBuiltIn": true
                         }
                       ],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "b54f2bc1-6a9e-565e-894a-969c83559736",
+                      "Type": 1,
+                      "Name": "Reply with quote",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
                       "IsBuiltIn": true
                     }
                   ],
