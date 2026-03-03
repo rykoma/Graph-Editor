@@ -1325,7 +1325,8 @@ namespace Graph_Editor.Pages.SampleQuery
                 "roleEligibilityScheduleInstances", "roleManagementPolicies", "rules", "roleManagementPolicyAssignments", "assignmentScheduleInstances",
                 "eligibilityScheduleInstances", "appRoleAssignedTo", "appRoleAssignments", "fido2Methods", "microsoftAuthenticatorMethods",
                 "platformCredentialMethods", "windowsHelloForBusinessMethods", "oauth2PermissionGrants", "userFlowAttributes", "b2xUserFlows",
-                "identityProviders", "userAttributeAssignments", "b2cUserFlows", "languages", "delegatedAdminRelationships", "accessAssignments"
+                "identityProviders", "userAttributeAssignments", "b2cUserFlows", "languages", "delegatedAdminRelationships", "accessAssignments",
+                "mailFolders", "messageRules", "messageTraces", "overrides"
             };
 
             foreach (var endpoint in endpoints)
