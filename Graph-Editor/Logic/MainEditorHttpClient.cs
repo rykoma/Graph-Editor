@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
 using Windows.Web.Http;
 using HttpClient = System.Net.Http.HttpClient;
 using HttpResponseMessage = System.Net.Http.HttpResponseMessage;
@@ -250,6 +251,22 @@ namespace Graph_Editor.Logic
         private void PrepareHeaders(Dictionary<string, string> Headers = null)
         {
             _httpClient.DefaultRequestHeaders.Clear(); // Remove all headers
+
+            string userAgent = null;
+            if (Headers != null && Headers.ContainsKey("User-Agent"))
+            {
+                userAgent = Headers["User-Agent"];
+            }
+            else
+            {
+                userAgent = GetUserAgent();
+            }
+
+            if (!string.IsNullOrWhiteSpace(userAgent))
+            {
+                _httpClient.DefaultRequestHeaders.UserAgent.ParseAdd(userAgent);
+            }
+
             _httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
             _httpClient.DefaultRequestHeaders.Add("Accept", "text/plain");
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Data.EditorAccessToken.EditorAccessToken.Instance.AuthenticationResult.AccessToken);
@@ -282,6 +299,13 @@ namespace Graph_Editor.Logic
                         continue;
                     }
 
+                    if (header.Key.Equals("User-Agent", StringComparison.OrdinalIgnoreCase))
+                    {
+                        // Ignore
+                        // User-Agent header is already set above
+                        continue;
+                    }
+
                     _httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
                 }
             }
@@ -297,6 +321,12 @@ namespace Graph_Editor.Logic
             {
                 return "application/json";
             }
+        }
+
+        private string GetUserAgent()
+        {
+            var appVersion = Package.Current.Id.Version;
+            return $"GraphEditor/{appVersion.Major}.{appVersion.Minor}.{appVersion.Build}";
         }
     }
 }
