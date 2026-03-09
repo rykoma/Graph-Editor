@@ -1326,7 +1326,8 @@ namespace Graph_Editor.Pages.SampleQuery
                 "eligibilityScheduleInstances", "appRoleAssignedTo", "appRoleAssignments", "fido2Methods", "microsoftAuthenticatorMethods",
                 "platformCredentialMethods", "windowsHelloForBusinessMethods", "oauth2PermissionGrants", "userFlowAttributes", "b2xUserFlows",
                 "identityProviders", "userAttributeAssignments", "b2cUserFlows", "languages", "delegatedAdminRelationships", "accessAssignments",
-                "mailFolders", "messageRules", "messageTraces", "overrides"
+                "mailFolders", "messageRules", "messageTraces", "overrides",
+                "notebooks", "sections", "sectionGroups"
             };
 
             foreach (var endpoint in endpoints)
@@ -1334,7 +1335,7 @@ namespace Graph_Editor.Pages.SampleQuery
                 // Pattern matches: /endpoint/[anything until next / or ? or end of string]
                 // [^/\?$]+ means one or more characters that are not /, ?, or $
                 // (?!createUploadSession|delete|\$ref) ensures the captured part is not "createUploadSession", "delete", or "$ref"
-                string pattern = $@"/{endpoint}/(?!createUploadSession|delete|\$ref|filterByCurrentUser|delta|getOrder|setOrder)([^/\?$]+)";
+                string pattern = $@"/{endpoint}/(?!createUploadSession|delete|\$ref|filterByCurrentUser|delta|getOrder|setOrder|getRecentNotebooks|GetNotebookFromWebUrl)([^/\?$]+)";
                 string replacement = $"/{endpoint}/{{id}}";
                 output = Regex.Replace(output, pattern, replacement, RegexOptions.IgnoreCase);
             }
