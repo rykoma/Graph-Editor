@@ -9730,12 +9730,12 @@
               "Name": "Open extensions",
               "Children": [
                 {
-                  "Id": "e9ef21df-1be0-44d1-862f-423bbf7c9ac3",
+                  "Id": "d31ecea2-6219-587b-a665-6eb6c3f84124",
                   "Type": 0,
                   "Name": "Create open extension",
                   "Children": [
                     {
-                      "Id": "ddf7757d-ea44-4fee-9705-a22f23341e83",
+                      "Id": "8fa266b5-ce30-5db0-995b-2130fc6e7b78",
                       "Type": 1,
                       "Name": "Create a message and extension in the same call",
                       "Method": "POST",
@@ -9746,7 +9746,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "46fb3c68-401c-4f28-89e0-9c0f9c6ba874",
+                      "Id": "db963837-a8b6-5754-9d13-b94f75593c2e",
                       "Type": 1,
                       "Name": "Create an extension in the specified message",
                       "Method": "POST",
@@ -9757,7 +9757,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "11dc9c22-04b7-41de-8ca5-d84b5d370d0d",
+                      "Id": "f86ea44b-f107-50af-aea3-9260ff593545",
                       "Type": 1,
                       "Name": "Create an extension in the specified group event",
                       "Method": "POST",
@@ -9768,7 +9768,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "99fa62d9-ac88-4fb0-b54a-9fd94bf73004",
+                      "Id": "3bfc1bdb-b9a2-51cb-b4c1-9a61c0f904a0",
                       "Type": 1,
                       "Name": "Create an extension in a new group post",
                       "Method": "POST",
@@ -9779,7 +9779,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "dcd653e4-93f7-4ad3-bf82-8026f4ae9eb8",
+                      "Id": "1aaf5148-05dc-54be-9ea5-04f2292af4a1",
                       "Type": 1,
                       "Name": "Create an extension in a new group post using POST operation",
                       "Method": "POST",
@@ -10083,12 +10083,12 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "f9f65322-4b27-4d3e-bd36-3d17398ba4f0",
+              "Id": "9c04f446-8007-525b-9a00-1604ebaac5c1",
               "Type": 0,
               "Name": "Create draft to forward message",
               "Children": [
                 {
-                  "Id": "9c04f446-8007-525b-9a00-1604ebaac5c1",
+                  "Id": "57d6bfec-9164-5a73-a420-6c62cb2f2959",
                   "Type": 1,
                   "Name": "Create a draft message in JSON format to forward an existing message",
                   "Method": "POST",
@@ -10099,7 +10099,7 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "2e6acce1-0011-40c1-86fd-2e9c5670f2a1",
+                  "Id": "9612d2bf-53b6-58a3-bf98-3ea3ed87eb78",
                   "Type": 1,
                   "Name": "Create a draft message in MIME format to forward an existing message",
                   "Method": "POST",
@@ -10351,12 +10351,12 @@
               "Name": "Open extensions",
               "Children": [
                 {
-                  "Id": "42d33498-02bf-4693-8944-ab1380e00bf8",
+                  "Id": "77b14221-5ace-5d15-9c8c-b6f2999b7525",
                   "Type": 0,
                   "Name": "Create open extension",
                   "Children": [
                     {
-                      "Id": "ec15dae9-41ed-4d1c-b715-34e920372c1e",
+                      "Id": "7e5eb175-c131-59a9-bec8-2e0babcc8295",
                       "Type": 1,
                       "Name": "Create a message and extension in the same call",
                       "Method": "POST",
@@ -10367,7 +10367,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "78286c08-6abe-48a4-9770-b23793cf2ba3",
+                      "Id": "6c7400f0-fdb4-558d-9eb2-47584f848d91",
                       "Type": 1,
                       "Name": "Create an extension in the specified message",
                       "Method": "POST",
@@ -10378,7 +10378,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "ce09d393-ff8f-4dee-92ae-cc796457af07",
+                      "Id": "47f0e95c-2c6d-5680-a788-5d097daf00d4",
                       "Type": 1,
                       "Name": "Create an extension in the specified group event",
                       "Method": "POST",
@@ -10389,7 +10389,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "cbfce248-e39d-430f-ab23-b0865ae0dd76",
+                      "Id": "e10cb6b2-b3a0-503e-894f-71e592087879",
                       "Type": 1,
                       "Name": "Create an extension in a new group post",
                       "Method": "POST",
@@ -10400,7 +10400,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "21a9349f-d887-4257-8fff-9386892edf2e",
+                      "Id": "86cc5fff-2932-5297-b6ae-a229a8c2174d",
                       "Type": 1,
                       "Name": "Create an extension in a new group post using POST operation",
                       "Method": "POST",
@@ -10783,7 +10783,7 @@
               "Name": "Add attachment to a message",
               "Children": [
                 {
-                  "Id": "c66edc75-fb45-4e3f-a072-648a2b70b928",
+                  "Id": "ace9c7d7-3c79-5981-ba92-0523a203c374",
                   "Type": 1,
                   "Name": "File attachment",
                   "Method": "POST",
@@ -10794,7 +10794,7 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "f0df8de5-839f-4bb3-a6df-2deba944ece6",
+                  "Id": "32610ffb-c21d-5e00-9d7d-37e0daa8a618",
                   "Type": 1,
                   "Name": "Item attachment",
                   "Method": "POST",
@@ -11441,12 +11441,12 @@
           "IsBuiltIn": true
         },
         {
-          "Id": "7a5ca31a-b498-58b9-a6e0-4eda6a365bcd",
+          "Id": "231e1e3b-db99-5b1b-8b41-53bf1349cda0",
           "Type": 0,
-          "Name": "Outlook category (deprecated)",
+          "Name": "Outlook category",
           "Children": [
             {
-              "Id": "aa47778a-4b79-5529-9882-4c3469bf4872",
+              "Id": "13d3a434-b8a1-5bfa-baaf-1233ded6cba9",
               "Type": 1,
               "Name": "List",
               "Method": "GET",
@@ -11457,7 +11457,7 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "cd088376-4362-5c81-b67c-8ca31873b5c5",
+              "Id": "163ef795-b12f-53f4-831c-4534576bf684",
               "Type": 1,
               "Name": "Get",
               "Method": "GET",
@@ -11468,7 +11468,7 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "2682b310-34c9-5795-940d-515680b7e625",
+              "Id": "008c585a-74ed-5d03-a563-3e8a263a1e73",
               "Type": 1,
               "Name": "Create",
               "Method": "POST",
@@ -11481,7 +11481,7 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "12cb5943-594f-52ca-b1f0-459369bcea66",
+              "Id": "4a26f330-b464-5bb6-9793-e69325192048",
               "Type": 1,
               "Name": "Update",
               "Method": "PATCH",
@@ -11492,7 +11492,7 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "ac67eea6-c058-52e1-ae9c-ed38cafdb47a",
+              "Id": "26e368cd-76aa-5bf7-b657-e79ed985aafa",
               "Type": 1,
               "Name": "Delete",
               "Method": "DELETE",
@@ -29436,7 +29436,7 @@
               "Body": "",
               "Children": [
                 {
-                  "Id": "8cad47cc-74af-4afa-9f8c-73b02bc65687",
+                  "Id": "1cf6dd26-be87-5a9c-822b-b4a64e2e61db",
                   "Type": 1,
                   "Name": "Create a message and extension in the same call",
                   "Method": "POST",
@@ -29447,7 +29447,7 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "df855cd9-0c7a-4d65-abfd-00607d2087ec",
+                  "Id": "6680d806-bc1a-5424-b41d-546a0ad9364e",
                   "Type": 1,
                   "Name": "Create an extension in the specified message",
                   "Method": "POST",
@@ -29458,7 +29458,7 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "61215ae6-3fd2-4b32-aecb-2cfa64eaa258",
+                  "Id": "bf9215ac-40e0-51ea-8f06-454b99f48c3b",
                   "Type": 1,
                   "Name": "Create an extension in the specified group event",
                   "Method": "POST",
@@ -29469,7 +29469,7 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "fc2ce324-d61e-45f2-81cd-e96066a51f88",
+                  "Id": "b5767287-a265-5d2d-9b96-1cb4ec71f3ab",
                   "Type": 1,
                   "Name": "Create an extension in a new group post",
                   "Method": "POST",
@@ -29480,7 +29480,7 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "49de2bf0-6cca-4b57-87d7-b471c21beb16",
+                  "Id": "064e2e4c-0d75-5857-bf56-31db3d3b0f95",
                   "Type": 1,
                   "Name": "Create an extension in a new group post using POST operation",
                   "Method": "POST",
@@ -31460,6 +31460,28 @@
               "IsBuiltIn": true
             },
             {
+              "Id": "972eb66e-70e8-5011-85ec-a4b8d05ee47e",
+              "Type": 1,
+              "Name": "Update custom property",
+              "Method": "",
+              "Url": "",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "a8fc6adb-8909-5f74-a69b-c257c168531c",
+              "Type": 1,
+              "Name": "Delete custom property",
+              "Method": "",
+              "Url": "",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
               "Id": "a715a35e-de01-548e-8c9e-eedfc32bc145",
               "Type": 1,
               "Name": "List columns",
@@ -31471,24 +31493,46 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "972eb66e-70e8-5011-85ec-a4b8d05ee47e",
+              "Id": "a1e17b1f-8183-5af8-995e-8a37cbcfd500",
               "Type": 1,
-              "Name": "Update custom property",
-              "Method": "PATCH",
-              "Url": "https://graph.microsoft.com/v1.0/storage/fileStorage/containers/{id}/customProperties",
+              "Name": "Create column",
+              "Method": "",
+              "Url": "",
               "Headers": {},
-              "Body": "{\n  \u0022clientUniqueId\u0022: {\n    \u0022value\u0022: \u0022c5d88310-1fc7-49be-80ca-e7d7a11e638b\u0022\n  },\n  \u0022color\u0022: {\n    \u0022value\u0022: \u0022green\u0022\n  }\n}",
+              "Body": "",
               "Children": [],
               "IsBuiltIn": true
             },
             {
-              "Id": "a8fc6adb-8909-5f74-a69b-c257c168531c",
+              "Id": "c985edec-88a9-5ea4-b726-07b35aa15e2f",
               "Type": 1,
-              "Name": "Delete custom property",
-              "Method": "PATCH",
-              "Url": "https://graph.microsoft.com/v1.0/storage/fileStorage/containers/{id}/customProperties",
+              "Name": "Get column",
+              "Method": "",
+              "Url": "",
               "Headers": {},
-              "Body": "{\n  \u0022clientUniqueId\u0022: null,\n  \u0022color\u0022: null\n}",
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "5f121752-5caa-5c6d-ba4a-42bd59be5557",
+              "Type": 1,
+              "Name": "Update column",
+              "Method": "",
+              "Url": "",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "1f0e27b5-f1dc-55a6-a145-4f32b455cd5e",
+              "Type": 1,
+              "Name": "Delete column",
+              "Method": "",
+              "Url": "",
+              "Headers": {},
+              "Body": "",
               "Children": [],
               "IsBuiltIn": true
             },
@@ -37365,13 +37409,43 @@
                     },
                     {
                       "Id": "9e113763-b6fe-5ee0-b938-633b2d62a3a1",
-                      "Type": 1,
+                      "Type": 0,
                       "Name": "Activate with scope",
-                      "Method": "POST",
-                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/lifecycleWorkflows/workflows/{id}/activatewithscope",
-                      "Headers": {},
-                      "Body": "{\n    \u0022subjects\u0022: [ \n        { \u0022id\u0022: \u00228cdf25a8-c9d2-423e-a03d-3f39f03c3e97\u0022},\n        { \u0022id\u0022: \u0022ea09ac2e-77e3-4134-85f2-25ccf3c33387\u0022}\n    ]\n}",
-                      "Children": [],
+                      "Children": [
+                        {
+                          "Id": "50ab2699-bd2b-52bd-abf6-8f91a0f14e27",
+                          "Type": 1,
+                          "Name": "Activate a workflow with a specific scope of 2 users",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/identityGovernance/lifecycleWorkflows/workflows/{id}/activatewithscope",
+                          "Headers": {},
+                          "Body": "{\n    \u0022subjects\u0022: [ \n        { \u0022id\u0022: \u00228cdf25a8-c9d2-423e-a03d-3f39f03c3e97\u0022},\n        { \u0022id\u0022: \u0022ea09ac2e-77e3-4134-85f2-25ccf3c33387\u0022}\n    ]\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "9a4204b3-2290-5a85-84b8-75fc8415ea93",
+                          "Type": 1,
+                          "Name": "Activate a workflow with a specific scope of 2 users who don\u0027t exist",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/identityGovernance/lifecycleWorkflows/workflows/{id}/activatewithscope",
+                          "Headers": {},
+                          "Body": "{\n    \u0022subjects\u0022: [ \n        { \u0022id\u0022: \u00222ea4c363-4b85-4529-b2ec-53b64308f39f\u0022},\n        { \u0022id\u0022: \u002244fc5392-9485-4348-871e-2ea17cc0a1b8\u0022}\n    ]\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "2e004473-ac0b-55ec-bea8-163b66d4805b",
+                          "Type": 1,
+                          "Name": "Activate a workflow with a specific processing result scope",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/identityGovernance/lifecycleWorkflows/workflows/{id}/activatewithscope",
+                          "Headers": {},
+                          "Body": "{\n \u0022scope\u0022: {\n  \u0022@odata.type\u0022: \u0022microsoft.graph.identityGovernance.activateProcessingResultScope\u0022,\n  \u0022processingResults\u0022: [\n   {\n    \u0022id\u0022: \u0022abc12345-265a-4e8f-8d61-94a2dcd2d395_1_78799042-265a-4e8f-8d61-94a2dcd2d395_638927021459371237_0cdd8963-aaaa-4632-a1f2-aaaa7230aaaa\u0022\n   },\n   {\n    \u0022id\u0022: \u0022abc12345-265a-4e8f-8d61-94a2dcd2d395_1_78799042-265a-4e8f-8d61-94a2dcd2d395_388131231459357126_aaaa8963-1c30-4632-aaaa-ac96723069cb\u0022\n   }\n  ],\n  \u0022taskScope\u0022: \u0022allTasks\u0022\n }\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        }
+                      ],
                       "IsBuiltIn": true
                     },
                     {
@@ -46740,12 +46814,12 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "4436cc1d-dd5f-44e1-9323-4611b840f0cc",
+              "Id": "87aeb354-f979-51bc-b9bf-0cb63f1e953b",
               "Type": 0,
               "Name": "Create draft to forward message",
               "Children": [
                 {
-                  "Id": "125cc2d1-f8c6-4012-af43-a78185aaab44",
+                  "Id": "e81b11f8-95b3-557c-b064-419788ad7035",
                   "Type": 1,
                   "Name": "Create a draft message in JSON format to forward an existing message",
                   "Method": "POST",
@@ -46756,7 +46830,7 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "ae24abad-e521-46ba-b74b-a452eef9a547",
+                  "Id": "49a94e7d-3bb6-57ef-8209-d920b1808eaa",
                   "Type": 1,
                   "Name": "Create a draft message in MIME format to forward an existing message",
                   "Method": "POST",
@@ -46999,7 +47073,7 @@
                   "Name": "Add attachment",
                   "Children": [
                     {
-                      "Id": "3c301ea4-6440-4e17-88b9-9ba763ea8eb4",
+                      "Id": "65eaa73a-c94e-5f76-869b-66c11a3689b8",
                       "Type": 1,
                       "Name": "File attachment",
                       "Method": "POST",
@@ -47010,7 +47084,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "6af307dd-aff6-427c-b65f-07cc2b165fe7",
+                      "Id": "71cbf669-cf5d-58a5-b189-27e437e5510e",
                       "Type": 1,
                       "Name": "Item attachment",
                       "Method": "POST",
@@ -47037,7 +47111,7 @@
                   "Name": "Create open extension",
                   "Children": [
                     {
-                      "Id": "54d756a9-05f8-41c7-94bf-f335484cd9c0",
+                      "Id": "0c4b3403-ab16-592b-8eee-e0dbfddaf8ae",
                       "Type": 1,
                       "Name": "Create a message and extension in the same call",
                       "Method": "POST",
@@ -47048,7 +47122,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "6cbe1099-d10f-47a2-8218-71686130237e",
+                      "Id": "b5a9c97e-151c-5d1c-a9c7-43275ae28a8b",
                       "Type": 1,
                       "Name": "Create an extension in the specified message",
                       "Method": "POST",
@@ -47059,7 +47133,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "bf9788db-7e4b-42b2-8f0f-186b9d2044dc",
+                      "Id": "07dd985e-03f0-5f78-a8bb-562a3a0861d2",
                       "Type": 1,
                       "Name": "Create an extension in the specified group event",
                       "Method": "POST",
@@ -47070,7 +47144,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "535327df-3d13-48db-abac-8b6ee844a5de",
+                      "Id": "dad99598-29e8-5edf-92e8-ea61b0812f2c",
                       "Type": 1,
                       "Name": "Create an extension in a new group post",
                       "Method": "POST",
@@ -47081,7 +47155,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "76350baa-27c0-4d2a-9fc9-4fc1cf5898a2",
+                      "Id": "dac0cd16-5597-5bdf-a6a4-0b8d79bcca28",
                       "Type": 1,
                       "Name": "Create an extension in a new group post using POST operation",
                       "Method": "POST",
@@ -47453,7 +47527,7 @@
               "Name": "Add attachment to a message",
               "Children": [
                 {
-                  "Id": "5972b333-bdd1-430f-8bbf-81d70883c351",
+                  "Id": "c964ab61-73dd-5450-b839-73c85886da1f",
                   "Type": 1,
                   "Name": "File attachment",
                   "Method": "POST",
@@ -47464,7 +47538,7 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "859b5117-6a78-43f3-8926-0bea688c4757",
+                  "Id": "477b9370-8d76-545f-8194-fd0d8d8bd93a",
                   "Type": 1,
                   "Name": "Item attachment",
                   "Method": "POST",
@@ -47585,12 +47659,12 @@
           "IsBuiltIn": true
         },
         {
-          "Id": "b688144c-b36c-5d88-a1e1-da8250b08524",
+          "Id": "1ffb70f7-e4f0-5846-a9ec-059a3037e5a3",
           "Type": 0,
-          "Name": "Outlook category (deprecated)",
+          "Name": "Outlook category",
           "Children": [
             {
-              "Id": "8a393ad6-3434-5bac-aa03-7fded3296520",
+              "Id": "2fbb321d-5e8d-519b-acce-f6822ec3bf45",
               "Type": 1,
               "Name": "List",
               "Method": "GET",
@@ -47601,7 +47675,7 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "eb32272b-84fe-5ff6-b110-e63651fe5fed",
+              "Id": "5b9400e6-04d1-53e2-a62b-b287421ac45f",
               "Type": 1,
               "Name": "Get",
               "Method": "GET",
@@ -47612,7 +47686,7 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "85592f60-e558-5e73-add8-07f78f81419e",
+              "Id": "9d0ff57c-e716-5c4e-8632-185b5f227fc4",
               "Type": 1,
               "Name": "Create",
               "Method": "POST",
@@ -47623,7 +47697,7 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "78f64d26-b73e-5dcc-9181-ed7088a2951e",
+              "Id": "388a011f-9be2-5aae-8a00-bfebd019fb45",
               "Type": 1,
               "Name": "Update",
               "Method": "PATCH",
@@ -47634,7 +47708,7 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "c875b2a9-7cf2-5868-87e8-4d04d4fb5dff",
+              "Id": "cf54cead-aac3-5c37-bf89-ac8b94ff4e08",
               "Type": 1,
               "Name": "Delete",
               "Method": "DELETE",
@@ -49243,7 +49317,63 @@
                   "Url": "",
                   "Headers": {},
                   "Body": "",
-                  "Children": [],
+                  "Children": [
+                    {
+                      "Id": "2653b717-893c-5832-a6f4-6261af2e24de",
+                      "Type": 1,
+                      "Name": "Create a message and extension in the same call",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "9e1114fd-5774-5082-b2e8-5be15bafc25c",
+                      "Type": 1,
+                      "Name": "Create an extension in the specified message",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "1a009692-2e7d-5c05-905d-d5483b6abb51",
+                      "Type": 1,
+                      "Name": "Create an extension in the specified group event",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "49e21512-a557-539f-8f2c-7389a8cda06a",
+                      "Type": 1,
+                      "Name": "Create an extension in a new group post",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "309ae59c-ab84-5b1d-a1b0-8add4855c130",
+                      "Type": 1,
+                      "Name": "Create an extension in a new group post using POST operation",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
                   "IsBuiltIn": true
                 },
                 {
@@ -49677,12 +49807,12 @@
           "IsBuiltIn": true
         },
         {
-          "Id": "a9b9a63e-bcd9-56c7-865f-bc1e81c0fdb5",
+          "Id": "66e7bbd0-fb1f-51d7-9816-8fa4891075f3",
           "Type": 0,
-          "Name": "Outlook category (deprecated)",
+          "Name": "Outlook category",
           "Children": [
             {
-              "Id": "6dd6e7ee-1635-55c3-b1d7-7eb9f8d0ae06",
+              "Id": "eba151cd-795d-530d-8466-a970c3864fd8",
               "Type": 1,
               "Name": "List",
               "Method": "",
@@ -49693,7 +49823,7 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "df425330-b06f-55bb-8480-230a1f74a1d3",
+              "Id": "26fe68e7-40d7-5c5d-8b5b-ed8d4c951251",
               "Type": 1,
               "Name": "Get",
               "Method": "",
@@ -49704,7 +49834,7 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "928579e9-2b2d-53ef-ab17-38ca5cfbc3b6",
+              "Id": "68649084-a29f-534d-9c99-c363fd92eb2e",
               "Type": 1,
               "Name": "Create",
               "Method": "",
@@ -49715,7 +49845,7 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "29582f70-7b6f-56d8-951a-cd2054222cab",
+              "Id": "672f95c1-cd25-5dc0-bc90-29846f9ea708",
               "Type": 1,
               "Name": "Update",
               "Method": "",
@@ -49726,7 +49856,7 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "3fe6679f-d183-5663-aa8e-884e0bc34fe1",
+              "Id": "cd6977e6-0a3d-5b78-a9d0-946e5bde395c",
               "Type": 1,
               "Name": "Delete",
               "Method": "",
