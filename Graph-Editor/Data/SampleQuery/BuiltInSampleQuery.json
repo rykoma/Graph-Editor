@@ -10094,7 +10094,7 @@
                   "Method": "POST",
                   "Url": "https://graph.microsoft.com/v1.0/me/messages/{id}/createForward",
                   "Headers": {},
-                  "Body": "",
+                  "Body": "{\n  \u0022message\u0022:{\n    \u0022isDeliveryReceiptRequested\u0022: true,\n    \u0022toRecipients\u0022:[\n      {\n        \u0022emailAddress\u0022: {\n          \u0022address\u0022:\u0022${SampleInternalUser3Address}\u0022,\n          \u0022name\u0022:\u0022${SampleInternalUser3Name}\u0022\n        }\n      }\n     ]\n  },\n  \u0022comment\u0022: \u0022Dana, just want to make sure you get this; you\u0027ll need this if the project gets approved.\u0022\n}",
                   "Children": [],
                   "IsBuiltIn": true
                 },
@@ -29467,6 +29467,28 @@
                   "Body": "{\n  \u0022@odata.type\u0022 : \u0022microsoft.graph.openTypeExtension\u0022,\n  \u0022extensionName\u0022 : \u0022Com.Contoso.Deal\u0022,\n  \u0022companyName\u0022 : \u0022Alpine Skis\u0022,\n  \u0022dealValue\u0022 : 1010100,\n  \u0022expirationDate\u0022 : \u0022${DateTime7DayLater0Utc}\u0022\n}",
                   "Children": [],
                   "IsBuiltIn": true
+                },
+                {
+                  "Id": "fc2ce324-d61e-45f2-81cd-e96066a51f88",
+                  "Type": 1,
+                  "Name": "Create an extension in a new group post",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}/posts/{id}/reply",
+                  "Headers": {},
+                  "Body": "{\n  \u0022post\u0022: {\n    \u0022body\u0022: {\n      \u0022contentType\u0022: \u0022html\u0022,\n      \u0022content\u0022: \u0022\u003Chtml\u003E\u003Cbody\u003E\u003Cdiv\u003E\u003Cdiv\u003E\u003Cdiv\u003E\u003Cdiv\u003EWhen and where? \u003C/div\u003E\u003C/div\u003E\u003C/div\u003E\u003C/div\u003E\u003C/body\u003E\u003C/html\u003E\u0022\n    },\n  \u0022extensions\u0022: [\n    {\n      \u0022@odata.type\u0022: \u0022microsoft.graph.openTypeExtension\u0022,\n      \u0022extensionName\u0022: \u0022Com.Contoso.HR\u0022,\n      \u0022companyName\u0022: \u0022Contoso\u0022,\n      \u0022expirationDate\u0022: \u00222015-07-03T13:04:00.000Z\u0022,\n      \u0022topPicks\u0022: [\n        \u0022Employees only\u0022,\n        \u0022Add spouse or guest\u0022,\n        \u0022Add family\u0022\n      ]\n    }\n  ]\n  }\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "49de2bf0-6cca-4b57-87d7-b471c21beb16",
+                  "Type": 1,
+                  "Name": "Create an extension in a new group post using POST operation",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/groups/{id}/conversations",
+                  "Headers": {},
+                  "Body": "{\n  \u0022Topic\u0022: \u0022Does anyone have a second?\u0022,\n  \u0022Threads\u0022: [\n    {\n      \u0022Posts\u0022: [\n        {\n          \u0022Body\u0022: {\n            \u0022ContentType\u0022: \u0022HTML\u0022,\n            \u0022Content\u0022: \u0022This is urgent!\u0022\n          },\n          \u0022Extensions\u0022: [\n            {\n              \u0022@odata.type\u0022: \u0022microsoft.graph.openTypeExtension\u0022,\n              \u0022extensionName\u0022: \u0022Com.Contoso.Benefits\u0022,\n              \u0022companyName\u0022: \u0022Contoso\u0022,\n              \u0022expirationDate\u0022: \u00222016-08-03T11:00:00.000Z\u0022,\n              \u0022topPicks\u0022: [\n                \u0022Employees only\u0022,\n                \u0022Add spouse or guest\u0022,\n                \u0022Add family\u0022\n              ]\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
                 }
               ],
               "IsBuiltIn": true
@@ -46729,7 +46751,7 @@
                   "Method": "POST",
                   "Url": "https://graph.microsoft.com/v1.0/me/messages/{id}/createForward",
                   "Headers": {},
-                  "Body": "",
+                  "Body": "{\n  \u0022message\u0022:{\n    \u0022isDeliveryReceiptRequested\u0022: true,\n    \u0022toRecipients\u0022:[\n      {\n        \u0022emailAddress\u0022: {\n          \u0022address\u0022:\u0022${SampleInternalUser3Address}\u0022,\n          \u0022name\u0022:\u0022${SampleInternalUser3Name}\u0022\n        }\n      }\n     ]\n  },\n  \u0022comment\u0022: \u0022Dana, just want to make sure you get this; you\u0027ll need this if the project gets approved.\u0022\n}",
                   "Children": [],
                   "IsBuiltIn": true
                 },
