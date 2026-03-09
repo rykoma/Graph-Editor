@@ -1075,6 +1075,7 @@ namespace Graph_Editor.Pages.SampleQuery
         {
             string output = Input.Replace("/users/{id}", "/users/${UserObjectId}");
             output = output.Replace("/users/{user-id}", "/users/${UserObjectId}");
+            output = output.Replace("/users/{userId}", "/users/${UserObjectId}");
             output = output.Replace("/users/{id | userPrincipalName}", "/users/${UserObjectId}");
             output = output.Replace("/groups/{group-id}", "/groups/{id}");
             output = output.Replace("/directoryObjects/{object-id}", "/directoryObjects/{id}");
