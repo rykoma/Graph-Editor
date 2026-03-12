@@ -1328,7 +1328,8 @@ namespace Graph_Editor.Pages.SampleQuery
                 "platformCredentialMethods", "windowsHelloForBusinessMethods", "oauth2PermissionGrants", "userFlowAttributes", "b2xUserFlows",
                 "identityProviders", "userAttributeAssignments", "b2cUserFlows", "languages", "delegatedAdminRelationships", "accessAssignments",
                 "mailFolders", "messageRules", "messageTraces", "overrides",
-                "notebooks", "sections", "sectionGroups"
+                "notebooks", "sections", "sectionGroups",
+                "contacts", "contactFolders"
             };
 
             foreach (var endpoint in endpoints)
