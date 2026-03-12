@@ -53728,6 +53728,17 @@
                   "IsBuiltIn": true
                 },
                 {
+                  "Id": "f0fd1617-ed39-5214-ad8b-5ddebd340862",
+                  "Type": 1,
+                  "Name": "Retry policy",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
                   "Id": "7a4264ec-da56-532e-a4d6-2a436d618b2d",
                   "Type": 0,
                   "Name": "Site sources",
