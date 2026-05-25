@@ -7337,6 +7337,1281 @@
       "IsBuiltIn": true
     },
     {
+      "Id": "08c71d5b-cd3c-51cf-98c4-740a0ddf2587",
+      "Type": 0,
+      "Name": "Agents",
+      "Children": [
+        {
+          "Id": "7180cbca-e01d-52c1-bd2f-c7b5631ea870",
+          "Type": 0,
+          "Name": "Agent identities",
+          "Children": [
+            {
+              "Id": "09542376-4d2f-5bc6-9ada-6a7ab5d5d39f",
+              "Type": 0,
+              "Name": "Agent identity blueprint",
+              "Children": [
+                {
+                  "Id": "209c1e4f-0ca8-57f5-b48b-0af3f776acbb",
+                  "Type": 1,
+                  "Name": "List",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/microsoft.graph.agentIdentityBlueprint",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "2fc75330-8bd7-52f6-a5c2-dff721fc4efa",
+                  "Type": 1,
+                  "Name": "Create",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/microsoft.graph.agentIdentityBlueprint",
+                  "Headers": {},
+                  "Body": "{\n  \u0022displayName\u0022: \u0022Display name\u0022,\n  \u0022sponsors@odata.bind\u0022: [\n    \u0022https://graph.microsoft.com/v1.0/users/e64405d7-f156-4ce1-b1f5-b0d801c367f3\u0022\n   ]\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "a225fd60-de93-569d-a7e3-0ff8adddb4c7",
+                  "Type": 1,
+                  "Name": "Get",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}/microsoft.graph.agentIdentityBlueprint",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "08b65cdb-cac2-5a1c-9ece-1a0cbb7a8007",
+                  "Type": 1,
+                  "Name": "Update",
+                  "Method": "PATCH",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}/microsoft.graph.agentIdentityBlueprint",
+                  "Headers": {},
+                  "Body": "{\n  \u0022displayName\u0022: \u0022My New Name\u0022\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "2b3e3cb0-4d6a-5d43-ac6f-cf4de7eff9ab",
+                  "Type": 1,
+                  "Name": "Upsert",
+                  "Method": "PATCH",
+                  "Url": "https://graph.microsoft.com/v1.0/applications(uniqueName=\u0027app-65278\u0027)/microsoft.graph.agentIdentityBlueprint",
+                  "Headers": {
+                    "Prefer": "create-if-missing"
+                  },
+                  "Body": "{\n  \u0022displayName\u0022: \u0022Display name\u0022\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "a2473fce-f4d8-554f-b03b-e41fb58fd61d",
+                  "Type": 1,
+                  "Name": "Delete",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/applications/{id}/microsoft.graph.agentIdentityBlueprint",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "8fab4c19-bd54-5f0e-9d07-805914e336d1",
+                  "Type": 0,
+                  "Name": "Credentials",
+                  "Children": [
+                    {
+                      "Id": "ff8380b6-1fe6-5efd-917f-2ef4e9f6d1bd",
+                      "Type": 1,
+                      "Name": "Add password",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/applications/{id}/microsoft.graph.agentIdentityBlueprint/addPassword",
+                      "Headers": {},
+                      "Body": "{\n  \u0022passwordCredential\u0022: {\n    \u0022displayName\u0022: \u0022Password friendly name\u0022\n  }\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "f85c0267-44ad-596c-9c00-ca76e8581aa5",
+                      "Type": 1,
+                      "Name": "Remove password",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/applications/{id}/microsoft.graph.agentIdentityBlueprint/removePassword",
+                      "Headers": {},
+                      "Body": "{\n    \u0022keyId\u0022: \u0022f0b0b335-1d71-4883-8f98-567911bfdca6\u0022\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "34220fd3-7001-55d6-b38d-d9bca880163f",
+                      "Type": 1,
+                      "Name": "Add key",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/applications/{id}/microsoft.graph.agentIdentityBlueprint/addKey",
+                      "Headers": {},
+                      "Body": "{\n  \u0022keyCredential\u0022: {\n    \u0022@odata.type\u0022: \u0022microsoft.graph.keyCredential\u0022\n  },\n  \u0022passwordCredential\u0022: {\n    \u0022@odata.type\u0022: \u0022microsoft.graph.passwordCredential\u0022\n  },\n  \u0022proof\u0022: \u0022String\u0022\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "5d70e1a2-9427-58d5-ad54-ded91b3f2e4e",
+                      "Type": 1,
+                      "Name": "Remove key",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/applications/{id}/microsoft.graph.agentIdentityBlueprint/removeKey",
+                      "Headers": {},
+                      "Body": "{\n  \u0022keyId\u0022: \u0022Guid\u0022,\n  \u0022proof\u0022: \u0022String\u0022\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "a9ff4262-58fe-56a8-b196-fa9f5ecfe902",
+                      "Type": 1,
+                      "Name": "List federated identity credential",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/applications/{id}/federatedIdentityCredentials/",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "d5baa1ad-a030-5332-9a49-903907559111",
+                      "Type": 1,
+                      "Name": "Create federated identity credential",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/applications/{id}/federatedIdentityCredentials/",
+                      "Headers": {},
+                      "Body": "{\n    \u0022name\u0022: \u0022testing02\u0022,\n    \u0022issuer\u0022: \u0022https://login.microsoftonline.com/3d1e2be9-a10a-4a0c-8380-7ce190f98ed9/v2.0\u0022,\n    \u0022subject\u0022: \u0022a7d388c3-5e3f-4959-ac7d-786b3383006a\u0022,\n    \u0022audiences\u0022: [\n        \u0022api://AzureADTokenExchange\u0022\n    ]\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "e6f79d89-996e-5e19-a942-25d78b4002f0",
+                      "Type": 1,
+                      "Name": "Get federated identity credential",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/applications/{id}/federatedIdentityCredentials/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "2fdbee49-8d3d-5507-8512-35ead31406f9",
+                      "Type": 1,
+                      "Name": "Update federated identity credential",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "9097faec-fc72-5180-8752-ccf0fe87b5b2",
+                      "Type": 0,
+                      "Name": "Upsert federated identity credential",
+                      "Children": [
+                        {
+                          "Id": "aede3f7a-a37d-5533-a0c8-89902e4db0f8",
+                          "Type": 1,
+                          "Name": "Create a new federatedIdentityCredential if it doesn\u0027t exist",
+                          "Method": "PATCH",
+                          "Url": "https://graph.microsoft.com/v1.0/applications(uniqueName=\u0027app-65278\u0027)/federatedIdentityCredentials(name=\u0027fic01-app-65278\u0027)",
+                          "Headers": {},
+                          "Body": "{\n    \u0022issuer\u0022: \u0022https://login.microsoftonline.com/3d1e2be9-a10a-4a0c-8380-7ce190f98ed9/v2.0\u0022,\n    \u0022subject\u0022: \u0022a7d388c3-5e3f-4959-ac7d-786b3383006a\u0022,\n    \u0022audiences\u0022: [\n        \u0022api://AzureADTokenExchange\u0022\n    ]\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "227132a4-998a-5a55-803c-698ee54aa487",
+                          "Type": 1,
+                          "Name": "Update an existing federatedIdentityCredential",
+                          "Method": "PATCH",
+                          "Url": "https://graph.microsoft.com/v1.0/applications(uniqueName=\u0027app-65278\u0027)/federatedIdentityCredentials(name=\u0027fic01-app-65278\u0027)",
+                          "Headers": {
+                            "Prefer": "create-if-missing"
+                          },
+                          "Body": "{\n    \u0022issuer\u0022: \u0022https://login.microsoftonline.com/3d1e2be9-a10a-4a0c-8380-7ce190f98ed9/v2.0\u0022,\n    \u0022subject\u0022: \u0022a7d388c3-5e3f-4959-ac7d-786b3383006a\u0022,\n    \u0022audiences\u0022: [\n        \u0022api://AzureADTokenExchange\u0022\n    ]\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        }
+                      ],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "1b71c007-25cc-5e7c-8ca8-abecfbfc9871",
+                      "Type": 1,
+                      "Name": "Delete federated identity credential",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/applications/{id}/federatedIdentityCredentials/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "7fbcfc29-d4a4-5dcc-bb34-e6b624696573",
+                  "Type": 0,
+                  "Name": "Deleted items",
+                  "Children": [
+                    {
+                      "Id": "191979f1-6c0a-5ac0-aeec-565689b22c2c",
+                      "Type": 0,
+                      "Name": "List",
+                      "Children": [
+                        {
+                          "Id": "394dd3f7-3eb7-5ad1-b209-6a295973e9da",
+                          "Type": 1,
+                          "Name": "Retrieve deleted groups",
+                          "Method": "GET",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/microsoft.graph.group",
+                          "Headers": {},
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "3efb6194-da3c-5f3e-927f-e9c648b349cb",
+                          "Type": 1,
+                          "Name": "Retrieve the count of deleted user objects and order the results by the deletedDateTime property",
+                          "Method": "GET",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/microsoft.graph.group?$count=true\u0026$orderby=deletedDateTime asc\u0026$select=id,DisplayName,deletedDateTime",
+                          "Headers": {
+                            "ConsistencyLevel": "eventual"
+                          },
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        }
+                      ],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "e8de8a86-08c2-55a2-b7bc-bc31d5887a17",
+                      "Type": 1,
+                      "Name": "Get",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "bdae7234-5e0d-52d0-9a7e-66bcad524e03",
+                      "Type": 0,
+                      "Name": "Restore",
+                      "Children": [
+                        {
+                          "Id": "36602b2e-60cd-5846-a7d7-534e0fd47be3",
+                          "Type": 1,
+                          "Name": "Restore a deleted item",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{id}/restore",
+                          "Headers": {},
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "a22bde40-5ec2-570e-a0d3-79f387d6a8e2",
+                          "Type": 1,
+                          "Name": "Restore a deleted item and remove any conflicting proxy addresses",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{id}/restore",
+                          "Headers": {},
+                          "Body": "{\n  \u0022autoReconcileProxyConflict\u0022: true\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "c745111f-0a11-58b2-ba6b-73457be827ea",
+                          "Type": 1,
+                          "Name": "Restore a deleted user and assign them a new userPrincipalName",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{id}/restore",
+                          "Headers": {},
+                          "Body": "{\n  \u0022newUserPrincipalName\u0022: \u0022${SampleInternalUser9Address}\u0022\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        }
+                      ],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "fb514479-0eaf-5984-8d10-7ff20a9c41a2",
+                      "Type": 1,
+                      "Name": "Permanently delete",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "e2c6aefa-ba0d-5f03-a141-c51817bc3d6a",
+                  "Type": 0,
+                  "Name": "Owners",
+                  "Children": [
+                    {
+                      "Id": "4d8faac7-fece-5f7b-9744-608026ccf810",
+                      "Type": 1,
+                      "Name": "List owners",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/applications/{id}/microsoft.graph.agentIdentityBlueprint/owners",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "59f3c5cd-1e22-57ca-961e-3ec8642d94da",
+                      "Type": 1,
+                      "Name": "Add owners",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/applications/{id}/microsoft.graph.agentIdentityBlueprint/owners/$ref",
+                      "Headers": {},
+                      "Body": "{\n    \u0022@odata.id\u0022: \u0022https://graph.microsoft.com/v1.0/directoryObjects/1511d5e7-c324-4362-ad4b-16c20076e5aa\u0022\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "3468a46b-3a00-5c2a-ac6d-40b42c953a3c",
+                      "Type": 1,
+                      "Name": "Remove owners",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/applications/{id}/microsoft.graph.agentIdentityBlueprint/owners/{id}/$ref",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "3450c42a-a4ea-547b-92fb-7576ecb15a1b",
+                  "Type": 0,
+                  "Name": "Sponsors",
+                  "Children": [
+                    {
+                      "Id": "f80e1880-29b6-578e-abd6-411812b52b61",
+                      "Type": 1,
+                      "Name": "List sponsors",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/applications/{id}/microsoft.graph.agentIdentityBlueprint/sponsors",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "03d74ded-5cc7-5eed-8008-8f33d09346b3",
+                      "Type": 1,
+                      "Name": "Add sponsors",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/applications/{id}/microsoft.graph.agentIdentityBlueprint/sponsors/$ref",
+                      "Headers": {},
+                      "Body": "{\n  \u0022@odata.id\u0022: \u0022https://graph.microsoft.com/v1.0/directoryObjects/{sponsor-object-id}\u0022\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "6e305a37-981f-59c0-825e-83072788e4fb",
+                      "Type": 1,
+                      "Name": "Remove sponsors",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/applications/{id}/microsoft.graph.agentIdentityBlueprint/sponsors/{id}/$ref",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "c49e01bf-5885-59fa-a0d1-c657cc0c0ca7",
+                  "Type": 0,
+                  "Name": "Verified publisher",
+                  "Children": [
+                    {
+                      "Id": "e4f7007e-e5a4-5130-a334-8478db353c12",
+                      "Type": 1,
+                      "Name": "Set",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/applications/{id}/microsoft.graph.agentIdentityBlueprint/setVerifiedPublisher",
+                      "Headers": {},
+                      "Body": "{\n    \u0022verifiedPublisherId\u0022: \u00221234567\u0022\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "e26fcda2-e12e-52db-98d1-c336938d0e61",
+                      "Type": 1,
+                      "Name": "Unset",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/applications/{id}/microsoft.graph.agentIdentityBlueprint/unsetVerifiedPublisher",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "637328ee-1bee-561d-8335-393d951ab658",
+                  "Type": 0,
+                  "Name": "Inheritable permissions",
+                  "Children": [
+                    {
+                      "Id": "7b4341ac-838c-5fa7-864c-3e8a75e4926d",
+                      "Type": 1,
+                      "Name": "List inheritable permissions",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/applications/{id}/microsoft.graph.agentIdentityBlueprint/inheritablePermissions",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "f39807ca-562e-55ae-abb2-538764185a76",
+                      "Type": 0,
+                      "Name": "Add inheritable permission",
+                      "Children": [
+                        {
+                          "Id": "3d50892e-22f0-5290-922a-10e7845e8035",
+                          "Type": 1,
+                          "Name": "Create inheritablePermission with allAllowedScopes pattern",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/applications/{id}/microsoft.graph.agentIdentityBlueprint/inheritablePermissions",
+                          "Headers": {},
+                          "Body": "{\n  \u0022resourceAppId\u0022: \u002200000003-0000-0000-c000-000000000000\u0022,\n  \u0022inheritableScopes\u0022: {\n    \u0022@odata.type\u0022: \u0022microsoft.graph.allAllowedScopes\u0022\n  }\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "56319ac4-a2d3-5984-b536-5a529fd9a8b9",
+                          "Type": 1,
+                          "Name": "Create inheritablePermission with enumeratedScopes pattern",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/applications/{id}/microsoft.graph.agentIdentityBlueprint/inheritablePermissions",
+                          "Headers": {},
+                          "Body": "{\n  \u0022resourceAppId\u0022: \u002200000003-0000-0000-c000-000000000000\u0022,\n  \u0022inheritableScopes\u0022: {\n    \u0022@odata.type\u0022: \u0022microsoft.graph.enumeratedScopes\u0022,\n    \u0022scopes\u0022: [\n      \u0022User.Read\u0022,\n      \u0022Mail.Read\u0022\n    ]\n  }\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "aab82b4e-209f-517c-93d4-cac61e3b61ab",
+                          "Type": 1,
+                          "Name": "Create inheritablePermission with noScopes pattern",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/applications/{id}/microsoft.graph.agentIdentityBlueprint/inheritablePermissions",
+                          "Headers": {},
+                          "Body": "{\n  \u0022resourceAppId\u0022: \u002200000003-0000-0000-c000-000000000000\u0022,\n  \u0022inheritableScopes\u0022: {\n    \u0022@odata.type\u0022: \u0022microsoft.graph.noScopes\u0022\n  }\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        }
+                      ],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "0077bbc8-085e-5dcf-bdfd-245a1d685c98",
+                      "Type": 1,
+                      "Name": "Delete inheritable permission",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/applications/{id}/microsoft.graph.agentIdentityBlueprint/inheritablePermissions/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "7be5eb11-50c7-5636-9c7f-27b8790ad261",
+              "Type": 0,
+              "Name": "Agent identity blueprint principal",
+              "Children": [
+                {
+                  "Id": "f109ac14-e322-539c-8bab-83c563d46251",
+                  "Type": 1,
+                  "Name": "List",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/microsoft.graph.agentIdentityBlueprintPrincipal",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "411e1233-c828-509b-b0b4-11e420618709",
+                  "Type": 1,
+                  "Name": "Create",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/microsoft.graph.agentIdentityBlueprintPrincipal",
+                  "Headers": {},
+                  "Body": "{\n  \u0022appId\u0022: \u002200001111-aaaa-2222-bbbb-3333cccc4444\u0022\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "fa1e1f7c-386d-5269-862d-1d6dc1a6b1ae",
+                  "Type": 1,
+                  "Name": "Get",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentityBlueprintPrincipal",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "9967c043-dbdd-5554-bb14-980c777074d9",
+                  "Type": 1,
+                  "Name": "Update",
+                  "Method": "PATCH",
+                  "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentityBlueprintPrincipal",
+                  "Headers": {},
+                  "Body": "{\n  \u0022appRoleAssignmentRequired\u0022: true\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "35650390-f651-5fd6-a485-a30b2c5e05a2",
+                  "Type": 1,
+                  "Name": "Delete",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentityBlueprintPrincipal",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "d1aa68e1-4cec-59db-b9ad-546e4b42fc3b",
+                  "Type": 0,
+                  "Name": "App role assignments",
+                  "Children": [
+                    {
+                      "Id": "312028e8-27da-5915-bb07-abcabb93a160",
+                      "Type": 1,
+                      "Name": "List app role assigned to",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/appRoleAssignedTo",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "e53bac24-518c-5df9-a02f-bd01f109d544",
+                      "Type": 1,
+                      "Name": "Add app role assigned to",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/appRoleAssignedTo",
+                      "Headers": {},
+                      "Body": "{\n  \u0022principalId\u0022: \u002233ad69f9-da99-4bed-acd0-3f24235cb296\u0022,\n  \u0022resourceId\u0022: \u00229028d19c-26a9-4809-8e3f-20ff73e2d75e\u0022,\n  \u0022appRoleId\u0022: \u0022ef7437e6-4f94-4a0a-a110-a439eb2aa8f7\u0022\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "ca6d208d-e45b-53dc-bd07-bfc37803f00e",
+                      "Type": 1,
+                      "Name": "Remove app role assigned to",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/appRoleAssignedTo/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "a0aee798-1532-5608-940a-06152aa7e264",
+                      "Type": 1,
+                      "Name": "List app role assignments",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/appRoleAssignments",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "db74092b-6980-5c5c-9108-94a96486ce69",
+                      "Type": 1,
+                      "Name": "Add app role assignment",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/appRoleAssignments",
+                      "Headers": {},
+                      "Body": "{\n  \u0022principalId\u0022: \u00229028d19c-26a9-4809-8e3f-20ff73e2d75e\u0022,\n  \u0022resourceId\u0022: \u00228fce32da-1246-437b-99cd-76d1d4677bd5\u0022,\n  \u0022appRoleId\u0022: \u0022498476ce-e0fe-48b0-b801-37ba7e2685c6\u0022\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "f6f48aec-b167-50d3-b09c-d2a4b34b6747",
+                      "Type": 1,
+                      "Name": "Remove app role assignment",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/appRoleAssignments/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "8c30e2dd-9a97-5780-beeb-0b8dac96278f",
+                  "Type": 0,
+                  "Name": "Delegated permission grants",
+                  "Children": [
+                    {
+                      "Id": "92a528bd-c68b-519f-8ff0-57cb6997059e",
+                      "Type": 1,
+                      "Name": "List OAuth 2.0 permission grants",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/oauth2PermissionGrants",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "fc476cce-389b-5362-9d97-7b498c69238c",
+                  "Type": 0,
+                  "Name": "Deleted items",
+                  "Children": [
+                    {
+                      "Id": "dc00d0ca-188c-5c6e-b85a-e5f865041cc2",
+                      "Type": 0,
+                      "Name": "List",
+                      "Children": [
+                        {
+                          "Id": "55ff8db3-9ef5-5953-b4f3-7d61b2b320cc",
+                          "Type": 1,
+                          "Name": "Retrieve deleted groups",
+                          "Method": "GET",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/microsoft.graph.group",
+                          "Headers": {},
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "df94310b-dae1-58b2-975f-357d208e5f19",
+                          "Type": 1,
+                          "Name": "Retrieve the count of deleted user objects and order the results by the deletedDateTime property",
+                          "Method": "GET",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/microsoft.graph.group?$count=true\u0026$orderby=deletedDateTime asc\u0026$select=id,DisplayName,deletedDateTime",
+                          "Headers": {
+                            "ConsistencyLevel": "eventual"
+                          },
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        }
+                      ],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "343aec67-92ee-570d-a436-66592ee92d41",
+                      "Type": 1,
+                      "Name": "Get",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "31413a49-5129-57cf-a548-28d1cc9b48f6",
+                      "Type": 0,
+                      "Name": "Restore",
+                      "Children": [
+                        {
+                          "Id": "6460967c-048d-5c8c-9248-4056248e83ca",
+                          "Type": 1,
+                          "Name": "Restore a deleted item",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{id}/restore",
+                          "Headers": {},
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "f3575722-44a1-5a3d-aea1-2959cb2a6a42",
+                          "Type": 1,
+                          "Name": "Restore a deleted item and remove any conflicting proxy addresses",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{id}/restore",
+                          "Headers": {},
+                          "Body": "{\n  \u0022autoReconcileProxyConflict\u0022: true\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "143f8d09-25d4-5d92-a73e-b4f82698c6b4",
+                          "Type": 1,
+                          "Name": "Restore a deleted user and assign them a new userPrincipalName",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{id}/restore",
+                          "Headers": {},
+                          "Body": "{\n  \u0022newUserPrincipalName\u0022: \u0022${SampleInternalUser9Address}\u0022\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        }
+                      ],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "bedddbac-61c3-5e10-9295-4fbd1733695a",
+                      "Type": 1,
+                      "Name": "Permanently delete",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "c1802b1e-134c-5dfd-8e6a-e4ba69611dfe",
+                  "Type": 0,
+                  "Name": "Directory objects",
+                  "Children": [
+                    {
+                      "Id": "34ee2f7d-6403-5d2d-8d09-247c2c351dc5",
+                      "Type": 1,
+                      "Name": "List owned objects",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentityBlueprintPrincipal/ownedObjects",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "17ce887f-1cef-5584-bd75-b6a32973bd60",
+                      "Type": 1,
+                      "Name": "List created objects",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentityBlueprintPrincipal/createdObjects",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "17cced64-510b-5caa-87f8-29e79bcda7a8",
+                  "Type": 0,
+                  "Name": "Memberships",
+                  "Children": [
+                    {
+                      "Id": "2fec6c1c-6d64-5d2c-a384-d6c2dcb59705",
+                      "Type": 1,
+                      "Name": "List member of",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentityBlueprintPrincipal/memberOf",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "4ef9c9f4-9e7f-51e1-af85-eaa91df16433",
+                  "Type": 0,
+                  "Name": "Owners",
+                  "Children": [
+                    {
+                      "Id": "1b822aa9-3433-5159-bcbf-27b8cb74a700",
+                      "Type": 1,
+                      "Name": "List owners",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentityBlueprintPrincipal/owners",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "20d0928a-3ba5-5db6-a4a1-98777515f0e7",
+                      "Type": 1,
+                      "Name": "Add owners",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentityBlueprintPrincipal/owners/$ref",
+                      "Headers": {},
+                      "Body": "{\n    \u0022@odata.id\u0022: \u0022https://graph.microsoft.com/v1.0/directoryObjects/1511d5e7-c324-4362-ad4b-16c20076e5aa\u0022\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "c9e6eb0a-4eb8-5bbf-bfcd-0a6eb90ad504",
+                      "Type": 1,
+                      "Name": "Remove owners",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentityBlueprintPrincipal/owners/{id}/$ref",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "eadbe3fe-abfc-5162-8289-7be1e1cae61f",
+                  "Type": 0,
+                  "Name": "Sponsors",
+                  "Children": [
+                    {
+                      "Id": "8b1402f4-32d5-5c10-82b7-7848c756f4fa",
+                      "Type": 1,
+                      "Name": "List sponsors",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentityBlueprintPrincipal/sponsors",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "819e5bf4-40fb-5f14-b80b-4117f6bb3755",
+                      "Type": 1,
+                      "Name": "Add sponsors",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentityBlueprintPrincipal/sponsors/$ref",
+                      "Headers": {},
+                      "Body": "{\n  \u0022@odata.id\u0022: \u0022https://graph.microsoft.com/v1.0/directoryObjects/{sponsor-object-id}\u0022\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "3591234f-29c9-5741-bd6e-c0f10c7e3e89",
+                      "Type": 1,
+                      "Name": "Remove sponsors",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/graph.agentIdentityBlueprintPrincipal/sponsors/{id}/$ref",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "dcaa34eb-b6aa-5b0d-86ec-002b62ba3dd8",
+              "Type": 0,
+              "Name": "Agent identity",
+              "Children": [
+                {
+                  "Id": "3b7bc3dd-1429-5ed2-9540-f8b2a0776621",
+                  "Type": 1,
+                  "Name": "List",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/microsoft.graph.agentIdentity",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "60c92820-1916-5d03-9cba-8526b06a10e1",
+                  "Type": 1,
+                  "Name": "Create",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/microsoft.graph.agentIdentity",
+                  "Headers": {},
+                  "Body": "{\n  \u0022displayName\u0022: \u0022My Agent Identity\u0022,\n  \u0022agentIdentityBlueprintId\u0022: \u002265415bb1-9267-4313-bbf5-ae259732ee12\u0022,\n  \u0022sponsors@odata.bind\u0022: [\n    \u0022https://graph.microsoft.com/v1.0/users/acc9f0a1-9075-464f-9fe7-049bf1ae6481\u0022,\n    \u0022https://graph.microsoft.com/v1.0/groups/47309f33-e0ff-7be6-defe-28b504c8cd2e\u0022\n  ]\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "581f7859-944d-5a93-9db3-c97fc38d3da3",
+                  "Type": 1,
+                  "Name": "Get",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentity",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "e2315f1b-dd26-590e-b2c7-3038cc6de664",
+                  "Type": 1,
+                  "Name": "Update",
+                  "Method": "PATCH",
+                  "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentity",
+                  "Headers": {},
+                  "Body": "{\n  \u0022displayName\u0022: \u0022My New Name\u0022\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "235784c8-47b7-4643-b4d7-40efca8806e5",
+                  "Type": 1,
+                  "Name": "Delete",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentity",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "a2f84509-95f1-5135-bf2e-d968c9bd48fd",
+                  "Type": 0,
+                  "Name": "App role assignments",
+                  "Children": [
+                    {
+                      "Id": "d41bbdfe-045c-5ae8-8f73-049eb6fb1b21",
+                      "Type": 1,
+                      "Name": "List appRoleAssignedTo",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/appRoleAssignedTo",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "ba8d4083-8f2c-58a1-a06e-69c4853c3c50",
+                      "Type": 1,
+                      "Name": "List appRoleAssignments",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/appRoleAssignments",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "2d27e285-f00b-5e32-88da-d082d66e09fe",
+                      "Type": 1,
+                      "Name": "Create appRoleAssignment",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/appRoleAssignments",
+                      "Headers": {},
+                      "Body": "{\n  \u0022principalId\u0022: \u00229028d19c-26a9-4809-8e3f-20ff73e2d75e\u0022,\n  \u0022resourceId\u0022: \u00228fce32da-1246-437b-99cd-76d1d4677bd5\u0022,\n  \u0022appRoleId\u0022: \u0022498476ce-e0fe-48b0-b801-37ba7e2685c6\u0022\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "c08e3e9b-f7ad-5ec2-bd40-facba74abb4b",
+                      "Type": 1,
+                      "Name": "Delete appRoleAssignment",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/appRoleAssignments/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "d6d05857-2be4-557c-8aed-18f0f0ce4431",
+                  "Type": 0,
+                  "Name": "Delegated permission grants",
+                  "Children": [
+                    {
+                      "Id": "6861c3b7-d806-52e5-9e09-b4d6aa25ebfe",
+                      "Type": 1,
+                      "Name": "List oauth2PermissionGrants",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/oauth2PermissionGrants",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "7ef0734f-983a-56e5-8fdf-b0e5b513aec2",
+                  "Type": 0,
+                  "Name": "Deleted items",
+                  "Children": [
+                    {
+                      "Id": "f569c44d-ee9b-56c9-9724-3f4d9c2e5502",
+                      "Type": 0,
+                      "Name": "List",
+                      "Children": [
+                        {
+                          "Id": "df480377-c160-522a-a6dc-deeeb28a5e73",
+                          "Type": 1,
+                          "Name": "Retrieve deleted groups",
+                          "Method": "GET",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/microsoft.graph.group",
+                          "Headers": {},
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "8e036f69-ac93-5f88-8481-eb746263a57d",
+                          "Type": 1,
+                          "Name": "Retrieve the count of deleted user objects and order the results by the deletedDateTime property",
+                          "Method": "GET",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/microsoft.graph.group?$count=true\u0026$orderby=deletedDateTime asc\u0026$select=id,displayName,deletedDateTime",
+                          "Headers": {
+                            "ConsistencyLevel": "eventual"
+                          },
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        }
+                      ],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "3371cde0-da30-5791-8f2e-208ae41dd2f4",
+                      "Type": 1,
+                      "Name": "Get",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "d811779e-f4c6-511b-bf7a-0e0403b6f9d6",
+                      "Type": 0,
+                      "Name": "Restore",
+                      "Children": [
+                        {
+                          "Id": "bcfbe1e8-309c-5cc8-9793-c4916a7e9139",
+                          "Type": 1,
+                          "Name": "Restore a deleted item",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{id}/restore",
+                          "Headers": {},
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "44877e7d-f8e8-510a-b97e-5906137bb0b9",
+                          "Type": 1,
+                          "Name": "Restore a deleted item and remove any conflicting proxy addresses",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{id}/restore",
+                          "Headers": {},
+                          "Body": "{\n  \u0022autoReconcileProxyConflict\u0022: true\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "7bb2587a-034a-553c-a504-c1353d76503b",
+                          "Type": 1,
+                          "Name": "Restore a deleted user and assign them a new userPrincipalName",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{id}/restore",
+                          "Headers": {},
+                          "Body": "{\n  \u0022newUserPrincipalName\u0022: \u0022${SampleInternalUser9Address}\u0022\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        }
+                      ],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "597d9cde-69f6-5323-84f2-25bc475db56b",
+                      "Type": 1,
+                      "Name": "Permanently delete",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/deletedItems/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "86115ca8-9575-53a8-b0b8-82571624926f",
+                  "Type": 0,
+                  "Name": "Directory objects",
+                  "Children": [
+                    {
+                      "Id": "6f77f32f-5299-55b1-8b93-0f22563950b1",
+                      "Type": 1,
+                      "Name": "List ownedObjects",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentity/ownedObjects",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "4f260da1-bf31-5ae3-9e89-2462070af8a7",
+                  "Type": 0,
+                  "Name": "Memberships",
+                  "Children": [
+                    {
+                      "Id": "d7abc706-2254-5783-a96e-011c5f6ec2bf",
+                      "Type": 1,
+                      "Name": "List direct memberships",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentity/memberOf",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "00843f2a-5fcd-5559-bfdf-a567dd0b44ca",
+                      "Type": 1,
+                      "Name": "List transitive memberships",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentity/transitiveMemberOf",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "25c9f06f-942a-5a46-8168-af7b49ea80a8",
+                  "Type": 0,
+                  "Name": "Owners",
+                  "Children": [
+                    {
+                      "Id": "2a83bc8d-0211-5226-b1d9-1c1787da341e",
+                      "Type": 1,
+                      "Name": "List owners",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentity/owners",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "bf81cd6e-7dad-57d9-b044-615742088347",
+                      "Type": 1,
+                      "Name": "Add owners",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentity/owners/$ref",
+                      "Headers": {},
+                      "Body": "{\n    \u0022@odata.id\u0022: \u0022https://graph.microsoft.com/v1.0/directoryObjects/1511d5e7-c324-4362-ad4b-16c20076e5aa\u0022\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "7b23f3ad-87eb-570d-b039-665f661f6e98",
+                      "Type": 1,
+                      "Name": "Remove owners",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentity/owners/{id}/$ref",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "457ebfcf-4c21-5060-8ba6-331216a07364",
+                  "Type": 0,
+                  "Name": "Sponsors",
+                  "Children": [
+                    {
+                      "Id": "cec14085-299d-5ee4-8d20-cc02632705cc",
+                      "Type": 1,
+                      "Name": "List sponsors",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentity/sponsors",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "3b98159a-4ecb-5516-a5eb-744a1ce53081",
+                      "Type": 1,
+                      "Name": "Add sponsors",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentity/sponsors/$ref",
+                      "Headers": {},
+                      "Body": "{\n  \u0022@odata.id\u0022: \u0022https://graph.microsoft.com/v1.0/directoryObjects/{sponsorObjectId}\u0022\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "b6017374-4d88-53f7-995b-81b6fa6ef369",
+                      "Type": 1,
+                      "Name": "Remove sponsors",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/servicePrincipals/{id}/microsoft.graph.agentIdentity/sponsors/{id}/$ref",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            }
+          ],
+          "IsBuiltIn": true
+        }
+      ],
+      "IsBuiltIn": true
+    },
+    {
       "Id": "a211da8e-8bab-58c2-9e0c-5920a981ca54",
       "Type": 0,
       "Name": "Backup storage",
@@ -31075,13 +32350,34 @@
             },
             {
               "Id": "104bd6bd-427b-529e-96d7-48ada700bd07",
-              "Type": 1,
+              "Type": 0,
               "Name": "Download version",
-              "Method": "GET",
-              "Url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/versions/{id}/content",
-              "Headers": {},
-              "Body": "",
-              "Children": [],
+              "Children": [
+                {
+                  "Id": "1056bc6d-1416-5f83-8b54-0c357acdf0e2",
+                  "Type": 1,
+                  "Name": "Download the contents of a previous version of a file",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/versions/{id}/content",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "a1ffe3c2-d725-5940-a22f-9b6c707a8a7c",
+                  "Type": 1,
+                  "Name": "Download a partial range of bytes from a previous version of a file",
+                  "Method": "GET",
+                  "Url": "https://onedrive.com/34FF49D6...",
+                  "Headers": {
+                    "Range": "bytes=0-1023"
+                  },
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
               "IsBuiltIn": true
             },
             {
@@ -48954,9 +50250,9 @@
           "Name": "People admin settings",
           "Children": [
             {
-              "Id": "781e4a23-e77a-592f-86eb-29a889eaf16c",
+              "Id": "14dbc583-c34f-586d-9327-91502e1c9d94",
               "Type": 1,
-              "Name": "Get peopleAdminSettings",
+              "Name": "Get",
               "Method": "GET",
               "Url": "https://graph.microsoft.com/v1.0/admin/people",
               "Headers": {},
@@ -48965,9 +50261,9 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "858ccd01-7d01-57a0-9aaa-a8ea9a56e46c",
+              "Id": "af218862-2ef8-53f7-a1a1-853341788a40",
               "Type": 1,
-              "Name": "List itemInsights",
+              "Name": "List item insights",
               "Method": "GET",
               "Url": "https://graph.microsoft.com/v1.0/admin/people/itemInsights",
               "Headers": {},
@@ -48976,9 +50272,9 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "d205223e-92ff-5baf-a4b1-6298c549fb79",
+              "Id": "a4dadf8b-3d34-5131-b597-f16159b9a076",
               "Type": 1,
-              "Name": "List pronounsSettings",
+              "Name": "List pronouns Settings",
               "Method": "GET",
               "Url": "https://graph.microsoft.com/v1.0/admin/people/pronouns",
               "Headers": {},
@@ -48987,9 +50283,9 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "c06a3bc9-6083-5356-91aa-1dbc67098a82",
+              "Id": "4f39428f-e49c-5747-b295-1561336d74db",
               "Type": 1,
-              "Name": "List profileCardProperties",
+              "Name": "List profile card properties",
               "Method": "GET",
               "Url": "https://graph.microsoft.com/v1.0/admin/people/profileCardProperties",
               "Headers": {},
@@ -48998,15 +50294,37 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "6d30b1de-2e5f-53a1-a05b-c21be5a0acb2",
+              "Id": "3b140b02-37bc-5f50-9646-60ca5f5174b4",
               "Type": 1,
-              "Name": "Create profileCardProperty",
+              "Name": "Create profile card property",
               "Method": "POST",
               "Url": "https://graph.microsoft.com/v1.0/admin/people/profileCardProperties",
               "Headers": {
                 "Content-type": "application/json; charset=utf-8"
               },
               "Body": "{\n  \u0022directoryPropertyName\u0022: \u0022CustomAttribute1\u0022,\n  \u0022annotations\u0022: [\n    {\n      \u0022displayName\u0022: \u0022Cost Center\u0022,\n      \u0022localizations\u0022: [\n        {\n          \u0022languageTag\u0022: \u0022ru\u0022,\n          \u0022displayName\u0022: \u0022\u0446\u0435\u043D\u0442\u0440 \u0437\u0430\u0442\u0440\u0430\u0442\u0022\n        }\n      ]\n    }\n  ]\n}",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "6d4cad0f-293f-51dc-8698-9428f9bffd91",
+              "Type": 1,
+              "Name": "List profile sources",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/admin/people/profileSources",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "ff8dc64d-e8fd-52aa-ba1b-450cbf80d444",
+              "Type": 1,
+              "Name": "Create profile source",
+              "Method": "POST",
+              "Url": "https://graph.microsoft.com/v1.0/admin/people/profileSources",
+              "Headers": {},
+              "Body": "{\n  \u0022sourceId\u0022: \u0022bamboohr1\u0022,\n  \u0022displayName\u0022: \u0022HR Platform\u0022,\n  \u0022kind\u0022: \u0022BambooHR\u0022,\n  \u0022webUrl\u0022: \u0022https://bamboohr.contoso.com/login\u0022,\n  \u0022localizations\u0022: [\n    {\n      \u0022displayName\u0022: \u0022HR-Plattform\u0022,\n      \u0022webUrl\u0022: \u0022http://bamboohr.contoso.com/de/login\u0022,\n      \u0022languageTag\u0022: \u0022de\u0022\n    }\n  ]\n}",
               "Children": [],
               "IsBuiltIn": true
             }
@@ -49037,6 +50355,136 @@
               "Url": "https://graph.microsoft.com/v1.0/admin/people/itemInsights",
               "Headers": {},
               "Body": "{\n  \u0022disabledForGroup\u0022: \u0022edbfe4fb-ec70-4300-928f-dbb2ae86c981\u0022\n}",
+              "Children": [],
+              "IsBuiltIn": true
+            }
+          ],
+          "IsBuiltIn": true
+        },
+        {
+          "Id": "e80cf8ff-fd42-5335-8571-ce27905842a6",
+          "Type": 0,
+          "Name": "Profile card property",
+          "Children": [
+            {
+              "Id": "167b78f4-62a7-5666-a536-89e277484b8f",
+              "Type": 1,
+              "Name": "List",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/admin/people/profileCardProperties",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "e59ac0c5-49b4-53f2-924d-f07039240018",
+              "Type": 1,
+              "Name": "Create",
+              "Method": "POST",
+              "Url": "https://graph.microsoft.com/v1.0/admin/people/profileCardProperties",
+              "Headers": {
+                "Content-type": "application/json; charset=utf-8"
+              },
+              "Body": "{\n  \u0022directoryPropertyName\u0022: \u0022CustomAttribute1\u0022,\n  \u0022annotations\u0022: [\n    {\n      \u0022displayName\u0022: \u0022Cost Center\u0022,\n      \u0022localizations\u0022: [\n        {\n          \u0022languageTag\u0022: \u0022ru\u0022,\n          \u0022displayName\u0022: \u0022\u0446\u0435\u043D\u0442\u0440 \u0437\u0430\u0442\u0440\u0430\u0442\u0022\n        }\n      ]\n    }\n  ]\n}",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "196b00df-064f-5180-996f-8875e2359a5b",
+              "Type": 1,
+              "Name": "Get",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/admin/people/profileCardProperties/CustomAttribute1",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "0e1d6f6d-cc81-5251-9618-334a45bc5b2d",
+              "Type": 1,
+              "Name": "Update",
+              "Method": "PATCH",
+              "Url": "https://graph.microsoft.com/v1.0/admin/people/profileCardProperties/CustomAttribute1",
+              "Headers": {
+                "Content-type": "application/json; charset=utf-8"
+              },
+              "Body": "{\n  \u0022annotations\u0022: [\n    {\n      \u0022displayName\u0022: \u0022Cost Center\u0022,\n      \u0022localizations\u0022: [\n        {\n          \u0022languageTag\u0022: \u0022no\u0022,\n          \u0022displayName\u0022: \u0022Kostnadssenter\u0022\n        }\n      ]\n    }\n  ]\n}",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "cdf887ba-9d12-57a6-887d-5a1bce01d934",
+              "Type": 1,
+              "Name": "Delete",
+              "Method": "DELETE",
+              "Url": "https://graph.microsoft.com/v1.0/admin/people/profileCardProperties/fax",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            }
+          ],
+          "IsBuiltIn": true
+        },
+        {
+          "Id": "7d557084-35ce-55c0-8d7d-56e0d275dd97",
+          "Type": 0,
+          "Name": "Profile source",
+          "Children": [
+            {
+              "Id": "078744dc-2b9a-54e7-937f-cdc5babec949",
+              "Type": 1,
+              "Name": "List",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/admin/people/profileSources",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "b15731bb-f77c-532f-a51b-27c664f265cc",
+              "Type": 1,
+              "Name": "Create",
+              "Method": "POST",
+              "Url": "https://graph.microsoft.com/v1.0/admin/people/profileSources",
+              "Headers": {},
+              "Body": "{\n  \u0022sourceId\u0022: \u0022bamboohr1\u0022,\n  \u0022displayName\u0022: \u0022HR Platform\u0022,\n  \u0022kind\u0022: \u0022BambooHR\u0022,\n  \u0022webUrl\u0022: \u0022https://bamboohr.contoso.com/login\u0022,\n  \u0022localizations\u0022: [\n    {\n      \u0022displayName\u0022: \u0022HR-Plattform\u0022,\n      \u0022webUrl\u0022: \u0022http://bamboohr.contoso.com/de/login\u0022,\n      \u0022languageTag\u0022: \u0022de\u0022\n    }\n  ]\n}",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "fa2d0f75-8bff-56ab-acc9-d45ea6d790cb",
+              "Type": 1,
+              "Name": "Get",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/admin/people/profileSources(sourceId=\u0027bamboohr1\u0027)",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "3f8d00ea-4427-5de9-a856-59bae37d2399",
+              "Type": 1,
+              "Name": "Update",
+              "Method": "PATCH",
+              "Url": "https://graph.microsoft.com/v1.0/admin/people/profileSources(sourceId=\u0027bamboohr1\u0027)",
+              "Headers": {},
+              "Body": "{\n  \u0022@odata.type\u0022: \u0022#microsoft.graph.profileSource\u0022,\n  \u0022sourceId\u0022: \u0022bamboohr1\u0022,\n  \u0022kind\u0022: \u0022BambooHR\u0022,\n  \u0022displayName\u0022: \u0022BambooHR Updated\u0022,\n  \u0022webUrl\u0022: \u0022https://bamboohr.contoso.com/login\u0022,\n  \u0022localizations\u0022: [\n    {\n      \u0022displayName\u0022: \u0022HR-Platform\u0022,\n      \u0022webUrl\u0022: \u0022http://bamboohr.contoso.com/en-us/login\u0022,\n      \u0022languageTag\u0022: \u0022en-us\u0022\n    },\n    {\n      \u0022displayName\u0022: \u0022HR-Plattform\u0022,\n      \u0022webUrl\u0022: \u0022http://bamboohr.contoso.com/de/login\u0022,\n      \u0022languageTag\u0022: \u0022de\u0022\n    }\n  ]\n}",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "e1df5540-babb-5791-b675-de4c4f925761",
+              "Type": 1,
+              "Name": "Delete",
+              "Method": "DELETE",
+              "Url": "https://graph.microsoft.com/v1.0/admin/people/profileSources(sourceId=\u0027bamboohr1\u0027)",
+              "Headers": {},
+              "Body": "",
               "Children": [],
               "IsBuiltIn": true
             }
@@ -52143,6 +53591,17 @@
                   "Id": "67561fc7-db23-5727-947b-15dc30adde54",
                   "Type": 1,
                   "Name": "List simulations",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "3ddd1f30-5d5e-5d5e-8c72-af04c7be8a97",
+                  "Type": 1,
+                  "Name": "List simulation users",
                   "Method": "",
                   "Url": "",
                   "Headers": {},

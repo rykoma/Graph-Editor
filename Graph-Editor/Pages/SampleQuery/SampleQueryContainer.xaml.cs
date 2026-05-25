@@ -1,4 +1,4 @@
-using Graph_Editor.Data.ExecutionRecord;
+﻿using Graph_Editor.Data.ExecutionRecord;
 using Graph_Editor.Data.SampleQuery;
 using Graph_Editor.Logic;
 using Graph_Editor.Pages.MainEditor;
@@ -1225,6 +1225,7 @@ namespace Graph_Editor.Pages.SampleQuery
             output = output.Replace("/apiConnectors/{identityApiConnectorId}", "/apiConnectors/{id}");
             output = output.Replace("/webApplicationFirewallProviders/{webApplicationFirewallProviderId}", "/webApplicationFirewallProviders/{id}");
             output = output.Replace("/webApplicationFirewallVerifications/{webApplicationFirewallVerificationModelId}", "/webApplicationFirewallVerifications/{id}");
+            output = output.Replace("/sponsors/{sponsorObjectId}", "/sponsors/{id}");
             output = output.Replace("/users/kim@contoso.com", "/users/{id}");
             output = output.Replace("/users/sandeep@contoso.com", "/users/{id}");
             output = output.Replace("/users/anirban@contoso.com", "/users/{id}");
@@ -1296,7 +1297,8 @@ namespace Graph_Editor.Pages.SampleQuery
                 "riskDetections", "riskyUsers", "riskyServicePrincipals", "graph.samlOrWsFedExternalDomainFederation", "federationConfigurations",
                 "microsoft.graph.samlOrWsFedExternalDomainFederation", "federationConfiguration", "tenants", "activityBasedTimeoutPolicies",
                 "featureRolloutPolicies", "appliesTo", "authenticationEventsFlows", "includeApplications", "apiConnectors",
-                "webApplicationFirewallProviders", "delegatedAdminCustomers", "requests"
+                "webApplicationFirewallProviders", "delegatedAdminCustomers", "requests",
+                "owners", "inheritablePermissions"
             };
             
             foreach (var endpoint in endpoints)
