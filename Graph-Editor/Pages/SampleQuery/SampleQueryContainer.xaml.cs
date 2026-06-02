@@ -1229,6 +1229,9 @@ namespace Graph_Editor.Pages.SampleQuery
             output = output.Replace("/users/kim@contoso.com", "/users/{id}");
             output = output.Replace("/users/sandeep@contoso.com", "/users/{id}");
             output = output.Replace("/users/anirban@contoso.com", "/users/{id}");
+            output = output.Replace("/microsoft.graph.agentUser/{userId}", "/microsoft.graph.agentUser/{id}");
+            output = output.Replace("/oneDriveForBusinessBrowseSessions/{oneDriveForBusinessBrowseSessionId}", "/oneDriveForBusinessBrowseSessions/{id}");
+            output = output.Replace("/sharePointBrowseSessions/{sharePointBrowseSessionId}", "/sharePointBrowseSessions/{id}");
             output = output.Replace("Pacific Standard Time", "${LocalTimeZone}").Replace("Eastern Standard Time", "${LocalTimeZone}");
             output = output.Replace("AdeleV@contoso.com", "${SampleInternalUser1Address}", true, null).Replace("Adele Vance", "${SampleInternalUser1Name}");
             output = output.Replace("samanthab@contoso.com", "${SampleInternalUser2Address}", true, null).Replace("Samantha Booth", "${SampleInternalUser2Name}");
@@ -1298,7 +1301,8 @@ namespace Graph_Editor.Pages.SampleQuery
                 "microsoft.graph.samlOrWsFedExternalDomainFederation", "federationConfiguration", "tenants", "activityBasedTimeoutPolicies",
                 "featureRolloutPolicies", "appliesTo", "authenticationEventsFlows", "includeApplications", "apiConnectors",
                 "webApplicationFirewallProviders", "delegatedAdminCustomers", "requests",
-                "owners", "inheritablePermissions"
+                "owners", "inheritablePermissions", "approvedClientApps", "microsoft.graph.agentUser",
+                "profiles", "profilePropertySettings"
             };
             
             foreach (var endpoint in endpoints)
@@ -1331,7 +1335,10 @@ namespace Graph_Editor.Pages.SampleQuery
                 "identityProviders", "userAttributeAssignments", "b2cUserFlows", "languages", "delegatedAdminRelationships", "accessAssignments",
                 "mailFolders", "messageRules", "messageTraces", "overrides",
                 "notebooks", "sections", "sectionGroups",
-                "contacts", "contactFolders"
+                "contacts", "contactFolders",
+                "oneDriveForBusinessBrowseSessions", "sharePointBrowseSessions",
+                "onPremisesConnections", "sharePointGroups", "mailboxes", "folders", "configurationMonitors", "configurationMonitoringResults",
+                "configurationDrifts", "configurationSnapshotJobs"
             };
 
             foreach (var endpoint in endpoints)
