@@ -11291,7 +11291,7 @@
               "Type": 1,
               "Name": "Permanently delete",
               "Method": "POST",
-              "Url": "https://graph.microsoft.com/v1.0/users/{id}/calendar/permanentDelete",
+              "Url": "https://graph.microsoft.com/v1.0/users/{id}/calendars/{id}/permanentDelete",
               "Headers": {},
               "Body": "",
               "Children": [],
@@ -38132,7 +38132,7 @@
                       "Type": 1,
                       "Name": "Filter by current user",
                       "Method": "GET",
-                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/appConsent/appConsentRequests/{id}/userConsentRequests/filterByCurrentUser(on=\u0027reviewer\u0027)?$filter= (status eq \u0027Completed\u0027)",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/appConsent/appConsentRequests/{id}/userConsentRequests/filterByCurrentUser(on=\u0027reviewer\u0027)?$filter=(status eq \u0027Completed\u0027)",
                       "Headers": {},
                       "Body": "",
                       "Children": [],
@@ -43185,6 +43185,17 @@
                       "IsBuiltIn": true
                     },
                     {
+                      "Id": "f9d7b7e8-b4f2-5e57-b731-e44837dc699b",
+                      "Type": 1,
+                      "Name": "Create",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/users/{id}/authentication/fido2Methods",
+                      "Headers": {},
+                      "Body": "{\n  \u0022@odata.type\u0022: \u0022#microsoft.graph.fido2AuthenticationMethod\u0022,\n  \u0022displayName\u0022: \u0022My security key\u0022,\n  \u0022publicKeyCredential\u0022: {\n    \u0022@odata.type\u0022: \u0022#microsoft.graph.webauthnPublicKeyCredential\u0022,\n    \u0022id\u0022: \u0022OEVEMkQzNTctNzNEMi00RjEzLTk5MjYtODdGNjFCMjRBMzQy\u0022,\n    \u0022response\u0022: {\n      \u0022@odata.type\u0022: \u0022#microsoft.graph.webauthnAuthenticatorAttestationResponse\u0022,\n      \u0022clientDataJSON\u0022: \u0022eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiUVRVMU16TkROekF0TmtNM05pMDBOVFJETFVKRFEwWXRSVFJFTURaQ05UQkZSVFJFIiwib3JpZ2luIjoiaHR0cHM6Ly9sb2dpbi5taWNyb3NvZnRvbmxpbmUuY29tIiwiY3Jvc3NPcmlnaW4iOmZhbHNlfQ\u0022,\n      \u0022attestationObject\u0022: \u0022o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YVikSZYN5YgOjGh0NBcPZHZgW4/krrmihjLHmVzzuoMdl2NdAAAAALraVWanqkAfvZZFYZpVEg0AIDhFRDJEMzU3LTczRDItNEYxMy05OTI2LTg3RjYxQjI0QTM0MqUBAgMmIAEhWCAMKJ7T4r8w5F6JGxJLJXNR0hV1MZF1aZ1F0pZXq5p5\u0022\n    },\n    \u0022clientExtensionResults\u0022: {\n      \u0022@odata.type\u0022: \u0022#microsoft.graph.webauthnAuthenticationExtensionsClientOutputs\u0022\n    }\n  }\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
                       "Id": "4e23d2b3-ce5f-58fd-b6d9-8f7f05cd70ec",
                       "Type": 1,
                       "Name": "Get",
@@ -43200,6 +43211,17 @@
                       "Type": 1,
                       "Name": "Delete",
                       "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/users/{id}/authentication/fido2Methods/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "739197bd-ca1d-5f08-b107-ed98d539a385",
+                      "Type": 1,
+                      "Name": "Creation options",
+                      "Method": "GET",
                       "Url": "https://graph.microsoft.com/v1.0/users/{id}/authentication/fido2Methods/{id}",
                       "Headers": {},
                       "Body": "",
