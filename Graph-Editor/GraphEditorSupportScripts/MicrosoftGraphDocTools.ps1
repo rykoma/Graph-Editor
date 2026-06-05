@@ -51,6 +51,75 @@ $script:subRequestCount = 0
 $script:totalHttpRequests = 0
 $script:startTime = Get-Date
 
+# Progress state for Test-MicrosoftGraphV1ReferenceChanges flow
+$script:V1ProgressEnabled = $false
+$script:V1ProgressParentId = 7100
+$script:V1ProgressChildId = 7101
+$script:V1TopTocTotal = 0
+$script:V1TopTocIndex = 0
+$script:V1TopTocName = ""
+$script:V1InnerTotal = 0
+$script:V1InnerIndex = 0
+
+function Update-V1ReferenceProgress {
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$Status,
+        [double]$PercentComplete = -1,
+        [switch]$Child
+    )
+
+    if (-not $script:V1ProgressEnabled) {
+        return
+    }
+
+    $safePercent = if ($PercentComplete -lt 0) {
+        0
+    }
+    else {
+        [Math]::Max(0, [Math]::Min(100, [int][Math]::Round($PercentComplete)))
+    }
+
+    if ($Child) {
+        Write-Progress -Id $script:V1ProgressChildId -ParentId $script:V1ProgressParentId -Activity "Exporting API v1.0 hierarchy" -Status $Status -PercentComplete $safePercent
+    }
+    else {
+        Write-Progress -Id $script:V1ProgressParentId -Activity "Testing Microsoft Graph v1.0 reference changes" -Status $Status -PercentComplete $safePercent
+    }
+}
+
+function Complete-V1ReferenceProgress {
+    if (-not $script:V1ProgressEnabled) {
+        return
+    }
+
+    Write-Progress -Id $script:V1ProgressChildId -ParentId $script:V1ProgressParentId -Activity "Exporting API v1.0 hierarchy" -Completed
+    Write-Progress -Id $script:V1ProgressParentId -Activity "Testing Microsoft Graph v1.0 reference changes" -Completed
+}
+
+function Get-V1ApiChildStatus {
+    param (
+        [string]$Detail = ""
+    )
+
+    if ($script:V1TopTocTotal -le 0 -or $script:V1TopTocIndex -le 0) {
+        return $Detail
+    }
+
+    $topName = if ([string]::IsNullOrWhiteSpace($script:V1TopTocName)) { "(unknown)" } else { $script:V1TopTocName }
+    $status = "API TOC item $($script:V1TopTocIndex)/$($script:V1TopTocTotal): $topName"
+
+    if ($script:V1InnerTotal -gt 0 -and $script:V1InnerIndex -gt 0) {
+        $status += " | $topName item $($script:V1InnerIndex)/$($script:V1InnerTotal)"
+    }
+
+    if (-not [string]::IsNullOrWhiteSpace($Detail)) {
+        $status += " ($Detail)"
+    }
+
+    return $status
+}
+
 # Helper function to invoke GitHub API with rate limit handling
 function Invoke-GitHubApi {
     [CmdletBinding()]
@@ -611,7 +680,13 @@ function Invoke-RestMethodWithRetry {
                     # Primary request (YAML files, etc.)
                     $script:requestCount++
                     $script:subRequestCount = 0
-                    Write-Host "[$script:requestCount] $Uri" -ForegroundColor Gray
+                    Write-Verbose "[$script:requestCount] $Uri"
+                }
+
+                if ($script:V1TopTocTotal -gt 0 -and $script:V1TopTocIndex -gt 0) {
+                    $currentTopPercent = ($script:V1TopTocIndex / $script:V1TopTocTotal) * 100
+                    $status = Get-V1ApiChildStatus -Detail "HTTP $($script:totalHttpRequests)"
+                    Update-V1ReferenceProgress -Child -Status $status -PercentComplete $currentTopPercent
                 }
                 # No progress display for secondary requests (Markdown files, etc.)
                 # Display control is handled by the caller
@@ -647,6 +722,11 @@ function Invoke-RestMethodWithRetry {
             }
             
             $statusInfo = if ($statusCode) { "(HTTP $statusCode)" } else { "" }
+            if ($script:V1TopTocTotal -gt 0 -and $script:V1TopTocIndex -gt 0) {
+                $currentTopPercent = ($script:V1TopTocIndex / $script:V1TopTocTotal) * 100
+                $status = Get-V1ApiChildStatus -Detail "waiting ${delay}s"
+                Update-V1ReferenceProgress -Child -Status $status -PercentComplete $currentTopPercent
+            }
             Write-Warning "Retry $($i + 1)/$MaxRetries $statusInfo : $Uri - Waiting ${delay} seconds"
             Start-Sleep -Seconds $delay
         }
@@ -694,13 +774,33 @@ function Get-DeterministicGuid {
 function ConvertFrom-TocItems {
     param (
         [array]$items,
-        [string]$parentPath = ""
+        [string]$parentPath = "",
+        [int]$ApiSectionDepth = -1
     )
 
+    $isRootLevel = [string]::IsNullOrEmpty($parentPath)
+    $isApiTopLevel = ($ApiSectionDepth -eq 0)
     $result = @()
+    $totalItems = if ($items) { $items.Count } else { 0 }
+
+    if ($isApiTopLevel) {
+        $script:V1TopTocTotal = $totalItems
+    }
+
+    $itemIndex = 0
     foreach ($item in $items) {
+        $itemIndex++
+        $originalName = $item.name
         if ($item.name -eq "API v1.0 reference") {
             $item.name = "Custom query"
+        }
+
+        $nextApiSectionDepth = -1
+        if ($ApiSectionDepth -ge 0) {
+            $nextApiSectionDepth = $ApiSectionDepth + 1
+        }
+        elseif ($originalName -eq "API v1.0 reference" -or $item.name -eq "Custom query") {
+            $nextApiSectionDepth = 0
         }
         
         $href = $item.href
@@ -708,14 +808,38 @@ function ConvertFrom-TocItems {
 
         # Build full path to current item
         $currentPath = if ($parentPath) { "$parentPath/$($item.name)" } else { $item.name }
+        if ($isApiTopLevel) {
+            $script:V1TopTocIndex = $itemIndex
+            $script:V1TopTocName = $item.name
+            $script:V1InnerTotal = 0
+            $script:V1InnerIndex = 0
+            $itemPercent = if ($totalItems -gt 0) { ($itemIndex / $totalItems) * 100 } else { 0 }
+            Update-V1ReferenceProgress -Child -Status "API TOC item $itemIndex/${totalItems}: $($item.name)" -PercentComplete $itemPercent
+        }
+        elseif ($ApiSectionDepth -eq 1 -and $script:V1TopTocTotal -gt 0 -and $script:V1TopTocIndex -gt 0) {
+            $script:V1InnerTotal = $totalItems
+            $script:V1InnerIndex = $itemIndex
+            $currentTopPercent = ($script:V1TopTocIndex / $script:V1TopTocTotal) * 100
+            $status = Get-V1ApiChildStatus -Detail "processing $($item.name)"
+            Update-V1ReferenceProgress -Child -Status $status -PercentComplete $currentTopPercent
+        }
+        elseif ($isRootLevel) {
+            $rootPercent = if ($totalItems -gt 0) { ($itemIndex / $totalItems) * 100 } else { 0 }
+            Update-V1ReferenceProgress -Child -Status "Root TOC item $itemIndex/${totalItems}: $($item.name)" -PercentComplete $rootPercent
+        }
+        elseif ($script:V1TopTocTotal -gt 0 -and $script:V1TopTocIndex -gt 0) {
+            $currentTopPercent = ($script:V1TopTocIndex / $script:V1TopTocTotal) * 100
+            $status = Get-V1ApiChildStatus -Detail "processing $($item.name)"
+            Update-V1ReferenceProgress -Child -Status $status -PercentComplete $currentTopPercent
+        }
 
         # If href is toc.yml, load recursively
         if ($href -and $href -like "*.yml") {
-            $children = Get-TocHierarchy -tocPath $href -parentPath $currentPath
+            $children = Get-TocHierarchy -tocPath $href -parentPath $currentPath -ApiSectionDepth $nextApiSectionDepth
         }
         # If items exist, process recursively
         elseif ($item.items) {
-            $children = ConvertFrom-TocItems -items $item.items -parentPath $currentPath
+            $children = ConvertFrom-TocItems -items $item.items -parentPath $currentPath -ApiSectionDepth $nextApiSectionDepth
         }
         # If href doesn't start with ../../api, skip as it's some overview page
         elseif ($href -and -not ($href -like "../../api*")) {
@@ -731,11 +855,11 @@ function ConvertFrom-TocItems {
             # Get list of Example titles
             $referenceFullPath = "$baseUrl$($href.Trim("../../"))"
             $script:subRequestCount++
-            Write-Host "  [$script:requestCount-$script:subRequestCount] Getting Examples: $($item.name) : $referenceFullPath" -ForegroundColor DarkGray
+            Write-Verbose "  [$script:requestCount-$script:subRequestCount] Getting Examples: $($item.name) : $referenceFullPath"
             $exampleTitles = Get-ExampleTitle -examplePath $referenceFullPath
 
             if ($exampleTitles.Count -eq 0) {
-                Write-Host "  [$script:requestCount-$script:subRequestCount] No Examples: $($item.name)" -ForegroundColor DarkGray
+                Write-Verbose "  [$script:requestCount-$script:subRequestCount] No Examples: $($item.name)"
 
                 $result += [PSCustomObject]@{
                     Id       = $guid.ToString()
@@ -800,7 +924,8 @@ function ConvertFrom-TocItems {
 function Get-TocHierarchy {
     param (
         [string]$tocPath,
-        [string]$parentPath = ""
+        [string]$parentPath = "",
+        [int]$ApiSectionDepth = -1
     )
 
     $url = if ($tocPath -like "http*") { $tocPath } else { "$baseUrl$tocPath" }
@@ -813,7 +938,7 @@ function Get-TocHierarchy {
         return @()
     }
 
-    return ConvertFrom-TocItems -items $toc.items -parentPath $parentPath
+    return ConvertFrom-TocItems -items $toc.items -parentPath $parentPath -ApiSectionDepth $ApiSectionDepth
 }
 
 function Get-ExampleTitle {
@@ -983,90 +1108,119 @@ function Export-MicrosoftGraphV1ReferenceTocToJson {
 }
 
 function Test-MicrosoftGraphV1ReferenceChanges {
+    [CmdletBinding()]
     param (
-        [string]$graphEditorFolder = [System.IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'Graph Editor')
+        [string]$graphEditorFolder = [System.IO.Path]::Combine([Environment]::GetFolderPath('MyDocuments'), 'Graph Editor'),
+        [switch]$NoProgress
     )
 
-    # Ensure Graph Editor folder exists
-    if (-not (Test-Path $graphEditorFolder)) {
-        New-Item -Path $graphEditorFolder -ItemType Directory -Force | Out-Null
-        Write-Host "Created folder: $graphEditorFolder" -ForegroundColor Gray
-    }
+    $script:V1ProgressEnabled = -not $NoProgress
+    Update-V1ReferenceProgress -Status "Preparing execution" -PercentComplete 5
 
-    $latestFile = Join-Path $graphEditorFolder "graph-api-hierarchy_latest.json"
-    $previousFile = Join-Path $graphEditorFolder "graph-api-hierarchy_previous.json"
-    $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
-    $backupFile = Join-Path $graphEditorFolder "graph-api-hierarchy_$timestamp.json"
-    $logFile = Join-Path $graphEditorFolder "GraphEditorSupportScripts.log"
+    try {
+
+        # Ensure Graph Editor folder exists
+        if (-not (Test-Path $graphEditorFolder)) {
+            New-Item -Path $graphEditorFolder -ItemType Directory -Force | Out-Null
+            Write-Host "Created folder: $graphEditorFolder" -ForegroundColor Gray
+        }
+
+        $latestFile = Join-Path $graphEditorFolder "graph-api-hierarchy_latest.json"
+        $previousFile = Join-Path $graphEditorFolder "graph-api-hierarchy_previous.json"
+        $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
+        $backupFile = Join-Path $graphEditorFolder "graph-api-hierarchy_$timestamp.json"
+        $logFile = Join-Path $graphEditorFolder "GraphEditorSupportScripts.log"
     
-    # Get current time with timezone
-    $now = Get-Date
-    $timezone = [System.TimeZoneInfo]::Local
-    $timezoneOffset = $timezone.GetUtcOffset($now).ToString("hh\:mm")
-    $timezoneSign = if ($timezone.GetUtcOffset($now).TotalMinutes -ge 0) { "+" } else { "-" }
-    $timestampWithTz = $now.ToString("yyyy-MM-dd HH:mm:ss") + " (UTC$timezoneSign$timezoneOffset)"
+        # Get current time with timezone
+        $now = Get-Date
+        $timezone = [System.TimeZoneInfo]::Local
+        $timezoneOffset = $timezone.GetUtcOffset($now).ToString("hh\:mm")
+        $timezoneSign = if ($timezone.GetUtcOffset($now).TotalMinutes -ge 0) { "+" } else { "-" }
+        $timestampWithTz = $now.ToString("yyyy-MM-dd HH:mm:ss") + " (UTC$timezoneSign$timezoneOffset)"
 
-    # Check if this is the first run
-    $isFirstRun = -not (Test-Path $latestFile)
+        # Check if this is the first run
+        $isFirstRun = -not (Test-Path $latestFile)
 
-    # If latest file exists, copy it to previous
-    if (-not $isFirstRun) {
-        Copy-Item -Path $latestFile -Destination $previousFile -Force
-    }
+        # If latest file exists, copy it to previous
+        if (-not $isFirstRun) {
+            Copy-Item -Path $latestFile -Destination $previousFile -Force
+        }
 
-    # Reset counters for new execution
-    $script:requestCount = 0
-    $script:subRequestCount = 0
-    $script:totalHttpRequests = 0
-    $script:startTime = Get-Date
+        # Reset counters for new execution
+        $script:requestCount = 0
+        $script:subRequestCount = 0
+        $script:totalHttpRequests = 0
+        $script:startTime = Get-Date
+        $script:V1TopTocTotal = 0
+        $script:V1TopTocIndex = 0
+        $script:V1TopTocName = ""
+        $script:V1InnerTotal = 0
+        $script:V1InnerIndex = 0
+        Update-V1ReferenceProgress -Status "Exporting latest hierarchy" -PercentComplete 20
+        Update-V1ReferenceProgress -Child -Status "Starting TOC traversal" -PercentComplete 0
 
-    # Execute export to create new latest file
-    Export-MicrosoftGraphV1ReferenceTocToJson -outputPath $latestFile
+        # Execute export to create new latest file
+        Export-MicrosoftGraphV1ReferenceTocToJson -outputPath $latestFile
+        Update-V1ReferenceProgress -Status "Saving backup and rotating old files" -PercentComplete 80
 
-    # Always create timestamped backup
-    Copy-Item -Path $latestFile -Destination $backupFile -Force
-    Write-Host "Backup saved: $backupFile" -ForegroundColor Gray
+        # Always create timestamped backup
+        Copy-Item -Path $latestFile -Destination $backupFile -Force
+        Write-Host "Backup saved: $backupFile" -ForegroundColor Gray
 
-    # Clean up old backups (older than 30 days)
-    $cutoffDate = (Get-Date).AddDays(-30)
-    Get-ChildItem -Path $graphEditorFolder -Filter "graph-api-hierarchy_*.json" | 
-    Where-Object { $_.Name -match '^graph-api-hierarchy_\d{8}_\d{6}\.json$' -and $_.LastWriteTime -lt $cutoffDate } | 
-    ForEach-Object {
-        Remove-Item $_.FullName -Force
-        Write-Host "Removed old backup: $($_.Name)" -ForegroundColor DarkGray
-    }
+        # Clean up old backups (older than 30 days)
+        $cutoffDate = (Get-Date).AddDays(-30)
+        Get-ChildItem -Path $graphEditorFolder -Filter "graph-api-hierarchy_*.json" | 
+        Where-Object { $_.Name -match '^graph-api-hierarchy_\d{8}_\d{6}\.json$' -and $_.LastWriteTime -lt $cutoffDate } | 
+        ForEach-Object {
+            Remove-Item $_.FullName -Force
+            Write-Verbose "Removed old backup: $($_.Name)"
+        }
 
-    # If first run, display message and exit
-    if ($isFirstRun) {
-        Write-Host "`nFirst run. Comparison will be performed on next execution." -ForegroundColor Cyan
-        Write-Host "Saved to: $latestFile" -ForegroundColor Cyan
+        # If first run, display message and exit
+        if ($isFirstRun) {
+            Update-V1ReferenceProgress -Status "First run complete" -PercentComplete 100
+            Write-Host "`nFirst run. Comparison will be performed on next execution." -ForegroundColor Cyan
+            Write-Host "Saved to: $latestFile" -ForegroundColor Cyan
         
-        # Write log entry
-        $logEntry = "[$timestampWithTz] Test-MicrosoftGraphV1ReferenceChanges - First run - Initial data collected`n"
-        Add-Content -Path $logFile -Value $logEntry -Encoding UTF8
+            # Write log entry
+            $logEntry = "[$timestampWithTz] Test-MicrosoftGraphV1ReferenceChanges - First run - Initial data collected`n"
+            Add-Content -Path $logFile -Value $logEntry -Encoding UTF8
         
-        return
-    }
+            return
+        }
 
-    # Compare previous and latest files
-    $previousContent = Get-Content -Path $previousFile -Raw -Encoding UTF8
-    $latestContent = Get-Content -Path $latestFile -Raw -Encoding UTF8
+        # Compare previous and latest files
+        Update-V1ReferenceProgress -Status "Comparing previous and latest snapshots" -PercentComplete 92
+        $previousContent = Get-Content -Path $previousFile -Raw -Encoding UTF8
+        $latestContent = Get-Content -Path $latestFile -Raw -Encoding UTF8
 
-    if ($previousContent -eq $latestContent) {
-        Write-Host "`n✅ No changes detected since last execution." -ForegroundColor Green
+        if ($previousContent -eq $latestContent) {
+            Write-Host "`n✅ No changes detected since last execution." -ForegroundColor Green
         
-        # Write log entry
-        $logEntry = "[$timestampWithTz] Test-MicrosoftGraphV1ReferenceChanges - No changes detected`n"
-        Add-Content -Path $logFile -Value $logEntry -Encoding UTF8
+            # Write log entry
+            $logEntry = "[$timestampWithTz] Test-MicrosoftGraphV1ReferenceChanges - No changes detected`n"
+            Add-Content -Path $logFile -Value $logEntry -Encoding UTF8
+        }
+        else {
+            Write-Host "`n⚠️ Changes detected since last execution." -ForegroundColor Yellow
+            Write-Host "Previous: $previousFile" -ForegroundColor Yellow
+            Write-Host "Latest:   $latestFile" -ForegroundColor Yellow
+            Write-Host "Backup:   $backupFile" -ForegroundColor Yellow
+        
+            # Write log entry
+            $logEntry = "[$timestampWithTz] Test-MicrosoftGraphV1ReferenceChanges - Changes detected - Backup: $backupFile`n"
+            Add-Content -Path $logFile -Value $logEntry -Encoding UTF8
+        }
+
+        Update-V1ReferenceProgress -Status "Completed" -PercentComplete 100
     }
-    else {
-        Write-Host "`n⚠️ Changes detected since last execution." -ForegroundColor Yellow
-        Write-Host "Previous: $previousFile" -ForegroundColor Yellow
-        Write-Host "Latest:   $latestFile" -ForegroundColor Yellow
-        Write-Host "Backup:   $backupFile" -ForegroundColor Yellow
-        
-        # Write log entry
-        $logEntry = "[$timestampWithTz] Test-MicrosoftGraphV1ReferenceChanges - Changes detected - Backup: $backupFile`n"
-        Add-Content -Path $logFile -Value $logEntry -Encoding UTF8
+    finally {
+        Complete-V1ReferenceProgress
+        $script:V1ProgressEnabled = $false
+        $script:V1TopTocTotal = 0
+        $script:V1TopTocIndex = 0
+        $script:V1TopTocName = ""
+        $script:V1InnerTotal = 0
+        $script:V1InnerIndex = 0
     }
 }
