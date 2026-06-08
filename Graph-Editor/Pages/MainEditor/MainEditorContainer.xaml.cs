@@ -1092,6 +1092,12 @@ namespace Graph_Editor.Pages.MainEditor
                 }
             },
             {
+                "${Date7DayAgo}", () =>
+                {
+                    return DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd");
+                }
+            },
+            {
                 "${Date0DayLater}", () =>
                 {
                     return DateTime.Now.ToString("yyyy-MM-dd");
@@ -1110,9 +1116,21 @@ namespace Graph_Editor.Pages.MainEditor
                 }
             },
             {
+                "${DateTime15DayAgo0Utc}", () =>
+                {
+                    return DateTime.Now.AddDays(-15).ToString("yyyy-MM-dd") + "T00:00:00Z";
+                }
+            },
+            {
                 "${DateTime2DayAgo0Utc}", () =>
                 {
                     return DateTime.Now.AddDays(-2).ToString("yyyy-MM-dd") + "T00:00:00Z";
+                }
+            },
+            {
+                "${DateTime2DayAgo235959Utc}", () =>
+                {
+                    return DateTime.Now.AddDays(-2).ToString("yyyy-MM-dd") + "T23:59:59Z";
                 }
             },
             {

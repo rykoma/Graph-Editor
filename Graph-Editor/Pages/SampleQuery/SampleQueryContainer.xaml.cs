@@ -1302,7 +1302,8 @@ namespace Graph_Editor.Pages.SampleQuery
                 "featureRolloutPolicies", "appliesTo", "authenticationEventsFlows", "includeApplications", "apiConnectors",
                 "webApplicationFirewallProviders", "delegatedAdminCustomers", "requests",
                 "owners", "inheritablePermissions", "approvedClientApps", "microsoft.graph.agentUser",
-                "profiles", "profilePropertySettings"
+                "profiles", "profilePropertySettings",
+                "userRegistrationDetails", "signIns"
             };
             
             foreach (var endpoint in endpoints)
