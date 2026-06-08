@@ -5641,24 +5641,84 @@
           "Children": [
             {
               "Id": "dce6095f-4690-51e4-afc4-2f678e2e7987",
-              "Type": 1,
+              "Type": 0,
               "Name": "List",
-              "Method": "GET",
-              "Url": "https://graph.microsoft.com/v1.0/applicationTemplates",
-              "Headers": {},
-              "Body": "",
-              "Children": [],
+              "Children": [
+                {
+                  "Id": "0ee102d0-007a-5dfc-bb41-229d967bda8f",
+                  "Type": 1,
+                  "Name": "List all application templates",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/applicationTemplates",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "774d5177-7105-5bca-acc0-4f0cf815c042",
+                  "Type": 1,
+                  "Name": "List all application templates with optional properties (with appropriate license)",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/applicationTemplates?$select=id,displayName,riskScore,riskFactors",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "fbf1c790-d7da-59e8-83cd-45a67df96aab",
+                  "Type": 1,
+                  "Name": "List all application templates with optional properties (without appropriate license)",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/applicationTemplates?$select=id,displayName,riskScore,riskFactors",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "542ac446-1a84-51a7-b7bf-af683ced324b",
+                  "Type": 1,
+                  "Name": "List application templates with filtering and ordering",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/applicationTemplates?$select=id,displayName,riskScore,categories\u0026$filter=categories/any(c: c eq \u0027contentSharing\u0027)\u0026$top=2\u0026$orderby=riskScore/total desc",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
               "IsBuiltIn": true
             },
             {
               "Id": "6245e39f-1ff5-5a81-b91c-e34dba63ed6b",
-              "Type": 1,
+              "Type": 0,
               "Name": "Get",
-              "Method": "GET",
-              "Url": "https://graph.microsoft.com/v1.0/applicationTemplates/{id}",
-              "Headers": {},
-              "Body": "",
-              "Children": [],
+              "Children": [
+                {
+                  "Id": "9db146e1-debd-51d4-85ac-a735a7e9aeb1",
+                  "Type": 1,
+                  "Name": "Get application template",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/applicationTemplates/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "f978cc2e-1cee-52a8-a5c0-d6a0a2dd7ce6",
+                  "Type": 1,
+                  "Name": "Get application template with optional properties",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/applicationTemplates/{id}?$select=id,displayName,riskScore,riskFactors",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
               "IsBuiltIn": true
             },
             {
@@ -9361,6 +9421,36 @@
               "IsBuiltIn": true
             },
             {
+              "Id": "a7b4814a-45e3-5a0e-bf2c-95f882747b61",
+              "Type": 0,
+              "Name": "Email notifications setting",
+              "Children": [
+                {
+                  "Id": "11197596-91c6-5404-b613-5f09085c9aef",
+                  "Type": 1,
+                  "Name": "Get",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/solutions/backupRestore/emailNotificationsSetting",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "503c7a32-ee0b-54ba-baba-11e1c6035268",
+                  "Type": 1,
+                  "Name": "Update",
+                  "Method": "PATCH",
+                  "Url": "https://graph.microsoft.com/v1.0/solutions/backupRestore/emailNotificationsSetting",
+                  "Headers": {},
+                  "Body": "{\n  \u0022isEnabled\u0022: true,\n  \u0022additionalEvents\u0022: \u0022restoreAndPolicyUpdates\u0022,\n  \u0022recipients\u0022: {\n    \u0022role\u0022: \u0022custom\u0022,\n    \u0022customRecipients\u0022: [\n      {\n        \u0022email\u0022: \u0022${SampleInternalUser10Address}\u0022\n      },\n      {\n        \u0022email\u0022: \u0022${SampleInternalUser11Address}\u0022\n      },\n      {\n        \u0022email\u0022: \u0022${SampleInternalUser12Address}\u0022\n      }\n    ]\n  }\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
               "Id": "bc0a291f-9dff-5a02-94a8-16d344b845cb",
               "Type": 0,
               "Name": "Protection policy",
@@ -11806,7 +11896,7 @@
                   "Name": "Add attachment",
                   "Children": [
                     {
-                      "Id": "21c2c12d-622b-456f-9754-875d95e0966b",
+                      "Id": "8d2cdb0a-93d9-5e12-b697-57d880b28fae",
                       "Type": 1,
                       "Name": "File attachment",
                       "Method": "POST",
@@ -11817,7 +11907,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "f1e46ab1-45fc-4218-87e9-ad377e137243",
+                      "Id": "0ac3593d-0632-5737-b67a-d699250c2407",
                       "Type": 1,
                       "Name": "Item attachment",
                       "Method": "POST",
@@ -12427,7 +12517,7 @@
                   "Name": "Add attachment",
                   "Children": [
                     {
-                      "Id": "444679b1-1620-4bce-986a-ba34d3ced239",
+                      "Id": "24408acd-e566-5f24-accc-a3a483e27400",
                       "Type": 1,
                       "Name": "File attachment",
                       "Method": "POST",
@@ -12438,7 +12528,7 @@
                       "IsBuiltIn": true
                     },
                     {
-                      "Id": "47f4de25-ca04-4b05-a0fd-66f4e783df56",
+                      "Id": "0ea61d65-55bb-5bc1-aead-a3768d5dd785",
                       "Type": 1,
                       "Name": "Item attachment",
                       "Method": "POST",
@@ -12862,7 +12952,7 @@
               "Name": "Add attachment to a user event",
               "Children": [
                 {
-                  "Id": "8246820a-fa5d-42c7-a11f-4648b2d6149e",
+                  "Id": "4622caa2-4712-53e9-bd8a-cc44389231d4",
                   "Type": 1,
                   "Name": "File attachment",
                   "Method": "POST",
@@ -12873,7 +12963,7 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "2dd99bf8-1f32-4b0b-96b4-98325ecf28cb",
+                  "Id": "99713ea4-ba87-56cf-8332-dcffdb949d73",
                   "Type": 1,
                   "Name": "Item attachment",
                   "Method": "POST",
@@ -29158,9 +29248,9 @@
               "Name": "List resources",
               "Children": [
                 {
-                  "Id": "fa6aba6f-35e1-4caf-92ca-38eea2e84a14",
+                  "Id": "ad28733f-c2ed-58e8-bea9-18b5f02b0213",
                   "Type": 1,
-                  "Name": "Example",
+                  "Name": "List all resources",
                   "Method": "GET",
                   "Url": "https://graph.microsoft.com/v1.0/education/classes/{id}/assignments/{id}/resources",
                   "Headers": {},
@@ -49617,7 +49707,7 @@
               "Name": "Add attachment to a user event",
               "Children": [
                 {
-                  "Id": "ad57b85d-1121-485c-8c3d-23eecba566cd",
+                  "Id": "4caacaaa-2d78-5663-a4ae-a3a0fe29811a",
                   "Type": 1,
                   "Name": "File attachment",
                   "Method": "POST",
@@ -49628,7 +49718,7 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "dde388f1-b6de-49c4-86fb-b26cbdd69e38",
+                  "Id": "d51881c6-1be0-5df7-ae62-148e725a5bc4",
                   "Type": 1,
                   "Name": "Item attachment",
                   "Method": "POST",
@@ -53134,7 +53224,7 @@
                           "IsBuiltIn": true
                         },
                         {
-                          "Id": "e4aa7ba5-df57-5a69-896c-d3150d8d2030",
+                          "Id": "3990f70b-9c4c-5b4d-96c3-1cc9e2917db9",
                           "Type": 1,
                           "Name": "Error response",
                           "Method": "",
