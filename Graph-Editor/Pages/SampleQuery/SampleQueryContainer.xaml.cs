@@ -1340,7 +1340,7 @@ namespace Graph_Editor.Pages.SampleQuery
                 "oneDriveForBusinessBrowseSessions", "sharePointBrowseSessions",
                 "onPremisesConnections", "sharePointGroups", "mailboxes", "folders", "configurationMonitors", "configurationMonitoringResults",
                 "configurationDrifts", "configurationSnapshotJobs",
-                "manifests"
+                "manifests", "acronyms", "bookmarks", "qnas"
             };
 
             foreach (var endpoint in endpoints)
