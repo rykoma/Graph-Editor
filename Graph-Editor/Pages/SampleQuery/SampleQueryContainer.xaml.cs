@@ -1339,7 +1339,8 @@ namespace Graph_Editor.Pages.SampleQuery
                 "contacts", "contactFolders",
                 "oneDriveForBusinessBrowseSessions", "sharePointBrowseSessions",
                 "onPremisesConnections", "sharePointGroups", "mailboxes", "folders", "configurationMonitors", "configurationMonitoringResults",
-                "configurationDrifts", "configurationSnapshotJobs"
+                "configurationDrifts", "configurationSnapshotJobs",
+                "manifests"
             };
 
             foreach (var endpoint in endpoints)
