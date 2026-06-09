@@ -107,10 +107,12 @@ function Get-V1ApiChildStatus {
     }
 
     $topName = if ([string]::IsNullOrWhiteSpace($script:V1TopTocName)) { "(unknown)" } else { $script:V1TopTocName }
-    $status = "API TOC item $($script:V1TopTocIndex)/$($script:V1TopTocTotal): $topName"
 
     if ($script:V1InnerTotal -gt 0 -and $script:V1InnerIndex -gt 0) {
-        $status += " | $topName item $($script:V1InnerIndex)/$($script:V1InnerTotal)"
+        $status = "API TOC item $($script:V1TopTocIndex)/$($script:V1TopTocTotal), sub $($script:V1InnerIndex)/$($script:V1InnerTotal): $topName"
+    }
+    else {
+        $status = "API TOC item $($script:V1TopTocIndex)/$($script:V1TopTocTotal): $topName"
     }
 
     if (-not [string]::IsNullOrWhiteSpace($Detail)) {
