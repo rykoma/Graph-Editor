@@ -1226,12 +1226,20 @@ namespace Graph_Editor.Pages.SampleQuery
             output = output.Replace("/webApplicationFirewallProviders/{webApplicationFirewallProviderId}", "/webApplicationFirewallProviders/{id}");
             output = output.Replace("/webApplicationFirewallVerifications/{webApplicationFirewallVerificationModelId}", "/webApplicationFirewallVerifications/{id}");
             output = output.Replace("/sponsors/{sponsorObjectId}", "/sponsors/{id}");
+            output = output.Replace("/queries/{auditLogQueryId}", "/queries/{id}");
+            output = output.Replace("/ediscoveryCases/{ediscoveryCaseId}", "/ediscoveryCases/{id}");
+            output = output.Replace("/searches/{ediscoverySearchId}", "/searches/{id}");
             output = output.Replace("/users/kim@contoso.com", "/users/{id}");
             output = output.Replace("/users/sandeep@contoso.com", "/users/{id}");
             output = output.Replace("/users/anirban@contoso.com", "/users/{id}");
             output = output.Replace("/microsoft.graph.agentUser/{userId}", "/microsoft.graph.agentUser/{id}");
             output = output.Replace("/oneDriveForBusinessBrowseSessions/{oneDriveForBusinessBrowseSessionId}", "/oneDriveForBusinessBrowseSessions/{id}");
             output = output.Replace("/sharePointBrowseSessions/{sharePointBrowseSessionId}", "/sharePointBrowseSessions/{id}");
+            output = output.Replace("/alerts/{alert_id}", "/alerts/{id}");
+            output = output.Replace("/retentionLabels/{retentionLabelId}", "/retentionLabels/{id}");
+            output = output.Replace("/retentionEvents/{retentionEventId}", "/retentionEvents/{id}");
+            output = output.Replace("/retentionEventTypes/{retentionEventTypeId}", "/retentionEventTypes/{id}");
+            output = output.Replace("/categories/{categoryTemplateId}", "/categories/{id}");
             output = output.Replace("Pacific Standard Time", "${LocalTimeZone}").Replace("Eastern Standard Time", "${LocalTimeZone}");
             output = output.Replace("AdeleV@contoso.com", "${SampleInternalUser1Address}", true, null).Replace("Adele Vance", "${SampleInternalUser1Name}");
             output = output.Replace("samanthab@contoso.com", "${SampleInternalUser2Address}", true, null).Replace("Samantha Booth", "${SampleInternalUser2Name}");
@@ -1303,7 +1311,11 @@ namespace Graph_Editor.Pages.SampleQuery
                 "webApplicationFirewallProviders", "delegatedAdminCustomers", "requests",
                 "owners", "inheritablePermissions", "approvedClientApps", "microsoft.graph.agentUser",
                 "profiles", "profilePropertySettings",
-                "userRegistrationDetails", "signIns"
+                "userRegistrationDetails", "signIns",
+                "simulationAutomations", "trainings", "languageDetails", "sensitivityLabels", "legalholds", "searches",
+                "siteSources", "unifiedGroupSources", "userSources", "reviewSets", "cases", "queries", "healthIssues", "sensors",
+                "threatAssessmentRequests", "retentionLabels", "authorities", "citations", "departments", "filePlanReferences",
+                "subcategories", "availableAccessPackages", "intelligenceProfileIndicators"
             };
             
             foreach (var endpoint in endpoints)
@@ -1340,7 +1352,12 @@ namespace Graph_Editor.Pages.SampleQuery
                 "oneDriveForBusinessBrowseSessions", "sharePointBrowseSessions",
                 "onPremisesConnections", "sharePointGroups", "mailboxes", "folders", "configurationMonitors", "configurationMonitoringResults",
                 "configurationDrifts", "configurationSnapshotJobs",
-                "manifests", "acronyms", "bookmarks", "qnas"
+                "manifests", "acronyms", "bookmarks", "qnas",
+                "alerts_v2", "incidents", "simulations", "payloads", "loginPages", "landingPages", "operations", "custodians",
+                "noncustodialdatasources", "legalholds", "noncustodialSources", "tags", "identityAccounts", "categories",
+                "articles", "articleIndicators", "hosts", "whoisRecords", "hostComponents", "hostCookies", "hostPairs", "hostPorts",
+                "hostSslCertificates", "hostTrackers", "intelProfiles", "passiveDnsRecords", "sslCertificates", "subdomains",
+                "vulnerabilities", "components"
             };
 
             foreach (var endpoint in endpoints)
