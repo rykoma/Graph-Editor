@@ -372,6 +372,9 @@ function Get-CommitHistoryV2 {
 
         # Get the list of files changed in each PR
         Write-Host "Processing $($allPRs.Count) pull request(s)..." -ForegroundColor Cyan
+        $prNumbers = $allPRs | ForEach-Object { [int]$_.number } | Sort-Object -Unique
+        $formattedPrNumbers = $prNumbers | ForEach-Object { "#$_" }
+        Write-Host "PR numbers: $($formattedPrNumbers -join ', ')" -ForegroundColor DarkGray
         $prIndex = 0
         foreach ($pr in $allPRs) {
             $prIndex++
