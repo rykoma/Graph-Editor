@@ -347,6 +347,30 @@ function Get-CommitHistoryV2 {
             }
         } while ($true)
 
+        # Exclude automated sync PRs.
+        # These PRs are bot-generated for repository/branch synchronization and should not be reviewed here.
+        if ($Repository -eq "microsoft-graph-docs-contrib" -or $Repository -eq "microsoft-graph-docs") {
+            $beforeFilterCount = $allPRs.Count
+            $excludedSyncPrNumbers = @()
+            $allPRs = $allPRs | Where-Object {
+                $authorLogin = if ($_.user -and $_.user.login) { [string]$_.user.login } else { "" }
+                $prTitle = if ($_.title) { [string]$_.title } else { "" }
+                $isBotAuthor = ($authorLogin -eq "learn-build-service-prod[bot]" -or $authorLogin -eq "learn-build-service-prod")
+                $isContribRepoSyncPr = ($Repository -eq "microsoft-graph-docs-contrib" -and $isBotAuthor -and $prTitle -eq "Repo sync for protected branch")
+                $isDocsAutoPublishPr = ($Repository -eq "microsoft-graph-docs" -and $isBotAuthor -and $prTitle.StartsWith("Auto Publish – main to live - "))
+                $isSyncPr = ($isContribRepoSyncPr -or $isDocsAutoPublishPr)
+                if ($isSyncPr) {
+                    $excludedSyncPrNumbers += [int]$_.number
+                }
+                -not $isSyncPr
+            }
+            $excludedSyncPrCount = $beforeFilterCount - $allPRs.Count
+            if ($excludedSyncPrCount -gt 0) {
+                $formattedExcludedPrNumbers = ($excludedSyncPrNumbers | Sort-Object -Unique | ForEach-Object { "#$_" }) -join ', '
+                Write-Host "Excluded $excludedSyncPrCount repo-sync PR(s) for ${Repository}: $formattedExcludedPrNumbers" -ForegroundColor DarkGray
+            }
+        }
+
         Write-Host "Found $($allPRs.Count) merged PR(s) on $($Date.ToString('yyyy-MM-dd'))" -ForegroundColor Cyan
 
         if ($allPRs.Count -eq 0) {
