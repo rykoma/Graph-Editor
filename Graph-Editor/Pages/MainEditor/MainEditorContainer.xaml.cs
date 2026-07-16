@@ -1097,6 +1097,18 @@ namespace Graph_Editor.Pages.MainEditor
                     return DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd");
                 }
             },
+                        {
+                "${Date4DayAgo}", () =>
+                {
+                    return DateTime.Now.AddDays(-4).ToString("yyyy-MM-dd");
+                }
+            },
+            {
+                "${Date1DayAgo}", () =>
+                {
+                    return DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
+                }
+            },
             {
                 "${Date0DayLater}", () =>
                 {

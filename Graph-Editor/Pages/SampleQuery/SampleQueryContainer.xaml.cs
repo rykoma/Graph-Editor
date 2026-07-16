@@ -1240,6 +1240,20 @@ namespace Graph_Editor.Pages.SampleQuery
             output = output.Replace("/retentionEvents/{retentionEventId}", "/retentionEvents/{id}");
             output = output.Replace("/retentionEventTypes/{retentionEventTypeId}", "/retentionEventTypes/{id}");
             output = output.Replace("/categories/{categoryTemplateId}", "/categories/{id}");
+            output = output.Replace("/sites/contoso.sharepoint.com,2C712604-1370-44E7-A1F5-426573FDA80A,2D2244C3-251A-49EA-93A8-39E1C3A060FE", "/sites/{hostname},{id}");
+            output = output.Replace("/sites/microsoft.sharepoint.com,b9b0bc03-cbc4-40d2-aba9-2c9dd9821ddf,6a742cee-9216-4db5-8046-13a595684e74", "/sites/{hostname},{id}");
+            output = output.Replace("/sites/mycompany.sharepoint.com,8f03a01c-dcfa-4aaf-9be5-b3fb48e538c1,739084f3-c0fa-46ac-b7f8-13b344781ad0", "/sites/{hostname},{id}");
+            output = output.Replace("/sites/contoso.sharepoint.com:/teams/1drvteam", "/sites/{hostname}:/{server-relative-path}");
+            output = output.Replace("/sites/{site-id}", "/sites/{id}");
+            output = output.Replace("/sites/{sitesId}", "/sites/{id}");
+            output = output.Replace("/categories/{categoryTemplateId}", "/categories/{id}");
+            output = output.Replace("/analyzedEmails/{analyzedEmailId}", "/analyzedEmails/{id}");
+            output = output.Replace("/lists/{list-id}", "/lists/{id}");
+            output = output.Replace("/contentTypes/{contentType-id}", "/contentTypes/{id}");
+            output = output.Replace("/columns/{column-id}", "/columns/{id}");
+            output = output.Replace("/sites/{siteId}", "/sites/{id}");
+            output = output.Replace("/contentTypes/{contentTypeId}", "/contentTypes/{id}");
+            output = output.Replace("/pages/{pageId}", "/pages/{id}");
             output = output.Replace("Pacific Standard Time", "${LocalTimeZone}").Replace("Eastern Standard Time", "${LocalTimeZone}");
             output = output.Replace("AdeleV@contoso.com", "${SampleInternalUser1Address}", true, null).Replace("Adele Vance", "${SampleInternalUser1Name}");
             output = output.Replace("samanthab@contoso.com", "${SampleInternalUser2Address}", true, null).Replace("Samantha Booth", "${SampleInternalUser2Name}");
@@ -1315,7 +1329,8 @@ namespace Graph_Editor.Pages.SampleQuery
                 "simulationAutomations", "trainings", "languageDetails", "sensitivityLabels", "legalholds", "searches",
                 "siteSources", "unifiedGroupSources", "userSources", "reviewSets", "cases", "queries", "healthIssues", "sensors",
                 "threatAssessmentRequests", "retentionLabels", "authorities", "citations", "departments", "filePlanReferences",
-                "subcategories", "availableAccessPackages", "intelligenceProfileIndicators"
+                "subcategories", "availableAccessPackages", "intelligenceProfileIndicators",
+                "lists", "pages", "webParts", "sets", "terms", "termStores"
             };
             
             foreach (var endpoint in endpoints)
@@ -1357,7 +1372,8 @@ namespace Graph_Editor.Pages.SampleQuery
                 "noncustodialdatasources", "legalholds", "noncustodialSources", "tags", "identityAccounts", "categories",
                 "articles", "articleIndicators", "hosts", "whoisRecords", "hostComponents", "hostCookies", "hostPairs", "hostPorts",
                 "hostSslCertificates", "hostTrackers", "intelProfiles", "passiveDnsRecords", "sslCertificates", "subdomains",
-                "vulnerabilities", "components"
+                "vulnerabilities", "components",
+                "documentSetVersions", "horizontalSections", "columns"
             };
 
             foreach (var endpoint in endpoints)
