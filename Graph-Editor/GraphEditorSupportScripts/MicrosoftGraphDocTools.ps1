@@ -39,11 +39,15 @@ $global:AccessTokenCache = ""
 $script:GitHubOrganization = "microsoftgraph"
 $script:TargetRepositories = @("microsoft-graph-docs-contrib", "microsoft-graph-docs")
 
+# Default TOC source for Microsoft Graph reference hierarchy.
+# The generated v1.0 TOC in the private docs repo is the canonical source used by Learn.
+$script:GraphDocOwner = "microsoftgraph"
+$script:GraphDocRepository = "microsoft-graph-docs"
+$script:GraphDocBranch = "main"
+$script:GraphDocApiRoot = "api-reference/v1.0"
+
 # Define a global variable to store file last commit date cache
 $global:FileLastCommitCache = @{}
-
-# Base URL for Microsoft Graph docs-contrib TOC processing
-$baseUrl = "https://raw.githubusercontent.com/microsoftgraph/microsoft-graph-docs-contrib/main/api-reference/v1.0/"
 
 # Counters for progress display in TOC export
 $script:requestCount = 0
@@ -357,7 +361,7 @@ function Get-CommitHistoryV2 {
                 $prTitle = if ($_.title) { [string]$_.title } else { "" }
                 $isBotAuthor = ($authorLogin -eq "learn-build-service-prod[bot]" -or $authorLogin -eq "learn-build-service-prod")
                 $isContribRepoSyncPr = ($Repository -eq "microsoft-graph-docs-contrib" -and $isBotAuthor -and $prTitle -eq "Repo sync for protected branch")
-                $isDocsAutoPublishPr = ($Repository -eq "microsoft-graph-docs" -and $isBotAuthor -and $prTitle.StartsWith("Auto Publish – main to live - "))
+                $isDocsAutoPublishPr = ($Repository -eq "microsoft-graph-docs" -and $isBotAuthor -and $prTitle.StartsWith("Auto Publish - main to live - "))
                 $isSyncPr = ($isContribRepoSyncPr -or $isDocsAutoPublishPr)
                 if ($isSyncPr) {
                     $excludedSyncPrNumbers += [int]$_.number
@@ -537,35 +541,96 @@ function Get-CommitHistoryV2 {
     }
 }
 
+function Get-RepositoryContentUrl {
+    param (
+        [string]$Owner = $script:GraphDocOwner,
+        [string]$Repository = $script:GraphDocRepository,
+        [string]$Branch = $script:GraphDocBranch,
+        [Parameter(Mandatory = $true)]
+        [string]$Path
+    )
+
+    $normalizedPath = $Path.TrimStart('/').Trim()
+    if ([string]::IsNullOrEmpty($normalizedPath)) {
+        throw "Repository path cannot be empty."
+    }
+
+    return "https://api.github.com/repos/$Owner/$Repository/contents/${normalizedPath}?ref=$Branch"
+}
+
+function Get-RepositoryRawUrl {
+    param (
+        [string]$Owner = $script:GraphDocOwner,
+        [string]$Repository = $script:GraphDocRepository,
+        [string]$Branch = $script:GraphDocBranch,
+        [Parameter(Mandatory = $true)]
+        [string]$Path
+    )
+
+    $normalizedPath = $Path.TrimStart('/').Trim()
+    if ([string]::IsNullOrEmpty($normalizedPath)) {
+        throw "Repository path cannot be empty."
+    }
+
+    return "https://raw.githubusercontent.com/$Owner/$Repository/$Branch/$normalizedPath"
+}
+
+function Get-GraphDocRepositoryUrl {
+    param (
+        [string]$Path,
+        [string]$Owner = $script:GraphDocOwner,
+        [string]$Repository = $script:GraphDocRepository,
+        [string]$Branch = $script:GraphDocBranch
+    )
+
+    if ([string]::IsNullOrEmpty($Path)) {
+        return Get-RepositoryContentUrl -Owner $Owner -Repository $Repository -Branch $Branch -Path "$script:GraphDocApiRoot/toc.yml"
+    }
+
+    $normalizedPath = $Path.TrimStart('/').Trim()
+    if ($normalizedPath -like "http*") {
+        return $normalizedPath
+    }
+
+    if ($normalizedPath -notmatch '^api-reference/') {
+        return Get-RepositoryContentUrl -Owner $Owner -Repository $Repository -Branch $Branch -Path "$script:GraphDocApiRoot/$normalizedPath"
+    }
+
+    return Get-RepositoryContentUrl -Owner $Owner -Repository $Repository -Branch $Branch -Path $normalizedPath
+}
+
 # Function to fetch and parse the YAML file from the provided URL
 function Get-YamlContent {
     param (
         [string]$url
     )
 
-    # Check if the URL is already cached
     if ($global:YamlCache.ContainsKey($url)) {
         return $global:YamlCache[$url]
     }
 
-    # Check if the access token is set
     if ([string]::IsNullOrEmpty($global:AccessTokenCache)) {
         Write-Error "Access token is not set. Please run Connect-GitHubRepository first."
         return
     }
 
     try {
-        # Fetch the YAML content from the URL with authentication (raw text, not JSON)
-        $response = Invoke-WebRequest -Uri $url -Method Get -Headers @{
-            "User-Agent"    = "PowerShell"
+        $requestHeaders = @{
+            "User-Agent" = "PowerShell"
             "Authorization" = "Bearer $global:AccessTokenCache"
         }
-        $yamlContent = $response.Content
 
-        # Parse the YAML content
-        $parsedYaml = $yamlContent | ConvertFrom-Yaml
+        $response = Invoke-WebRequest -Uri $url -Method Get -Headers $requestHeaders
+        $content = $response.Content
 
-        # Store the parsed YAML content in the cache
+        if ($url -like "*api.github.com/repos/*/contents/*") {
+            $payload = $content | ConvertFrom-Json
+            if ($payload.type -eq "file" -and -not [string]::IsNullOrEmpty($payload.content)) {
+                $content = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($payload.content))
+            }
+        }
+
+        $parsedYaml = $content | ConvertFrom-Yaml
         $global:YamlCache[$url] = $parsedYaml
 
         return $parsedYaml
@@ -581,7 +646,7 @@ function Get-YamlContent {
 function Search-FilenameInYaml {
     param (
         [string]$filename,
-        [string]$mainYamlUrl = "https://raw.githubusercontent.com/microsoftgraph/microsoft-graph-docs-contrib/refs/heads/main/api-reference/v1.0/toc.yml",
+        [string]$mainYamlUrl = (Get-GraphDocRepositoryUrl -Path "api-reference/v1.0/toc.yml"),
         [switch]$returnOnly
     )
 
@@ -658,7 +723,7 @@ function Search-FilenameInYaml {
 
     # Iterate through each YAML file under the "API v1.0 reference" node
     foreach ($item in $apiReferenceNode.items) {
-        $yamlUrl = "https://raw.githubusercontent.com/microsoftgraph/microsoft-graph-docs-contrib/refs/heads/main/api-reference/v1.0/$($item.href)"
+        $yamlUrl = Get-GraphDocRepositoryUrl -Path $item.href
         if ($yamlUrl.EndsWith("/toc.yml")) {
             Search-InYamlFile -yamlUrl $yamlUrl -filename $filename -topParentName $item.name -locations $locations
         }
@@ -699,29 +764,29 @@ function Invoke-RestMethodWithRetry {
             if (-not [string]::IsNullOrEmpty($global:AccessTokenCache)) {
                 $headers["Authorization"] = "Bearer $global:AccessTokenCache"
             }
+
             $result = Invoke-RestMethod -Uri $Uri -Headers $headers -ErrorAction Stop
-            
-            # Display progress (only on first success)
+            if ($Uri -like "*api.github.com/repos/*/contents/*") {
+                $payload = $result
+                if ($payload -is [pscustomobject] -and $payload.type -eq "file" -and -not [string]::IsNullOrEmpty($payload.content)) {
+                    $result = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($payload.content))
+                }
+            }
+
             if ($i -eq 0) {
-                $script:totalHttpRequests++  # Count total number of requests
-                
+                $script:totalHttpRequests++
                 if ($RequestType -eq 'Primary') {
-                    # Primary request (YAML files, etc.)
                     $script:requestCount++
                     $script:subRequestCount = 0
                     Write-Verbose "[$script:requestCount] $Uri"
                 }
-
                 if ($script:V1TopTocTotal -gt 0 -and $script:V1TopTocIndex -gt 0) {
                     $currentTopPercent = ($script:V1TopTocIndex / $script:V1TopTocTotal) * 100
                     $status = Get-V1ApiChildStatus -Detail "HTTP $($script:totalHttpRequests)"
                     Update-V1ReferenceProgress -Child -Status $status -PercentComplete $currentTopPercent
                 }
-                # No progress display for secondary requests (Markdown files, etc.)
-                # Display control is handled by the caller
             }
             
-            # Polite delay on success (not needed on retry)
             if ($PoliteDelayMilliseconds -gt 0 -and $i -eq 0) {
                 Start-Sleep -Milliseconds $PoliteDelayMilliseconds
             }
@@ -730,8 +795,6 @@ function Invoke-RestMethodWithRetry {
         }
         catch {
             $isLastRetry = ($i -eq ($MaxRetries - 1))
-            
-            # Get status code (if exists)
             $statusCode = $null
             if ($_.Exception.Response) {
                 $statusCode = $_.Exception.Response.StatusCode.value__
@@ -742,12 +805,11 @@ function Invoke-RestMethodWithRetry {
                 throw
             }
             
-            # Wait longer for 429 (Too Many Requests)
             $delay = if ($statusCode -eq 429) { 
                 $RetryDelaySeconds * 3 
             }
             else { 
-                $RetryDelaySeconds * [Math]::Pow(2, $i)  # Exponential backoff
+                $RetryDelaySeconds * [Math]::Pow(2, $i)
             }
             
             $statusInfo = if ($statusCode) { "(HTTP $statusCode)" } else { "" }
@@ -760,9 +822,7 @@ function Invoke-RestMethodWithRetry {
             Start-Sleep -Seconds $delay
         }
     }
-}
-
-function Get-DeterministicGuid {
+}function Get-DeterministicGuid {
     param (
         [Parameter(Mandatory = $true)]
         [string]$InputString,
@@ -882,7 +942,7 @@ function ConvertFrom-TocItems {
         $exampleTitles = @()
         if ($href) {
             # Get list of Example titles
-            $referenceFullPath = "$baseUrl$($href.Trim("../../"))"
+                        $referenceFullPath = Get-RepositoryRawUrl -Owner $script:GraphDocOwner -Repository $script:GraphDocRepository -Branch $script:GraphDocBranch -Path "api-reference/v1.0/$($href.Trim("../../"))"
             $script:subRequestCount++
             Write-Verbose "  [$script:requestCount-$script:subRequestCount] Getting Examples: $($item.name) : $referenceFullPath"
             $exampleTitles = Get-ExampleTitle -examplePath $referenceFullPath
@@ -957,7 +1017,7 @@ function Get-TocHierarchy {
         [int]$ApiSectionDepth = -1
     )
 
-    $url = if ($tocPath -like "http*") { $tocPath } else { "$baseUrl$tocPath" }
+        $url = if ($tocPath -like "http*") { $tocPath } else { Get-GraphDocRepositoryUrl -Path $tocPath }
     try {
         $yamlContent = Invoke-RestMethodWithRetry -Uri $url
         $toc = ConvertFrom-Yaml $yamlContent
