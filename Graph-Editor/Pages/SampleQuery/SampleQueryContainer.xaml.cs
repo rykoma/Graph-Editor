@@ -1243,6 +1243,7 @@ namespace Graph_Editor.Pages.SampleQuery
             output = output.Replace("/sites/contoso.sharepoint.com,2C712604-1370-44E7-A1F5-426573FDA80A,2D2244C3-251A-49EA-93A8-39E1C3A060FE", "/sites/{hostname},{id}");
             output = output.Replace("/sites/microsoft.sharepoint.com,b9b0bc03-cbc4-40d2-aba9-2c9dd9821ddf,6a742cee-9216-4db5-8046-13a595684e74", "/sites/{hostname},{id}");
             output = output.Replace("/sites/mycompany.sharepoint.com,8f03a01c-dcfa-4aaf-9be5-b3fb48e538c1,739084f3-c0fa-46ac-b7f8-13b344781ad0", "/sites/{hostname},{id}");
+            output = output.Replace("/sites/contoso.sharepoint.com,48f1898f-77d9-4a1b-bddc-1f49bb6dc134,7206fc09-e4af-48b3-8730-ed7321396d7a", "/sites/{hostname},{id}");
             output = output.Replace("/sites/contoso.sharepoint.com:/teams/1drvteam", "/sites/{hostname}:/{server-relative-path}");
             output = output.Replace("/sites/{site-id}", "/sites/{id}");
             output = output.Replace("/sites/{sitesId}", "/sites/{id}");
@@ -1254,6 +1255,11 @@ namespace Graph_Editor.Pages.SampleQuery
             output = output.Replace("/sites/{siteId}", "/sites/{id}");
             output = output.Replace("/contentTypes/{contentTypeId}", "/contentTypes/{id}");
             output = output.Replace("/pages/{pageId}", "/pages/{id}");
+            output = output.Replace("/tasks/{task-id}", "/tasks/{id}");
+            output = output.Replace("/plans/{plan-id}", "/plans/{id}");
+            output = output.Replace("/resources/{accessPackageResourceId}", "/resources/{id}");
+            output = output.Replace("/uploadSessions/{customDataProvidedResourceUploadSessionId}", "/uploadSessions/{id}");
+            output = output.Replace("/remoteTenantGroups/{remoteTenantGroupId}", "/remoteTenantGroups/{id}");
             output = output.Replace("Pacific Standard Time", "${LocalTimeZone}").Replace("Eastern Standard Time", "${LocalTimeZone}");
             output = output.Replace("AdeleV@contoso.com", "${SampleInternalUser1Address}", true, null).Replace("Adele Vance", "${SampleInternalUser1Name}");
             output = output.Replace("samanthab@contoso.com", "${SampleInternalUser2Address}", true, null).Replace("Samantha Booth", "${SampleInternalUser2Name}");
@@ -1373,7 +1379,8 @@ namespace Graph_Editor.Pages.SampleQuery
                 "articles", "articleIndicators", "hosts", "whoisRecords", "hostComponents", "hostCookies", "hostPairs", "hostPorts",
                 "hostSslCertificates", "hostTrackers", "intelProfiles", "passiveDnsRecords", "sslCertificates", "subdomains",
                 "vulnerabilities", "components",
-                "documentSetVersions", "horizontalSections", "columns"
+                "documentSetVersions", "horizontalSections", "columns",
+                "buckets"
             };
 
             foreach (var endpoint in endpoints)

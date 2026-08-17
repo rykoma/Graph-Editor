@@ -2283,6 +2283,38 @@
                   "IsBuiltIn": true
                 },
                 {
+                  "Id": "ce9bcd0c-791b-5ea9-a689-76cf4b45622f",
+                  "Type": 0,
+                  "Name": "List sponsorOf",
+                  "Children": [
+                    {
+                      "Id": "06c2b86a-3165-50a9-9043-96a85b70972f",
+                      "Type": 1,
+                      "Name": "List all entities that a user sponsors",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/users/{id}/sponsorOf",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "326cf168-20fe-56d3-a4d0-3ce1a357b26a",
+                      "Type": 1,
+                      "Name": "List all entities that a user sponsors, filtered by type",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/users/{id}/sponsorOf?$filter=microsoft.graph.user/userType eq \u0027Guest\u0027",
+                      "Headers": {
+                        "ConsistencyLevel": "eventual"
+                      },
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
                   "Id": "cee893dc-b8c5-5665-862b-5110d31e52b7",
                   "Type": 1,
                   "Name": "Remove",
@@ -17078,6 +17110,25 @@
                       "IsBuiltIn": true
                     }
                   ],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "71693ce2-647f-5c55-b02b-a006aab8d40b",
+              "Type": 0,
+              "Name": "Cloud PC service plan",
+              "Children": [
+                {
+                  "Id": "e9c6c102-1246-5b00-8610-213278411ef7",
+                  "Type": 1,
+                  "Name": "List",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/deviceManagement/virtualEndpoint/servicePlans",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
                   "IsBuiltIn": true
                 }
               ],
@@ -33194,13 +33245,43 @@
             },
             {
               "Id": "7e42794c-00d7-5b03-8e32-388219637855",
-              "Type": 1,
+              "Type": 0,
               "Name": "Assign sensitivity label",
-              "Method": "POST",
-              "Url": "https://graph.microsoft.com/v1.0/drive/root/items/{id}/assignSensitivityLabel",
-              "Headers": {},
-              "Body": "{\n  \u0022sensitivityLabelId\u0022: \u00225feba255-812e-446a-ac59-a7044ef827b5\u0022,\n  \u0022assignmentMethod\u0022: \u0022standard\u0022,\n  \u0022justificationText\u0022: \u0022test_justification\u0022\n}",
-              "Children": [],
+              "Children": [
+                {
+                  "Id": "3bc3fdd7-8f44-5641-89a4-c59d7a081717",
+                  "Type": 1,
+                  "Name": "Assign a sensitivity label",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/drive/root/items/{id}/assignSensitivityLabel",
+                  "Headers": {},
+                  "Body": "{\n  \u0022sensitivityLabelId\u0022: \u00225feba255-812e-446a-ac59-a7044ef827b5\u0022,\n  \u0022assignmentMethod\u0022: \u0022standard\u0022,\n  \u0022justificationText\u0022: \u0022test_justification\u0022\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "8388e3ee-4975-5a48-9b10-28e5eedfd830",
+                  "Type": 1,
+                  "Name": "Assign a sensitivity label on behalf of a user (app-only)",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/drives/{id}/items/{id}/assignSensitivityLabel",
+                  "Headers": {},
+                  "Body": "{\n  \u0022sensitivityLabelId\u0022: \u00225feba255-812e-446a-ac59-a7044ef827b5\u0022,\n  \u0022assignmentMethod\u0022: \u0022standard\u0022,\n  \u0022justificationText\u0022: \u0022test_justification\u0022,\n  \u0022appliedByUser\u0022: {\n    \u0022id\u0022: \u00224a2ec3c4-1b2d-3e4f-5a6b-7c8d9e0f1a2b\u0022\n  }\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "289e96ff-8366-5436-a72b-6dd4dc692fd0",
+                  "Type": 1,
+                  "Name": "Assign a sensitivity label on behalf of a user using a user principal name (app-only)",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/drives/{id}/items/{id}/assignSensitivityLabel",
+                  "Headers": {},
+                  "Body": "{\n  \u0022sensitivityLabelId\u0022: \u00225feba255-812e-446a-ac59-a7044ef827b5\u0022,\n  \u0022assignmentMethod\u0022: \u0022standard\u0022,\n  \u0022justificationText\u0022: \u0022test_justification\u0022,\n  \u0022appliedByUser\u0022: {\n    \u0022userPrincipalName\u0022: \u0022${SampleInternalUser1Address}\u0022\n  }\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
               "IsBuiltIn": true
             },
             {
@@ -33928,6 +34009,17 @@
               "Url": "",
               "Headers": {},
               "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "4163c2a6-2851-59da-a1e5-12780827f9eb",
+              "Type": 1,
+              "Name": "Upsert columns",
+              "Method": "PATCH",
+              "Url": "https://graph.microsoft.com/v1.0/storage/fileStorage/containers/{id}/columns",
+              "Headers": {},
+              "Body": "{\n  \u0022@context\u0022: \u0022#$delta\u0022,\n  \u0022value\u0022: [\n    {\n      \u0022id\u0022: \u0022aec21c58-7f1f-4875-b438-d47ef622306c\u0022,\n      \u0022isSearchable\u0022: false\n    },\n    {\n      \u0022id\u0022: \u0022aec21c58-7f1f-4875-b438-d47df622306c\u0022,\n      \u0022isSearchable\u0022: false\n    },\n    {\n      \u0022name\u0022: \u0022booleanColumn1234\u0022,\n      \u0022boolean\u0022: {}\n    },\n    {\n      \u0022name\u0022: \u0022booleanColumn33\u0022,\n      \u0022boolean\u0022: {}\n    }\n  ]\n}",
               "Children": [],
               "IsBuiltIn": true
             },
@@ -35529,6 +35621,17 @@
                       "IsBuiltIn": true
                     }
                   ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "8406494a-12b6-58c6-af92-d70d293947b1",
+                  "Type": 1,
+                  "Name": "List remote tenant groups",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/directory/remoteTenantGroups",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
                   "IsBuiltIn": true
                 },
                 {
@@ -37293,6 +37396,36 @@
               "IsBuiltIn": true
             },
             {
+              "Id": "27f5879b-b402-57e2-b932-a15a4ca756dc",
+              "Type": 0,
+              "Name": "Remote tenant group",
+              "Children": [
+                {
+                  "Id": "7f269dd5-d081-59df-9718-2b31c04c3457",
+                  "Type": 1,
+                  "Name": "List",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/directory/remoteTenantGroups",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "216cbbee-4083-51d9-ad7a-bb44702b3368",
+                  "Type": 1,
+                  "Name": "Get",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/directory/remoteTenantGroups/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
               "Id": "959ab054-496e-57f3-8e8f-31fac9cf2f25",
               "Type": 0,
               "Name": "Role management",
@@ -37921,6 +38054,28 @@
                       "IsBuiltIn": true
                     },
                     {
+                      "Id": "6f17b37f-c2f3-5210-b17b-35ff20b8293a",
+                      "Type": 1,
+                      "Name": "Accept recommendations",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/accessReviews/definitions/{id}/instances/{id}/stages/{id}/acceptRecommendations",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "959aa2c8-ee26-5f63-8bfd-ef97109bedc9",
+                      "Type": 1,
+                      "Name": "Batch record decisions",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/accessReviews/definitions/{id}/instances/{id}/stages/{id}/batchRecordDecisions",
+                      "Headers": {},
+                      "Body": "{\n  \u0022decision\u0022: \u0022Approve\u0022,\n  \u0022justification\u0022: \u0022All principals with access need continued access to the resource as they are on the same team.\u0022,\n  \u0022resourceId\u0022: \u0022a5c51e59-3fcd-4a37-87a1-835c0c21488a\u0022\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
                       "Id": "1449f935-b1e7-5ee8-a4c2-a5f2dc66ea33",
                       "Type": 1,
                       "Name": "Filter by current user",
@@ -38160,6 +38315,36 @@
                       "Url": "https://graph.microsoft.com/v1.0/identityGovernance/accessReviews/historyDefinitions/{id}/instances/{id}/generateDownloadUri",
                       "Headers": {},
                       "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "19ab6f59-6e4b-5769-beef-578d04f46037",
+                  "Type": 0,
+                  "Name": "Unified root",
+                  "Children": [
+                    {
+                      "Id": "cb9c7936-1707-5548-b99a-2c7596c54a21",
+                      "Type": 1,
+                      "Name": "List definitions",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/accessReviews/unified/definitions",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "54e172e3-8db4-5a0b-b9cc-45ebbb05374b",
+                      "Type": 1,
+                      "Name": "Create definition",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/accessReviews/unified/definitions",
+                      "Headers": {},
+                      "Body": "{\n    \u0022displayName\u0022: \u0022Catalog access review\u0022,\n    \u0022descriptionForAdmins\u0022: \u0022Quarterly user-centric review of catalog resources\u0022,\n    \u0022scope\u0022: {\n        \u0022@odata.type\u0022: \u0022#microsoft.graph.principalResourceMembershipsScope\u0022,\n        \u0022principalScopes\u0022: [\n            {\n                \u0022@odata.type\u0022: \u0022#microsoft.graph.accessReviewPrincipalScope\u0022,\n                \u0022scopeType\u0022: \u0022allUsers\u0022\n            }\n        ],\n        \u0022resourceScopes\u0022: [\n            {\n                \u0022@odata.type\u0022: \u0022#microsoft.graph.accessReviewResourceScope\u0022,\n                \u0022resourceId\u0022: \u0022c6010d0c-ff41-4929-9776-fa03a03dd5ac\u0022,\n                \u0022scopeType\u0022: \u0022catalog\u0022\n            }\n        ]\n    },\n    \u0022reviewers\u0022: [\n        {\n            \u0022@odata.type\u0022: \u0022#microsoft.graph.accessReviewReviewerScope\u0022,\n            \u0022scopeType\u0022: \u0022manager\u0022\n        }\n    ],\n    \u0022settings\u0022: {\n        \u0022mailNotificationsEnabled\u0022: true,\n        \u0022reminderNotificationsEnabled\u0022: true,\n        \u0022justificationRequiredOnApproval\u0022: true,\n        \u0022instanceDurationInDays\u0022: 6,\n        \u0022recommendationsEnabled\u0022: true,\n        \u0022recurrence\u0022: {\n            \u0022pattern\u0022: {\n                \u0022type\u0022: \u0022absoluteMonthly\u0022,\n                \u0022interval\u0022: 1\n            },\n            \u0022range\u0022: {\n                \u0022type\u0022: \u0022noEnd\u0022,\n                \u0022startDate\u0022: \u00222026-08-31\u0022\n            }\n        }\n    }\n}",
                       "Children": [],
                       "IsBuiltIn": true
                     }
@@ -39351,6 +39536,39 @@
                       "Body": "",
                       "Children": [],
                       "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "493c89f0-60bb-5be9-b767-828e4cc6753b",
+                      "Type": 1,
+                      "Name": "List uploadSessions",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/catalogs/{id}/resources/{id}/uploadSessions",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "0750a0d3-bf8d-5d5d-9b29-245efd726ce2",
+                      "Type": 1,
+                      "Name": "Create customDataProvidedResourceUploadSession",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/catalogs/{id}/resources/{id}/uploadSessions",
+                      "Headers": {},
+                      "Body": "{\n  \u0022@odata.type\u0022: \u0022#microsoft.graph.customDataProvidedResourceAccessReviewUploadSession\u0022,\n  \u0022data\u0022: {\n    \u0022@odata.type\u0022: \u0022#microsoft.graph.customDataProvidedResourcePayloads.accessReviewContextData\u0022,\n    \u0022reviewDefinitionId\u0022: \u00229e4b1c6f-2a3d-4f8e-9b7a-5c1e2d3f4a6b\u0022,\n    \u0022reviewInstanceId\u0022: \u002215eeb4df-8a4d-4f8e-9b7a-6b3e1c7f5a9d\u0022\n  }\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "dd98ef6f-62ee-5663-b586-50d35afedc10",
+                      "Type": 1,
+                      "Name": "Delete customDataProvidedResourceUploadSession",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/catalogs/{id}/resources/{id}/uploadSessions/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
                     }
                   ],
                   "IsBuiltIn": true
@@ -39948,6 +40166,123 @@
                           "IsBuiltIn": true
                         }
                       ],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "7f4114cb-2e4e-55ff-b84d-a8d638ef4ed4",
+                  "Type": 0,
+                  "Name": "Custom data provided resource",
+                  "Children": [
+                    {
+                      "Id": "fa387156-bdc5-530c-a23a-8609191b7574",
+                      "Type": 1,
+                      "Name": "List uploadSessions",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/catalogs/{id}/resources/{id}/uploadSessions",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "a04cbf5c-6b34-55f8-aa20-7d86628916cd",
+                      "Type": 1,
+                      "Name": "Create customDataProvidedResourceUploadSession",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/catalogs/{id}/resources/{id}/uploadSessions",
+                      "Headers": {},
+                      "Body": "{\n  \u0022@odata.type\u0022: \u0022#microsoft.graph.customDataProvidedResourceAccessReviewUploadSession\u0022,\n  \u0022data\u0022: {\n    \u0022@odata.type\u0022: \u0022#microsoft.graph.customDataProvidedResourcePayloads.accessReviewContextData\u0022,\n    \u0022reviewDefinitionId\u0022: \u00229e4b1c6f-2a3d-4f8e-9b7a-5c1e2d3f4a6b\u0022,\n    \u0022reviewInstanceId\u0022: \u002215eeb4df-8a4d-4f8e-9b7a-6b3e1c7f5a9d\u0022\n  }\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "b0de671a-ae1b-517a-a5a6-b6f4d1cde111",
+                      "Type": 1,
+                      "Name": "Delete customDataProvidedResourceUploadSession",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/catalogs/{id}/resources/{id}/uploadSessions/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "d30981e0-005b-5f0b-a3d2-87d4cf911322",
+                  "Type": 0,
+                  "Name": "Custom data provided resource upload session",
+                  "Children": [
+                    {
+                      "Id": "863196c3-2268-5624-9481-535d9b6874c1",
+                      "Type": 1,
+                      "Name": "Create",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/catalogs/{id}/resources/{id}/uploadSessions",
+                      "Headers": {},
+                      "Body": "{\n  \u0022@odata.type\u0022: \u0022#microsoft.graph.customDataProvidedResourceAccessReviewUploadSession\u0022,\n  \u0022data\u0022: {\n    \u0022@odata.type\u0022: \u0022#microsoft.graph.customDataProvidedResourcePayloads.accessReviewContextData\u0022,\n    \u0022reviewDefinitionId\u0022: \u00229e4b1c6f-2a3d-4f8e-9b7a-5c1e2d3f4a6b\u0022,\n    \u0022reviewInstanceId\u0022: \u002215eeb4df-8a4d-4f8e-9b7a-6b3e1c7f5a9d\u0022\n  }\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "e11846b6-1066-51b4-945a-b4c43207280d",
+                      "Type": 1,
+                      "Name": "List",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/catalogs/{id}/resources/{id}/uploadSessions",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "54bd62ce-56da-5de1-be9e-3ac75c6bb5fb",
+                      "Type": 1,
+                      "Name": "Get",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/catalogs/{id}/resources/{id}/uploadSessions/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "57c3c60a-4b97-5b53-8a3b-2ff1ff30f5e3",
+                      "Type": 1,
+                      "Name": "Upload file",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/catalogs/{id}/resources/{id}/uploadSessions/{id}/uploadFile",
+                      "Headers": {
+                        "Content-Type": "multipart/form-data; boundary=MyPartBoundary198374"
+                      },
+                      "Body": "--MyPartBoundary198374\nContent-Disposition: form-data; name=\u0022file\u0022; filename=\u0022building-access-data.csv\u0022\nContent-Type: application/octet-stream\n\nprincipalId,principalType,permissionId,permissionName,permissionDescription,permissionType\n550e8400-e29b-41d4-a716-446655440000,user,6ba7b810-9dad-11d1-80b4-00c04fd430c8,Access,Physical access to building,Physical\n7c9e6679-7425-40de-944b-e07fc1f90ae7,user,6ba7b810-9dad-11d1-80b4-00c04fd430c9,Reserve,Book conference room,Administrative\n--MyPartBoundary198374--",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "ba908b12-01c6-5494-b4a5-c18204363500",
+                      "Type": 1,
+                      "Name": "Update",
+                      "Method": "PATCH",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/catalogs/{id}/resources/{id}/uploadSessions/{id}",
+                      "Headers": {},
+                      "Body": "{\n  \u0022isUploadDone\u0022: true\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "e3c5ac3a-25e7-553e-956f-dee4b50ab88b",
+                      "Type": 1,
+                      "Name": "Delete",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/catalogs/{id}/resources/{id}/uploadSessions/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
                       "IsBuiltIn": true
                     }
                   ],
@@ -60825,6 +61160,28 @@
               "Body": "",
               "Children": [],
               "IsBuiltIn": true
+            },
+            {
+              "Id": "335af564-9d46-5331-8719-cd2f2bbe514a",
+              "Type": 1,
+              "Name": "List permissions",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/sites/{id}/lists/{id}/permissions",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "d036a19f-3c61-52c2-be94-9488d02149ff",
+              "Type": 1,
+              "Name": "Create permission",
+              "Method": "POST",
+              "Url": "https://graph.microsoft.com/v1.0/sites/{hostname},{id}/lists/{id}/permissions",
+              "Headers": {},
+              "Body": "{\n  \u0022grantedToV2\u0022: {\n    \u0022application\u0022: {\n      \u0022id\u0022: \u002289ea5c94-7736-4e25-95ad-3fa95f62b66e\u0022,\n      \u0022displayName\u0022: \u0022Contoso Time Manager App\u0022\n    }\n  },\n  \u0022roles\u0022: [\u0022write\u0022]\n}",
+              "Children": [],
+              "IsBuiltIn": true
             }
           ],
           "IsBuiltIn": true
@@ -61342,6 +61699,28 @@
               "Name": "Get recent activities",
               "Method": "GET",
               "Url": "https://graph.microsoft.com/v1.0/drives/{id}/items/{id}/activities",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "b93e3a44-dcdf-53b2-bec7-78299537066b",
+              "Type": 1,
+              "Name": "List permissions",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/sites/{id}/lists/{id}/items/{id}/permissions",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "f7807822-5d02-5843-8048-d5a3ed441758",
+              "Type": 1,
+              "Name": "Create permission",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/sites/{id}/lists/{id}/items/{id}/permissions",
               "Headers": {},
               "Body": "",
               "Children": [],
@@ -62280,8 +62659,8 @@
               "Id": "73f4a9b9-f00d-538a-8eab-35869646483b",
               "Type": 1,
               "Name": "Get assigned to task board format",
-              "Method": "",
-              "Url": "",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/planner/tasks/{id}/assignedToTaskBoardFormat",
               "Headers": {},
               "Body": "",
               "Children": [],
@@ -62291,10 +62670,13 @@
               "Id": "f42c066e-cdd3-56a6-98d2-cb7255a2549c",
               "Type": 1,
               "Name": "Update assigned to task board format",
-              "Method": "",
-              "Url": "",
-              "Headers": {},
-              "Body": "",
+              "Method": "PATCH",
+              "Url": "https://graph.microsoft.com/v1.0/planner/tasks/{id}/assignedToTaskBoardFormat",
+              "Headers": {
+                "Prefer": "return=representation",
+                "If-Match": "W/\u0022JzEtVGFzayAgQEBAQEBAQEBAQEBAQEBAWCc=\u0022"
+              },
+              "Body": "{\n  \u0022orderHintsByAssignee\u0022: {\n    \u0022aaa27244-1db4-476a-a5cb-004607466324\u0022: \u00228566473P 957764Jk!\u0022\n  }\n}",
               "Children": [],
               "IsBuiltIn": true
             }
@@ -62310,8 +62692,8 @@
               "Id": "a638c72b-8a63-5b8e-9152-7e7fb244e7df",
               "Type": 1,
               "Name": "Get bucket",
-              "Method": "",
-              "Url": "",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/planner/buckets/{id}",
               "Headers": {},
               "Body": "",
               "Children": [],
@@ -62321,8 +62703,8 @@
               "Id": "39dc9d75-61c1-5092-ac92-58099ab9c5c3",
               "Type": 1,
               "Name": "List bucket tasks",
-              "Method": "",
-              "Url": "",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/planner/buckets/{id}/tasks",
               "Headers": {},
               "Body": "",
               "Children": [],
@@ -62332,10 +62714,10 @@
               "Id": "4363f984-99f6-5047-ba84-680f4a955898",
               "Type": 1,
               "Name": "Create bucket",
-              "Method": "",
-              "Url": "",
+              "Method": "POST",
+              "Url": "https://graph.microsoft.com/v1.0/planner/buckets",
               "Headers": {},
-              "Body": "",
+              "Body": "{\n  \u0022name\u0022: \u0022Advertising\u0022,\n  \u0022planId\u0022: \u0022xqQg5FS2LkCp935s-FIFm2QAFkHM\u0022,\n  \u0022orderHint\u0022: \u0022 !\u0022\n}",
               "Children": [],
               "IsBuiltIn": true
             },
@@ -62343,10 +62725,13 @@
               "Id": "2294a792-3c20-534b-b17b-23ece8595c56",
               "Type": 1,
               "Name": "Update bucket",
-              "Method": "",
-              "Url": "",
-              "Headers": {},
-              "Body": "",
+              "Method": "PATCH",
+              "Url": "https://graph.microsoft.com/v1.0/planner/buckets/{id}",
+              "Headers": {
+                "Prefer": "return=representation",
+                "If-Match": "W/\u0022JzEtVGFzayAgQEBAQEBAQEBAQEBAQEBAWCc=\u0022"
+              },
+              "Body": "{\n  \u0022name\u0022: \u0022Development\u0022\n}",
               "Children": [],
               "IsBuiltIn": true
             },
@@ -62354,9 +62739,11 @@
               "Id": "675d854e-39d8-5197-91fc-12e66d838399",
               "Type": 1,
               "Name": "Delete bucket",
-              "Method": "",
-              "Url": "",
-              "Headers": {},
+              "Method": "DELETE",
+              "Url": "https://graph.microsoft.com/v1.0/planner/buckets/{id}",
+              "Headers": {
+                "If-Match": "W/\u0022JzEtVGFzayAgQEBAQEBAQEBAQEBAQEBAWCc=\u0022"
+              },
               "Body": "",
               "Children": [],
               "IsBuiltIn": true
@@ -62373,8 +62760,8 @@
               "Id": "c2950330-a206-5f00-971b-233b6866c17b",
               "Type": 1,
               "Name": "Get bucket task board format",
-              "Method": "",
-              "Url": "",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/planner/tasks/{id}/bucketTaskBoardFormat",
               "Headers": {},
               "Body": "",
               "Children": [],
@@ -62384,10 +62771,13 @@
               "Id": "f8026023-9bf8-5f3a-b400-952805e24ec4",
               "Type": 1,
               "Name": "Update bucket task board format",
-              "Method": "",
-              "Url": "",
-              "Headers": {},
-              "Body": "",
+              "Method": "PATCH",
+              "Url": "https://graph.microsoft.com/v1.0/planner/tasks/{id}/bucketTaskBoardFormat",
+              "Headers": {
+                "Prefer": "return=representation",
+                "If-Match": "W/\u0022JzEtVGFzayAgQEBAQEBAQEBAQEBAQEBAWCc=\u0022"
+              },
+              "Body": "{\n  \u0022orderHint\u0022: \u0022A6673H Ejkl!\u0022\n}",
               "Children": [],
               "IsBuiltIn": true
             }
@@ -62403,10 +62793,10 @@
               "Id": "0127ee1e-c06e-58a6-af3e-e1d325709d8e",
               "Type": 1,
               "Name": "Create",
-              "Method": "",
-              "Url": "",
+              "Method": "POST",
+              "Url": "https://graph.microsoft.com/v1.0/planner/plans",
               "Headers": {},
-              "Body": "",
+              "Body": "{\n  \u0022container\u0022: {\n    \u0022url\u0022: \u0022https://graph.microsoft.com/v1.0/groups/ebf3b108-5234-4e22-b93d-656d7dae5874\u0022\n  },\n  \u0022title\u0022: \u0022title-value\u0022\n}",
               "Children": [],
               "IsBuiltIn": true
             },
@@ -62414,8 +62804,8 @@
               "Id": "6dcd1cdf-5113-51cb-bfd8-5c292deef280",
               "Type": 1,
               "Name": "Get",
-              "Method": "",
-              "Url": "",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/planner/plans/{id}",
               "Headers": {},
               "Body": "",
               "Children": [],
@@ -62425,10 +62815,13 @@
               "Id": "af432da4-4dcc-5af8-9a45-b567f4155b82",
               "Type": 1,
               "Name": "Update",
-              "Method": "",
-              "Url": "",
-              "Headers": {},
-              "Body": "",
+              "Method": "PATCH",
+              "Url": "https://graph.microsoft.com/v1.0/planner/plans/{id}",
+              "Headers": {
+                "Prefer": "return=representation",
+                "If-Match": "W/\u0022JzEtVGFzayAgQEBAQEBAQEBAQEBAQEBAWCc=\u0022"
+              },
+              "Body": "{\n  \u0022title\u0022: \u0022title-value\u0022\n}",
               "Children": [],
               "IsBuiltIn": true
             },
@@ -62436,9 +62829,11 @@
               "Id": "32be861d-ca14-5393-8cef-2cbdb1948a4e",
               "Type": 1,
               "Name": "Delete",
-              "Method": "",
-              "Url": "",
-              "Headers": {},
+              "Method": "DELETE",
+              "Url": "https://graph.microsoft.com/v1.0/planner/plans/{id}",
+              "Headers": {
+                "If-Match": "W/\u0022JzEtVGFzayAgQEBAQEBAQEBAQEBAQEBAWCc=\u0022"
+              },
               "Body": "",
               "Children": [],
               "IsBuiltIn": true
@@ -62447,8 +62842,8 @@
               "Id": "310bd0d9-dd61-5239-b9c7-984ab788101b",
               "Type": 1,
               "Name": "List plan buckets",
-              "Method": "",
-              "Url": "",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/planner/plans/{id}/buckets",
               "Headers": {},
               "Body": "",
               "Children": [],
@@ -62458,8 +62853,8 @@
               "Id": "9075be92-24f8-571f-9bbe-d7a71376b1a4",
               "Type": 1,
               "Name": "List plan tasks",
-              "Method": "",
-              "Url": "",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/planner/plans/{id}/tasks",
               "Headers": {},
               "Body": "",
               "Children": [],
@@ -62477,8 +62872,8 @@
               "Id": "28d6fa37-324b-5b73-b4f5-177495db675d",
               "Type": 1,
               "Name": "Get plan details",
-              "Method": "",
-              "Url": "",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/planner/plans/{id}/details",
               "Headers": {},
               "Body": "",
               "Children": [],
@@ -62488,10 +62883,13 @@
               "Id": "d353ef4a-ae98-57f0-a473-2e2d33a0f4ce",
               "Type": 1,
               "Name": "Update plan details",
-              "Method": "",
-              "Url": "",
-              "Headers": {},
-              "Body": "",
+              "Method": "PATCH",
+              "Url": "https://graph.microsoft.com/v1.0/planner/plans/{id}/details",
+              "Headers": {
+                "Prefer": "return=representation",
+                "If-Match": "W/\u0022JzEtVGFzayAgQEBAQEBAQEBAQEBAQEBAWCc=\u0022"
+              },
+              "Body": "{\n  \u0022sharedWith\u0022: {\n    \u00226463a5ce-2119-4198-9f2a-628761df4a62\u0022 : true,\n    \u0022d95e6152-f683-4d78-9ff5-67ad180fea4a\u0022 : false,\n  },\n  \u0022categoryDescriptions\u0022: {\n    \u0022category1\u0022: \u0022Indoors\u0022,\n    \u0022category3\u0022: null,\n  }\n}",
               "Children": [],
               "IsBuiltIn": true
             }
@@ -66389,6 +66787,25 @@
                   "IsBuiltIn": true
                 },
                 {
+                  "Id": "298f1379-6a3f-56cd-b2c8-f92a31d2ce01",
+                  "Type": 0,
+                  "Name": "Virtual event townhall registration configuration",
+                  "Children": [
+                    {
+                      "Id": "931a2610-372e-5b28-87b3-fcba977e9a8e",
+                      "Type": 1,
+                      "Name": "Get",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
                   "Id": "cba9ab07-b52e-5662-8bef-0c78c10ff642",
                   "Type": 0,
                   "Name": "Virtual event registration question",
@@ -68955,6 +69372,36 @@
               "IsBuiltIn": true
             },
             {
+              "Id": "b13b78b6-02db-5d16-80d0-c38a59667089",
+              "Type": 0,
+              "Name": "Deleted chat",
+              "Children": [
+                {
+                  "Id": "3a336d19-55eb-5dff-a157-f8d35b6678c1",
+                  "Type": 1,
+                  "Name": "Get",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "baab85e2-1002-5731-850a-cd237b8058c7",
+                  "Type": 1,
+                  "Name": "Undo delete",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
               "Id": "e98bfd67-e391-5182-bd86-fab7bff56c40",
               "Type": 0,
               "Name": "Chat message",
@@ -70522,14 +70969,55 @@
               "IsBuiltIn": true
             },
             {
-              "Id": "b13b78b6-02db-5d16-80d0-c38a59667089",
+              "Id": "90340009-0166-5d70-acd9-c0303329d86b",
               "Type": 0,
-              "Name": "Deleted chat",
+              "Name": "Targeted chat message",
               "Children": [
                 {
-                  "Id": "3a336d19-55eb-5dff-a157-f8d35b6678c1",
+                  "Id": "0634bd2e-b232-5fdb-9e71-032bbf7f674c",
+                  "Type": 0,
+                  "Name": "Get all targeted messages",
+                  "Children": [
+                    {
+                      "Id": "670c4c81-aa4e-50d6-868a-7c063cfdf0a7",
+                      "Type": 1,
+                      "Name": "Get all targeted messages for a user",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "fe20cc7c-a315-5233-b698-d3aab9ad0dd2",
+                      "Type": 1,
+                      "Name": "Filter targeted messages by date range",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "fd9721ce-c820-5478-9e28-1ad72fdf80d9",
+                      "Type": 1,
+                      "Name": "Get targeted messages by application sender",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "f82b3387-21c9-5782-9263-97810a8d7f8c",
                   "Type": 1,
-                  "Name": "Get",
+                  "Name": "Get all retained targeted messages",
                   "Method": "",
                   "Url": "",
                   "Headers": {},
@@ -70538,9 +71026,20 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "baab85e2-1002-5731-850a-cd237b8058c7",
+                  "Id": "46ecfa48-1cce-50d6-8e08-908963246a6b",
                   "Type": 1,
-                  "Name": "Undo delete",
+                  "Name": "Delete targeted message from channel",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "a7083e4c-8bfb-5d2a-8efd-2575d0b35b8f",
+                  "Type": 1,
+                  "Name": "Delete targeted message from chat",
                   "Method": "",
                   "Url": "",
                   "Headers": {},
@@ -71717,6 +72216,69 @@
                       "Id": "fd3e84bb-f7b3-5672-959d-a2299ee25cd6",
                       "Type": 1,
                       "Name": "Get",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "11bf8865-9684-59b4-ae23-33fedd0485ba",
+                      "Type": 0,
+                      "Name": "Get all targeted messages",
+                      "Children": [
+                        {
+                          "Id": "68734529-08df-5273-aba1-3395061f1992",
+                          "Type": 1,
+                          "Name": "Get all targeted messages for a user",
+                          "Method": "",
+                          "Url": "",
+                          "Headers": {},
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "fbd30676-934e-51e1-8759-13a5bf7c33fa",
+                          "Type": 1,
+                          "Name": "Filter targeted messages by date range",
+                          "Method": "",
+                          "Url": "",
+                          "Headers": {},
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "d0fba8f0-d27e-567c-9d4c-dce63aa15a2a",
+                          "Type": 1,
+                          "Name": "Get targeted messages by application sender",
+                          "Method": "",
+                          "Url": "",
+                          "Headers": {},
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        }
+                      ],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "adbb5d1b-1d1c-5665-be40-9bff56bde726",
+                      "Type": 1,
+                      "Name": "Get all retained targeted messages",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "2a646244-6691-50d0-837a-954ae8949115",
+                      "Type": 1,
+                      "Name": "Delete targeted message",
                       "Method": "",
                       "Url": "",
                       "Headers": {},
