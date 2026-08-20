@@ -36739,6 +36739,257 @@
               "IsBuiltIn": true
             },
             {
+              "Id": "2284a62c-cca4-5530-aa44-33f03556a4da",
+              "Type": 0,
+              "Name": "Entra Backup and Recovery",
+              "Children": [
+                {
+                  "Id": "eb1e5bf6-2a80-5a5e-8fc2-bb081050a4d9",
+                  "Type": 0,
+                  "Name": "Recovery job",
+                  "Children": [
+                    {
+                      "Id": "1ec690c7-8b98-5d94-9708-4f2e7864c2bd",
+                      "Type": 1,
+                      "Name": "List",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/recovery/snapshots/{id}/recoveryJobs",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "c530f943-62e0-5742-9189-5922c6996cdf",
+                      "Type": 0,
+                      "Name": "Create",
+                      "Children": [
+                        {
+                          "Id": "83c1e796-9e79-5183-bb3c-9275ae2e7a15",
+                          "Type": 1,
+                          "Name": "Create a recovery job without filtering",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/recovery/snapshots/{id}/recoveryJobs",
+                          "Headers": {},
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "fef7a089-bcd8-5827-b224-042e74a8f2c0",
+                          "Type": 1,
+                          "Name": "Create a recovery job filtered by entity types",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/recovery/snapshots/{id}/recoveryJobs",
+                          "Headers": {},
+                          "Body": "{\n  \u0022filteringCriteria\u0022: {\n    \u0022@odata.type\u0022: \u0022#microsoft.graph.entraRecoveryServices.recoveryJobEntityNamesFilter\u0022,\n    \u0022entityTypes\u0022: [\n      \u0022user\u0022\n    ]\n  }\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "94451971-4d13-53aa-8d46-f21a6ef87fb2",
+                          "Type": 1,
+                          "Name": "Create a recovery job filtered by specific entity IDs",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/recovery/snapshots/{id}/recoveryJobs",
+                          "Headers": {},
+                          "Body": "{\n  \u0022filteringCriteria\u0022: {\n    \u0022@odata.type\u0022: \u0022#microsoft.graph.entraRecoveryServices.recoveryJobEntityNameAndIdsFilter\u0022,\n    \u0022filterValues\u0022: [\n      {\n        \u0022entityType\u0022: \u0022user\u0022,\n        \u0022entityIds\u0022: [\n          \u002252330fde-895a-4a99-ae59-1c35c2a263e9\u0022,\n          \u00220c503c02-5554-4d59-9fcc-69736618fb8f\u0022\n        ]\n      },\n      {\n        \u0022entityType\u0022: \u0022group\u0022,\n        \u0022entityIds\u0022: [\n          \u002204181a71-a18d-4eee-94da-a77e7eb6520b\u0022,\n          \u00222c888900-a7e8-4a01-ada5-17c04b29e8ec\u0022\n        ]\n      }\n    ]\n  }\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        }
+                      ],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "f7283645-23cb-53e0-85a9-f912f78eda46",
+                      "Type": 1,
+                      "Name": "Get",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/recovery/snapshots/{id}/recoveryJobs/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "53267466-e71a-5fa7-93f8-51f29626488c",
+                      "Type": 0,
+                      "Name": "Get failed changes",
+                      "Children": [
+                        {
+                          "Id": "c9611558-7788-511c-ace3-a21c74d8dd21",
+                          "Type": 1,
+                          "Name": "Get failed changes from a completed recovery job",
+                          "Method": "GET",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/recovery/snapshots/{id}/recoveryJobs/{id}/microsoft.graph.entraRecoveryServices.getFailedChanges",
+                          "Headers": {},
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "196aa6ab-cbd7-504b-84fe-5df2fd23336e",
+                          "Type": 1,
+                          "Name": "Get failed changes with top parameter",
+                          "Method": "GET",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/recovery/snapshots/{id}/recoveryJobs/{id}/microsoft.graph.entraRecoveryServices.getFailedChanges?$top=1",
+                          "Headers": {},
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        }
+                      ],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "dfecd76f-35b6-55e8-997f-9a69d25a753e",
+                  "Type": 0,
+                  "Name": "Recovery job base",
+                  "Children": [
+                    {
+                      "Id": "4e2edf62-e893-55a6-bb36-977a0071ccb0",
+                      "Type": 1,
+                      "Name": "List",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/recovery/jobs",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "578a1ea0-af4e-5e8e-87b0-b06c8c9968ff",
+                      "Type": 1,
+                      "Name": "Cancel",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/recovery/jobs/{id}/microsoft.graph.entraRecoveryServices.cancel",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "09fe1ee6-59f0-5ea1-9dc9-a05d5228e0ce",
+                  "Type": 0,
+                  "Name": "Recovery preview job",
+                  "Children": [
+                    {
+                      "Id": "761b5fa7-78bd-5bea-9f5c-4d51d5ba2638",
+                      "Type": 1,
+                      "Name": "List",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/recovery/snapshots/{id}/recoveryPreviewJobs",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "82ec2c26-9830-57b1-a0f1-9d7de0706b31",
+                      "Type": 0,
+                      "Name": "Create",
+                      "Children": [
+                        {
+                          "Id": "c660a89c-c726-5fe1-97b6-291a63b09239",
+                          "Type": 1,
+                          "Name": "Create a preview job without filtering",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/recovery/snapshots/{id}/recoveryPreviewJobs",
+                          "Headers": {},
+                          "Body": "",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "5ad74c43-3f61-5cc7-b9a0-d2f79ad1f328",
+                          "Type": 1,
+                          "Name": "Create a preview job filtered by entity types",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/recovery/snapshots/{id}/recoveryPreviewJobs",
+                          "Headers": {},
+                          "Body": "{\n  \u0022filteringCriteria\u0022: {\n    \u0022@odata.type\u0022: \u0022#microsoft.graph.entraRecoveryServices.recoveryJobEntityNamesFilter\u0022,\n    \u0022entityTypes\u0022: [\n      \u0022user\u0022\n    ]\n  }\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "b361c399-3030-560b-a6b4-d32a036b275b",
+                          "Type": 1,
+                          "Name": "Create a preview job filtered by specific entity IDs",
+                          "Method": "POST",
+                          "Url": "https://graph.microsoft.com/v1.0/directory/recovery/snapshots/{id}/recoveryPreviewJobs",
+                          "Headers": {},
+                          "Body": "{\n  \u0022filteringCriteria\u0022: {\n    \u0022@odata.type\u0022: \u0022#microsoft.graph.entraRecoveryServices.recoveryJobEntityNameAndIdsFilter\u0022,\n    \u0022filterValues\u0022: [\n      {\n        \u0022entityType\u0022: \u0022user\u0022,\n        \u0022entityIds\u0022: [\n          \u002252330fde-895a-4a99-ae59-1c35c2a263e9\u0022,\n          \u00220c503c02-5554-4d59-9fcc-69736618fb8f\u0022\n        ]\n      },\n      {\n        \u0022entityType\u0022: \u0022group\u0022,\n        \u0022entityIds\u0022: [\n          \u002204181a71-a18d-4eee-94da-a77e7eb6520b\u0022,\n          \u00222c888900-a7e8-4a01-ada5-17c04b29e8ec\u0022\n        ]\n      }\n    ]\n  }\n}",
+                          "Children": [],
+                          "IsBuiltIn": true
+                        }
+                      ],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "bf5c544f-fcd7-5e3a-9c6c-e44271bf58ac",
+                      "Type": 1,
+                      "Name": "Get",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/recovery/snapshots/{id}/recoveryPreviewJobs/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "bc736b9b-053d-56d3-a98d-cfc27047e51c",
+                      "Type": 1,
+                      "Name": "Get changes",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/recovery/snapshots/{id}/recoveryPreviewJobs/{id}/microsoft.graph.entraRecoveryServices.getChanges",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "a0bb3602-f5e4-5e3b-b76c-5209ef6454e9",
+                  "Type": 0,
+                  "Name": "Snapshot",
+                  "Children": [
+                    {
+                      "Id": "96fd569c-fd58-561f-adb2-7bdcef6a9a82",
+                      "Type": 1,
+                      "Name": "List snapshots",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/recovery/snapshots",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "5f4b0ca6-8555-5cad-b3c6-2bca13084e56",
+                      "Type": 1,
+                      "Name": "Get snapshot",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/directory/recovery/snapshots/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
               "Id": "157223d3-382b-54aa-870c-899a88ece398",
               "Type": 0,
               "Name": "Group setting",
@@ -56282,12 +56533,12 @@
           "Name": "Audit log query",
           "Children": [
             {
-              "Id": "01dc2976-78c4-5ba7-8a6f-684ca5d73640",
+              "Id": "be5e1963-2720-5468-9fae-cb906f1af90e",
               "Type": 0,
-              "Name": "Audit log query",
+              "Name": "Audit core root",
               "Children": [
                 {
-                  "Id": "70b4653e-7537-5d8b-83e5-583dca778688",
+                  "Id": "e982f7d4-dff3-5300-b3a7-d5c9e916eaed",
                   "Type": 1,
                   "Name": "List audit log queries",
                   "Method": "GET",
@@ -56298,7 +56549,7 @@
                   "IsBuiltIn": true
                 },
                 {
-                  "Id": "50347af8-01be-50a7-8039-af0c71c458ed",
+                  "Id": "fe15e40b-c4a9-5971-bf2b-5eddb94e31bf",
                   "Type": 1,
                   "Name": "Create audit log query",
                   "Method": "POST",
@@ -56307,7 +56558,15 @@
                   "Body": "{\n  \u0022@odata.type\u0022: \u0022#microsoft.graph.security.auditLogQuery\u0022,\n  \u0022displayName\u0022: \u0022String\u0022,\n  \u0022filterStartDateTime\u0022: \u0022String (timestamp)\u0022,\n  \u0022filterEndDateTime\u0022: \u0022String (timestamp)\u0022,\n  \u0022recordTypeFilters\u0022: [\n    \u0022String\u0022\n  ],\n  \u0022keywordFilter\u0022: \u0022String\u0022,\n  \u0022serviceFilter\u0022: \u0022String\u0022,\n  \u0022operationFilters\u0022: [\n    \u0022String\u0022\n  ],\n  \u0022userPrincipalNameFilters\u0022: [\n    \u0022String\u0022\n  ],\n  \u0022ipAddressFilters\u0022: [\n    \u0022String\u0022\n  ],\n  \u0022objectIdFilters\u0022: [\n    \u0022String\u0022\n  ],\n  \u0022administrativeUnitIdFilters\u0022: [\n    \u0022String\u0022\n  ],\n  \u0022status\u0022: \u0022String\u0022\n}",
                   "Children": [],
                   "IsBuiltIn": true
-                },
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "01dc2976-78c4-5ba7-8a6f-684ca5d73640",
+              "Type": 0,
+              "Name": "Audit log query",
+              "Children": [
                 {
                   "Id": "dde1cfe4-1386-5a1f-9e37-e78565ee2d9e",
                   "Type": 1,

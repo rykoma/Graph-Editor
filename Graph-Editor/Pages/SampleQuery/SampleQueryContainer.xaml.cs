@@ -1336,7 +1336,8 @@ namespace Graph_Editor.Pages.SampleQuery
                 "siteSources", "unifiedGroupSources", "userSources", "reviewSets", "cases", "queries", "healthIssues", "sensors",
                 "threatAssessmentRequests", "retentionLabels", "authorities", "citations", "departments", "filePlanReferences",
                 "subcategories", "availableAccessPackages", "intelligenceProfileIndicators",
-                "lists", "pages", "webParts", "sets", "terms", "termStores"
+                "lists", "pages", "webParts", "sets", "terms", "termStores",
+                "recoveryJobs", "recoveryPreviewJobs"
             };
             
             foreach (var endpoint in endpoints)
@@ -1380,7 +1381,8 @@ namespace Graph_Editor.Pages.SampleQuery
                 "hostSslCertificates", "hostTrackers", "intelProfiles", "passiveDnsRecords", "sslCertificates", "subdomains",
                 "vulnerabilities", "components",
                 "documentSetVersions", "horizontalSections", "columns",
-                "buckets"
+                "buckets",
+                "snapshots"
             };
 
             foreach (var endpoint in endpoints)
