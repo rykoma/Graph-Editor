@@ -300,7 +300,15 @@ function Get-CommitHistoryV2 {
         Write-Host "Repository: $Organization/$Repository" -ForegroundColor Cyan
         Write-Host "====================================================" -ForegroundColor DarkGray
 
-        $tocMainYamlUrl = "https://raw.githubusercontent.com/$Organization/$Repository/refs/heads/main/api-reference/v1.0/toc.yml"
+        # Search the TOC in the repository that contains the changed file first.
+        # For contrib changes, fall back to docs because it can publish a v1.0 TOC entry before contrib is synchronized.
+        $tocMainYamlUrl = Get-RepositoryContentUrl -Owner $Organization -Repository $Repository -Branch "main" -Path "api-reference/v1.0/toc.yml"
+        $fallbackTocYamlUrl = if ($Repository -eq "microsoft-graph-docs-contrib") {
+            Get-RepositoryContentUrl -Owner $Organization -Repository "microsoft-graph-docs" -Branch "main" -Path "api-reference/v1.0/toc.yml"
+        }
+        else {
+            $null
+        }
 
         # Retrieve merged pull requests from the GitHub API (with pagination)
         Write-Host "Fetching merged pull requests..." -ForegroundColor Cyan
@@ -487,7 +495,7 @@ function Get-CommitHistoryV2 {
                 Write-Host "View: $fileUrl" -ForegroundColor Cyan
 
                 # Search the file name in YAML structure (inline output)
-                $yamlLocations = Search-FilenameInYaml -filename:($filename.Split("/") | Select-Object -Last 1) -mainYamlUrl $tocMainYamlUrl -returnOnly
+                $yamlLocations = Search-FilenameInYaml -filename:($filename.Split("/") | Select-Object -Last 1) -mainYamlUrl $tocMainYamlUrl -mainYamlRepository $Repository -fallbackYamlUrl $fallbackTocYamlUrl -fallbackYamlRepository "microsoft-graph-docs" -returnOnly
                 if ($yamlLocations -and $yamlLocations.Count -gt 0) {
                     $isFirst = $true
                     foreach ($location in $yamlLocations) {
@@ -647,32 +655,15 @@ function Search-FilenameInYaml {
     param (
         [string]$filename,
         [string]$mainYamlUrl = (Get-GraphDocRepositoryUrl -Path "api-reference/v1.0/toc.yml"),
+        [string]$mainYamlRepository = $script:GraphDocRepository,
+        [string]$fallbackYamlUrl,
+        [string]$fallbackYamlRepository,
         [switch]$returnOnly
     )
 
     # Check if the access token is set
     if ([string]::IsNullOrEmpty($global:AccessTokenCache)) {
         Write-Error "Access token is not set. Please run Connect-GitHubRepository first."
-        return
-    }
-
-    # Get the parsed main YAML content
-    $mainYamlData = Get-YamlContent -url $mainYamlUrl
-
-    if (-not $mainYamlData) {
-        if (-not $returnOnly) {
-            Write-Host "Failed to retrieve or parse the main YAML file." -ForegroundColor Red
-        }
-        return
-    }
-
-    # Find the "API v1.0 reference" node
-    $apiReferenceNode = $mainYamlData.items | Where-Object { $_.name -eq "API v1.0 reference" }
-
-    if (-not $apiReferenceNode) {
-        if (-not $returnOnly) {
-            Write-Host "The 'API v1.0 reference' node is not found in the main YAML data." -ForegroundColor Red
-        }
         return
     }
 
@@ -721,15 +712,40 @@ function Search-FilenameInYaml {
         Search-Recursive -nodes $yamlData.items
     }
 
-    # Iterate through each YAML file under the "API v1.0 reference" node
-    foreach ($item in $apiReferenceNode.items) {
-        $yamlUrl = Get-GraphDocRepositoryUrl -Path $item.href
-        if ($yamlUrl.EndsWith("/toc.yml")) {
-            Search-InYamlFile -yamlUrl $yamlUrl -filename $filename -topParentName $item.name -locations $locations
+    function Search-Toc {
+        param (
+            [string]$tocUrl,
+            [string]$tocRepository
+        )
+
+        $mainYamlData = Get-YamlContent -url $tocUrl
+        if (-not $mainYamlData) {
+            if (-not $returnOnly) {
+                Write-Host "Failed to retrieve or parse the main YAML file: $tocUrl" -ForegroundColor Red
+            }
+            return
         }
-        else {
-            # If the item is not a toc.yml file, skip it
+
+        $apiReferenceNode = $mainYamlData.items | Where-Object { $_.name -eq "API v1.0 reference" }
+        if (-not $apiReferenceNode) {
+            if (-not $returnOnly) {
+                Write-Host "The 'API v1.0 reference' node is not found in the main YAML data: $tocUrl" -ForegroundColor Red
+            }
+            return
         }
+
+        foreach ($item in $apiReferenceNode.items) {
+            if ($item.href -and $item.href -match '(?i)(?:^|/)toc\.yml$') {
+                $yamlUrl = Get-RepositoryContentUrl -Owner $script:GraphDocOwner -Repository $tocRepository -Branch $script:GraphDocBranch -Path "api-reference/v1.0/$($item.href)"
+                Search-InYamlFile -yamlUrl $yamlUrl -filename $filename -topParentName $item.name -locations $locations
+            }
+        }
+    }
+
+    # Preserve all locations in the source repository; use the fallback only when none are present there.
+    Search-Toc -tocUrl $mainYamlUrl -tocRepository $mainYamlRepository
+    if ($locations.Count -eq 0 -and -not [string]::IsNullOrWhiteSpace($fallbackYamlUrl)) {
+        Search-Toc -tocUrl $fallbackYamlUrl -tocRepository $fallbackYamlRepository
     }
 
     # Output the locations or return them
