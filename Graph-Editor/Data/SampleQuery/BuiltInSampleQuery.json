@@ -40598,6 +40598,69 @@
                     }
                   ],
                   "IsBuiltIn": true
+                },
+                {
+                  "Id": "88c29fed-c670-5918-9bb7-feba2563df2a",
+                  "Type": 0,
+                  "Name": "External origin resource connector",
+                  "Children": [
+                    {
+                      "Id": "079685b8-d66f-5e29-b7d8-b3592c21dffc",
+                      "Type": 1,
+                      "Name": "List",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/externalOriginResourceConnectors",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "23c8683c-1ef7-5dcd-b2ab-ef5c2020be7d",
+                      "Type": 1,
+                      "Name": "Create",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/externalOriginResourceConnectors",
+                      "Headers": {},
+                      "Body": "{\n  \u0022@odata.type\u0022: \u0022#microsoft.graph.externalOriginResourceConnector\u0022,\n  \u0022displayName\u0022: \u0022SAP IAG Connector\u0022,\n  \u0022description\u0022: \u0022This connector helps integrate Microsoft Entra with SAP IAG\u0022,\n  \u0022connectorType\u0022: \u0022sapIag\u0022,\n  \u0022connectionInfo\u0022: {\n    \u0022@odata.type\u0022: \u0022microsoft.graph.externalTokenBasedSapIagConnectionInfo\u0022,\n    \u0022url\u0022: \u0022https://contoso.example.com\u0022,\n    \u0022accessTokenUrl\u0022: \u0022https://contoso.example.com/oauth/token\u0022,\n    \u0022clientId\u0022: \u0022e9ad8b1d-959c-4e86-8ba2-2cbf4d14bc29\u0022,\n    \u0022keyVaultName\u0022: \u0022Keyvault\u0022,\n    \u0022secretName\u0022: \u0022clientSecret\u0022,\n    \u0022subscriptionId\u0022: \u00225ee98b73-d9df-43a7-8a92-36855054bdee\u0022,\n    \u0022resourceGroup\u0022: \u0022SAP IAG Group\u0022\n  }\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "f88e7d8f-2afc-567d-8161-3b7314cb285c",
+                      "Type": 1,
+                      "Name": "Get",
+                      "Method": "GET",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/externalOriginResourceConnectors/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "0ab3fd9d-efd9-50c1-a8e7-d0747a2d87b4",
+                      "Type": 1,
+                      "Name": "Update",
+                      "Method": "PATCH",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/externalOriginResourceConnectors/{id}",
+                      "Headers": {},
+                      "Body": "{\n  \u0022connectorType\u0022: \u0022sapIag\u0022,\n  \u0022displayName\u0022: \u0022SAP IAG Connector 2.0\u0022,\n  \u0022description\u0022: \u0022SAP IAG Connector 2.0 description\u0022,\n  \u0022connectionInfo\u0022: {\n    \u0022@odata.type\u0022: \u0022microsoft.graph.externalTokenBasedSapIagConnectionInfo\u0022,\n    \u0022url\u0022: \u0022https://contoso.example.com\u0022,\n    \u0022keyVaultName\u0022: \u0022Keyvault\u0022,\n    \u0022subscriptionId\u0022: \u00225ee98b73-d9df-43a7-8a92-36855054bdee\u0022,\n    \u0022resourceGroup\u0022: \u0022SAP IAG Group\u0022,\n    \u0022accessTokenUrl\u0022: \u0022https://contoso.example.com/oauth/token\u0022,\n    \u0022clientId\u0022: \u0022e9ad8b1d-959c-4e86-8ba2-2cbf4d14bc29\u0022,\n    \u0022secretName\u0022: \u0022clientSecret\u0022\n  }\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "4072af6d-7cb0-5e2b-a618-856ca879b98f",
+                      "Type": 1,
+                      "Name": "Delete",
+                      "Method": "DELETE",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/entitlementManagement/externalOriginResourceConnectors/{id}",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
                 }
               ],
               "IsBuiltIn": true
@@ -51817,7 +51880,7 @@
                   "Type": 1,
                   "Name": "List folders with query parameters",
                   "Method": "GET",
-                  "Url": "https://graph.microsoft.com/v1.0/admin/exchange/mailboxes/{id}/folders?$filter=type eq \u0027IPF.Appointment\u0027\u0026$select=displayName,type\u0026$top=5",
+                  "Url": "https://graph.microsoft.com/v1.0/admin/exchange/mailboxes/{id}/folders?$filter=type eq \u0027IPF.Appointment\u0027\u0026$select=displayName,type,wellKnownName\u0026$top=5",
                   "Headers": {},
                   "Body": "",
                   "Children": [],
@@ -73998,6 +74061,77 @@
                   "Body": "",
                   "Children": [],
                   "IsBuiltIn": true
+                },
+                {
+                  "Id": "6f65bbcb-1d71-5bd1-8e95-ec4afddaaba4",
+                  "Type": 1,
+                  "Name": "List Microsoft 365 capabilities",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/policies/crossTenantAccessPolicy/default/m365Capabilities",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "2f090833-817e-5eaa-b38a-bb7617d71e5e",
+                  "Type": 0,
+                  "Name": "Create Microsoft 365 capability",
+                  "Children": [
+                    {
+                      "Id": "1bdfc8c4-7391-5e5c-b86b-f6af061fabef",
+                      "Type": 1,
+                      "Name": "Create a cross-tenant open profile card capability",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/policies/crossTenantAccessPolicy/default/m365Capabilities",
+                      "Headers": {},
+                      "Body": "{\n  \u0022@odata.type\u0022: \u0022#microsoft.graph.crossTenantOpenProfileCard\u0022,\n  \u0022inboundAccess\u0022: {\n    \u0022isAllowed\u0022: true,\n    \u0022resourceScopes\u0022: {\n      \u0022included\u0022: [\n        {\n          \u0022resourceId\u0022: \u0022ad4fc698-74dc-4f62-9e71-ba9b591e8e74\u0022,\n          \u0022resourceType\u0022: \u0022group\u0022\n        }\n      ],\n      \u0022excluded\u0022: [\n        {\n          \u0022resourceId\u0022: \u0022ad4fc698-74dc-4f62-9e71-ba9b591e8e00\u0022,\n          \u0022resourceType\u0022: \u0022group\u0022\n        }\n      ]\n    }\n  }\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "40855b03-8cfe-5a02-8ede-f57b69d2b48f",
+                      "Type": 1,
+                      "Name": "Create a cross-tenant migration capability",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/policies/crossTenantAccessPolicy/default/m365Capabilities",
+                      "Headers": {},
+                      "Body": "{\n  \u0022@odata.type\u0022: \u0022#microsoft.graph.crossTenantMigration\u0022,\n  \u0022inboundAccess\u0022: {\n    \u0022isAllowed\u0022: true,\n    \u0022resourceScopes\u0022: {\n      \u0022included\u0022: [\n        {\n          \u0022resourceId\u0022: \u0022ad4fc698-74dc-4f62-9e71-ba9b591e8e74\u0022,\n          \u0022resourceType\u0022: \u0022group\u0022\n        }\n      ],\n      \u0022excluded\u0022: []\n    }\n  }\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "a89d517b-07e1-5820-badb-a647cb1a63bc",
+                  "Type": 0,
+                  "Name": "Update Microsoft 365 capability",
+                  "Children": [
+                    {
+                      "Id": "d11e5e5e-8cfe-526b-b684-4548cc4ecb26",
+                      "Type": 1,
+                      "Name": "Update only the access setting",
+                      "Method": "PATCH",
+                      "Url": "https://graph.microsoft.com/v1.0/policies/crossTenantAccessPolicy/default/m365Capabilities/crossTenantOpenProfileCard",
+                      "Headers": {},
+                      "Body": "{\n  \u0022inboundAccess\u0022: {\n    \u0022isAllowed\u0022: false\n  }\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "6ded1b8f-f82e-5263-93ad-221e8d78bc95",
+                      "Type": 1,
+                      "Name": "Update the access setting and resource scopes",
+                      "Method": "PATCH",
+                      "Url": "https://graph.microsoft.com/v1.0/policies/crossTenantAccessPolicy/default/m365Capabilities/crossTenantOpenProfileCard",
+                      "Headers": {},
+                      "Body": "{\n  \u0022inboundAccess\u0022: {\n    \u0022isAllowed\u0022: true,\n    \u0022resourceScopes\u0022: {\n      \u0022included\u0022: [\n        {\n          \u0022resourceId\u0022: \u0022ad4fc698-74dc-4f62-9e71-ba9b591e8e74\u0022,\n          \u0022resourceType\u0022: \u0022group\u0022\n        },\n        {\n          \u0022resourceId\u0022: \u0022070061d7-a98e-43d3-b708-0758d3738ac7\u0022,\n          \u0022resourceType\u0022: \u0022group\u0022\n        }\n      ],\n      \u0022excluded\u0022: [\n        {\n          \u0022resourceId\u0022: \u0022ad4fc698-74dc-4f62-9e71-ba9b591e8e00\u0022,\n          \u0022resourceType\u0022: \u0022group\u0022\n        }\n      ]\n    }\n  }\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
                 }
               ],
               "IsBuiltIn": true
@@ -74117,6 +74251,69 @@
                   "Name": "Delete",
                   "Method": "DELETE",
                   "Url": "https://graph.microsoft.com/v1.0/policies/crossTenantAccessPolicy/partners/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "5f531013-92b2-56ac-b2bd-bb63b4b6557d",
+                  "Type": 1,
+                  "Name": "List Microsoft 365 capabilities",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/policies/crossTenantAccessPolicy/partners/{id}/m365Capabilities",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "ab5820ea-9786-5a52-bc94-236bc5cd3756",
+                  "Type": 0,
+                  "Name": "Create Microsoft 365 capability",
+                  "Children": [
+                    {
+                      "Id": "72e634bb-8c6b-5dc3-a469-2cd9b4774e33",
+                      "Type": 1,
+                      "Name": "Create a cross-tenant mail tips capability",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/policies/crossTenantAccessPolicy/partners/{id}/m365Capabilities",
+                      "Headers": {},
+                      "Body": "{\n  \u0022@odata.type\u0022: \u0022#microsoft.graph.crossTenantMailTipsLimited\u0022,\n  \u0022inboundAccess\u0022: {\n    \u0022isAllowed\u0022: false,\n    \u0022resourceScopes\u0022: {\n      \u0022included\u0022: [\n        {\n          \u0022resourceId\u0022: \u0022ad4fc698-74dc-4f62-9e71-ba9b591e8e74\u0022,\n          \u0022resourceType\u0022: \u0022group\u0022\n        }\n      ],\n      \u0022excluded\u0022: []\n    }\n  }\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "8e67beff-5b98-5127-9b92-dbe77ccc5aa2",
+                      "Type": 1,
+                      "Name": "Create a cross-tenant places room booking capability",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/policies/crossTenantAccessPolicy/partners/{id}/m365Capabilities",
+                      "Headers": {},
+                      "Body": "{\n  \u0022@odata.type\u0022: \u0022#microsoft.graph.crossTenantPlacesRoomBooking\u0022,\n  \u0022inboundAccess\u0022: {\n    \u0022isAllowed\u0022: true,\n    \u0022resourceScopes\u0022: {\n      \u0022included\u0022: [\n        {\n          \u0022resourceId\u0022: \u0022ad4fc698-74dc-4f62-9e71-ba9b591e8e74\u0022,\n          \u0022resourceType\u0022: \u0022group\u0022\n        }\n      ],\n      \u0022excluded\u0022: []\n    }\n  }\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "6b3e8576-68e0-5271-a178-aa4eb22cf35a",
+                  "Type": 1,
+                  "Name": "Update Microsoft 365 capability",
+                  "Method": "PATCH",
+                  "Url": "https://graph.microsoft.com/v1.0/policies/crossTenantAccessPolicy/partners/{id}/m365Capabilities/crossTenantOpenProfileCard",
+                  "Headers": {},
+                  "Body": "{\n  \u0022inboundAccess\u0022: {\n    \u0022isAllowed\u0022: false,\n    \u0022resourceScopes\u0022: {\n      \u0022included\u0022: [\n        {\n          \u0022resourceId\u0022: \u0022ad4fc698-74dc-4f62-9e71-ba9b591e8e74\u0022,\n          \u0022resourceType\u0022: \u0022group\u0022\n        },\n        {\n          \u0022resourceId\u0022: \u0022070061d7-a98e-43d3-b708-0758d3738ac7\u0022,\n          \u0022resourceType\u0022: \u0022group\u0022\n        }\n      ],\n      \u0022excluded\u0022: []\n    }\n  }\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "4d96c8e9-ae80-59dc-9ded-ba91ed8be75a",
+                  "Type": 1,
+                  "Name": "Delete Microsoft 365 capability",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/policies/crossTenantAccessPolicy/partners/{id}/m365Capabilities/crossTenantOpenProfileCard",
                   "Headers": {},
                   "Body": "",
                   "Children": [],

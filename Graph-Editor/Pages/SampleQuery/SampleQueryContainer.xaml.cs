@@ -1337,7 +1337,7 @@ namespace Graph_Editor.Pages.SampleQuery
                 "threatAssessmentRequests", "retentionLabels", "authorities", "citations", "departments", "filePlanReferences",
                 "subcategories", "availableAccessPackages", "intelligenceProfileIndicators",
                 "lists", "pages", "webParts", "sets", "terms", "termStores",
-                "recoveryJobs", "recoveryPreviewJobs"
+                "recoveryJobs", "recoveryPreviewJobs", "externalOriginResourceConnectors"
             };
             
             foreach (var endpoint in endpoints)
