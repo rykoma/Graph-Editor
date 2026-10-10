@@ -1753,6 +1753,28 @@
                   "Body": "{\n    \u0022EmailAddresses\u0022: [\n        \u0022${SampleInternalUser3Address}\u0022,\n        \u0022${SampleInternalUser7Address}\u0022\n    ],\n    \u0022MailTipsOptions\u0022: \u0022automaticReplies, mailboxFullStatus\u0022\n}",
                   "Children": [],
                   "IsBuiltIn": true
+                },
+                {
+                  "Id": "9aed36f6-8dcd-51c3-8ae1-15194ad9c5b3",
+                  "Type": 1,
+                  "Name": "List notes",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/me/notes?$select=id,subject,bodyPreview,lastModifiedDateTime\u0026$orderby=lastModifiedDateTime desc\u0026$top=20",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "b4cabdb3-6073-5a39-9a89-7adf79cd9eae",
+                  "Type": 1,
+                  "Name": "Create note",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/me/notes",
+                  "Headers": {},
+                  "Body": "{\n  \u0022subject\u0022: \u0022Project Ideas\u0022,\n  \u0022body\u0022: {\n    \u0022contentType\u0022: \u0022html\u0022,\n    \u0022content\u0022: \u0022\u003Chtml\u003E\u003Cbody\u003E\u003Cp\u003EConsider implementing automated testing framework\u003C/p\u003E\u003C/body\u003E\u003C/html\u003E\u0022\n  }\n}",
+                  "Children": [],
+                  "IsBuiltIn": true
                 }
               ],
               "IsBuiltIn": true
@@ -12991,13 +13013,32 @@
             },
             {
               "Id": "3a970686-8a3d-52d9-badf-abb8624395a5",
-              "Type": 1,
+              "Type": 0,
               "Name": "Delete",
-              "Method": "DELETE",
-              "Url": "https://graph.microsoft.com/v1.0/me/events/{id}/attachments/{id}",
-              "Headers": {},
-              "Body": "",
-              "Children": [],
+              "Children": [
+                {
+                  "Id": "ee3dd97d-eeb9-530c-83b4-fc502dc139e3",
+                  "Type": 1,
+                  "Name": "Delete an event attachment",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/me/events/{id}/attachments/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "e0fd26a4-a334-5fda-838f-a751d5f4f956",
+                  "Type": 1,
+                  "Name": "Delete a note attachment",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/me/notes/{id}/attachments/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
               "IsBuiltIn": true
             },
             {
@@ -13281,13 +13322,32 @@
             },
             {
               "Id": "998e7929-6596-5a09-9e3d-885de6a82b28",
-              "Type": 1,
+              "Type": 0,
               "Name": "Delete",
-              "Method": "DELETE",
-              "Url": "https://graph.microsoft.com/v1.0/me/events/{id}/attachments/{id}",
-              "Headers": {},
-              "Body": "",
-              "Children": [],
+              "Children": [
+                {
+                  "Id": "1d5c3228-24bc-5d91-9de4-e4264e5a8938",
+                  "Type": 1,
+                  "Name": "Delete an event attachment",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/me/events/{id}/attachments/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "08aecadb-57da-5f89-a999-e614f552cb8d",
+                  "Type": 1,
+                  "Name": "Delete a note attachment",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/me/notes/{id}/attachments/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
               "IsBuiltIn": true
             }
           ],
@@ -13407,13 +13467,32 @@
             },
             {
               "Id": "eae0e945-529b-53bc-86bd-87f97229b5cf",
-              "Type": 1,
+              "Type": 0,
               "Name": "Delete",
-              "Method": "DELETE",
-              "Url": "https://graph.microsoft.com/v1.0/me/events/{id}/attachments/{id}",
-              "Headers": {},
-              "Body": "",
-              "Children": [],
+              "Children": [
+                {
+                  "Id": "5be2047b-db3b-559a-9901-7a5b5cc0f562",
+                  "Type": 1,
+                  "Name": "Delete an event attachment",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/me/events/{id}/attachments/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "ee9f7d06-5f0f-5a38-830e-9771d5fb39ec",
+                  "Type": 1,
+                  "Name": "Delete a note attachment",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/me/notes/{id}/attachments/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
               "IsBuiltIn": true
             }
           ],
@@ -13533,13 +13612,32 @@
             },
             {
               "Id": "3d3654e0-7943-5669-8d64-c7e1e63c4d53",
-              "Type": 1,
+              "Type": 0,
               "Name": "Delete",
-              "Method": "DELETE",
-              "Url": "https://graph.microsoft.com/v1.0/me/events/{id}/attachments/{id}",
-              "Headers": {},
-              "Body": "",
-              "Children": [],
+              "Children": [
+                {
+                  "Id": "896a67cc-7786-5238-9f9a-2a57888611d4",
+                  "Type": 1,
+                  "Name": "Delete an event attachment",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/me/events/{id}/attachments/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "f062a1a6-cf8a-5a3b-a930-6f0e6d1566f8",
+                  "Type": 1,
+                  "Name": "Delete a note attachment",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/me/notes/{id}/attachments/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
               "IsBuiltIn": true
             }
           ],
@@ -13590,7 +13688,7 @@
               "Method": "PATCH",
               "Url": "https://graph.microsoft.com/v1.0/me/calendarGroups/{id}",
               "Headers": {},
-              "Body": "{\n  \u0022name\u0022: \u0022name-value\u0022\n}",
+              "Body": "{\n  \u0022name\u0022: \u0022My Calendars\u0022\n}",
               "Children": [],
               "IsBuiltIn": true
             },
@@ -15251,6 +15349,17 @@
               "Name": "Reauthorize",
               "Method": "POST",
               "Url": "https://graph.microsoft.com/v1.0/subscriptions/{id}/reauthorize",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "5ea284b9-a9dc-5937-9f4d-a8468d4e51ec",
+              "Type": 1,
+              "Name": "Get VAPID",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/subscriptions/getVapidPublicKey",
               "Headers": {},
               "Body": "",
               "Children": [],
@@ -33182,6 +33291,17 @@
               "IsBuiltIn": true
             },
             {
+              "Id": "9527d205-3484-5bdb-9e87-c4374fa87e26",
+              "Type": 1,
+              "Name": "Revoke grants on sharing link",
+              "Method": "POST",
+              "Url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/permissions/{id}/revokeGrants",
+              "Headers": {},
+              "Body": "{\n  \u0022grantees\u0022: [\n    {\n      \u0022email\u0022: \u0022ryan@contoso.com\u0022\n    }\n  ]\n}",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
               "Id": "b074077c-a187-5182-9082-e7df74c5e5e5",
               "Type": 1,
               "Name": "Get WebSocket channel",
@@ -34480,6 +34600,17 @@
               "Url": "https://graph.microsoft.com/v1.0/shares/{encoded-sharing-url}/permission/grant",
               "Headers": {},
               "Body": "{\n  \u0022recipients\u0022: [\n    {\n      \u0022email\u0022: \u0022john@contoso.com\u0022\n    },\n    {\n      \u0022email\u0022: \u0022ryan@external.com\u0022\n    }\n  ],\n  \u0022roles\u0022: [\u0022read\u0022]\n}",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "d5c236f6-5810-5a31-be8d-39cca8ee97c5",
+              "Type": 1,
+              "Name": "Revoke grants on sharing link",
+              "Method": "POST",
+              "Url": "https://graph.microsoft.com/v1.0/me/drive/items/{id}/permissions/{id}/revokeGrants",
+              "Headers": {},
+              "Body": "{\n  \u0022grantees\u0022: [\n    {\n      \u0022email\u0022: \u0022ryan@contoso.com\u0022\n    }\n  ]\n}",
               "Children": [],
               "IsBuiltIn": true
             }
@@ -35877,6 +36008,17 @@
                   "Url": "https://graph.microsoft.com/v1.0/devices/{id}",
                   "Headers": {},
                   "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "a51e4e21-350e-504e-9ed7-af59e3939750",
+                  "Type": 1,
+                  "Name": "device: provision",
+                  "Method": "POST",
+                  "Url": "https://graph.microsoft.com/v1.0/devices/provision",
+                  "Headers": {},
+                  "Body": "{\n  \u0022provisioningBlob\u0022: \u0022eyJ2ZXIiOiIxLjAiLCJub25jZSI6IjJkZjg1ZTdmYTk0ZjQ3In0\u0022\n}",
                   "Children": [],
                   "IsBuiltIn": true
                 },
@@ -38175,6 +38317,17 @@
                       "Url": "https://graph.microsoft.com/v1.0/identityGovernance/accessReviews/definitions/{id}/instances/{id}/applyDecisions",
                       "Headers": {},
                       "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "af1d1f50-a921-522a-b8df-d0f21640a81e",
+                      "Type": 1,
+                      "Name": "Apply custom data provided resource decisions",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/accessReviews/unified/instances/{id}/batchApplyCustomDataProvidedResourceDecisions",
+                      "Headers": {},
+                      "Body": "{\n  \u0022applyResult\u0022: \u0022appliedSuccessfully\u0022,\n  \u0022applyDescription\u0022: \u0022Access was removed from production application: GitHub-app.\u0022,\n  \u0022customDataProvidedResourceId\u0022: \u00225c728447-be5c-4565-b4d3-cb248b609891\u0022\n}",
                       "Children": [],
                       "IsBuiltIn": true
                     },
@@ -40862,6 +41015,17 @@
                       "IsBuiltIn": true
                     },
                     {
+                      "Id": "a52011bb-e3f6-58f9-b9f6-63550491587f",
+                      "Type": 1,
+                      "Name": "Activate and wait",
+                      "Method": "POST",
+                      "Url": "https://graph.microsoft.com/v1.0/identityGovernance/lifecycleWorkflows/workflows/{id}/activateAndWait",
+                      "Headers": {},
+                      "Body": "{\n  \u0022subject\u0022: {\n    \u0022@odata.type\u0022: \u0022#microsoft.graph.identityGovernance.provisioningObjectWorkflowSubject\u0022,\n    \u0022id\u0022: \u0022b74f0fae-b1f3-4c96-9bf0-d4d8a8e37cbe\u0022,\n    \u0022attributeSetEntries\u0022: [\n      {\n        \u0022name\u0022: \u0022department\u0022,\n        \u0022value\u0022: \u0022Engineering\u0022\n      },\n      {\n        \u0022name\u0022: \u0022jobTitle\u0022,\n        \u0022value\u0022: \u0022Software Engineer\u0022\n      }\n    ]\n  }\n}",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
                       "Id": "4829bee8-029e-5a47-a62d-b513e72dc259",
                       "Type": 1,
                       "Name": "List users in scope",
@@ -41385,6 +41549,47 @@
                               "Name": "Remove reprocessedRuns",
                               "Method": "DELETE",
                               "Url": "https://graph.microsoft.com/v1.0/identityGovernance/lifecycleWorkflows/deletedItems/workflows/{id}/executionScope/{userProcessingResultId}/reprocessedRuns/{id}/$ref",
+                              "Headers": {},
+                              "Body": "",
+                              "Children": [],
+                              "IsBuiltIn": true
+                            }
+                          ],
+                          "IsBuiltIn": true
+                        },
+                        {
+                          "Id": "d3b4cece-d118-567c-8fc3-7ebb551fe9c0",
+                          "Type": 0,
+                          "Name": "Subject processing result",
+                          "Children": [
+                            {
+                              "Id": "dcda7236-e70e-569a-a58a-780f67b7634c",
+                              "Type": 1,
+                              "Name": "List (from run)",
+                              "Method": "GET",
+                              "Url": "https://graph.microsoft.com/v1.0/identityGovernance/lifecycleWorkflows/workflows/{id}/runs/{id}/subjectProcessingResults",
+                              "Headers": {},
+                              "Body": "",
+                              "Children": [],
+                              "IsBuiltIn": true
+                            },
+                            {
+                              "Id": "c64f147d-f12a-5c3d-9267-ffb2d47ef109",
+                              "Type": 1,
+                              "Name": "Get",
+                              "Method": "GET",
+                              "Url": "https://graph.microsoft.com/v1.0/identityGovernance/lifecycleWorkflows/workflows/{id}/runs/{id}/subjectProcessingResults/{id}",
+                              "Headers": {},
+                              "Body": "",
+                              "Children": [],
+                              "IsBuiltIn": true
+                            },
+                            {
+                              "Id": "6ccf995b-50ef-50c8-9ea0-19dbcbffacb6",
+                              "Type": 1,
+                              "Name": "Summary",
+                              "Method": "GET",
+                              "Url": "https://graph.microsoft.com/v1.0/identityGovernance/lifecycleWorkflows/workflows/{id}/runs/{id}/subjectProcessingResults/summary(startDateTime=${DateTime8DayAgo0Utc},endDateTime=${DateTime1DayAgo0Utc})",
                               "Headers": {},
                               "Body": "",
                               "Children": [],
@@ -50650,13 +50855,32 @@
             },
             {
               "Id": "d631ea5c-9a7f-55c3-9523-28402a2bbc40",
-              "Type": 1,
+              "Type": 0,
               "Name": "Delete",
-              "Method": "DELETE",
-              "Url": "https://graph.microsoft.com/v1.0/me/events/{id}/attachments/{id}",
-              "Headers": {},
-              "Body": "",
-              "Children": [],
+              "Children": [
+                {
+                  "Id": "70cc2d03-aa82-51cb-a11f-c820c812a791",
+                  "Type": 1,
+                  "Name": "Delete an event attachment",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/me/events/{id}/attachments/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "fa63847d-e394-53f8-bdc4-97e78843e7bb",
+                  "Type": 1,
+                  "Name": "Delete a note attachment",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/me/notes/{id}/attachments/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
               "IsBuiltIn": true
             },
             {
@@ -51417,6 +51641,174 @@
           "IsBuiltIn": true
         },
         {
+          "Id": "e4f97686-670f-5ae4-bf67-376f62bada1b",
+          "Type": 0,
+          "Name": "note",
+          "Children": [
+            {
+              "Id": "1eda4286-20d5-5740-b816-6521c70e42e9",
+              "Type": 1,
+              "Name": "List",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/me/notes?$select=id,subject,bodyPreview,lastModifiedDateTime\u0026$orderby=lastModifiedDateTime desc\u0026$top=20",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "c9101d21-64db-5974-a1f6-ce3411ca5e0b",
+              "Type": 1,
+              "Name": "Create",
+              "Method": "POST",
+              "Url": "https://graph.microsoft.com/v1.0/me/notes",
+              "Headers": {},
+              "Body": "{\n  \u0022subject\u0022: \u0022Project Ideas\u0022,\n  \u0022body\u0022: {\n    \u0022contentType\u0022: \u0022html\u0022,\n    \u0022content\u0022: \u0022\u003Chtml\u003E\u003Cbody\u003E\u003Cp\u003EConsider implementing automated testing framework\u003C/p\u003E\u003C/body\u003E\u003C/html\u003E\u0022\n  }\n}",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "cd4aaf02-b7a1-5f4e-9b71-d85e18222e9d",
+              "Type": 0,
+              "Name": "Get",
+              "Children": [
+                {
+                  "Id": "1f1419f1-b36b-5b15-8747-713032c7d54c",
+                  "Type": 1,
+                  "Name": "Get a note",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/me/notes/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "3aca62ff-b789-5686-b3e2-13883e56601f",
+                  "Type": 1,
+                  "Name": "Get a note with attachments",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/me/notes/{id}?$expand=attachments",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "3456c1f5-1c62-5e8a-b5b0-50f8fc654e7f",
+              "Type": 1,
+              "Name": "Update",
+              "Method": "PATCH",
+              "Url": "https://graph.microsoft.com/v1.0/me/notes/{id}",
+              "Headers": {
+                "If-Match": "\u0022CQAAABYAAABE\u0022"
+              },
+              "Body": "{\n  \u0022subject\u0022: \u0022Updated Meeting Notes - Jan 28\u0022,\n  \u0022body\u0022: {\n    \u0022contentType\u0022: \u0022html\u0022,\n    \u0022content\u0022: \u0022\u003Chtml\u003E\u003Cbody\u003E\u003Ch2\u003EUpdated Standup\u003C/h2\u003E\u003Cul\u003E\u003Cli\u003ETask 1 completed\u003C/li\u003E\u003Cli\u003ETask 2 in progress\u003C/li\u003E\u003C/ul\u003E\u003C/body\u003E\u003C/html\u003E\u0022\n  }\n}",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "ad5f8f72-0574-575b-8ff2-16072953203b",
+              "Type": 1,
+              "Name": "Delete",
+              "Method": "DELETE",
+              "Url": "https://graph.microsoft.com/v1.0/me/notes/{id}",
+              "Headers": {
+                "If-Match": "\u0022CQAAABYAAABG\u0022"
+              },
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "10fbd185-34e2-5ad1-890c-1ce7e844d1e1",
+              "Type": 0,
+              "Name": "Get delta",
+              "Children": [
+                {
+                  "Id": "7f7d1cb7-349a-5434-9a96-b42076c71f5a",
+                  "Type": 1,
+                  "Name": "Initial sync request",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/me/notes/delta",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "4cdc22c8-2fc2-5fb5-bbfe-4db90ca24deb",
+                  "Type": 1,
+                  "Name": "Subsequent delta request",
+                  "Method": "GET",
+                  "Url": "https://graph.microsoft.com/v1.0/me/notes/delta?$deltatoken=abc123def456",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "e8a6bd00-008e-5b24-977f-423e7098f07b",
+              "Type": 1,
+              "Name": "List attachments",
+              "Method": "GET",
+              "Url": "https://graph.microsoft.com/v1.0/me/notes/{id}/attachments",
+              "Headers": {},
+              "Body": "",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "8764b648-2d32-5f7d-9c51-b388ec35b1ce",
+              "Type": 1,
+              "Name": "Create attachment",
+              "Method": "POST",
+              "Url": "https://graph.microsoft.com/v1.0/me/notes/{id}/attachments",
+              "Headers": {},
+              "Body": "{\n  \u0022@odata.type\u0022: \u0022#microsoft.graph.fileAttachment\u0022,\n  \u0022name\u0022: \u0022screenshot.png\u0022,\n  \u0022contentType\u0022: \u0022image/png\u0022,\n  \u0022contentBytes\u0022: \u0022iVBORw0KGgoAAAANSUhEUgAAAAUA...\u0022,\n  \u0022contentId\u0022: \u0022screenshot-001\u0022,\n  \u0022isInline\u0022: true\n}",
+              "Children": [],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "8dbc0f08-9dfa-502b-84bb-fb880b7b42e9",
+              "Type": 0,
+              "Name": "Delete attachment",
+              "Children": [
+                {
+                  "Id": "a34144f3-d43d-507a-9b72-62f4b228e871",
+                  "Type": 1,
+                  "Name": "Delete an event attachment",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/me/events/{id}/attachments/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "a712ccfc-00eb-56ec-a628-c3a3fc3a20bd",
+                  "Type": 1,
+                  "Name": "Delete a note attachment",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/me/notes/{id}/attachments/{id}",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            }
+          ],
+          "IsBuiltIn": true
+        },
+        {
           "Id": "3a685b7e-af71-5223-ba5f-1446b52514a4",
           "Type": 0,
           "Name": "Message trace",
@@ -51757,6 +52149,36 @@
               "IsBuiltIn": true
             },
             {
+              "Id": "86615f63-db4f-599a-a86f-cc3f4544ed0d",
+              "Type": 0,
+              "Name": "Delete",
+              "Children": [
+                {
+                  "Id": "8723dc25-9151-5223-9c91-2c4711f013fc",
+                  "Type": 1,
+                  "Name": "Soft-delete a mailbox item",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/admin/exchange/mailboxes/{id}/folders/{id}/items/{id}?disposalType=softDelete",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "009a64d0-f600-5c4a-b3ba-69b73e127a1e",
+                  "Type": 1,
+                  "Name": "Hard-delete a mailbox item",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/admin/exchange/mailboxes/{id}/folders/{id}/items/{id}?disposalType=hardDelete",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
               "Id": "82a07a9b-07a4-5b3f-81c5-81439c539048",
               "Type": 1,
               "Name": "Get delta",
@@ -51979,6 +52401,36 @@
                   "Name": "List items using query parameter",
                   "Method": "GET",
                   "Url": "https://graph.microsoft.com/v1.0/admin/exchange/mailboxes/{id}/folders/{id}/items?$filter=createdDateTime ge 2021-08-21 and createdDateTime lt 2021-09-16\u0026$select=type,size\u0026$top=1",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "daf3c0f8-d8c3-5cb2-8c27-9eca9ccc1ab6",
+              "Type": 0,
+              "Name": "Delete item in folder",
+              "Children": [
+                {
+                  "Id": "153cbd3a-a53c-5860-af80-5b52f72867f6",
+                  "Type": 1,
+                  "Name": "Soft-delete a mailbox item",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/admin/exchange/mailboxes/{id}/folders/{id}/items/{id}?disposalType=softDelete",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "4da2ab9f-a008-5776-acac-6ce856c243f5",
+                  "Type": 1,
+                  "Name": "Hard-delete a mailbox item",
+                  "Method": "DELETE",
+                  "Url": "https://graph.microsoft.com/v1.0/admin/exchange/mailboxes/{id}/folders/{id}/items/{id}?disposalType=hardDelete",
                   "Headers": {},
                   "Body": "",
                   "Children": [],
@@ -74615,6 +75067,349 @@
                   "IsBuiltIn": true
                 }
               ],
+              "IsBuiltIn": true
+            }
+          ],
+          "IsBuiltIn": true
+        },
+        {
+          "Id": "7ae551f0-b279-517c-915d-7ce2014b0abe",
+          "Type": 0,
+          "Name": "Tenant governance",
+          "Children": [
+            {
+              "Id": "286dd173-45d1-5263-b782-b1163a57fa06",
+              "Type": 0,
+              "Name": "Governance invitation",
+              "Children": [
+                {
+                  "Id": "343a141d-f245-5583-8973-8019e1c6c116",
+                  "Type": 1,
+                  "Name": "List",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "103bc348-1a4e-5e04-9322-c43ab883d355",
+                  "Type": 1,
+                  "Name": "Create",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "92eb2470-dde3-53be-b8eb-0a409de267c7",
+                  "Type": 1,
+                  "Name": "Get",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "1a96b753-e316-571b-a84d-ec9e9202038b",
+                  "Type": 1,
+                  "Name": "Delete",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "2e364566-e60a-5009-88eb-0457401d4bed",
+              "Type": 0,
+              "Name": "Governance relationship",
+              "Children": [
+                {
+                  "Id": "a4a207f8-16f9-5897-bc2d-465f17cf9538",
+                  "Type": 1,
+                  "Name": "List",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "cf0217f9-48c7-52be-8102-4ca7ccc65176",
+                  "Type": 1,
+                  "Name": "Get",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "28b3744e-3003-54a2-8d9e-6398434ac68b",
+                  "Type": 1,
+                  "Name": "Update",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "0567e876-46b4-535c-a6c0-9d0b7ad0019c",
+              "Type": 0,
+              "Name": "Governance request",
+              "Children": [
+                {
+                  "Id": "08a038b5-3881-598c-8554-59af67cd7cf8",
+                  "Type": 1,
+                  "Name": "List",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "f330d7b4-3462-5561-87f9-a09ce37946f7",
+                  "Type": 1,
+                  "Name": "Create",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "7bba1d64-aee6-56ee-b1d3-fe55930aeeaf",
+                  "Type": 1,
+                  "Name": "Get",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "43a93450-a7e4-5fc6-9b84-8eb4a21ac7e7",
+                  "Type": 1,
+                  "Name": "Update",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "a151a8cc-3844-5486-bfd1-beda05aba8b4",
+              "Type": 0,
+              "Name": "Related tenant",
+              "Children": [
+                {
+                  "Id": "25c4180e-14e9-5269-befa-93f85a6a84a4",
+                  "Type": 1,
+                  "Name": "List",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "404b90e8-a79b-5d6f-b0f5-6cf148bdc7bb",
+                  "Type": 1,
+                  "Name": "Get",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "3671335c-c879-5fca-abcb-ab8a46e55bda",
+                  "Type": 1,
+                  "Name": "Refresh",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "a6af2760-0301-5ff0-a32a-9ca8fc0ed2e4",
+              "Type": 0,
+              "Name": "Tenant governance policy template",
+              "Children": [
+                {
+                  "Id": "3c1d108b-a1d7-57b7-a307-9c4847aabc36",
+                  "Type": 1,
+                  "Name": "List",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "aae42562-6ce2-5036-a7da-38c864fab4ab",
+                  "Type": 1,
+                  "Name": "Create",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "74285a62-ab69-54f5-8993-6547d03444b1",
+                  "Type": 0,
+                  "Name": "Get",
+                  "Children": [
+                    {
+                      "Id": "0e537b61-8d72-5d78-a0a6-2122d3ba4f1a",
+                      "Type": 1,
+                      "Name": "Get a specific governance policy template",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "068a0fa5-34e2-5901-8ae6-aae7e03f6718",
+                      "Type": 1,
+                      "Name": "Get the default governance policy template",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "2d2c0f14-811f-5ada-b98a-f9d93b89fa41",
+                  "Type": 0,
+                  "Name": "Update",
+                  "Children": [
+                    {
+                      "Id": "bff44be2-109a-558a-9727-d7e6f99a2cb7",
+                      "Type": 1,
+                      "Name": "Update a custom governance policy template",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    },
+                    {
+                      "Id": "e2d299de-78b0-5146-9ce7-73c432657cb2",
+                      "Type": 1,
+                      "Name": "Update the default governance policy template",
+                      "Method": "",
+                      "Url": "",
+                      "Headers": {},
+                      "Body": "",
+                      "Children": [],
+                      "IsBuiltIn": true
+                    }
+                  ],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "2e91a4ae-28c0-5f59-a5c0-ca0f8cc1e3d0",
+                  "Type": 1,
+                  "Name": "Delete",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "756bf055-3e39-5b10-b3bc-527cd36d1c19",
+              "Type": 0,
+              "Name": "Tenant governance setting",
+              "Children": [
+                {
+                  "Id": "cf2c1942-7c25-59f2-8157-a326dab49b0e",
+                  "Type": 1,
+                  "Name": "Get",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "dc0536ac-16a7-5bd9-ae09-69b28d008080",
+                  "Type": 1,
+                  "Name": "Update",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                },
+                {
+                  "Id": "e7898cd2-57c8-5f43-a4e0-39de3e026569",
+                  "Type": 1,
+                  "Name": "Enable related tenants",
+                  "Method": "",
+                  "Url": "",
+                  "Headers": {},
+                  "Body": "",
+                  "Children": [],
+                  "IsBuiltIn": true
+                }
+              ],
+              "IsBuiltIn": true
+            },
+            {
+              "Id": "728c78f4-9f92-5831-9b40-40633ad1d5d9",
+              "Type": 0,
+              "Name": "Complex types",
+              "Children": [],
               "IsBuiltIn": true
             }
           ],

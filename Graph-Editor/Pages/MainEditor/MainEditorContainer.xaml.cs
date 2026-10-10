@@ -1133,6 +1133,12 @@ namespace Graph_Editor.Pages.MainEditor
                     return DateTime.Now.AddDays(-15).ToString("yyyy-MM-dd") + "T00:00:00Z";
                 }
             },
+                        {
+                "${DateTime8DayAgo0Utc}", () =>
+                {
+                    return DateTime.Now.AddDays(-8).ToString("yyyy-MM-dd") + "T00:00:00Z";
+                }
+            },
             {
                 "${DateTime2DayAgo0Utc}", () =>
                 {

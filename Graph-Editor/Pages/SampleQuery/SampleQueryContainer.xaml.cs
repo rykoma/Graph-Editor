@@ -1260,6 +1260,7 @@ namespace Graph_Editor.Pages.SampleQuery
             output = output.Replace("/resources/{accessPackageResourceId}", "/resources/{id}");
             output = output.Replace("/uploadSessions/{customDataProvidedResourceUploadSessionId}", "/uploadSessions/{id}");
             output = output.Replace("/remoteTenantGroups/{remoteTenantGroupId}", "/remoteTenantGroups/{id}");
+            output = output.Replace("/instances/{accessReviewInstanceId}", "/instances/{id}");
             output = output.Replace("Pacific Standard Time", "${LocalTimeZone}").Replace("Eastern Standard Time", "${LocalTimeZone}");
             output = output.Replace("AdeleV@contoso.com", "${SampleInternalUser1Address}", true, null).Replace("Adele Vance", "${SampleInternalUser1Name}");
             output = output.Replace("samanthab@contoso.com", "${SampleInternalUser2Address}", true, null).Replace("Samantha Booth", "${SampleInternalUser2Name}");
@@ -1337,7 +1338,7 @@ namespace Graph_Editor.Pages.SampleQuery
                 "threatAssessmentRequests", "retentionLabels", "authorities", "citations", "departments", "filePlanReferences",
                 "subcategories", "availableAccessPackages", "intelligenceProfileIndicators",
                 "lists", "pages", "webParts", "sets", "terms", "termStores",
-                "recoveryJobs", "recoveryPreviewJobs", "externalOriginResourceConnectors"
+                "recoveryJobs", "recoveryPreviewJobs", "externalOriginResourceConnectors", "subjectProcessingResults"
             };
             
             foreach (var endpoint in endpoints)
@@ -1382,7 +1383,7 @@ namespace Graph_Editor.Pages.SampleQuery
                 "vulnerabilities", "components",
                 "documentSetVersions", "horizontalSections", "columns",
                 "buckets",
-                "snapshots"
+                "snapshots", "notes"
             };
 
             foreach (var endpoint in endpoints)
