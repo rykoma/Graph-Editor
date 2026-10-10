@@ -11,7 +11,7 @@
 #
 # Functions:
 #   Connect-GitHubRepository  - Stores the target GitHub organization, repository, and access token in global variables.
-#   Get-CommitHistoryV2       - Retrieves pull requests merged on the specified date and lists changed api-reference/v1.0/api/ files.
+#   Get-CommitHistoryV2       - Retrieves pull requests merged on the specified date and lists changed api-reference/v1.0/api/ files with their authors.
 #                               Pull request-based processing avoids bulk-merge noise by design.
 #   Get-YamlContent           - Fetches and parses a YAML file from a URL, with in-memory caching.
 #   Search-FilenameInYaml     - Searches the Microsoft Graph docs TOC YAML tree for the given filename and returns its location path(s).
@@ -416,6 +416,7 @@ function Get-CommitHistoryV2 {
             $prIndex++
             $prNumber = $pr.number
             $prTitle = $pr.title
+            $prAuthor = if ($pr.user -and $pr.user.login) { [string]$pr.user.login } else { "unknown" }
             $prMergedAt = [DateTime]::Parse($pr.merged_at).ToLocalTime()
             $prUrl = $pr.html_url
 
@@ -457,6 +458,7 @@ function Get-CommitHistoryV2 {
                 $fileCommitMap[$file.filename].PRs += @{
                     Number   = $prNumber
                     Title    = $prTitle
+                    Author   = $prAuthor
                     MergedAt = $prMergedAt
                     Url      = $prUrl
                 }
@@ -516,14 +518,14 @@ function Get-CommitHistoryV2 {
                 if ($fileInfo.PRs.Count -eq 1) {
                     $pr = $fileInfo.PRs[0]
                     $prDiffUrl = "https://github.com/$Organization/$Repository/pull/$($pr.Number)/files#diff-$fileHash"
-                    Write-Host "PR:    #$($pr.Number) - $($pr.Title)" -ForegroundColor DarkGray
+                    Write-Host "PR:    #$($pr.Number) - $($pr.Title) (@$($pr.Author))" -ForegroundColor DarkGray
                     Write-Host "       $prDiffUrl" -ForegroundColor DarkGray
                 }
                 else {
                     Write-Host "PRs ($($fileInfo.PRs.Count)):" -ForegroundColor DarkGray
                     foreach ($pr in $fileInfo.PRs) {
                         $prDiffUrl = "https://github.com/$Organization/$Repository/pull/$($pr.Number)/files#diff-$fileHash"
-                        Write-Host "       #$($pr.Number) - $($pr.Title)" -ForegroundColor DarkGray
+                        Write-Host "       #$($pr.Number) - $($pr.Title) (@$($pr.Author))" -ForegroundColor DarkGray
                         Write-Host "       $prDiffUrl" -ForegroundColor DarkGray
                     }
                 }
